@@ -47,8 +47,21 @@
   .badge-new { background: #00cec922; color: #00cec9; }
   .filter-btn[data-filter="new"] { border-color: #00cec944; }
   .filter-btn[data-filter="new"].active { background: #00cec9; border-color: #00cec9; color: #000; }
+  .filter-btn[data-filter="manual"] { border-color: #fd79a844; }
+  .filter-btn[data-filter="manual"].active { background: #fd79a8; border-color: #fd79a8; color: #000; }
+  .badge-manual { background: #fd79a822; color: #fd79a8; }
   .filter-btn[data-filter="mylist"] { border-color: #6c5ce744; }
   .filter-btn[data-filter="mylist"].active { background: #6c5ce7; border-color: #6c5ce7; color: #fff; }
+  .manual-add { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
+  .manual-add input { background: #1a1a24; border: 1px solid #333; color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 14px; width: 260px; outline: none; }
+  .manual-add input:focus { border-color: #fd79a8; }
+  .manual-add button { background: #fd79a8; border: none; color: #000; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .manual-add button:hover { background: #e84393; }
+  .manual-add button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .manual-add .status { color: #888; font-size: 13px; min-width: 200px; }
+  .manual-add .status.checking { color: #fdcb6e; }
+  .manual-add .status.done { color: #00b894; }
+  .manual-add .status.error { color: #e74c3c; }
   .filter-btn[data-filter="brandpick"].active { background: #fdcb6e; border-color: #fdcb6e; color: #000; }
   .stats { display: flex; gap: 16px; margin-bottom: 20px; }
   .stat-card { background: #1a1a24; border: 1px solid #222; border-radius: 10px; padding: 14px 20px; min-width: 120px; }
@@ -150,6 +163,12 @@
 
 <div class="stats" id="stats"></div>
 
+<div class="manual-add">
+  <input type="text" id="manualInput" placeholder="Type a domain name (e.g. goblinbet)">
+  <button id="manualBtn" onclick="addManualDomain()">Check & Add</button>
+  <span class="status" id="manualStatus"></span>
+</div>
+
 <div class="controls">
   <input type="text" id="search" placeholder="Search names...">
   <button class="filter-btn active" data-filter="all">All</button>
@@ -164,6 +183,7 @@
   <button class="filter-btn" data-filter="dark">Dark/Edgy</button>
   <button class="filter-btn" data-filter="action">Action</button>
   <button class="filter-btn" data-filter="new">New</button>
+  <button class="filter-btn" data-filter="manual">Manual</button>
   <button class="filter-btn" data-filter="mylist">My List</button>
   <button class="filter-btn" data-filter="cheap">Under 1000 kr</button>
   <span id="count"></span>
@@ -394,6 +414,7 @@ function render() {
     if (currentFilter === 'dark' && !DARK_NAMES.has(d.name)) return false;
     if (currentFilter === 'action' && !ACTION_NAMES.has(d.name)) return false;
     if (currentFilter === 'new' && !NEW_NAMES.has(d.name)) return false;
+    if (currentFilter === 'manual' && d.type !== 'Manual') return false;
     if (currentFilter === 'cheap') {
       const prices = [d.com, d.io, d.bet, d.game].map(parsePriceNum);
       if (Math.min(...prices) >= 1000) return false;
@@ -418,7 +439,7 @@ function render() {
 
   const tbody = document.getElementById('tbody');
   tbody.innerHTML = filtered.map(d => {
-    const badgeClass = d.type === 'Compound' ? 'badge-compound' : d.type === 'Invented' ? 'badge-invented' : d.type === 'New' ? 'badge-new' : 'badge-oneword';
+    const badgeClass = d.type === 'Compound' ? 'badge-compound' : d.type === 'Invented' ? 'badge-invented' : d.type === 'New' ? 'badge-new' : d.type === 'Manual' ? 'badge-manual' : 'badge-oneword';
     const takenClass = `taken-${d.taken}`;
     const inList = isInList(d.name);
     const selectedClass = inList ? ' selected' : '';
@@ -471,6 +492,103 @@ document.querySelectorAll('th.sortable').forEach(th => {
   });
 });
 
+// Manual domain entry — check via DNS over HTTPS (Cloudflare DoH)
+// NXDOMAIN (Status 3) = available, has records = taken
+async function checkDomainDNS(domain) {
+  try {
+    const resp = await fetch(`https://cloudflare-dns.com/dns-query?name=${domain}&type=NS`, {
+      headers: { 'Accept': 'application/dns-json' }
+    });
+    const data = await resp.json();
+    // Status 3 = NXDOMAIN (not registered), 0 = found
+    if (data.Status === 3) return 'Available';
+    if (data.Status === 0 && data.Answer && data.Answer.length > 0) return 'Taken';
+    // Status 0 but no answer — could be registered with no NS, check A record
+    const respA = await fetch(`https://cloudflare-dns.com/dns-query?name=${domain}&type=A`, {
+      headers: { 'Accept': 'application/dns-json' }
+    });
+    const dataA = await respA.json();
+    if (dataA.Status === 3) return 'Available';
+    if (dataA.Status === 0 && dataA.Answer && dataA.Answer.length > 0) return 'Taken';
+    // Ambiguous — mark as unknown
+    return '?';
+  } catch (e) {
+    return '?';
+  }
+}
+
+// Load saved manual domains from localStorage
+function loadManualDomains() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('manualDomains') || '[]');
+    const existing = new Set(DATA.map(d => d.name.toLowerCase()));
+    saved.forEach(d => {
+      if (!existing.has(d.name.toLowerCase())) {
+        DATA.push(d);
+        existing.add(d.name.toLowerCase());
+      }
+    });
+  } catch(e) {}
+}
+
+function saveManualDomains() {
+  const manuals = DATA.filter(d => d.type === 'Manual');
+  localStorage.setItem('manualDomains', JSON.stringify(manuals));
+}
+
+async function addManualDomain() {
+  const input = document.getElementById('manualInput');
+  const btn = document.getElementById('manualBtn');
+  const status = document.getElementById('manualStatus');
+  let name = input.value.trim().replace(/\s+/g, '').replace(/\..+$/, '');
+  if (!name) return;
+  // Capitalize first letter
+  name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+
+  // Check if already exists
+  if (DATA.find(d => d.name.toLowerCase() === name.toLowerCase())) {
+    status.className = 'status error';
+    status.textContent = `"${name}" already in the list`;
+    return;
+  }
+
+  btn.disabled = true;
+  status.className = 'status checking';
+  status.textContent = `Checking ${name} across 4 TLDs...`;
+
+  const tlds = ['com', 'io', 'bet', 'game'];
+  const results = {};
+  for (const tld of tlds) {
+    status.textContent = `Checking ${name}.${tld}...`;
+    results[tld] = await checkDomainDNS(`${name.toLowerCase()}.${tld}`);
+    // Small delay between checks
+    await new Promise(r => setTimeout(r, 200));
+  }
+
+  const taken = Object.values(results).filter(v => v === 'Taken').length;
+  const entry = { name, taken, com: results.com, io: results.io, bet: results.bet, game: results.game, type: 'Manual' };
+  DATA.push(entry);
+  saveManualDomains();
+
+  const availCount = Object.values(results).filter(v => v === 'Available').length;
+  status.className = 'status done';
+  status.textContent = `Added "${name}" — ${availCount}/4 TLDs available`;
+  input.value = '';
+  btn.disabled = false;
+
+  // Switch to manual filter and render
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-filter="manual"]').classList.add('active');
+  currentFilter = 'manual';
+  render();
+}
+
+// Enter key triggers add
+document.getElementById('manualInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addManualDomain();
+});
+
+loadManualDomains();
 render();
 renderList();
 </script>
