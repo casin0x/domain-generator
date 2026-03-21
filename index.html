@@ -638,6 +638,18 @@ async function recheckDomains(domains) {
   // Update manual domains in localStorage if any were manual
   saveManualDomains();
 
+  // Sync My List sidebar with updated DATA
+  for (let i = 0; i < myList.length; i++) {
+    const fresh = DATA.find(x => x.name === myList[i].name);
+    if (fresh) {
+      myList[i].com = fresh.com;
+      myList[i].io = fresh.io;
+      myList[i].bet = fresh.bet;
+      myList[i].game = fresh.game;
+    }
+  }
+  saveList();
+
   statusEl.style.color = '#00b894';
   statusEl.textContent = `Done — ${checked} names rechecked, ${changed} changes found`;
   btns.forEach(b => b.disabled = false);
