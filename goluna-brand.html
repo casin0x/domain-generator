@@ -447,59 +447,52 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== DIRECTION 7: VOLTAGE ===== */
 #dir7 {
-  background:
-    repeating-linear-gradient(135deg, transparent, transparent 60px, rgba(234,179,8,0.03) 60px, rgba(234,179,8,0.03) 62px),
-    repeating-linear-gradient(135deg, transparent 30px, rgba(234,179,8,0.02) 30px, rgba(234,179,8,0.02) 31px),
-    #08080c;
+  background: #000;
 }
-#dir7 .dir-inner { text-align: left; }
-#dir7 .dir-number { font-family: 'Bebas Neue', sans-serif; left: 40px; color: #eab308; font-weight: 400; }
-#dir7 .dir-label { font-family: 'Barlow', sans-serif; color: #eab308; text-align: left; font-weight: 700; text-transform: uppercase; }
+#dir7 .dir-inner { text-align: center; }
+#dir7 .dir-number { font-family: 'Cormorant Garamond', serif; left: 50%; transform: translateX(-50%); color: #fff; }
+#dir7 .dir-label { font-family: 'Jost', sans-serif; color: rgba(255,255,255,0.6); text-align: center; letter-spacing: 0.4em; font-weight: 300; }
 #dir7 .wordmark {
-  font-family: 'Bebas Neue', sans-serif; font-size: clamp(90px, 12vw, 130px);
-  text-align: left; font-weight: 400; color: #eab308;
-  text-transform: uppercase; letter-spacing: 0.15em;
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 11vw, 120px);
+  text-align: center; font-weight: 700; color: #fff;
 }
 #dir7 .tagline {
-  font-family: 'Barlow', sans-serif; font-weight: 600;
-  font-size: clamp(16px, 2vw, 22px); color: rgba(254,249,195,0.4); text-align: left;
-  text-transform: uppercase; letter-spacing: 0.1em;
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(255,255,255,0.3); text-align: center;
+  font-style: italic;
 }
 #dir7 .color-strip { border-radius: 0; overflow: hidden; }
-#dir7 .color-swatch .hex { color: #fef9c3; }
-#dir7 .color-swatch .label { color: rgba(254,249,195,0.5); }
+#dir7 .color-swatch .hex { color: #fff; }
+#dir7 .color-swatch .label { color: rgba(255,255,255,0.4); }
 
 #dir7 .mockup {
-  border-radius: 0; border: 1px solid rgba(234,179,8,0.2);
-  background: #08080c; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  border-radius: 0; border: 1px solid rgba(255,255,255,0.08);
+  background: #000; box-shadow: 0 20px 80px rgba(0,0,0,0.8);
 }
-#dir7 .mockup-nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: #eab308; text-transform: uppercase; letter-spacing: 0.1em; }
-#dir7 .mockup-nav-links { color: rgba(254,249,195,0.4); font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; font-size: 14px; letter-spacing: 0.08em; }
-#dir7 .mockup-hero-area h3 {
-  font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #eab308;
-  text-transform: uppercase; letter-spacing: 0.08em;
-}
-#dir7 .mockup-hero-area p { font-family: 'Barlow', sans-serif; color: rgba(254,249,195,0.4); }
+#dir7 .mockup-nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #fff; font-weight: 700; }
+#dir7 .mockup-nav-links { color: rgba(255,255,255,0.3); font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.08em; font-weight: 300; }
+#dir7 .mockup-hero-area h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #fff; font-weight: 700; }
+#dir7 .mockup-hero-area p { font-family: 'Jost', sans-serif; color: rgba(255,255,255,0.3); font-weight: 300; }
 #dir7 .mockup-btn {
-  background: #facc15; color: #08080c; font-family: 'Bebas Neue', sans-serif;
-  border-radius: 0; font-weight: 400; text-transform: uppercase; letter-spacing: 0.12em; font-size: 16px;
+  background: #fff; color: #000; font-family: 'Jost', sans-serif;
+  border-radius: 0; font-weight: 500; letter-spacing: 0.1em; font-size: 13px;
 }
-#dir7 .mockup-footer { border-top: 1px solid rgba(234,179,8,0.15); height: 1px; }
+#dir7 .mockup-footer { border-top: 1px solid rgba(255,255,255,0.06); height: 1px; }
 
 #dir7 .vip-card {
-  background: rgba(234,179,8,0.03); border: 1px solid rgba(234,179,8,0.08);
-  border-radius: 0; font-family: 'Barlow', sans-serif;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0; font-family: 'Jost', sans-serif; font-weight: 300;
 }
-#dir7 .vip-card .tier-name { color: #eab308; font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-#dir7 .vip-card .tier-perk { color: rgba(254,249,195,0.4); }
+#dir7 .vip-card .tier-name { color: #fff; font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+#dir7 .vip-card .tier-perk { color: rgba(255,255,255,0.3); }
 
 #dir7 .voice-card {
-  border: 1px solid rgba(234,179,8,0.2); border-radius: 0;
-  background: rgba(234,179,8,0.02);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 0;
+  background: rgba(255,255,255,0.01);
 }
-#dir7 .voice-card .voice-label { color: #eab308; }
-#dir7 .tone-pill { border-color: rgba(234,179,8,0.3); color: #eab308; border-radius: 0; }
-#dir7 .voice-msg { color: rgba(254,249,195,0.5); font-family: 'Barlow', sans-serif; }
+#dir7 .voice-card .voice-label { color: rgba(255,255,255,0.6); }
+#dir7 .tone-pill { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); border-radius: 0; }
+#dir7 .voice-msg { color: rgba(255,255,255,0.35); font-family: 'Jost', sans-serif; font-weight: 300; }
 
 /* ===== DIRECTION 8: JADE TEMPLE ===== */
 #dir8 {
@@ -766,7 +759,7 @@ a { text-decoration: none; color: inherit; }
   <a href="#dir4" style="color:#38bdf8">Aurora</a>
   <a href="#dir5" style="color:#94a3b8">Dark Side</a>
   <a href="#dir6" style="color:#d4a017">Desert</a>
-  <a href="#dir7" style="color:#eab308">Voltage</a>
+  <a href="#dir7" style="color:#a3a3a3">Noir</a>
   <a href="#dir8" style="color:#059668">Jade</a>
   <a href="#dir9" style="color:#22d3ee">Phantom</a>
   <a href="#dir10" style="color:#ec4899">Sakura</a>
@@ -1121,54 +1114,54 @@ a { text-decoration: none; color: inherit; }
 <section id="dir7" class="direction">
   <div class="dir-inner">
     <div class="dir-number">07</div>
-    <p class="dir-label">Voltage</p>
+    <p class="dir-label">Noir</p>
 
-    <h2 class="wordmark">GOLUNA</h2>
-    <p class="tagline">MAXIMUM VOLTAGE.</p>
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">No Color. Pure Class.</p>
 
     <div class="color-strip">
-      <div class="color-swatch" style="background:#08080c"><span class="hex">#08080c</span><span class="label">Blackout</span></div>
-      <div class="color-swatch" style="background:#eab308"><span class="hex">#eab308</span><span class="label">Electric Yellow</span></div>
-      <div class="color-swatch" style="background:#1c1917"><span class="hex">#1c1917</span><span class="label">Carbon</span></div>
-      <div class="color-swatch" style="background:#fef9c3;color:#08080c"><span class="hex" style="color:#08080c">#fef9c3</span><span class="label" style="color:#08080c">Flash White</span></div>
-      <div class="color-swatch" style="background:#111010"><span class="hex">#111010</span><span class="label">Surface</span></div>
-      <div class="color-swatch" style="background:#facc15"><span class="hex">#facc15</span><span class="label">CTA Yellow</span></div>
+      <div class="color-swatch" style="background:#000"><span class="hex">#000000</span><span class="label">Black</span></div>
+      <div class="color-swatch" style="background:#fff;color:#000"><span class="hex" style="color:#000">#FFFFFF</span><span class="label" style="color:#000">White</span></div>
+      <div class="color-swatch" style="background:#0a0a0a"><span class="hex">#0A0A0A</span><span class="label">Near Black</span></div>
+      <div class="color-swatch" style="background:#e5e5e5;color:#000"><span class="hex" style="color:#000">#E5E5E5</span><span class="label" style="color:#000">Light Grey</span></div>
+      <div class="color-swatch" style="background:#171717"><span class="hex">#171717</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#a3a3a3"><span class="hex">#A3A3A3</span><span class="label">Mid Grey</span></div>
     </div>
 
     <div class="mockup-wrap">
       <div class="mockup">
         <div class="mockup-nav">
-          <div class="mockup-nav-logo">GOLUNA</div>
-          <div class="mockup-nav-links"><span>SLOTS</span><span>SPORTS</span><span>LIVE</span><span>ARENA</span></div>
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Casino</span><span>Sports</span><span>Live</span><span>VIP</span></div>
         </div>
         <div class="mockup-hero-area">
-          <h3>Maximum Voltage</h3>
-          <p>Every spin is a surge. Every bet is a bolt. Every win hits like lightning.</p>
-          <button class="mockup-btn">POWER UP</button>
+          <h3>No Color. Pure Class.</h3>
+          <p>When you strip everything away, only the game remains. Nothing to distract. Everything to gain.</p>
+          <button class="mockup-btn">Begin</button>
         </div>
         <div class="mockup-footer"></div>
       </div>
     </div>
 
     <div class="vip-section">
-      <p class="vip-title" style="text-align:left">VIP Tiers</p>
+      <p class="vip-title">VIP Tiers</p>
       <div class="vip-row">
-        <div class="vip-card" style="border-bottom:2px solid #111010"><span class="tier-num">I</span><span class="tier-name">Spark</span><span class="tier-perk">Static charge</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #1c1917"><span class="tier-num">II</span><span class="tier-name">Wire</span><span class="tier-perk">Current flowing</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #1c1917"><span class="tier-num">III</span><span class="tier-name">Circuit</span><span class="tier-perk">Connected</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #eab308"><span class="tier-num">IV</span><span class="tier-name">Conductor</span><span class="tier-perk">High voltage access</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #eab308"><span class="tier-num">V</span><span class="tier-name">Generator</span><span class="tier-perk">Power unlimited</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #facc15"><span class="tier-num">VI</span><span class="tier-name">Reactor</span><span class="tier-perk">Core reactor</span></div>
-        <div class="vip-card" style="border-bottom:2px solid #facc15"><span class="tier-num">VII</span><span class="tier-name">Superconductor</span><span class="tier-perk">You ARE the grid</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #171717"><span class="tier-num">I</span><span class="tier-name">Shadow</span><span class="tier-perk">Seen but not noticed</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #262626"><span class="tier-num">II</span><span class="tier-name">Silhouette</span><span class="tier-perk">The outline sharpens</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #404040"><span class="tier-num">III</span><span class="tier-name">Contrast</span><span class="tier-perk">Standing out from grey</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #737373"><span class="tier-num">IV</span><span class="tier-name">Monochrome</span><span class="tier-perk">Clarity without noise</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a3a3a3"><span class="tier-num">V</span><span class="tier-name">Silver</span><span class="tier-perk">Luminous presence</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #d4d4d4"><span class="tier-num">VI</span><span class="tier-name">Platinum</span><span class="tier-perk">Beyond color</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #fff"><span class="tier-num">VII</span><span class="tier-name">White Light</span><span class="tier-perk">All color. No color. Everything.</span></div>
       </div>
     </div>
 
     <div class="voice-card">
       <p class="voice-label">Brand Voice</p>
       <div class="tone-pills">
-        <span class="tone-pill">Aggressive</span><span class="tone-pill">Electric</span><span class="tone-pill">Fast</span><span class="tone-pill">Dominant</span>
+        <span class="tone-pill">Minimal</span><span class="tone-pill">Timeless</span><span class="tone-pill">Confident</span><span class="tone-pill">Silent</span>
       </div>
-      <p class="voice-msg">GOLUNA VOLTAGE doesn't do quiet. Every spin is a surge. Every bet is a bolt. Every win hits like lightning. We built this for people who play at maximum power — no dimmer switch, no safe mode. Plug in. Power up. Dominate.</p>
+      <p class="voice-msg">Colour is noise. GoLuna Noir strips it all away — no flashy gradients, no neon desperation, no visual shouting. What remains is the purest form of the game. Black and white. Win or lose. In or out. This is for those who don't need to be sold. They already know.</p>
     </div>
   </div>
 </section>
@@ -1341,32 +1334,7 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
-<!-- ===== RECOMMENDATION ===== -->
-<section class="reco">
-  <h2>Recommendation</h2>
-  <div class="reco-grid">
-    <div class="reco-card pick-top">
-      <p class="reco-badge">Top Pick</p>
-      <h3>Moonlit Luxe</h3>
-      <p>The gold-and-navy palette commands premium positioning without feeling unapproachable. Cormorant Garamond gives GoLuna instant gravitas. The VIP tier progression from Moonbeam to Supermoon is thematically airtight and reinforces the lunar brand story at every touchpoint.</p>
-    </div>
-    <div class="reco-card pick-runner">
-      <p class="reco-badge">Runner-Up</p>
-      <h3>Dark Side</h3>
-      <p>The moon/space narrative is native to GoLuna's name. Deep space silver + indigo creates an otherworldly premium feel. The VIP system (Stardust → Celestial) ties directly to the brand story. Cosmic enough for crypto, premium enough for high-rollers.</p>
-    </div>
-    <div class="reco-card pick-runner-2">
-      <p class="reco-badge">Second Runner-Up</p>
-      <h3>Polar Aurora</h3>
-      <p>Scandinavian trust + clean design. For regulated markets where credibility matters more than flash.</p>
-    </div>
-    <div class="reco-card pick-wild">
-      <p class="reco-badge">Wildcard</p>
-      <h3>Sakura Drift</h3>
-      <p>Japanese aesthetic is untapped in Western iGaming. The beauty angle is radically different from every competitor.</p>
-    </div>
-  </div>
-</section>
+<!-- recommendation removed -->
 
 <!-- ===== DOMAIN FOOTER ===== -->
 <section class="domain-footer">
