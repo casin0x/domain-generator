@@ -6,7 +6,7 @@
 <title>GoLuna — Brand Exploration</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Russo+One&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Bebas+Neue&family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Crimson+Text:wght@400;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Russo+One&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
@@ -405,6 +405,263 @@ a { text-decoration: none; color: inherit; }
 #dir5 .tone-pill { border-color: rgba(245,158,11,0.25); color: #f59e0b; }
 #dir5 .voice-msg { color: rgba(254,243,199,0.6); font-family: 'Nunito', sans-serif; }
 
+/* ===== DIRECTION 6: BLOOD MOON ===== */
+#dir6 {
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(220,38,38,0.06) 0%, transparent 70%), #120808;
+}
+#dir6 .dir-inner { text-align: center; }
+#dir6 .dir-number { font-family: 'Cinzel', serif; left: 50%; transform: translateX(-50%); color: #dc2626; }
+#dir6 .dir-label { font-family: 'Cinzel', serif; color: #dc2626; text-align: center; letter-spacing: 0.35em; }
+#dir6 .wordmark {
+  font-family: 'Cinzel', serif; font-size: clamp(80px, 11vw, 120px);
+  text-align: center; font-weight: 900; color: #dc2626;
+  text-shadow: 0 0 40px rgba(220,38,38,0.2);
+}
+#dir6 .tagline {
+  font-family: 'Crimson Text', serif; font-weight: 400;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(254,202,202,0.4); text-align: center;
+  font-style: italic;
+}
+#dir6 .color-strip { border-radius: 4px; overflow: hidden; }
+#dir6 .color-swatch .hex { color: #fecaca; }
+#dir6 .color-swatch .label { color: rgba(254,202,202,0.5); }
+
+#dir6 .mockup {
+  border-radius: 4px; border: 1px solid rgba(220,38,38,0.15);
+  background: #120808; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+#dir6 .mockup-nav-logo { font-family: 'Cinzel', serif; font-size: 18px; color: #dc2626; font-weight: 700; }
+#dir6 .mockup-nav-links { color: rgba(254,202,202,0.4); font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.05em; }
+#dir6 .mockup-hero-area h3 { font-family: 'Cinzel', serif; font-size: 28px; color: #dc2626; font-weight: 700; }
+#dir6 .mockup-hero-area p { font-family: 'Crimson Text', serif; color: rgba(254,202,202,0.4); }
+#dir6 .mockup-btn {
+  background: #dc2626; color: #120808; font-family: 'Cinzel', serif;
+  border-radius: 4px; font-weight: 700; letter-spacing: 0.05em;
+}
+#dir6 .mockup-footer { border-top: 1px solid rgba(220,38,38,0.15); height: 1px; }
+
+#dir6 .vip-card {
+  background: rgba(220,38,38,0.03); border: 1px solid rgba(220,38,38,0.08);
+  border-radius: 4px; font-family: 'Crimson Text', serif;
+}
+#dir6 .vip-card .tier-name { color: #dc2626; font-family: 'Cinzel', serif; }
+#dir6 .vip-card .tier-perk { color: rgba(254,202,202,0.4); }
+
+#dir6 .voice-card {
+  border: 1px solid rgba(220,38,38,0.2); border-radius: 4px;
+  background: rgba(220,38,38,0.02);
+}
+#dir6 .voice-card .voice-label { color: #dc2626; }
+#dir6 .tone-pill { border-color: rgba(220,38,38,0.25); color: #dc2626; }
+#dir6 .voice-msg { color: rgba(254,202,202,0.5); font-family: 'Crimson Text', serif; }
+
+/* ===== DIRECTION 7: POLAR AURORA ===== */
+#dir7 {
+  background:
+    linear-gradient(180deg, transparent 30%, rgba(34,211,238,0.04) 38%, rgba(167,139,250,0.03) 42%, rgba(244,114,182,0.02) 46%, transparent 55%),
+    #0c1622;
+}
+#dir7 .dir-inner { text-align: right; }
+#dir7 .dir-number { font-family: 'DM Serif Display', serif; right: 40px; left: auto; color: #38bdf8; }
+#dir7 .dir-label { font-family: 'Inter', sans-serif; color: #38bdf8; text-align: right; }
+#dir7 .wordmark {
+  font-family: 'DM Serif Display', serif; font-size: clamp(72px, 10vw, 110px);
+  text-align: right; font-weight: 400; color: #38bdf8;
+}
+#dir7 .tagline {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(224,242,254,0.4); text-align: right;
+}
+#dir7 .color-strip { border-radius: 12px; overflow: hidden; }
+#dir7 .color-swatch .hex { color: #e0f2fe; }
+#dir7 .color-swatch .label { color: rgba(224,242,254,0.5); }
+
+#dir7 .mockup {
+  border-radius: 12px; border: 1px solid rgba(56,189,248,0.12);
+  background: #0c1622; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+#dir7 .mockup-nav-logo { font-family: 'DM Serif Display', serif; font-size: 18px; color: #38bdf8; font-weight: 400; }
+#dir7 .mockup-nav-links { color: rgba(224,242,254,0.45); font-family: 'Inter', sans-serif; }
+#dir7 .mockup-hero-area h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: #38bdf8; font-weight: 400; }
+#dir7 .mockup-hero-area p { font-family: 'Inter', sans-serif; color: rgba(224,242,254,0.4); }
+#dir7 .mockup-btn {
+  background: #0ea5e9; color: #fff; font-family: 'Inter', sans-serif;
+  border-radius: 8px; font-weight: 500;
+}
+#dir7 .mockup-footer { border-top: 1px solid rgba(56,189,248,0.1); height: 1px; }
+
+#dir7 .vip-card {
+  background: rgba(56,189,248,0.03); border: 1px solid rgba(56,189,248,0.08);
+  border-radius: 12px; font-family: 'Inter', sans-serif;
+}
+#dir7 .vip-card .tier-name { color: #38bdf8; }
+#dir7 .vip-card .tier-perk { color: rgba(224,242,254,0.4); }
+
+#dir7 .voice-card {
+  border: 1px solid rgba(56,189,248,0.15); border-radius: 12px;
+  background: rgba(56,189,248,0.02);
+}
+#dir7 .voice-card .voice-label { color: #38bdf8; }
+#dir7 .tone-pill { border-color: rgba(56,189,248,0.2); color: #38bdf8; }
+#dir7 .voice-msg { color: rgba(224,242,254,0.5); font-family: 'Inter', sans-serif; }
+
+/* ===== DIRECTION 8: SILK ROAD ===== */
+#dir8 {
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(161,98,7,0.03) 20px, rgba(161,98,7,0.03) 21px),
+    repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(161,98,7,0.03) 20px, rgba(161,98,7,0.03) 21px),
+    #1a0f08;
+}
+#dir8 .dir-inner { text-align: center; }
+#dir8 .dir-number { font-family: 'Playfair Display', serif; left: 50%; transform: translateX(-50%); color: #a16207; }
+#dir8 .dir-label { font-family: 'Jost', sans-serif; color: #d4a017; text-align: center; letter-spacing: 0.3em; }
+#dir8 .wordmark {
+  font-family: 'Playfair Display', serif; font-size: clamp(72px, 10vw, 110px);
+  text-align: center; font-weight: 900;
+  background: linear-gradient(135deg, #a16207, #d4a017);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#dir8 .tagline {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(254,243,199,0.4); text-align: center;
+}
+#dir8 .color-strip { border-radius: 8px; overflow: hidden; }
+#dir8 .color-swatch .hex { color: #fef3c7; }
+#dir8 .color-swatch .label { color: rgba(254,243,199,0.5); }
+
+#dir8 .mockup {
+  border-radius: 8px; border: 1px solid rgba(212,160,23,0.12);
+  background: #1a0f08; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+#dir8 .mockup-nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: #d4a017; font-weight: 700; }
+#dir8 .mockup-nav-links { color: rgba(254,243,199,0.4); font-family: 'Jost', sans-serif; }
+#dir8 .mockup-hero-area h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: #d4a017; font-weight: 700; }
+#dir8 .mockup-hero-area p { font-family: 'Jost', sans-serif; color: rgba(254,243,199,0.4); }
+#dir8 .mockup-btn {
+  background: linear-gradient(135deg, #a16207, #d4a017); color: #1a0f08;
+  font-family: 'Jost', sans-serif; border-radius: 8px; font-weight: 600;
+}
+#dir8 .mockup-footer { border-top: 1px solid rgba(212,160,23,0.12); height: 1px; }
+
+#dir8 .vip-card {
+  background: rgba(161,98,7,0.04); border: 1px solid rgba(212,160,23,0.08);
+  border-radius: 8px; font-family: 'Jost', sans-serif;
+}
+#dir8 .vip-card .tier-name { color: #d4a017; font-family: 'Playfair Display', serif; }
+#dir8 .vip-card .tier-perk { color: rgba(254,243,199,0.4); }
+
+#dir8 .voice-card {
+  border: 1px solid rgba(212,160,23,0.2); border-radius: 8px;
+  background: rgba(161,98,7,0.03);
+}
+#dir8 .voice-card .voice-label { color: #d4a017; }
+#dir8 .tone-pill { border-color: rgba(212,160,23,0.25); color: #d4a017; }
+#dir8 .voice-msg { color: rgba(254,243,199,0.5); font-family: 'Jost', sans-serif; }
+
+/* ===== DIRECTION 9: LUNAR PUNK ===== */
+#dir9 {
+  background:
+    repeating-conic-gradient(rgba(163,230,53,0.02) 0% 25%, transparent 0% 50%) 0 0 / 40px 40px,
+    #0a0a00;
+}
+#dir9 .dir-inner { text-align: left; }
+#dir9 .dir-number { font-family: 'Syne', sans-serif; left: 40px; color: #a3e635; font-weight: 800; }
+#dir9 .dir-label {
+  font-family: 'Syne', sans-serif; color: #a3e635; text-align: left;
+  font-weight: 700; transform: rotate(-1deg); display: inline-block;
+}
+#dir9 .wordmark {
+  font-family: 'Syne', sans-serif; font-size: clamp(90px, 12vw, 130px);
+  text-align: left; font-weight: 800; color: #a3e635;
+  letter-spacing: -0.02em;
+}
+#dir9 .tagline {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 400;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(236,252,203,0.4); text-align: left;
+}
+#dir9 .color-strip { border-radius: 0; overflow: hidden; border: 1px dashed rgba(163,230,53,0.15); }
+#dir9 .color-swatch .hex { color: #ecfccb; }
+#dir9 .color-swatch .label { color: rgba(236,252,203,0.5); }
+
+#dir9 .mockup {
+  border-radius: 0; border: 2px dashed rgba(163,230,53,0.2);
+  background: #0a0a00; box-shadow: none;
+}
+#dir9 .mockup-nav-logo { font-family: 'Syne', sans-serif; font-size: 18px; color: #a3e635; font-weight: 800; }
+#dir9 .mockup-nav-links { color: rgba(236,252,203,0.4); font-family: 'Syne', sans-serif; font-weight: 600; }
+#dir9 .mockup-hero-area h3 { font-family: 'Syne', sans-serif; font-size: 28px; color: #a3e635; font-weight: 800; text-transform: uppercase; }
+#dir9 .mockup-hero-area p { font-family: 'Space Grotesk', sans-serif; color: rgba(236,252,203,0.4); }
+#dir9 .mockup-btn {
+  background: #a3e635; color: #0a0a00; font-family: 'Syne', sans-serif;
+  border-radius: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+}
+#dir9 .mockup-footer { border-top: 1px dashed rgba(163,230,53,0.15); height: 1px; }
+
+#dir9 .vip-card {
+  background: rgba(163,230,53,0.03); border: 1px dashed rgba(163,230,53,0.1);
+  border-radius: 0; font-family: 'Space Grotesk', sans-serif;
+}
+#dir9 .vip-card .tier-name { color: #a3e635; font-family: 'Syne', sans-serif; font-weight: 700; }
+#dir9 .vip-card .tier-perk { color: rgba(236,252,203,0.4); }
+
+#dir9 .voice-card {
+  border: 2px dashed rgba(163,230,53,0.2); border-radius: 0;
+  background: rgba(163,230,53,0.02);
+}
+#dir9 .voice-card .voice-label { color: #a3e635; }
+#dir9 .tone-pill { border-color: rgba(163,230,53,0.3); color: #a3e635; border-radius: 0; }
+#dir9 .voice-msg { color: rgba(236,252,203,0.5); font-family: 'Space Grotesk', sans-serif; }
+
+/* ===== DIRECTION 10: MOONSTONE ===== */
+#dir10 {
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(192,132,252,0.03) 0%, transparent 70%), #140e1e;
+}
+#dir10 .dir-inner { text-align: center; }
+#dir10 .dir-number { font-family: 'Cormorant Garamond', serif; left: 50%; transform: translateX(-50%); color: #c084fc; font-style: italic; }
+#dir10 .dir-label { font-family: 'Jost', sans-serif; color: #c084fc; text-align: center; letter-spacing: 0.35em; font-weight: 300; }
+#dir10 .wordmark {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(72px, 10vw, 110px);
+  text-align: center; font-weight: 400; font-style: italic; color: #c084fc;
+  letter-spacing: 0.02em; line-height: 1.2;
+}
+#dir10 .tagline {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(243,232,255,0.35); text-align: center;
+  letter-spacing: 0.08em;
+}
+#dir10 .color-strip { border-radius: 24px; overflow: hidden; }
+#dir10 .color-swatch .hex { color: #f3e8ff; }
+#dir10 .color-swatch .label { color: rgba(243,232,255,0.5); }
+
+#dir10 .mockup {
+  border-radius: 24px; border: 1px solid rgba(192,132,252,0.1);
+  background: #140e1e; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+#dir10 .mockup-nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #c084fc; font-weight: 400; font-style: italic; }
+#dir10 .mockup-nav-links { color: rgba(243,232,255,0.4); font-family: 'Cormorant Garamond', serif; font-style: italic; }
+#dir10 .mockup-hero-area h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #c084fc; font-weight: 400; font-style: italic; }
+#dir10 .mockup-hero-area p { font-family: 'Jost', sans-serif; font-weight: 300; color: rgba(243,232,255,0.35); }
+#dir10 .mockup-btn {
+  background: linear-gradient(135deg, #c084fc, #d8b4fe); color: #140e1e;
+  font-family: 'Jost', sans-serif; border-radius: 999px; font-weight: 500;
+}
+#dir10 .mockup-footer { border-top: 1px solid rgba(192,132,252,0.08); height: 1px; }
+
+#dir10 .vip-card {
+  background: rgba(192,132,252,0.03); border: 1px solid rgba(192,132,252,0.08);
+  border-radius: 24px; font-family: 'Jost', sans-serif; font-weight: 300;
+}
+#dir10 .vip-card .tier-name { color: #c084fc; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+#dir10 .vip-card .tier-perk { color: rgba(243,232,255,0.35); }
+
+#dir10 .voice-card {
+  border: 1px solid rgba(192,132,252,0.15); border-radius: 24px;
+  background: rgba(192,132,252,0.02);
+}
+#dir10 .voice-card .voice-label { color: #c084fc; }
+#dir10 .tone-pill { border-color: rgba(192,132,252,0.2); color: #c084fc; border-radius: 999px; }
+#dir10 .voice-msg { color: rgba(243,232,255,0.45); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.9; letter-spacing: 0.01em; }
+
 /* ===== RECOMMENDATION ===== */
 .reco {
   background: #06060a; padding: 100px 40px; text-align: center;
@@ -429,9 +686,13 @@ a { text-decoration: none; color: inherit; }
 .reco-card.pick-top .reco-badge { color: #d4a017; }
 .reco-card.pick-top h3 { color: #d4a017; font-family: 'Cormorant Garamond', serif; }
 
-.reco-card.pick-runner { border: 1px solid rgba(13,148,136,0.3); }
-.reco-card.pick-runner .reco-badge { color: #14b8a6; }
-.reco-card.pick-runner h3 { color: #14b8a6; font-family: 'Outfit', sans-serif; }
+.reco-card.pick-runner { border: 1px solid rgba(220,38,38,0.3); }
+.reco-card.pick-runner .reco-badge { color: #dc2626; }
+.reco-card.pick-runner h3 { color: #dc2626; font-family: 'Cinzel', serif; }
+
+.reco-card.pick-runner-2 { border: 1px solid rgba(56,189,248,0.3); }
+.reco-card.pick-runner-2 .reco-badge { color: #38bdf8; }
+.reco-card.pick-runner-2 h3 { color: #38bdf8; font-family: 'DM Serif Display', serif; }
 
 .reco-card.pick-wild { border: 1px solid rgba(139,92,246,0.3); }
 .reco-card.pick-wild .reco-badge { color: #8b5cf6; }
@@ -502,6 +763,11 @@ a { text-decoration: none; color: inherit; }
   <a href="#dir3">Tide</a>
   <a href="#dir4">Forge</a>
   <a href="#dir5">Harvest</a>
+  <a href="#dir6" style="color:#dc2626">Blood</a>
+  <a href="#dir7" style="color:#38bdf8">Aurora</a>
+  <a href="#dir8" style="color:#a16207">Silk</a>
+  <a href="#dir9" style="color:#a3e635">Punk</a>
+  <a href="#dir10" style="color:#c084fc">Moon</a>
 </nav>
 
 <!-- BACK TO TOP -->
@@ -510,7 +776,7 @@ a { text-decoration: none; color: inherit; }
 <!-- ===== HERO ===== -->
 <section id="hero" class="hero">
   <h1 class="hero-title">GoLuna</h1>
-  <p class="hero-sub">Five Worlds. One Moon.</p>
+  <p class="hero-sub">Ten Worlds. One Moon.</p>
 </section>
 
 <!-- ===== DIRECTION 1: MOONLIT LUXE ===== -->
@@ -793,6 +1059,286 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
+<!-- ===== DIRECTION 6: BLOOD MOON ===== -->
+<section id="dir6" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">06</div>
+    <p class="dir-label">Blood Moon</p>
+
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">The Night Demands Tribute.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#120808"><span class="hex">#120808</span><span class="label">Blood Night</span></div>
+      <div class="color-swatch" style="background:#dc2626"><span class="hex">#dc2626</span><span class="label">Crimson</span></div>
+      <div class="color-swatch" style="background:#7f1d1d"><span class="hex">#7f1d1d</span><span class="label">Dark Blood</span></div>
+      <div class="color-swatch" style="background:#fecaca;color:#120808"><span class="hex" style="color:#120808">#fecaca</span><span class="label" style="color:#120808">Pale Bone</span></div>
+      <div class="color-swatch" style="background:#1a0c0c"><span class="hex">#1a0c0c</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#ef4444"><span class="hex">#ef4444</span><span class="label">CTA Red</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-nav">
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Casino</span><span>Arena</span><span>Live</span><span>VIP</span><span>Vault</span></div>
+        </div>
+        <div class="mockup-hero-area">
+          <h3>The Night Demands Tribute</h3>
+          <p>Every wager is a blood pact. Every win a testament to your darkness.</p>
+          <button class="mockup-btn">Enter the Blood Moon</button>
+        </div>
+        <div class="mockup-footer"></div>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #1a0c0c"><span class="tier-num">I</span><span class="tier-name">Thrall</span><span class="tier-perk">Blood oath initiation</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #7f1d1d"><span class="tier-num">II</span><span class="tier-name">Acolyte</span><span class="tier-perk">Nightly blood tithe</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #7f1d1d"><span class="tier-num">III</span><span class="tier-name">Nightwalker</span><span class="tier-perk">Shadow passage granted</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #dc2626"><span class="tier-num">IV</span><span class="tier-name">Bloodletter</span><span class="tier-perk">Crimson multiplier</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #dc2626"><span class="tier-num">V</span><span class="tier-name">Nosferatu</span><span class="tier-perk">Nocturnal dominion</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #ef4444"><span class="tier-num">VI</span><span class="tier-name">Elder</span><span class="tier-perk">Council seat</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #ef4444"><span class="tier-num">VII</span><span class="tier-name">Immortal</span><span class="tier-perk">Eternal reign, the night is yours</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Gothic</span><span class="tone-pill">Aristocratic</span><span class="tone-pill">Commanding</span><span class="tone-pill">Ancient</span>
+      </div>
+      <p class="voice-msg">You've crossed the threshold into the Blood Moon's domain. Here, the night is not feared — it is revered. Every wager is a blood pact, every win a testament to your darkness. The ancients have watched. They approve. Take your place among the eternal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIRECTION 7: POLAR AURORA ===== -->
+<section id="dir7" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">07</div>
+    <p class="dir-label">Polar Aurora</p>
+
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">Fortune Illuminates the North.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#0c1622"><span class="hex">#0c1622</span><span class="label">Arctic Night</span></div>
+      <div class="color-swatch" style="background:#38bdf8"><span class="hex">#38bdf8</span><span class="label">Aurora Blue</span></div>
+      <div class="color-swatch" style="background:#e0f2fe;color:#0c1622"><span class="hex" style="color:#0c1622">#e0f2fe</span><span class="label" style="color:#0c1622">Ice White</span></div>
+      <div class="color-swatch" style="background:#1e3a5f"><span class="hex">#1e3a5f</span><span class="label">Deep Fjord</span></div>
+      <div class="color-swatch" style="background:#15202e"><span class="hex">#15202e</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#0ea5e9"><span class="hex">#0ea5e9</span><span class="label">CTA Cyan</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-nav">
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Wager</span><span>Compete</span><span>Live</span><span>Ranks</span></div>
+        </div>
+        <div class="mockup-hero-area">
+          <h3>Fortune Illuminates the North</h3>
+          <p>Clean odds. Instant payouts. The quiet confidence of the north.</p>
+          <button class="mockup-btn">Begin</button>
+        </div>
+        <div class="mockup-footer"></div>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title" style="text-align:right">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #15202e"><span class="tier-num">I</span><span class="tier-name">Frost</span><span class="tier-perk">First frost welcome</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #1e3a5f"><span class="tier-num">II</span><span class="tier-name">Aurora</span><span class="tier-perk">Northern glow bonus</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #1e3a5f"><span class="tier-num">III</span><span class="tier-name">Glacier</span><span class="tier-perk">Glacier-tier access</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #38bdf8"><span class="tier-num">IV</span><span class="tier-name">Summit</span><span class="tier-perk">Summit privileges</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #38bdf8"><span class="tier-num">V</span><span class="tier-name">Apex</span><span class="tier-perk">Apex treatment</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #0ea5e9"><span class="tier-num">VI</span><span class="tier-name">Crown</span><span class="tier-perk">Crown council</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #0ea5e9"><span class="tier-num">VII</span><span class="tier-name">Northern Light</span><span class="tier-perk">The aurora bows to you</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Clean</span><span class="tone-pill">Trustworthy</span><span class="tone-pill">Nordic</span><span class="tone-pill">Understated</span>
+      </div>
+      <p class="voice-msg">No noise. No gimmicks. At GoLuna, the experience speaks for itself — clean odds, instant payouts, and the quiet confidence of a platform built on Scandinavian principles. The northern lights don't shout. They simply illuminate. Welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIRECTION 8: SILK ROAD ===== -->
+<section id="dir8" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">08</div>
+    <p class="dir-label">Silk Road</p>
+
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">Where East Meets Fortune.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#1a0f08"><span class="hex">#1a0f08</span><span class="label">Spice Night</span></div>
+      <div class="color-swatch" style="background:#a16207"><span class="hex">#a16207</span><span class="label">Amber Silk</span></div>
+      <div class="color-swatch" style="background:#d4a017"><span class="hex">#d4a017</span><span class="label">Palace Gold</span></div>
+      <div class="color-swatch" style="background:#fef3c7;color:#1a0f08"><span class="hex" style="color:#1a0f08">#fef3c7</span><span class="label" style="color:#1a0f08">Ivory</span></div>
+      <div class="color-swatch" style="background:#241508"><span class="hex">#241508</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#b45309"><span class="hex">#b45309</span><span class="label">CTA Amber</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-nav">
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Treasury</span><span>Games</span><span>Live</span><span>Royal Court</span></div>
+        </div>
+        <div class="mockup-hero-area">
+          <h3>Where East Meets Fortune</h3>
+          <p>Every game is a bazaar of possibility, every win a treasure from distant lands.</p>
+          <button class="mockup-btn">Enter the Palace</button>
+        </div>
+        <div class="mockup-footer"></div>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #241508"><span class="tier-num">I</span><span class="tier-name">Merchant</span><span class="tier-perk">Merchant's welcome</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a16207"><span class="tier-num">II</span><span class="tier-name">Trader</span><span class="tier-perk">Trade route bonus</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a16207"><span class="tier-num">III</span><span class="tier-name">Caravan Leader</span><span class="tier-perk">Caravan protection</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #d4a017"><span class="tier-num">IV</span><span class="tier-name">Vizier</span><span class="tier-perk">Vizier's counsel</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #d4a017"><span class="tier-num">V</span><span class="tier-name">Sultan</span><span class="tier-perk">Sultan's treasury</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #b45309"><span class="tier-num">VI</span><span class="tier-name">Caliph</span><span class="tier-perk">Caliph's decree</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #b45309"><span class="tier-num">VII</span><span class="tier-name">Immortal Throne</span><span class="tier-perk">The throne answers to no one</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Opulent</span><span class="tone-pill">Ancient</span><span class="tone-pill">Warm</span><span class="tone-pill">Regal</span>
+      </div>
+      <p class="voice-msg">The Silk Road carried the world's most precious treasures across continents, and GoLuna carries that same spirit into the digital age. Here, every game is a bazaar of possibility, every win a treasure from distant lands. The palace gates are open. Enter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIRECTION 9: LUNAR PUNK ===== -->
+<section id="dir9" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">09</div>
+    <p class="dir-label">Lunar Punk</p>
+
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">Burn the Playbook.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#0a0a00"><span class="hex">#0a0a00</span><span class="label">Void</span></div>
+      <div class="color-swatch" style="background:#a3e635"><span class="hex">#a3e635</span><span class="label">Acid</span></div>
+      <div class="color-swatch" style="background:#365314"><span class="hex">#365314</span><span class="label">Toxic Dark</span></div>
+      <div class="color-swatch" style="background:#ecfccb;color:#0a0a00"><span class="hex" style="color:#0a0a00">#ecfccb</span><span class="label" style="color:#0a0a00">Pale Acid</span></div>
+      <div class="color-swatch" style="background:#14140a"><span class="hex">#14140a</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#84cc16"><span class="hex">#84cc16</span><span class="label">CTA Green</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-nav">
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Slots</span><span>Tables</span><span>Live</span><span>Rank</span></div>
+        </div>
+        <div class="mockup-hero-area">
+          <h3>Play Different</h3>
+          <p>No velvet ropes. No dress code. Just you and the game.</p>
+          <button class="mockup-btn">PLAY DIFFERENT</button>
+        </div>
+        <div class="mockup-footer"></div>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title" style="text-align:left">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #14140a"><span class="tier-num">I</span><span class="tier-name">Dropout</span><span class="tier-perk">You showed up</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #365314"><span class="tier-num">II</span><span class="tier-name">Misfit</span><span class="tier-perk">You stayed</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #365314"><span class="tier-num">III</span><span class="tier-name">Outcast</span><span class="tier-perk">You don't care</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a3e635"><span class="tier-num">IV</span><span class="tier-name">Renegade</span><span class="tier-perk">You broke rules</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a3e635"><span class="tier-num">V</span><span class="tier-name">Disruptor</span><span class="tier-perk">You changed the game</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #84cc16"><span class="tier-num">VI</span><span class="tier-name">Iconoclast</span><span class="tier-perk">You rewrote it</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #84cc16"><span class="tier-num">VII</span><span class="tier-name">Lunatic</span><span class="tier-perk">You ARE the game</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Raw</span><span class="tone-pill">Defiant</span><span class="tone-pill">Authentic</span><span class="tone-pill">Unpolished</span>
+      </div>
+      <p class="voice-msg">No velvet ropes. No dress code. No terms and conditions buried in fine print. GoLuna Punk is the casino that burned the playbook and let you write a new one. You're not a 'valued customer' — you're a lunatic, and that's a compliment. Play ugly. Win big.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIRECTION 10: MOONSTONE ===== -->
+<section id="dir10" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">10</div>
+    <p class="dir-label">Moonstone</p>
+
+    <h2 class="wordmark">GoLuna</h2>
+    <p class="tagline">Fortune Finds the Dreamers.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#140e1e"><span class="hex">#140e1e</span><span class="label">Deep Amethyst</span></div>
+      <div class="color-swatch" style="background:#c084fc"><span class="hex">#c084fc</span><span class="label">Lavender</span></div>
+      <div class="color-swatch" style="background:#a855f7"><span class="hex">#a855f7</span><span class="label">Violet</span></div>
+      <div class="color-swatch" style="background:#f3e8ff;color:#140e1e"><span class="hex" style="color:#140e1e">#f3e8ff</span><span class="label" style="color:#140e1e">Pearl</span></div>
+      <div class="color-swatch" style="background:#1c1428"><span class="hex">#1c1428</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#d8b4fe"><span class="hex">#d8b4fe</span><span class="label">CTA Soft Purple</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup">
+        <div class="mockup-nav">
+          <div class="mockup-nav-logo">GoLuna</div>
+          <div class="mockup-nav-links"><span>Discover</span><span>Play</span><span>Dream</span><span>Rise</span></div>
+        </div>
+        <div class="mockup-hero-area">
+          <h3>Fortune Finds the Dreamers</h3>
+          <p>Like the moonstone — quiet on the surface, holding an inner fire.</p>
+          <button class="mockup-btn">Begin Your Dream</button>
+        </div>
+        <div class="mockup-footer"></div>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #1c1428"><span class="tier-num">I</span><span class="tier-name">Whisper</span><span class="tier-perk">A quiet invitation</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a855f7"><span class="tier-num">II</span><span class="tier-name">Glow</span><span class="tier-perk">Inner glow activated</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a855f7"><span class="tier-num">III</span><span class="tier-name">Shimmer</span><span class="tier-perk">Crystal clarity bonus</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #c084fc"><span class="tier-num">IV</span><span class="tier-name">Radiance</span><span class="tier-perk">Radiant multiplier</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #c084fc"><span class="tier-num">V</span><span class="tier-name">Brilliance</span><span class="tier-perk">Brilliant treatment</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #d8b4fe"><span class="tier-num">VI</span><span class="tier-name">Ascendance</span><span class="tier-perk">Ascended privileges</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #d8b4fe"><span class="tier-num">VII</span><span class="tier-name">Transcendence</span><span class="tier-perk">You've transcended the game itself</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Ethereal</span><span class="tone-pill">Dreamy</span><span class="tone-pill">Inclusive</span><span class="tone-pill">Mystical</span>
+      </div>
+      <p class="voice-msg">Some casinos shout. GoLuna whispers. Like the moonstone itself — quiet on the surface, but holding an inner fire that only reveals itself to those who look closely. If you're here, you already know. The dreams you play are the ones that come true.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== RECOMMENDATION ===== -->
 <section class="reco">
   <h2>Recommendation</h2>
@@ -804,8 +1350,13 @@ a { text-decoration: none; color: inherit; }
     </div>
     <div class="reco-card pick-runner">
       <p class="reco-badge">Runner-Up</p>
-      <h3>Silver Tide</h3>
-      <p>The ocean metaphor is versatile and emotionally resonant. Teal reads as trustworthy and modern — rare in iGaming. The rounded, flowing design language differentiates sharply from competitor platforms that lean aggressive. Strong candidate for a mass-market play.</p>
+      <h3>Blood Moon</h3>
+      <p>The gothic horror aesthetic is genuinely untapped in iGaming. Dark, aristocratic, unforgettable. The vampire mascot has infinite content depth — seasonal events, blood moon promotions, midnight tournaments.</p>
+    </div>
+    <div class="reco-card pick-runner-2">
+      <p class="reco-badge">Second Runner-Up</p>
+      <h3>Polar Aurora</h3>
+      <p>Scandinavian trust + northern lights visuals. Clean, trustworthy, works perfectly for regulated European markets.</p>
     </div>
     <div class="reco-card pick-wild">
       <p class="reco-badge">Wildcard</p>
@@ -843,7 +1394,7 @@ a { text-decoration: none; color: inherit; }
 (function() {
   const pills = document.querySelectorAll('.nav-pills a');
   const backTop = document.querySelector('.back-top');
-  const sections = document.querySelectorAll('#hero, #dir1, #dir2, #dir3, #dir4, #dir5');
+  const sections = document.querySelectorAll('#hero, #dir1, #dir2, #dir3, #dir4, #dir5, #dir6, #dir7, #dir8, #dir9, #dir10');
 
   function update() {
     const scrollY = window.scrollY;
