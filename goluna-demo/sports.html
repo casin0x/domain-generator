@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Sports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0f2e;
+  --surface: #141a3a;
+  --border: rgba(255,255,255,0.06);
+  --gold: #d4a017;
+  --gold-hover: #e8b52a;
+  --silver: #c0c7d6;
+  --white: #f0eff4;
+  --green: #22c55e;
+  --cta-text: #0a0f2e;
+  --sidebar-bg: #0e1238;
+  --footer-bg: #0a0f30;
+  --heading: 'Cormorant Garamond', serif;
+  --body: 'Jost', sans-serif;
+  --nav-h: 64px;
+  --sidebar-w: 240px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 9999; opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--body); border: none; cursor: pointer; outline: none; }
+
+/* ── NAV ─────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: rgba(10,15,46,0.95);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.nav-logo {
+  font-family: var(--heading); font-size: 26px; font-weight: 700;
+  color: var(--gold); display: flex; align-items: center; gap: 10px;
+}
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--silver);
+  transition: color .2s; position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--gold); transition: width .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+.btn-ghost {
+  padding: 8px 20px; border-radius: 8px;
+  border: 1px solid var(--silver); color: var(--silver);
+  font-size: 14px; font-weight: 500; background: transparent; transition: all .2s;
+}
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+.btn-gold {
+  padding: 8px 22px; border-radius: 8px;
+  background: var(--gold); color: var(--cta-text);
+  font-size: 14px; font-weight: 600; transition: all .2s;
+}
+.btn-gold:hover { background: var(--gold-hover); transform: translateY(-1px); }
+
+/* ── LEFT SIDEBAR ────────────────────────────────── */
+.sidebar {
+  position: fixed; top: var(--nav-h); left: 0; bottom: 0;
+  width: var(--sidebar-w); background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 0; z-index: 90; overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
+
+.sidebar-nav { padding: 16px 12px 12px; border-bottom: 1px solid var(--border); }
+.sidebar-nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 10px;
+  color: var(--silver); cursor: pointer; transition: all .2s;
+  font-size: 14px; font-weight: 500; position: relative;
+}
+.sidebar-nav-item:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+.sidebar-nav-item.active { background: rgba(212,160,23,0.12); color: var(--gold); }
+.sidebar-nav-item.active::before {
+  content: ''; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 20px; background: var(--gold); border-radius: 0 3px 3px 0;
+}
+.sidebar-nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* Sports sub-section */
+.sports-sub { padding: 16px 12px; }
+.sports-toggle {
+  display: flex; gap: 0; margin-bottom: 16px;
+  background: rgba(255,255,255,0.04); border-radius: 8px; overflow: hidden;
+}
+.sports-toggle button {
+  flex: 1; padding: 8px 0; font-size: 13px; font-weight: 600;
+  color: var(--silver); background: transparent; transition: all .2s;
+  border-radius: 8px;
+}
+.sports-toggle button.active {
+  background: var(--gold); color: var(--cta-text);
+}
+
+.sports-list { display: flex; flex-direction: column; gap: 2px; }
+.sport-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 14px; border-radius: 8px;
+  color: var(--silver); cursor: pointer; transition: all .15s;
+  font-size: 13px; font-weight: 500;
+}
+.sport-item:hover { background: rgba(255,255,255,0.04); color: var(--white); }
+.sport-item.active { background: rgba(212,160,23,0.1); color: var(--gold); }
+.sport-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+.sport-item .count {
+  margin-left: auto; font-size: 11px; font-weight: 400;
+  color: rgba(192,199,214,0.5); min-width: 28px; text-align: right;
+}
+
+/* ── 3-COLUMN LAYOUT ────────────────────────────── */
+.layout {
+  margin-left: var(--sidebar-w);
+  padding-top: var(--nav-h);
+  display: flex; min-height: calc(100vh - var(--nav-h));
+}
+.center-col {
+  flex: 1; min-width: 0;
+  padding: 0;
+}
+.right-col {
+  width: 280px; flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  background: var(--sidebar-bg);
+}
+
+/* ── TOP BAR ─────────────────────────────────────── */
+.top-bar {
+  display: flex; align-items: center; gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px; height: 48px;
+}
+.top-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 14px; height: 100%;
+  font-size: 13px; font-weight: 500; color: var(--silver);
+  cursor: pointer; transition: color .2s;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+.top-tab:hover { color: var(--white); }
+.top-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.top-tab svg { width: 16px; height: 16px; }
+.top-tab .live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #ef4444; display: inline-block;
+}
+
+.sub-tabs {
+  display: flex; align-items: center; gap: 0;
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px; height: 42px;
+}
+.sub-tab {
+  padding: 0 16px; height: 100%;
+  display: flex; align-items: center;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--silver); cursor: pointer;
+  border-bottom: 2px solid transparent; transition: all .2s;
+  text-transform: uppercase;
+}
+.sub-tab:hover { color: var(--white); }
+.sub-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ── FEATURED BANNER ─────────────────────────────── */
+.featured-banner {
+  margin: 16px 20px;
+  border-radius: 12px; overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(34,197,94,0.06) 0%, transparent 50%),
+    linear-gradient(135deg, #0e1650 0%, #1a1060 40%, #1c1266 70%, #140e45 100%);
+  padding: 32px 36px; position: relative;
+  min-height: 160px; display: flex; flex-direction: column; justify-content: center;
+}
+.featured-banner::before {
+  content: ''; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(212,160,23,0.12) 0%, rgba(212,160,23,0.03) 50%, transparent 70%);
+  border-radius: 50%;
+}
+.featured-banner::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(212,160,23,0.35), transparent),
+    radial-gradient(1px 1px at 55% 15%, rgba(212,160,23,0.25), transparent),
+    radial-gradient(1px 1px at 75% 55%, rgba(212,160,23,0.2), transparent),
+    radial-gradient(1.5px 1.5px at 35% 65%, rgba(212,160,23,0.3), transparent),
+    radial-gradient(1px 1px at 85% 35%, rgba(212,160,23,0.15), transparent);
+}
+.featured-content { position: relative; z-index: 2; }
+.featured-league {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 8px;
+}
+.featured-title {
+  font-family: var(--heading); font-size: 28px; font-weight: 600;
+  color: var(--white); margin-bottom: 6px;
+}
+.featured-sub {
+  font-size: 14px; color: var(--silver); margin-bottom: 16px;
+}
+.featured-small {
+  font-size: 11px; color: rgba(192,199,214,0.5); margin-top: 12px;
+}
+
+/* ── POPULAR SECTION ─────────────────────────────── */
+.popular-section { padding: 20px 20px 0; }
+.popular-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.popular-header h3 {
+  font-family: var(--body); font-size: 18px; font-weight: 600;
+  color: var(--white); display: flex; align-items: center; gap: 8px;
+}
+.popular-header h3 svg { width: 20px; height: 20px; color: var(--gold); }
+
+.filter-pills {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.filter-pill {
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 500; color: var(--silver);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); cursor: pointer;
+  transition: all .2s;
+}
+.filter-pill:hover { border-color: rgba(212,160,23,0.3); color: var(--white); }
+.filter-pill.active {
+  background: rgba(212,160,23,0.12); border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── MATCH CARDS ─────────────────────────────────── */
+.matches { padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 2px; }
+.match-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px;
+  transition: border-color .2s;
+}
+.match-card:hover { border-color: rgba(212,160,23,0.15); }
+
+.match-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.match-league {
+  font-size: 11px; font-weight: 500; color: var(--silver);
+  display: flex; align-items: center; gap: 6px;
+}
+.match-league .dot {
+  width: 4px; height: 4px; border-radius: 50%; background: var(--silver); opacity: 0.4;
+}
+.match-market {
+  font-size: 11px; font-weight: 500; color: rgba(192,199,214,0.5);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+.match-time {
+  font-size: 11px; color: rgba(192,199,214,0.6);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+}
+.match-time svg { width: 14px; height: 14px; opacity: 0.5; }
+
+.match-body {
+  display: flex; align-items: center; gap: 16px;
+}
+.match-teams { flex: 1; min-width: 0; }
+.match-team {
+  display: flex; align-items: center; gap: 10px;
+  padding: 3px 0; font-size: 13px; font-weight: 500; color: var(--white);
+}
+.match-team + .match-team { margin-top: 4px; }
+.team-crest {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: var(--white);
+}
+
+.match-odds {
+  display: flex; gap: 6px; align-items: center; flex-shrink: 0;
+}
+.odds-group {
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+}
+.odds-label {
+  font-size: 9px; font-weight: 600; color: rgba(192,199,214,0.4);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.odd-btn {
+  min-width: 54px; padding: 7px 10px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 6px; text-align: center;
+  font-size: 12px; font-weight: 600; color: var(--white);
+  cursor: pointer; transition: all .15s;
+}
+.odd-btn:hover { border-color: var(--gold); background: rgba(212,160,23,0.08); }
+.odd-btn.fav {
+  background: rgba(212,160,23,0.08); border-color: rgba(212,160,23,0.2);
+  color: var(--gold);
+}
+.odds-divider {
+  width: 1px; height: 36px; background: var(--border); margin: 0 2px;
+  align-self: flex-end; margin-bottom: 4px;
+}
+
+.match-more {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; flex-shrink: 0; cursor: pointer;
+  color: rgba(192,199,214,0.4); transition: color .2s;
+}
+.match-more:hover { color: var(--gold); }
+.match-more svg { width: 16px; height: 16px; }
+
+/* ── RIGHT COLUMN: BETSLIP ───────────────────────── */
+.betslip { position: sticky; top: var(--nav-h); }
+.betslip-header {
+  display: flex; align-items: center; justify-content: center;
+  height: 48px; border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; color: var(--white);
+  letter-spacing: 0.5px; gap: 6px;
+}
+.betslip-header svg { width: 14px; height: 14px; color: var(--silver); }
+
+.betslip-tabs {
+  display: flex; border-bottom: 1px solid var(--border);
+}
+.betslip-tab {
+  flex: 1; padding: 10px 0; text-align: center;
+  font-size: 12px; font-weight: 600; color: var(--silver);
+  cursor: pointer; transition: all .2s;
+  border-bottom: 2px solid transparent;
+}
+.betslip-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.betslip-tab:hover { color: var(--white); }
+
+.betslip-view-icons {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 8px 16px; gap: 8px;
+}
+.betslip-view-icons svg {
+  width: 16px; height: 16px; color: var(--silver); cursor: pointer;
+  transition: color .15s;
+}
+.betslip-view-icons svg:hover { color: var(--gold); }
+
+.betslip-empty {
+  padding: 48px 24px; text-align: center;
+}
+.betslip-empty svg { width: 48px; height: 48px; color: rgba(192,199,214,0.2); margin-bottom: 16px; }
+.betslip-empty h4 {
+  font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 6px;
+}
+.betslip-empty p {
+  font-size: 12px; color: var(--silver); line-height: 1.5;
+}
+
+.odds-settings {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; font-weight: 500; color: var(--silver);
+  cursor: pointer; transition: color .2s;
+}
+.odds-settings:hover { color: var(--gold); }
+.odds-settings svg { width: 14px; height: 14px; }
+
+/* Upcoming sidebar */
+.upcoming-sidebar {
+  border-top: 1px solid var(--border); padding: 16px;
+}
+.upcoming-title {
+  font-size: 12px; font-weight: 600; color: var(--white);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.upcoming-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px;
+  margin-bottom: 8px; cursor: pointer;
+  transition: border-color .2s;
+}
+.upcoming-card:hover { border-color: rgba(212,160,23,0.2); }
+.upcoming-league {
+  font-size: 10px; font-weight: 500; color: rgba(192,199,214,0.5);
+  margin-bottom: 4px; display: flex; align-items: center; gap: 6px;
+}
+.upcoming-league .time {
+  margin-left: auto; font-size: 10px; color: rgba(192,199,214,0.4);
+}
+.upcoming-teams {
+  display: flex; flex-direction: column; gap: 2px;
+  margin-bottom: 8px;
+}
+.upcoming-team {
+  font-size: 12px; font-weight: 500; color: var(--white);
+}
+.upcoming-odds {
+  display: flex; gap: 6px;
+}
+.upcoming-odd {
+  flex: 1; padding: 5px 0; text-align: center;
+  font-size: 11px; font-weight: 600; color: var(--white);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border); border-radius: 5px;
+  cursor: pointer; transition: all .15s;
+}
+.upcoming-odd:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ──────────────────────────────────────── */
+.footer-wrap {
+  margin-left: var(--sidebar-w);
+}
+.footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 32px;
+  position: relative;
+}
+.footer::before {
+  content: ''; display: block; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+  position: absolute; top: 0; left: 0; right: 0;
+}
+.footer-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 40px;
+}
+.footer-brand h3 {
+  font-family: var(--heading); font-size: 28px; font-weight: 700;
+  color: var(--gold); margin-bottom: 12px;
+}
+.footer-brand p {
+  font-size: 13px; color: var(--silver); line-height: 1.7;
+  margin-bottom: 20px; max-width: 280px;
+}
+.social-icons { display: flex; gap: 12px; }
+.social-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--silver); cursor: pointer; transition: all .2s;
+}
+.social-icon:hover { background: rgba(212,160,23,0.15); color: var(--gold); }
+.social-icon svg { width: 16px; height: 16px; }
+.footer-col h4 {
+  font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: var(--silver);
+  margin-bottom: 10px; transition: color .2s;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-payments { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.payment-badge {
+  width: 52px; height: 32px; border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: var(--silver);
+}
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 12px; color: var(--silver); opacity: 0.7; }
+.footer-bottom .license {
+  font-size: 11px; color: var(--silver); opacity: 0.5;
+  max-width: 500px; text-align: right; line-height: 1.5;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1200px) {
+  .right-col { width: 260px; }
+}
+@media (max-width: 1024px) {
+  .right-col { display: none; }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .layout { margin-left: 0; }
+  .footer-wrap { margin-left: 0; }
+  .nav-links { display: none; }
+  .featured-banner { margin: 12px 12px; padding: 24px 20px; }
+  .featured-title { font-size: 22px; }
+  .popular-section { padding: 16px 12px 0; }
+  .matches { padding: 12px 12px 20px; }
+  .match-body { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .match-odds { width: 100%; justify-content: flex-start; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .nav { padding: 0 16px; }
+  .nav-logo { font-size: 22px; }
+  .top-bar { padding: 0 12px; overflow-x: auto; }
+  .top-tab { padding: 0 10px; font-size: 12px; white-space: nowrap; }
+  .sub-tabs { padding: 0 12px; }
+  .featured-banner { margin: 8px; padding: 20px 16px; min-height: 120px; }
+  .featured-title { font-size: 20px; }
+  .popular-section { padding: 12px 8px 0; }
+  .filter-pills { gap: 6px; }
+  .matches { padding: 8px 8px 16px; }
+  .match-card { padding: 12px; }
+  .odd-btn { min-width: 46px; padding: 6px 6px; font-size: 11px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .footer-bottom .license { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#d4a017;">Go</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#c0c7d6;">Luna</span>
+  </div>
+  <div class="nav-links">
+    <a href="casino.html">Casino</a>
+    <a href="sports.html" class="active">Sports</a>
+    <a href="casino.html">Live</a>
+    <a href="promotions.html">Promotions</a>
+    <a href="vip.html">VIP</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-ghost">Login</button>
+    <button class="btn-gold">Sign Up</button>
+  </div>
+</nav>
+
+<!-- ============ LEFT SIDEBAR ============ -->
+<aside class="sidebar">
+  <!-- Main nav items -->
+  <div class="sidebar-nav">
+    <a href="index.html" class="sidebar-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="casino.html" class="sidebar-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>
+      Casino
+    </a>
+    <a href="sports.html" class="sidebar-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Sports
+    </a>
+    <a href="#" class="sidebar-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Live
+    </a>
+    <a href="#" class="sidebar-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Originals
+    </a>
+    <a href="promotions.html" class="sidebar-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M2 8h20"/><path d="M12 2l4 6H8l4-6z"/></svg>
+      Promotions
+    </a>
+  </div>
+
+  <!-- Sports sub-section -->
+  <div class="sports-sub">
+    <div class="sports-toggle">
+      <button class="active">Sports</button>
+      <button>Esports</button>
+    </div>
+    <div class="sports-list">
+      <div class="sport-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+        Soccer
+        <span class="count">755</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M4.93 4.93l14.14 14.14"/><path d="M19.07 4.93L4.93 19.07"/></svg>
+        Basketball
+        <span class="count">93</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M18 12a6 6 0 0 0-6-6"/><path d="M6 12a6 6 0 0 0 6 6"/><path d="M12 2v20"/></svg>
+        Tennis
+        <span class="count">357</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M4 12h16"/><path d="M12 2c-2.8 3.2-4 6.5-4 10s1.2 6.8 4 10"/><path d="M12 2c2.8 3.2 4 6.5 4 10s-1.2 6.8-4 10"/></svg>
+        Ice Hockey
+        <span class="count">142</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 3l18 18"/><path d="M21 3L3 21"/><path d="M12 3v18"/><path d="M3 12h18"/></svg>
+        Chess
+        <span class="count">16</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="6"/><path d="M12 6v12"/><path d="M6 9l12 6"/><path d="M18 9L6 15"/></svg>
+        American Football
+        <span class="count">48</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6c-3.3 0-6 2.7-6 6"/><path d="M12 6c3.3 0 6 2.7 6 6"/><path d="M6 12c0 3.3 2.7 6 6 6"/><path d="M18 12c0 3.3-2.7 6-6 6"/></svg>
+        Baseball
+        <span class="count">67</span>
+      </div>
+      <div class="sport-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M17 17m-3 0a3 3 0 1 0 6 0 3 3 0 1 0-6 0"/></svg>
+        MMA
+        <span class="count">24</span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ 3-COLUMN LAYOUT ============ -->
+<div class="layout">
+
+  <!-- ──── CENTER COLUMN ──── -->
+  <div class="center-col">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-tab active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </div>
+      <div class="top-tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+        Live
+        <span class="live-dot"></span>
+      </div>
+      <div class="top-tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Favorites
+      </div>
+      <div class="top-tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Results
+      </div>
+      <div class="top-tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </div>
+    </div>
+
+    <!-- Sub Tabs -->
+    <div class="sub-tabs">
+      <div class="sub-tab active">Highlights</div>
+      <div class="sub-tab">Event Builder</div>
+    </div>
+
+    <!-- Featured Banner -->
+    <div class="featured-banner">
+      <div class="featured-content">
+        <div class="featured-league">UEFA Champions League</div>
+        <div class="featured-title">Quarter Finals Preview</div>
+        <div class="featured-sub">The biggest matches in European football are here.</div>
+        <button class="btn-gold" style="padding:10px 24px;font-size:13px;">Read Now</button>
+        <div class="featured-small">Crypto Sportsbook, Casino and Poker all in one place!</div>
+      </div>
+    </div>
+
+    <!-- Popular Section -->
+    <div class="popular-section">
+      <div class="popular-header">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3 3 5 6 6-1 4-3 7-6 10-3-3-5-6-6-10 3-1 5-3 6-6z"/></svg>
+          Popular
+        </h3>
+      </div>
+      <div class="filter-pills">
+        <div class="filter-pill active">Soccer</div>
+        <div class="filter-pill">Counter-Strike</div>
+        <div class="filter-pill">Basketball</div>
+        <div class="filter-pill">Tennis</div>
+        <div class="filter-pill">Ice Hockey</div>
+      </div>
+    </div>
+
+    <!-- Match Cards -->
+    <div class="matches">
+
+      <!-- Match 1 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            International Women
+            <span class="dot"></span>
+            UEFA Champions League
+          </div>
+          <div class="match-market">To qualify</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Tomorrow, 18:45
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#fff,#d4af37);">RM</div>
+              Real Madrid
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#a50044,#004d98);">FC</div>
+              FC Barcelona
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn">8.60</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">6.00</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn fav">1.22</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn">6.60</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn fav">1.07</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match 2 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            International Women
+            <span class="dot"></span>
+            UEFA Champions League
+          </div>
+          <div class="match-market">1x2</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Today, 21:00
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#db0007,#fff);">AR</div>
+              Arsenal
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#034694,#fff);">CH</div>
+              Chelsea FC
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.82</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">3.75</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">3.50</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.73</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">1.96</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match 3 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            England
+            <span class="dot"></span>
+            Premier League
+          </div>
+          <div class="match-market">1x2</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Tomorrow, 15:00
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#6CABDD,#1C2C5B);">MC</div>
+              Manchester City
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#c8102E,#00b2a9);">LI</div>
+              Liverpool
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.95</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">3.40</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">3.80</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.62</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">2.15</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match 4 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            Spain
+            <span class="dot"></span>
+            La Liga
+          </div>
+          <div class="match-market">1x2</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Tomorrow, 20:00
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#cb3524,#fff);">AT</div>
+              Atletico Madrid
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#0067b1,#fff);">RS</div>
+              Real Sociedad
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">2.10</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">3.20</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">3.45</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.55</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">2.30</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match 5 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            Italy
+            <span class="dot"></span>
+            Serie A
+          </div>
+          <div class="match-market">1x2</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Today, 20:45
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#fb090b,#000);">AC</div>
+              AC Milan
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#0068a8,#000);">IN</div>
+              Inter Milan
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn">2.85</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">3.15</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn fav">2.50</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn">2.20</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn fav">1.60</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match 6 -->
+      <div class="match-card">
+        <div class="match-header">
+          <div class="match-league">
+            Germany
+            <span class="dot"></span>
+            Bundesliga
+          </div>
+          <div class="match-market">1x2</div>
+        </div>
+        <div class="match-time">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Tomorrow, 17:30
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="match-body">
+          <div class="match-teams">
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#dc052d,#0066b2);">BM</div>
+              Bayern Munich
+            </div>
+            <div class="match-team">
+              <div class="team-crest" style="background:linear-gradient(135deg,#fde100,#000);">BD</div>
+              Borussia Dortmund
+            </div>
+          </div>
+          <div class="match-odds">
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.55</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">X</span>
+              <div class="odd-btn">4.20</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">5.80</div>
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-group">
+              <span class="odds-label">1</span>
+              <div class="odd-btn fav">1.30</div>
+            </div>
+            <div class="odds-group">
+              <span class="odds-label">2</span>
+              <div class="odd-btn">3.30</div>
+            </div>
+          </div>
+          <div class="match-more">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ──── RIGHT COLUMN: BETSLIP ──── -->
+  <div class="right-col">
+    <div class="betslip">
+
+      <!-- Betslip Header -->
+      <div class="betslip-header">
+        BETSLIP
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <!-- Betslip Tabs -->
+      <div class="betslip-tabs">
+        <div class="betslip-tab active">Single</div>
+        <div class="betslip-tab">Combo</div>
+        <div class="betslip-tab">System</div>
+      </div>
+
+      <!-- View Icons -->
+      <div class="betslip-view-icons">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </div>
+
+      <!-- Empty State -->
+      <div class="betslip-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <h4>Place your bets</h4>
+        <p>Your selections will appear in this area</p>
+      </div>
+
+      <!-- Odds Settings -->
+      <div class="odds-settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Odds Settings
+      </div>
+
+      <!-- Upcoming Matches -->
+      <div class="upcoming-sidebar">
+        <div class="upcoming-title">Upcoming</div>
+
+        <div class="upcoming-card">
+          <div class="upcoming-league">
+            USA &middot; NCAA
+            <span class="time">Today, 23:00</span>
+          </div>
+          <div class="upcoming-teams">
+            <span class="upcoming-team">Tulsa Golden Hurricane</span>
+            <span class="upcoming-team">Wichita State Shockers</span>
+          </div>
+          <div class="upcoming-odds">
+            <div class="upcoming-odd">1.51</div>
+            <div class="upcoming-odd">2.50</div>
+          </div>
+        </div>
+
+        <div class="upcoming-card">
+          <div class="upcoming-league">
+            USA &middot; NCAA
+            <span class="time">Today, 23:30</span>
+          </div>
+          <div class="upcoming-teams">
+            <span class="upcoming-team">New Mexico Lobos</span>
+            <span class="upcoming-team">Saint Josephs Hawks</span>
+          </div>
+          <div class="upcoming-odds">
+            <div class="upcoming-odd">1.13</div>
+            <div class="upcoming-odd">5.60</div>
+          </div>
+        </div>
+
+        <div class="upcoming-card">
+          <div class="upcoming-league">
+            USA &middot; NCAA
+            <span class="time">Tomorrow, 01:00</span>
+          </div>
+          <div class="upcoming-teams">
+            <span class="upcoming-team">Dayton Flyers</span>
+            <span class="upcoming-team">Illinois State</span>
+          </div>
+          <div class="upcoming-odds">
+            <div class="upcoming-odd">1.85</div>
+            <div class="upcoming-odd">3.20</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<div class="footer-wrap">
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>GoLuna</h3>
+        <p>The premier crypto casino experience. Fast deposits, instant withdrawals, and provably fair games. Play under the moonlight.</p>
+        <div class="social-icons">
+          <div class="social-icon" title="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </div>
+          <div class="social-icon" title="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <div class="social-icon" title="Discord">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561 19.9312 19.9312 0 005.9932 3.0284.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286 19.8975 19.8975 0 006.0023-3.0283.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+          </div>
+          <div class="social-icon" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Casino</h4>
+        <a href="#">Slots</a>
+        <a href="#">Table games</a>
+        <a href="#">Live casino</a>
+        <a href="#">Jackpots</a>
+        <a href="#">New releases</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="#">About us</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Responsible gambling</a>
+        <a href="#">Fairness</a>
+      </div>
+      <div class="footer-col">
+        <h4>Payments</h4>
+        <div class="footer-payments">
+          <div class="payment-badge">BTC</div>
+          <div class="payment-badge">ETH</div>
+          <div class="payment-badge">LTC</div>
+          <div class="payment-badge">DOGE</div>
+          <div class="payment-badge">XRP</div>
+          <div class="payment-badge">USDT</div>
+          <div class="payment-badge">SOL</div>
+          <div class="payment-badge">TRX</div>
+          <div class="payment-badge">BNB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 GoLuna. All rights reserved.</p>
+      <p class="license">GoLuna is operated by Luna Digital Entertainment N.V., registered and licensed in Curacao under license number 365/JAZ. Players must be 18+ to participate. Gambling can be addictive, please play responsibly.</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+// Sports/Esports toggle
+document.querySelectorAll('.sports-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sports-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Sport list active state
+document.querySelectorAll('.sport-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.sport-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Filter pills
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+
+// Top tabs
+document.querySelectorAll('.top-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Sub tabs
+document.querySelectorAll('.sub-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Betslip tabs
+document.querySelectorAll('.betslip-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.betslip-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Sidebar nav items
+document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+    if (item.getAttribute('href') === '#') {
+      e.preventDefault();
+      document.querySelectorAll('.sidebar-nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    }
+  });
+});
+
+// Odds button click feedback
+document.querySelectorAll('.odd-btn, .upcoming-odd').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('fav');
+  });
+});
+</script>
+</body>
+</html>
