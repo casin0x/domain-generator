@@ -3,30 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoLuna — My Profile</title>
+<title>GoLuna -- My Profile</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0c1445;
+  --bg: #0a0f2e;
   --surface: #141a3a;
   --border: rgba(255,255,255,0.06);
   --gold: #d4a017;
   --gold-hover: #e8b52a;
+  --gold-dim: rgba(212,160,23,0.12);
   --silver: #c0c7d6;
   --white: #f0eff4;
-  --cta-text: #0c1445;
+  --cta-text: #0a0f2e;
   --sidebar-bg: #0e1238;
-  --footer-bg: #0a0f30;
+  --footer-bg: #080c24;
   --heading: 'Cormorant Garamond', serif;
   --body: 'Jost', sans-serif;
-  --content-w: 1120px;
-  --nav-h: 64px;
-  --sidebar-w: 72px;
-  --green: #22c55e;
-  --red: #ef4444;
+  --nav-h: 60px;
+  --sidebar-w: 240px;
 }
 
 html { scroll-behavior: smooth; }
@@ -41,11 +40,9 @@ body {
 }
 body::after {
   content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.015;
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 9999;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-reduced-motion: reduce) {
@@ -56,95 +53,154 @@ a { color: inherit; text-decoration: none; }
 button { font-family: var(--body); border: none; cursor: pointer; outline: none; }
 img { display: block; max-width: 100%; }
 
-/* -- NAV -- */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: var(--nav-h);
-  background: rgba(12,20,69,0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 32px;
-}
-.nav-logo {
-  font-family: var(--heading);
-  font-size: 26px; font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 1px;
-  display: flex; align-items: center; gap: 10px;
-}
-.nav-logo img { height: 32px; width: auto; }
-.nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a {
-  font-size: 14px; font-weight: 500; color: var(--silver);
-  transition: color .2s;
-  position: relative;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-  background: var(--gold); transition: width .2s;
-}
-.nav-links a:hover::after { width: 100%; }
-.nav-actions { display: flex; gap: 12px; align-items: center; }
+/* ── BUTTONS ──────────────────────────────────────── */
 .btn-ghost {
   padding: 8px 20px; border-radius: 8px;
-  border: 1px solid var(--silver); color: var(--silver);
+  border: 1px solid rgba(192,199,214,0.4); color: var(--silver);
   font-size: 14px; font-weight: 500; background: transparent;
   transition: all .2s;
 }
 .btn-ghost:hover { border-color: var(--white); color: var(--white); }
 .btn-gold {
   padding: 8px 22px; border-radius: 8px;
-  background: var(--gold); color: var(--cta-text);
+  background: linear-gradient(135deg, #d4a017, #b8860b); color: var(--cta-text);
   font-size: 14px; font-weight: 600;
-  transition: all .2s;
+  transition: all .2s; border: none;
 }
-.btn-gold:hover { background: var(--gold-hover); transform: translateY(-1px); }
+.btn-gold:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-/* -- SIDEBAR -- */
+/* ── TOP NAV ──────────────────────────────────────── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: rgba(10,15,46,0.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+}
+.topnav-left {
+  display: flex; align-items: center; gap: 16px;
+}
+.hamburger {
+  background: none; border: none; color: var(--silver); cursor: pointer;
+  display: none; padding: 4px;
+}
+.hamburger svg { width: 24px; height: 24px; }
+.topnav-logo {
+  font-family: var(--heading);
+  font-size: 26px; font-weight: 700;
+  letter-spacing: 1px; display: flex; align-items: center; gap: 0;
+}
+.topnav-logo .go { color: var(--gold); }
+.topnav-logo .luna { color: var(--silver); }
+
+.topnav-pills {
+  display: flex; gap: 8px; align-items: center;
+}
+.pill-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent; color: var(--silver);
+  font-family: var(--body); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.pill-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.pill-btn:hover, .pill-btn.active {
+  border-color: var(--gold); color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.topnav-right {
+  display: flex; align-items: center; gap: 12px;
+}
+.lang-btn {
+  background: none; border: none; color: var(--silver); cursor: pointer;
+  padding: 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  transition: color .2s;
+}
+.lang-btn:hover { color: var(--white); }
+.lang-btn svg { width: 20px; height: 20px; }
+
+/* ── LEFT SIDEBAR ─────────────────────────────────── */
 .sidebar {
   position: fixed; top: var(--nav-h); left: 0; bottom: 0;
-  width: var(--sidebar-w); background: var(--sidebar-bg);
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
   border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; align-items: center;
-  padding: 20px 0; gap: 6px; z-index: 90;
+  display: flex; flex-direction: column;
+  padding: 20px 0 20px; z-index: 90;
+  overflow-y: auto; overflow-x: hidden;
 }
-.sidebar-item {
-  width: 48px; height: 48px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--silver); cursor: pointer;
-  transition: all .2s; position: relative;
-}
-.sidebar-item:hover, .sidebar-item.active {
-  background: rgba(212,160,23,0.12); color: var(--gold);
-}
-.sidebar-item.active::before {
-  content: ''; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
-  width: 3px; height: 20px; background: var(--gold); border-radius: 0 3px 3px 0;
-}
-.sidebar-item svg { width: 22px; height: 22px; }
-.sidebar-tooltip {
-  position: absolute; left: 60px; top: 50%; transform: translateY(-50%);
-  background: var(--surface); color: var(--white); padding: 4px 10px;
-  border-radius: 6px; font-size: 12px; white-space: nowrap;
-  opacity: 0; pointer-events: none; transition: opacity .15s;
-  border: 1px solid var(--border);
-}
-.sidebar-item:hover .sidebar-tooltip { opacity: 1; }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 
-/* -- MAIN CONTENT -- */
+.sidebar-auth {
+  padding: 0 16px 20px; display: flex; flex-direction: column; gap: 8px;
+}
+.sidebar-auth .btn-gold {
+  width: 100%; padding: 11px; font-size: 14px; border-radius: 8px; text-align: center;
+}
+.sidebar-auth .btn-ghost {
+  width: 100%; padding: 10px; font-size: 14px; border-radius: 8px; text-align: center;
+}
+
+.sidebar-nav { flex: 1; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 20px; cursor: pointer;
+  color: var(--silver); font-size: 15px; font-weight: 500;
+  transition: all .15s; position: relative;
+  border-left: 3px solid transparent;
+}
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.03); color: var(--white);
+}
+.sidebar-item.active {
+  color: var(--gold); border-left-color: var(--gold);
+  background: rgba(212,160,23,0.06);
+}
+.sidebar-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+.sidebar-item .arrow {
+  margin-left: auto; width: 14px; height: 14px;
+  transition: transform .2s;
+}
+.sidebar-item.expanded .arrow { transform: rotate(180deg); }
+
+.sidebar-sub {
+  display: none; padding-left: 52px;
+}
+.sidebar-sub.open { display: block; }
+.sidebar-sub a {
+  display: block; padding: 8px 20px 8px 0;
+  font-size: 13px; color: var(--silver);
+  transition: color .15s;
+}
+.sidebar-sub a:hover { color: var(--gold); }
+
+.sidebar-divider {
+  height: 1px; background: var(--border);
+  margin: 12px 16px;
+}
+
+.sidebar-secondary .sidebar-item {
+  font-size: 14px; padding: 9px 20px;
+}
+
+/* ── MAIN CONTENT ─────────────────────────────────── */
 .main {
   margin-left: var(--sidebar-w);
   padding-top: calc(var(--nav-h) + 24px);
   padding-bottom: 0;
 }
 .content {
-  max-width: var(--content-w);
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 28px;
 }
+
 
 /* -- PROFILE HEADER -- */
 .profile-header {
@@ -350,17 +406,23 @@ img { display: block; max-width: 100%; }
 .setting-select:focus { border-color: var(--gold); }
 .setting-select option { background: var(--surface); color: var(--white); }
 
-/* -- FOOTER -- */
+
+/* ── FOOTER ───────────────────────────────────────── */
 .footer {
   background: var(--footer-bg);
   border-top: 1px solid var(--border);
   padding: 56px 0 32px;
   margin-left: calc(var(--sidebar-w) * -1);
   padding-left: var(--sidebar-w);
+  position: relative;
+}
+.footer::before {
+  content: ''; display: block; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+  position: absolute; top: 0; left: 0; right: 0;
 }
 .footer-inner {
-  max-width: var(--content-w);
-  margin: 0 auto; padding: 0 24px;
+  max-width: 1140px; margin: 0 auto; padding: 0 28px;
 }
 .footer-grid {
   display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -379,23 +441,19 @@ img { display: block; max-width: 100%; }
   width: 36px; height: 36px; border-radius: 8px;
   background: rgba(255,255,255,0.06);
   display: flex; align-items: center; justify-content: center;
-  color: var(--silver); cursor: pointer;
-  transition: all .2s;
+  color: var(--silver); cursor: pointer; transition: all .2s;
 }
-.social-icon:hover { background: rgba(212,160,23,0.15); color: var(--gold); }
+.social-icon:hover { background: var(--gold-dim); color: var(--gold); }
 .social-icon svg { width: 16px; height: 16px; }
 .footer-col h4 {
-  font-size: 14px; font-weight: 600; color: var(--white);
-  margin-bottom: 16px;
+  font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 16px;
 }
 .footer-col a {
   display: block; font-size: 13px; color: var(--silver);
   margin-bottom: 10px; transition: color .2s;
 }
 .footer-col a:hover { color: var(--gold); }
-.footer-payments {
-  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
-}
+.footer-payments { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .payment-badge {
   width: 52px; height: 32px; border-radius: 6px;
   background: rgba(255,255,255,0.06);
@@ -403,20 +461,17 @@ img { display: block; max-width: 100%; }
   font-size: 10px; font-weight: 600; color: var(--silver);
 }
 .footer-bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 24px;
+  border-top: 1px solid var(--border); padding-top: 24px;
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 12px;
 }
-.footer-bottom p {
-  font-size: 12px; color: var(--silver); opacity: 0.7;
-}
+.footer-bottom p { font-size: 12px; color: var(--silver); opacity: 0.7; }
 .footer-bottom .license {
   font-size: 11px; color: var(--silver); opacity: 0.5;
   max-width: 500px; text-align: right; line-height: 1.5;
 }
 
-/* -- LOGIN MODAL -- */
+/* ── LOGIN MODAL ──────────────────────────────────── */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(0,0,0,0.65);
@@ -434,7 +489,8 @@ img { display: block; max-width: 100%; }
 }
 .modal-overlay.open .modal { transform: scale(1); }
 .modal-left {
-  width: 50%; background: linear-gradient(160deg, #0e1650 0%, #1a1060 50%, #140e45 100%);
+  width: 50%;
+  background: linear-gradient(160deg, #0e1650 0%, #1a1060 50%, #140e45 100%);
   display: flex; flex-direction: column; justify-content: center;
   align-items: center; padding: 48px; position: relative; overflow: hidden;
 }
@@ -454,12 +510,10 @@ img { display: block; max-width: 100%; }
   position: relative; z-index: 1; max-width: 260px; line-height: 1.6;
 }
 .modal-right {
-  width: 50%; padding: 48px; display: flex; flex-direction: column;
-  justify-content: center;
+  width: 50%; padding: 48px; display: flex; flex-direction: column; justify-content: center;
 }
 .modal-right h3 {
-  font-size: 22px; font-weight: 600; color: var(--white);
-  margin-bottom: 8px;
+  font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 8px;
 }
 .modal-right .sub {
   font-size: 13px; color: var(--silver); margin-bottom: 28px;
@@ -473,8 +527,7 @@ img { display: block; max-width: 100%; }
   width: 100%; padding: 12px 14px; border-radius: 8px;
   border: 1px solid var(--border); background: rgba(255,255,255,0.04);
   color: var(--white); font-family: var(--body); font-size: 14px;
-  transition: border-color .2s;
-  outline: none;
+  transition: border-color .2s; outline: none;
 }
 .form-group input:focus { border-color: var(--gold); }
 .form-group input::placeholder { color: rgba(192,199,214,0.4); }
@@ -512,93 +565,206 @@ img { display: block; max-width: 100%; }
 .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--white); }
 .modal-close svg { width: 18px; height: 18px; }
 
-/* -- RESPONSIVE -- */
+/* ── MOBILE SIDEBAR OVERLAY ───────────────────────── */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0; z-index: 85;
+  background: rgba(0,0,0,0.5);
+}
+.sidebar-overlay.open { display: block; }
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 1200px) {
+  .game-grid { grid-template-columns: repeat(5, 1fr); }
+  .game-grid.six-col { grid-template-columns: repeat(4, 1fr); }
+  .features { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 768px) {
-  .sidebar { display: none; }
-  .main { margin-left: 0; }
-  .footer { margin-left: 0; padding-left: 0; }
-  .nav-links { display: none; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .quick-actions { grid-template-columns: 1fr; }
   .settings-grid { grid-template-columns: 1fr; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform .3s;
+    z-index: 95;
+  }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .topnav-pills { display: none; }
+  .main { margin-left: 0; }
+  .footer { margin-left: 0; padding-left: 0; }
+  .hero { min-height: 280px; padding: 32px 28px; }
+  .hero h1 { font-size: 32px; }
+  .game-grid { grid-template-columns: repeat(3, 1fr); }
+  .game-grid.six-col { grid-template-columns: repeat(3, 1fr); }
+  .features { grid-template-columns: repeat(2, 1fr); }
+  .categories { grid-template-columns: repeat(2, 1fr); }
+  .providers-grid { grid-template-columns: repeat(3, 1fr); }
+  .live-prov-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
-  .profile-top { flex-direction: column; text-align: center; }
-  .activity-table-wrap { overflow-x: auto; }
-  .activity-table { min-width: 600px; }
+  .deposit-cta { flex-direction: column; align-items: flex-start; padding: 28px; }
   .modal { width: 90vw; height: auto; max-height: 90vh; }
   .modal-left { display: none; }
   .modal-right { width: 100%; padding: 32px; }
 }
 @media (max-width: 420px) {
-  .nav { padding: 0 16px; }
-  .nav-logo { font-size: 22px; }
-  .content { padding: 0 12px; }
   .stats-row { grid-template-columns: 1fr; }
-  .profile-header { padding: 24px 20px; }
+  .profile-top { flex-direction: column; text-align: center; }
+  .topnav { padding: 0 12px; }
+  .topnav-logo { font-size: 22px; }
+  .content { padding: 0 12px; }
+  .hero { padding: 24px 20px; min-height: 240px; }
+  .hero h1 { font-size: 26px; }
+  .hero p { font-size: 14px; }
+  .game-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .game-grid.six-col { grid-template-columns: repeat(2, 1fr); }
+  .features { grid-template-columns: 1fr; }
+  .categories { grid-template-columns: 1fr; }
+  .providers-grid { grid-template-columns: repeat(2, 1fr); }
+  .live-prov-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
+  .crypto-row { flex-wrap: wrap; }
 }
 
-.stat-card:nth-child(1) { border-top: 2px solid #d4a017; }
-.stat-card:nth-child(2) { border-top: 2px solid #22c55e; }
-.stat-card:nth-child(3) { border-top: 2px solid #3b82f6; }
-.stat-card:nth-child(4) { border-top: 2px solid #8b5cf6; }
 </style>
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
-<nav class="nav">
-  <div class="nav-logo">
-    <a href="index.html"><span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#d4a017;">Go</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#c0c7d6;">Luna</span></a>
+<!-- ============ TOP NAV ============ -->
+<nav class="topnav">
+  <div class="topnav-left">
+    <button class="hamburger" id="hamburgerBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="topnav-logo">
+      <span class="go">Go</span><span class="luna">Luna</span>
+    </a>
   </div>
-  <div class="nav-links">
-    <a href="index.html">Casino</a>
-    <a href="casino.html">Sports</a>
-    <a href="casino.html">Live</a>
-    <a href="promotions.html">Promotions</a>
-    <a href="#">VIP</a>
+
+  <div class="topnav-pills">
+    <a href="casino.html" class="pill-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>
+      Casino
+    </a>
+    <a href="casino.html" class="pill-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+      Live
+    </a>
+    <a href="casino.html" class="pill-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Originals
+    </a>
+    <a href="casino.html" class="pill-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5L14 3l-3.5 3.5"/><path d="M14 3v8"/><path d="M6.5 17.5L10 21l3.5-3.5"/><path d="M10 21v-8"/><rect x="2" y="7" width="6" height="10" rx="1"/><rect x="16" y="7" width="6" height="10" rx="1"/></svg>
+      Poker
+    </a>
+    <a href="sports.html" class="pill-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Sports
+    </a>
   </div>
-  <div class="nav-actions">
+
+  <div class="topnav-right">
+    <button class="lang-btn" title="Language">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </button>
     <button class="btn-ghost" id="loginBtn">Login</button>
-    <button class="btn-gold">Sign Up</button>
+    <button class="btn-gold" id="signUpBtnNav">Sign Up</button>
   </div>
 </nav>
 
-<!-- ============ SIDEBAR ============ -->
-<aside class="sidebar">
-  <a href="index.html" class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span class="sidebar-tooltip">Home</span>
-  </a>
-  <div class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/><circle cx="7" cy="16" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/></svg>
-    <span class="sidebar-tooltip">Casino</span>
+<!-- ============ SIDEBAR OVERLAY (mobile) ============ -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ============ LEFT SIDEBAR ============ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-auth">
+    <button class="btn-gold">Sign Up</button>
+    <button class="btn-ghost" id="loginBtn2">Login</button>
   </div>
-  <div class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-    <span class="sidebar-tooltip">Sports</span>
-  </div>
-  <div class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-    <span class="sidebar-tooltip">Live</span>
-  </div>
-  <div class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-    <span class="sidebar-tooltip">Originals</span>
-  </div>
-  <a href="promotions.html" class="sidebar-item">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M2 8h20"/><path d="M12 2l4 6H8l4-6z"/></svg>
-    <span class="sidebar-tooltip">Promotions</span>
-  </a>
-  <div class="sidebar-item active">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    <span class="sidebar-tooltip">Profile</span>
+
+  <div class="sidebar-nav">
+    <!-- Main nav -->
+    <div class="sidebar-item has-dropdown" data-dropdown="casino-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>
+      Casino
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="sidebar-sub" id="casino-sub">
+      <a href="casino.html">Slots</a>
+      <a href="casino.html">Table Games</a>
+      <a href="casino.html">Jackpots</a>
+      <a href="casino.html">New Releases</a>
+    </div>
+
+    <div class="sidebar-item has-dropdown" data-dropdown="live-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+      Live
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="sidebar-sub" id="live-sub">
+      <a href="casino.html">Blackjack</a>
+      <a href="casino.html">Roulette</a>
+      <a href="casino.html">Baccarat</a>
+      <a href="casino.html">Game Shows</a>
+    </div>
+
+    <a href="casino.html" class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Originals
+    </a>
+
+    <a href="casino.html" class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5L14 3l-3.5 3.5"/><path d="M14 3v8"/><path d="M6.5 17.5L10 21l3.5-3.5"/><path d="M10 21v-8"/><rect x="2" y="7" width="6" height="10" rx="1"/><rect x="16" y="7" width="6" height="10" rx="1"/></svg>
+      Poker
+    </a>
+
+    <a href="sports.html" class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      Sports
+    </a>
+
+    <a href="casino.html" class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/><path d="M14 12v.01"/></svg>
+      Racing
+    </a>
+
+    <a href="casino.html" class="sidebar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+      News
+    </a>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-secondary">
+      <a href="promotions.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M2 8h20"/><path d="M12 2l4 6H8l4-6z"/></svg>
+        Promotions
+      </a>
+      <a href="casino.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        FAQ
+      </a>
+      <a href="casino.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Terms
+      </a>
+      <a href="casino.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        About
+      </a>
+      <a href="casino.html" class="sidebar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        Affiliates
+      </a>
+    </div>
   </div>
 </aside>
 
 <!-- ============ MAIN ============ -->
 <main class="main">
 <div class="content">
+
 
   <!-- PROFILE HEADER -->
   <section class="profile-header">
@@ -793,6 +959,7 @@ img { display: block; max-width: 100%; }
     </div>
   </div>
 
+
 </div>
 
 <!-- FOOTER -->
@@ -819,19 +986,19 @@ img { display: block; max-width: 100%; }
       </div>
       <div class="footer-col">
         <h4>Casino</h4>
-        <a href="#">Slots</a>
-        <a href="#">Table games</a>
-        <a href="#">Live casino</a>
-        <a href="#">Jackpots</a>
-        <a href="#">New releases</a>
+        <a href="casino.html">Slots</a>
+        <a href="casino.html">Table games</a>
+        <a href="casino.html">Live casino</a>
+        <a href="casino.html">Jackpots</a>
+        <a href="casino.html">New releases</a>
       </div>
       <div class="footer-col">
         <h4>About</h4>
-        <a href="#">About us</a>
-        <a href="#">Terms of service</a>
-        <a href="#">Privacy policy</a>
-        <a href="#">Responsible gambling</a>
-        <a href="#">Fairness</a>
+        <a href="casino.html">About us</a>
+        <a href="casino.html">Terms of service</a>
+        <a href="casino.html">Privacy policy</a>
+        <a href="casino.html">Responsible gambling</a>
+        <a href="casino.html">Fairness</a>
       </div>
       <div class="footer-col">
         <h4>Payments</h4>
@@ -901,11 +1068,13 @@ img { display: block; max-width: 100%; }
 
 <script>
 // Login modal
-const loginBtn = document.getElementById('loginBtn');
+const loginBtns = document.querySelectorAll('#loginBtn, #loginBtn2');
 const loginModal = document.getElementById('loginModal');
 const modalClose = document.getElementById('modalClose');
 
-loginBtn.addEventListener('click', () => loginModal.classList.add('open'));
+loginBtns.forEach(btn => {
+  btn.addEventListener('click', () => loginModal.classList.add('open'));
+});
 modalClose.addEventListener('click', () => loginModal.classList.remove('open'));
 loginModal.addEventListener('click', (e) => {
   if (e.target === loginModal) loginModal.classList.remove('open');
@@ -914,17 +1083,48 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') loginModal.classList.remove('open');
 });
 
-// Sidebar active state
-document.querySelectorAll('.sidebar-item').forEach(item => {
+// Sidebar dropdown toggles
+document.querySelectorAll('.sidebar-item.has-dropdown').forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = item.getAttribute('data-dropdown');
+    const sub = document.getElementById(targetId);
+    if (!sub) return;
+
+    const isOpen = sub.classList.contains('open');
+
+    // Close all dropdowns
+    document.querySelectorAll('.sidebar-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.sidebar-item.has-dropdown').forEach(i => i.classList.remove('expanded'));
+
+    // Toggle current
+    if (!isOpen) {
+      sub.classList.add('open');
+      item.classList.add('expanded');
+    }
+  });
+});
+
+// Sidebar active state (non-dropdown items)
+document.querySelectorAll('.sidebar-item:not(.has-dropdown)').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
   });
 });
 
-// Toggle switches
-document.querySelectorAll('.toggle').forEach(toggle => {
-  toggle.addEventListener('click', () => toggle.classList.toggle('on'));
+// Mobile hamburger toggle
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+hamburgerBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('mobile-open');
+  sidebarOverlay.classList.toggle('open');
+});
+sidebarOverlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  sidebarOverlay.classList.remove('open');
 });
 </script>
 </body>
