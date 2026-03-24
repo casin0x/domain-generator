@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Deposit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c1445;
+  --surface: #141a3a;
+  --border: rgba(255,255,255,0.06);
+  --gold: #d4a017;
+  --gold-hover: #e8b52a;
+  --silver: #c0c7d6;
+  --white: #f0eff4;
+  --cta-text: #0c1445;
+  --sidebar-bg: #0e1238;
+  --footer-bg: #0a0f30;
+  --heading: 'Cormorant Garamond', serif;
+  --body: 'Jost', sans-serif;
+  --content-w: 1120px;
+  --nav-h: 64px;
+  --sidebar-w: 72px;
+  --green: #22c55e;
+  --red: #ef4444;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--body); border: none; cursor: pointer; outline: none; }
+img { display: block; max-width: 100%; }
+
+/* ── NAV ─────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: rgba(12,20,69,0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.nav-logo {
+  font-family: var(--heading);
+  font-size: 26px; font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo img { height: 32px; width: auto; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--silver);
+  transition: color .2s;
+  position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--gold); transition: width .2s;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+.btn-ghost {
+  padding: 8px 20px; border-radius: 8px;
+  border: 1px solid var(--silver); color: var(--silver);
+  font-size: 14px; font-weight: 500; background: transparent;
+  transition: all .2s;
+}
+.btn-ghost:hover { border-color: var(--white); color: var(--white); }
+.btn-gold {
+  padding: 8px 22px; border-radius: 8px;
+  background: var(--gold); color: var(--cta-text);
+  font-size: 14px; font-weight: 600;
+  transition: all .2s;
+}
+.btn-gold:hover { background: var(--gold-hover); transform: translateY(-1px); }
+
+/* ── SIDEBAR ─────────────────────────────────────── */
+.sidebar {
+  position: fixed; top: var(--nav-h); left: 0; bottom: 0;
+  width: var(--sidebar-w); background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 0; gap: 6px; z-index: 90;
+}
+.sidebar-item {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--silver); cursor: pointer;
+  transition: all .2s; position: relative;
+}
+.sidebar-item:hover, .sidebar-item.active {
+  background: rgba(212,160,23,0.12); color: var(--gold);
+}
+.sidebar-item.active::before {
+  content: ''; position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 20px; background: var(--gold); border-radius: 0 3px 3px 0;
+}
+.sidebar-item svg { width: 22px; height: 22px; }
+.sidebar-tooltip {
+  position: absolute; left: 60px; top: 50%; transform: translateY(-50%);
+  background: var(--surface); color: var(--white); padding: 4px 10px;
+  border-radius: 6px; font-size: 12px; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity .15s;
+  border: 1px solid var(--border);
+}
+.sidebar-item:hover .sidebar-tooltip { opacity: 1; }
+
+/* ── MAIN CONTENT ────────────────────────────────── */
+.main {
+  margin-left: var(--sidebar-w);
+  padding-top: calc(var(--nav-h) + 24px);
+  padding-bottom: 0;
+}
+.content {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── PAGE HEADER ─────────────────────────────────── */
+.page-header { margin-bottom: 28px; }
+.page-header h1 {
+  font-family: var(--heading);
+  font-size: 40px; font-weight: 600;
+  color: var(--gold); margin-bottom: 8px;
+}
+
+/* ── CRYPTO TABS ─────────────────────────────────── */
+.crypto-tabs {
+  display: flex; gap: 8px; margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.crypto-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 10px;
+  background: transparent; color: var(--silver);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all .2s;
+}
+.crypto-tab:hover { border-color: var(--gold); color: var(--white); }
+.crypto-tab.active {
+  background: rgba(212,160,23,0.12); color: var(--gold);
+  border-color: var(--gold);
+}
+.crypto-tab .coin-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── DEPOSIT CARD ────────────────────────────────── */
+.deposit-card {
+  max-width: 600px; margin: 0 auto 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+}
+.deposit-card h2 {
+  font-family: var(--body); font-size: 20px; font-weight: 600;
+  color: var(--white); margin-bottom: 20px;
+}
+.network-select {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--white); font-family: var(--body); font-size: 14px;
+  margin-bottom: 20px; cursor: pointer;
+  outline: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c0c7d6' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+.network-select option { background: var(--surface); color: var(--white); }
+.deposit-label {
+  font-size: 13px; font-weight: 500; color: var(--silver);
+  margin-bottom: 8px; display: block;
+}
+.address-field {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.address-field input {
+  flex: 1; padding: 12px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--white); font-family: 'Courier New', monospace;
+  font-size: 14px; outline: none;
+  letter-spacing: 0.5px;
+}
+.address-field input:focus { border-color: var(--gold); }
+.copy-btn {
+  padding: 12px 18px; border-radius: 8px;
+  background: var(--gold); color: var(--cta-text);
+  font-size: 13px; font-weight: 600;
+  transition: all .2s; flex-shrink: 0;
+}
+.copy-btn:hover { background: var(--gold-hover); }
+
+/* ── QR CODE ─────────────────────────────────────── */
+.qr-container {
+  display: flex; justify-content: center; margin-bottom: 24px;
+}
+.qr-placeholder {
+  width: 200px; height: 200px; border-radius: 12px;
+  background: #0a0e2e;
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  width: 160px; height: 160px; gap: 2px;
+}
+.qr-cell {
+  border-radius: 1px;
+}
+.qr-cell.on { background: var(--gold); opacity: 0.8; }
+.qr-cell.off { background: transparent; }
+
+/* ── DEPOSIT INFO ────────────────────────────────── */
+.deposit-info {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 20px;
+}
+.deposit-info span {
+  font-size: 13px; color: var(--silver);
+}
+
+/* ── WARNING BOX ─────────────────────────────────── */
+.warning-box {
+  background: rgba(234,179,8,0.08);
+  border: 1px solid rgba(234,179,8,0.25);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.warning-box svg {
+  width: 20px; height: 20px; color: #eab308;
+  flex-shrink: 0; margin-top: 1px;
+}
+.warning-box p {
+  font-size: 13px; color: #eab308; line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* ── QUICK AMOUNTS ───────────────────────────────── */
+.quick-amounts-section { margin-bottom: 36px; }
+.quick-amounts-title {
+  font-family: var(--body); font-size: 16px; font-weight: 600;
+  color: var(--white); margin-bottom: 14px;
+  text-align: center;
+}
+.quick-amounts {
+  display: flex; gap: 10px; justify-content: center;
+  flex-wrap: wrap;
+}
+.quick-btn {
+  padding: 10px 24px; border-radius: 10px;
+  background: var(--surface); color: var(--silver);
+  border: 1px solid var(--border);
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.quick-btn:hover {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(212,160,23,0.06);
+}
+
+/* ── RECENT DEPOSITS TABLE ───────────────────────── */
+.recent-section { margin-bottom: 48px; }
+.section-title {
+  font-family: var(--body); font-size: 20px; font-weight: 600;
+  color: var(--white); margin-bottom: 16px;
+}
+.deposits-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.deposits-table th {
+  text-align: left; padding: 14px 18px;
+  font-size: 12px; font-weight: 600; color: var(--silver);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--border);
+}
+.deposits-table td {
+  padding: 14px 18px;
+  font-size: 14px; color: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.deposits-table tr:last-child td { border-bottom: none; }
+.deposits-table .status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.status-confirmed { color: var(--green); }
+.status-confirmed .status-dot { background: var(--green); }
+.tx-id {
+  font-family: 'Courier New', monospace;
+  font-size: 13px; color: var(--silver);
+}
+
+/* ── FOOTER ──────────────────────────────────────── */
+.footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 32px;
+  margin-left: calc(var(--sidebar-w) * -1);
+  padding-left: var(--sidebar-w);
+}
+.footer-inner {
+  max-width: var(--content-w);
+  margin: 0 auto; padding: 0 24px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 40px;
+}
+.footer-brand h3 {
+  font-family: var(--heading); font-size: 28px; font-weight: 700;
+  color: var(--gold); margin-bottom: 12px;
+}
+.footer-brand p {
+  font-size: 13px; color: var(--silver); line-height: 1.7;
+  margin-bottom: 20px; max-width: 280px;
+}
+.social-icons { display: flex; gap: 12px; }
+.social-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--silver); cursor: pointer;
+  transition: all .2s;
+}
+.social-icon:hover { background: rgba(212,160,23,0.15); color: var(--gold); }
+.social-icon svg { width: 16px; height: 16px; }
+.footer-col h4 {
+  font-size: 14px; font-weight: 600; color: var(--white);
+  margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: var(--silver);
+  margin-bottom: 10px; transition: color .2s;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-payments {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+}
+.payment-badge {
+  width: 52px; height: 32px; border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: var(--silver);
+}
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p {
+  font-size: 12px; color: var(--silver); opacity: 0.7;
+}
+.footer-bottom .license {
+  font-size: 11px; color: var(--silver); opacity: 0.5;
+  max-width: 500px; text-align: right; line-height: 1.5;
+}
+
+/* ── LOGIN MODAL ─────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.65);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+.modal-overlay.open { opacity: 1; visibility: visible; }
+.modal {
+  width: 912px; height: 600px; border-radius: 16px;
+  overflow: hidden; display: flex;
+  background: var(--surface);
+  transform: scale(0.92); transition: transform .3s;
+  position: relative;
+}
+.modal-overlay.open .modal { transform: scale(1); }
+.modal-left {
+  width: 50%; background: linear-gradient(160deg, #0e1650 0%, #1a1060 50%, #140e45 100%);
+  display: flex; flex-direction: column; justify-content: center;
+  align-items: center; padding: 48px; position: relative; overflow: hidden;
+}
+.modal-left::before {
+  content: ''; position: absolute;
+  width: 260px; height: 260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,160,23,0.18) 0%, rgba(212,160,23,0.04) 50%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.modal-left h2 {
+  font-family: var(--heading); font-size: 36px; font-weight: 600;
+  color: var(--gold); text-align: center; position: relative; z-index: 1;
+  margin-bottom: 12px;
+}
+.modal-left p {
+  font-size: 14px; color: var(--silver); text-align: center;
+  position: relative; z-index: 1; max-width: 260px; line-height: 1.6;
+}
+.modal-right {
+  width: 50%; padding: 48px; display: flex; flex-direction: column;
+  justify-content: center;
+}
+.modal-right h3 {
+  font-size: 22px; font-weight: 600; color: var(--white);
+  margin-bottom: 8px;
+}
+.modal-right .sub {
+  font-size: 13px; color: var(--silver); margin-bottom: 28px;
+}
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--silver); margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%; padding: 12px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.04);
+  color: var(--white); font-family: var(--body); font-size: 14px;
+  transition: border-color .2s;
+  outline: none;
+}
+.form-group input:focus { border-color: var(--gold); }
+.form-group input::placeholder { color: rgba(192,199,214,0.4); }
+.form-actions { margin-top: 8px; }
+.btn-gold.full { width: 100%; padding: 12px; font-size: 15px; border-radius: 8px; }
+.form-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 20px 0; color: var(--silver); font-size: 13px;
+}
+.form-divider::before, .form-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.social-logins { display: flex; gap: 12px; }
+.social-login-btn {
+  flex: 1; padding: 10px; border-radius: 8px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--silver); font-size: 13px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  cursor: pointer; transition: all .2s;
+}
+.social-login-btn:hover { border-color: rgba(212,160,23,0.4); color: var(--white); }
+.social-login-btn svg { width: 18px; height: 18px; }
+.modal-signup {
+  margin-top: 20px; font-size: 13px; color: var(--silver); text-align: center;
+}
+.modal-signup a { color: var(--gold); font-weight: 500; }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.06); border: none;
+  color: var(--silver); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; z-index: 10;
+}
+.modal-close:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+.modal-close svg { width: 18px; height: 18px; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .footer { margin-left: 0; padding-left: 0; }
+  .nav-links { display: none; }
+  .page-header h1 { font-size: 32px; }
+  .deposit-card { padding: 28px 20px; }
+  .crypto-tabs { gap: 6px; }
+  .crypto-tab { padding: 8px 14px; font-size: 13px; }
+  .deposits-table { font-size: 13px; }
+  .deposits-table th, .deposits-table td { padding: 10px 12px; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .quick-amounts { gap: 8px; }
+  .quick-btn { padding: 8px 18px; font-size: 13px; }
+  .modal { width: 90vw; height: auto; max-height: 90vh; }
+  .modal-left { display: none; }
+  .modal-right { width: 100%; padding: 32px; }
+}
+@media (max-width: 420px) {
+  .nav { padding: 0 16px; }
+  .nav-logo { font-size: 22px; }
+  .content { padding: 0 12px; }
+  .page-header h1 { font-size: 26px; }
+  .crypto-tabs { gap: 4px; }
+  .crypto-tab { padding: 6px 10px; font-size: 12px; gap: 4px; }
+  .crypto-tab .coin-icon { width: 20px; height: 20px; font-size: 9px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .address-field { flex-direction: column; }
+  .address-field input { width: 100%; }
+  .copy-btn { width: 100%; text-align: center; }
+  .deposits-table th:nth-child(4), .deposits-table td:nth-child(4) { display: none; }
+  .quick-btn { padding: 8px 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#d4a017;">Go</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#c0c7d6;">Luna</span>
+  </a>
+  <div class="nav-links">
+    <a href="casino.html">Casino</a>
+    <a href="#">Sports</a>
+    <a href="#">Live</a>
+    <a href="#">Promotions</a>
+    <a href="vip.html">VIP</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-ghost" id="loginBtn">Login</button>
+    <button class="btn-gold">Sign Up</button>
+  </div>
+</nav>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <a href="index.html" class="sidebar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="sidebar-tooltip">Home</span>
+  </a>
+  <a href="casino.html" class="sidebar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/><circle cx="7" cy="16" r="1" fill="currentColor"/><circle cx="17" cy="8" r="1" fill="currentColor"/></svg>
+    <span class="sidebar-tooltip">Casino</span>
+  </a>
+  <div class="sidebar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    <span class="sidebar-tooltip">Sports</span>
+  </div>
+  <div class="sidebar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span class="sidebar-tooltip">Live</span>
+  </div>
+  <div class="sidebar-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <span class="sidebar-tooltip">Originals</span>
+  </div>
+  <div class="sidebar-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    <span class="sidebar-tooltip">Deposit</span>
+  </div>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+<div class="content">
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <h1>Deposit</h1>
+  </section>
+
+  <!-- CRYPTO TABS -->
+  <div class="crypto-tabs">
+    <button class="crypto-tab active">
+      <span class="coin-icon" style="background:#f7931a;color:#fff;">B</span>
+      Bitcoin
+    </button>
+    <button class="crypto-tab">
+      <span class="coin-icon" style="background:#627eea;color:#fff;">E</span>
+      Ethereum
+    </button>
+    <button class="crypto-tab">
+      <span class="coin-icon" style="background:#26a17b;color:#fff;">T</span>
+      USDT
+    </button>
+    <button class="crypto-tab">
+      <span class="coin-icon" style="background:#bfbbbb;color:#333;">L</span>
+      Litecoin
+    </button>
+    <button class="crypto-tab">
+      <span class="coin-icon" style="background:#c2a633;color:#fff;">D</span>
+      Dogecoin
+    </button>
+    <button class="crypto-tab">
+      <span class="coin-icon" style="background:#0085c0;color:#fff;">X</span>
+      Ripple
+    </button>
+  </div>
+
+  <!-- DEPOSIT CARD -->
+  <div class="deposit-card">
+    <h2>Deposit Bitcoin</h2>
+
+    <label class="deposit-label">Network</label>
+    <select class="network-select">
+      <option>Bitcoin</option>
+      <option>Lightning Network</option>
+    </select>
+
+    <label class="deposit-label">Your BTC deposit address:</label>
+    <div class="address-field">
+      <input type="text" value="bc1q7x8k4m9p2w3n5v6b8c1d0e3f4g5h6j7m3xk9" readonly>
+      <button class="copy-btn" id="copyBtn">Copy</button>
+    </div>
+
+    <!-- QR CODE -->
+    <div class="qr-container">
+      <div class="qr-placeholder">
+        <div class="qr-grid" id="qrGrid"></div>
+      </div>
+    </div>
+
+    <div class="deposit-info">
+      <span>Minimum deposit: 0.0001 BTC</span>
+      <span>Confirmations required: 1</span>
+    </div>
+
+    <div class="warning-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p>Only send BTC to this address. Sending other assets may result in permanent loss.</p>
+    </div>
+  </div>
+
+  <!-- QUICK AMOUNTS -->
+  <div class="quick-amounts-section">
+    <div class="quick-amounts-title">Quick amounts</div>
+    <div class="quick-amounts">
+      <button class="quick-btn">$25</button>
+      <button class="quick-btn">$50</button>
+      <button class="quick-btn">$100</button>
+      <button class="quick-btn">$250</button>
+      <button class="quick-btn">$500</button>
+      <button class="quick-btn">$1000</button>
+    </div>
+  </div>
+
+  <!-- RECENT DEPOSITS -->
+  <section class="recent-section">
+    <h3 class="section-title">Recent Deposits</h3>
+    <table class="deposits-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>TX ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mar 23, 2026</td>
+          <td>0.05 BTC</td>
+          <td><span class="status status-confirmed"><span class="status-dot"></span> Confirmed</span></td>
+          <td><span class="tx-id">bc1q7...m3x</span></td>
+        </tr>
+        <tr>
+          <td>Mar 20, 2026</td>
+          <td>0.12 BTC</td>
+          <td><span class="status status-confirmed"><span class="status-dot"></span> Confirmed</span></td>
+          <td><span class="tx-id">bc1qa2...k9f</span></td>
+        </tr>
+        <tr>
+          <td>Mar 15, 2026</td>
+          <td>500 USDT</td>
+          <td><span class="status status-confirmed"><span class="status-dot"></span> Confirmed</span></td>
+          <td><span class="tx-id">TXa8f...2k9</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>GoLuna</h3>
+        <p>The premier crypto casino experience. Fast deposits, instant withdrawals, and provably fair games. Play under the moonlight.</p>
+        <div class="social-icons">
+          <div class="social-icon" title="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </div>
+          <div class="social-icon" title="Telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <div class="social-icon" title="Discord">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561 19.9312 19.9312 0 005.9932 3.0284.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286 19.8975 19.8975 0 006.0023-3.0283.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
+          </div>
+          <div class="social-icon" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Casino</h4>
+        <a href="#">Slots</a>
+        <a href="#">Table games</a>
+        <a href="#">Live casino</a>
+        <a href="#">Jackpots</a>
+        <a href="#">New releases</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="#">About us</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Responsible gambling</a>
+        <a href="#">Fairness</a>
+      </div>
+      <div class="footer-col">
+        <h4>Payments</h4>
+        <div class="footer-payments">
+          <div class="payment-badge">BTC</div>
+          <div class="payment-badge">ETH</div>
+          <div class="payment-badge">LTC</div>
+          <div class="payment-badge">DOGE</div>
+          <div class="payment-badge">XRP</div>
+          <div class="payment-badge">USDT</div>
+          <div class="payment-badge">SOL</div>
+          <div class="payment-badge">TRX</div>
+          <div class="payment-badge">BNB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 GoLuna. All rights reserved.</p>
+      <p class="license">GoLuna is operated by Luna Digital Entertainment N.V., registered and licensed in Curacao under license number 365/JAZ. Players must be 18+ to participate. Gambling can be addictive, please play responsibly.</p>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- ============ LOGIN MODAL ============ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-left">
+      <h2>GoLuna</h2>
+      <p>Where Fortune Glows. Join thousands of players winning under the moonlight.</p>
+    </div>
+    <div class="modal-right">
+      <h3>Welcome back</h3>
+      <p class="sub">Sign in to your account to continue playing</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password">
+      </div>
+      <div class="form-actions">
+        <button class="btn-gold full">Sign in</button>
+      </div>
+      <div class="form-divider">or</div>
+      <div class="social-logins">
+        <button class="social-login-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button class="social-login-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="var(--silver)"/></svg>
+          GitHub
+        </button>
+      </div>
+      <div class="modal-signup">
+        Don't have an account? <a href="#">Sign up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Login modal
+const loginBtn = document.getElementById('loginBtn');
+const loginModal = document.getElementById('loginModal');
+const modalClose = document.getElementById('modalClose');
+
+loginBtn.addEventListener('click', () => loginModal.classList.add('open'));
+modalClose.addEventListener('click', () => loginModal.classList.remove('open'));
+loginModal.addEventListener('click', (e) => {
+  if (e.target === loginModal) loginModal.classList.remove('open');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') loginModal.classList.remove('open');
+});
+
+// Sidebar active state
+document.querySelectorAll('.sidebar-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Crypto tabs
+document.querySelectorAll('.crypto-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.crypto-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+
+// Copy button
+document.getElementById('copyBtn').addEventListener('click', function() {
+  const addr = document.querySelector('.address-field input');
+  navigator.clipboard.writeText(addr.value).then(() => {
+    this.textContent = 'Copied!';
+    setTimeout(() => { this.textContent = 'Copy'; }, 2000);
+  });
+});
+
+// Generate CSS QR code pattern
+(function() {
+  const grid = document.getElementById('qrGrid');
+  // QR-like pattern - deterministic seed based on address
+  const pattern = [
+    1,1,1,1,1,1,1,0,1,0,1,
+    1,0,0,0,0,0,1,0,0,1,0,
+    1,0,1,1,1,0,1,0,1,0,1,
+    1,0,1,1,1,0,1,0,0,1,1,
+    1,0,1,1,1,0,1,0,1,1,0,
+    1,0,0,0,0,0,1,0,0,0,1,
+    1,1,1,1,1,1,1,0,1,0,1,
+    0,0,0,0,0,0,0,0,1,1,0,
+    1,0,1,1,0,1,1,1,0,1,1,
+    0,1,0,0,1,0,0,1,1,0,0,
+    1,1,1,0,1,1,1,0,1,0,1,
+  ];
+  pattern.forEach(v => {
+    const cell = document.createElement('div');
+    cell.className = 'qr-cell ' + (v ? 'on' : 'off');
+    grid.appendChild(cell);
+  });
+})();
+</script>
+</body>
+</html>
