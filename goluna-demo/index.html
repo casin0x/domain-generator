@@ -208,7 +208,7 @@ img { display: block; max-width: 100%; }
     radial-gradient(ellipse 30% 40% at 80% 40%, rgba(255,255,255,0.04) 0%, transparent 60%),
     radial-gradient(circle at 85% 50%, rgba(192,199,214,0.08) 0%, transparent 40%),
     radial-gradient(ellipse 80% 80% at 50% 120%, rgba(14,18,56,0.8) 0%, transparent 70%),
-    linear-gradient(135deg, #0e1650 0%, #1a1060 30%, #1c1266 60%, #140e45 100%);
+    linear-gradient(135deg, var(--sidebar-bg) 0%, var(--surface) 40%, var(--bg) 100%);
   position: relative; overflow: hidden;
   display: flex; align-items: center; padding: 0 56px;
   margin-bottom: 0;
@@ -235,7 +235,7 @@ img { display: block; max-width: 100%; }
     radial-gradient(1px 1px at 15% 60%, rgba(212,160,23,0.2), transparent),
     radial-gradient(1.5px 1.5px at 85% 75%, rgba(212,160,23,0.3), transparent);
 }
-.hero-content { position: relative; z-index: 2; max-width: 480px; padding: 48px 0; }
+.hero-content { position: relative; z-index: 2; max-width: 580px; padding: 48px 0; }
 .hero h1 {
   font-family: var(--heading); font-size: 48px; font-weight: 600;
   color: var(--gold); line-height: 1.12; margin-bottom: 16px;
