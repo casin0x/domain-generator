@@ -660,6 +660,48 @@ a { text-decoration: none; color: inherit; }
 #dir10 .tone-pill { border-color: rgba(236,72,153,0.2); color: #ec4899; border-radius: 999px; }
 #dir10 .voice-msg { color: rgba(252,231,243,0.45); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.9; letter-spacing: 0.01em; }
 
+/* ===== DIRECTION 11: ULTRAVIOLET ===== */
+#dir11 {
+  background: #080808;
+}
+#dir11 .dir-inner { text-align: center; }
+#dir11 .dir-number { font-family: 'Jost', sans-serif; left: 50%; transform: translateX(-50%); color: #886cff; font-weight: 400; }
+#dir11 .dir-label { font-family: 'Jost', sans-serif; color: #886cff; text-align: center; letter-spacing: 0.4em; font-weight: 400; }
+#dir11 .wordmark {
+  font-family: 'Jost', sans-serif; font-size: clamp(80px, 11vw, 120px);
+  text-align: center; font-weight: 600; color: #e6ecf1;
+  letter-spacing: 0.02em;
+}
+#dir11 .wm-go { color: #886cff; }
+#dir11 .wm-luna { color: #e6ecf1; }
+#dir11 .tagline {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px); color: rgba(130,137,152,0.6); text-align: center;
+}
+#dir11 .color-strip { border-radius: 8px; overflow: hidden; }
+#dir11 .color-swatch .hex { color: #e6ecf1; }
+#dir11 .color-swatch .label { color: rgba(130,137,152,0.6); }
+
+#dir11 .mockup {
+  border-radius: 8px; border: 1px solid rgba(136,108,255,0.08);
+  background: #080808; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+#dir11 .vip-card {
+  background: rgba(136,108,255,0.03); border: 1px solid rgba(136,108,255,0.06);
+  border-radius: 8px; font-family: 'Jost', sans-serif;
+}
+#dir11 .vip-card .tier-name { color: #886cff; font-family: 'Jost', sans-serif; font-weight: 600; }
+#dir11 .vip-card .tier-perk { color: rgba(130,137,152,0.5); }
+
+#dir11 .voice-card {
+  border: 1px solid rgba(136,108,255,0.1); border-radius: 8px;
+  background: rgba(136,108,255,0.02);
+}
+#dir11 .voice-card .voice-label { color: #886cff; }
+#dir11 .tone-pill { border-color: rgba(136,108,255,0.15); color: #886cff; }
+#dir11 .voice-msg { color: rgba(130,137,152,0.6); font-family: 'Jost', sans-serif; }
+
 /* ===== RECOMMENDATION ===== */
 .reco {
   background: #06060a; padding: 100px 40px; text-align: center;
@@ -765,6 +807,7 @@ a { text-decoration: none; color: inherit; }
   <a href="#dir8" style="color:#059668">Jade</a>
   <a href="#dir9" style="color:#22d3ee">Phantom</a>
   <a href="#dir10" style="color:#ec4899">Sakura</a>
+  <a href="#dir11" style="color:#886cff">UV</a>
 </nav>
 
 <!-- BACK TO TOP -->
@@ -773,7 +816,7 @@ a { text-decoration: none; color: inherit; }
 <!-- ===== HERO ===== -->
 <section id="hero" class="hero">
   <h1 class="hero-title">GoLuna</h1>
-  <p class="hero-sub">Ten Worlds. One Moon.</p>
+  <p class="hero-sub">Eleven Worlds. One Moon.</p>
 </section>
 
 <!-- ===== DIRECTION 1: MOONLIT LUXE ===== -->
@@ -1237,7 +1280,52 @@ a { text-decoration: none; color: inherit; }
   </div>
 </section>
 
-<!-- recommendation removed -->
+<!-- ===== DIRECTION 11: ULTRAVIOLET ===== -->
+<section id="dir11" class="direction">
+  <div class="dir-inner">
+    <div class="dir-number">11</div>
+    <p class="dir-label">Ultraviolet</p>
+
+    <h2 class="wordmark"><span class="wm-go">Go</span><span class="wm-luna">Luna</span></h2>
+    <p class="tagline">Play in the Dark.</p>
+
+    <div class="color-strip">
+      <div class="color-swatch" style="background:#080808"><span class="hex">#080808</span><span class="label">True Black</span></div>
+      <div class="color-swatch" style="background:#886cff"><span class="hex">#886cff</span><span class="label">Violet</span></div>
+      <div class="color-swatch" style="background:#121418"><span class="hex">#121418</span><span class="label">Surface</span></div>
+      <div class="color-swatch" style="background:#e6ecf1;color:#080808"><span class="hex" style="color:#080808">#e6ecf1</span><span class="label" style="color:#080808">Light</span></div>
+      <div class="color-swatch" style="background:#0e0e14"><span class="hex">#0e0e14</span><span class="label">Sidebar</span></div>
+      <div class="color-swatch" style="background:#a08aff"><span class="hex">#a08aff</span><span class="label">Hover</span></div>
+    </div>
+
+    <div class="mockup-wrap">
+      <div class="mockup mockup-screenshot" style="padding:0;overflow:hidden;max-height:700px;">
+        <a href="./goluna-demo/theme-ultraviolet.html" target="_blank" style="display:block;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1"><img src="./goluna-demo/assets/homepage-dir11.png" alt="GoLuna Homepage" style="width:100%;display:block;border-radius:12px;"></a>
+      </div>
+    </div>
+
+    <div class="vip-section">
+      <p class="vip-title">VIP Tiers</p>
+      <div class="vip-row">
+        <div class="vip-card" style="border-bottom:2px solid #121418"><span class="tier-num">I</span><span class="tier-name">Dim</span><span class="tier-perk">Signal detected</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #1b1927"><span class="tier-num">II</span><span class="tier-name">Glow</span><span class="tier-perk">Frequency rising</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #431e7f"><span class="tier-num">III</span><span class="tier-name">Pulse</span><span class="tier-perk">Wavelength locked</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #690cec"><span class="tier-num">IV</span><span class="tier-name">Beam</span><span class="tier-perk">Spectrum unlocked</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #7717ff"><span class="tier-num">V</span><span class="tier-name">Prism</span><span class="tier-perk">Light bends to you</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #886cff"><span class="tier-num">VI</span><span class="tier-name">Radiant</span><span class="tier-perk">Beyond visible light</span></div>
+        <div class="vip-card" style="border-bottom:2px solid #a08aff"><span class="tier-num">VII</span><span class="tier-name">Ultraviolet</span><span class="tier-perk">You are the source.</span></div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <p class="voice-label">Brand Voice</p>
+      <div class="tone-pills">
+        <span class="tone-pill">Clean</span><span class="tone-pill">Modern</span><span class="tone-pill">Confident</span><span class="tone-pill">Minimal</span>
+      </div>
+      <p class="voice-msg">No noise. No clutter. GoLuna Ultraviolet strips everything back to what matters — the game, the odds, and the clean confidence of a platform that doesn't need to shout. True black. Pure violet. Maximum clarity. This is gaming reduced to its essential frequency.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ===== DOMAIN FOOTER ===== -->
 <section class="domain-footer">
