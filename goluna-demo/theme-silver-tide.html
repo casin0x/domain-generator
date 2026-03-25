@@ -76,7 +76,7 @@ img { display: block; max-width: 100%; }
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-h);
-  background: rgba(10,15,46,0.96);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--border);
@@ -211,7 +211,7 @@ img { display: block; max-width: 100%; }
     radial-gradient(ellipse 40% 60% at 75% 50%, var(--gold-dim) 0%, transparent 70%),
     radial-gradient(ellipse 30% 40% at 80% 40%, rgba(255,255,255,0.04) 0%, transparent 60%),
     radial-gradient(circle at 85% 50%, rgba(192,199,214,0.08) 0%, transparent 40%),
-    radial-gradient(ellipse 80% 80% at 50% 120%, rgba(14,18,56,0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 80% at 50% 120%, var(--sidebar-bg) 0%, transparent 70%),
     linear-gradient(135deg, var(--sidebar-bg) 0%, var(--surface) 40%, var(--bg) 100%);
   position: relative; overflow: hidden;
   display: flex; align-items: center; padding: 0 56px;
@@ -265,7 +265,7 @@ img { display: block; max-width: 100%; }
 /* ── SCROLLING TICKER ─────────────────────────────── */
 .ticker-bar {
   width: 100%; overflow: hidden;
-  background: rgba(14,18,56,0.8);
+  background: color-mix(in srgb, var(--sidebar-bg) 80%, transparent);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 10px 0;
@@ -341,7 +341,7 @@ img { display: block; max-width: 100%; }
 .cat-card img { width: 100%; height: 100%; object-fit: cover; }
 .cat-label-wrap {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(10,15,46,0.15) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 6px;
 }
@@ -461,7 +461,7 @@ img { display: block; max-width: 100%; }
 }
 .game-thumb .game-overlay {
   position: absolute; inset: 0;
-  background: rgba(10,15,46,0.6);
+  background: rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity .2s;
 }
@@ -1004,7 +1004,7 @@ img { display: block; max-width: 100%; }
         <div class="cat-v2-info">
           <h4>Casino</h4>
           <p>8,500+ games, 70+ providers. Slots, table games, and big wins!</p>
-          <a href="casino.html" class="cat-v2-btn" style="background:#d4a017;color:#0a0f2e;">Go To Casino</a>
+          <a href="casino.html" class="cat-v2-btn" style="background:#d4a017;color:var(--cta-text);">Go To Casino</a>
         </div>
       </div>
       <div class="cat-v2-card">
@@ -1020,7 +1020,7 @@ img { display: block; max-width: 100%; }
         <div class="cat-v2-info">
           <h4>Sportsbook</h4>
           <p>Bet on your favorite sports. Live streams, live bets, great odds!</p>
-          <a href="sports.html" class="cat-v2-btn" style="background:#22c55e;color:#0a0f2e;">Go To Sportsbook</a>
+          <a href="sports.html" class="cat-v2-btn" style="background:#22c55e;color:var(--cta-text);">Go To Sportsbook</a>
         </div>
       </div>
       <div class="cat-v2-card">
