@@ -16,6 +16,10 @@
   --gold: #22d3ee;
   --gold-hover: #67e8f9;
   --gold-dim: rgba(34,211,238,0.12);
+  --gold-glow: rgba(34,211,238,0.08);
+  --gold-subtle: rgba(34,211,238,0.04);
+  --gold-hover-border: rgba(34,211,238,0.2);
+  --gold-text-glow: rgba(34,211,238,0.12);
   --silver: #1a6a7a;
   --white: #cffafe;
   --cta-text: #060808;
@@ -159,7 +163,7 @@ img { display: block; max-width: 100%; }
 }
 .sidebar-item.active {
   color: var(--gold); border-left-color: var(--gold);
-  background: rgba(212,160,23,0.06);
+  background: var(--gold-subtle);
 }
 .sidebar-item svg { width: 20px; height: 20px; flex-shrink: 0; }
 .sidebar-item .arrow {
@@ -204,7 +208,7 @@ img { display: block; max-width: 100%; }
 .hero {
   width: 100%; min-height: 380px; border-radius: 12px;
   background:
-    radial-gradient(ellipse 40% 60% at 75% 50%, rgba(212,160,23,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 75% 50%, var(--gold-dim) 0%, transparent 70%),
     radial-gradient(ellipse 30% 40% at 80% 40%, rgba(255,255,255,0.04) 0%, transparent 60%),
     radial-gradient(circle at 85% 50%, rgba(192,199,214,0.08) 0%, transparent 40%),
     radial-gradient(ellipse 80% 80% at 50% 120%, rgba(14,18,56,0.8) 0%, transparent 70%),
@@ -217,29 +221,29 @@ img { display: block; max-width: 100%; }
   content: ''; position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
   width: 340px; height: 340px;
   background:
-    radial-gradient(circle, rgba(212,160,23,0.18) 0%, rgba(212,160,23,0.06) 35%, transparent 65%);
+    radial-gradient(circle, var(--gold-dim) 0%, var(--gold-subtle) 35%, transparent 65%);
   border-radius: 50%;
   filter: blur(2px);
 }
 .hero::after {
   content: ''; position: absolute; inset: 0;
   background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(212,160,23,0.4), transparent),
-    radial-gradient(1px 1px at 60% 20%, rgba(212,160,23,0.3), transparent),
-    radial-gradient(1px 1px at 80% 60%, rgba(212,160,23,0.25), transparent),
-    radial-gradient(1.5px 1.5px at 40% 70%, rgba(212,160,23,0.35), transparent),
-    radial-gradient(1px 1px at 70% 40%, rgba(212,160,23,0.2), transparent),
-    radial-gradient(1px 1px at 30% 80%, rgba(212,160,23,0.3), transparent),
-    radial-gradient(1.5px 1.5px at 90% 30%, rgba(212,160,23,0.25), transparent),
-    radial-gradient(1px 1px at 50% 50%, rgba(212,160,23,0.15), transparent),
-    radial-gradient(1px 1px at 15% 60%, rgba(212,160,23,0.2), transparent),
-    radial-gradient(1.5px 1.5px at 85% 75%, rgba(212,160,23,0.3), transparent);
+    radial-gradient(1px 1px at 20% 30%, var(--gold-dim), transparent),
+    radial-gradient(1px 1px at 60% 20%, var(--gold-dim), transparent),
+    radial-gradient(1px 1px at 80% 60%, var(--gold-glow), transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, var(--gold-dim), transparent),
+    radial-gradient(1px 1px at 70% 40%, var(--gold-glow), transparent),
+    radial-gradient(1px 1px at 30% 80%, var(--gold-dim), transparent),
+    radial-gradient(1.5px 1.5px at 90% 30%, var(--gold-glow), transparent),
+    radial-gradient(1px 1px at 50% 50%, var(--gold-glow), transparent),
+    radial-gradient(1px 1px at 15% 60%, var(--gold-glow), transparent),
+    radial-gradient(1.5px 1.5px at 85% 75%, var(--gold-dim), transparent);
 }
 .hero-content { position: relative; z-index: 2; max-width: 580px; padding: 48px 0; }
 .hero h1 {
   font-family: var(--heading); font-size: 48px; font-weight: 600;
   color: var(--gold); line-height: 1.12; margin-bottom: 16px;
-  text-shadow: 0 0 60px rgba(212,160,23,0.12);
+  text-shadow: 0 0 60px var(--gold-text-glow);
 }
 .hero p {
   font-size: 16px; color: var(--silver); line-height: 1.65;
@@ -253,8 +257,8 @@ img { display: block; max-width: 100%; }
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.15) 0%, rgba(212,160,23,0.08) 40%, transparent 70%);
-  box-shadow: 0 0 80px 20px rgba(212,160,23,0.08), 0 0 160px 60px rgba(192,199,214,0.04);
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.15) 0%, var(--gold-glow) 40%, transparent 70%);
+  box-shadow: 0 0 80px 20px var(--gold-glow), 0 0 160px 60px rgba(192,199,214,0.04);
   pointer-events: none;
 }
 
@@ -295,7 +299,7 @@ img { display: block; max-width: 100%; }
   min-height: 110px;
   transition: border-color .2s, background .2s;
 }
-.feature-card:hover { border-color: rgba(212,160,23,0.25); background: rgba(212,160,23,0.03); }
+.feature-card:hover { border-color: var(--gold-hover-border); background: var(--gold-subtle); }
 .feature-card-icon {
   width: 40px; height: 40px; border-radius: 10px;
   background: var(--gold-dim);
@@ -314,7 +318,7 @@ img { display: block; max-width: 100%; }
 .section-header h3 {
   font-family: var(--body); font-size: 20px; font-weight: 600; color: var(--white);
   display: flex; align-items: center; gap: 10px;
-  text-shadow: 0 0 30px rgba(212,160,23,0.08);
+  text-shadow: 0 0 30px var(--gold-glow);
 }
 .section-header h3 svg { width: 22px; height: 22px; color: var(--gold); }
 .section-header a {
@@ -356,7 +360,7 @@ img { display: block; max-width: 100%; }
   background: var(--surface); border: 1px solid var(--border);
   transition: transform .2s, border-color .2s;
 }
-.cat-v2-card:hover { transform: translateY(-3px); border-color: rgba(212,160,23,0.15); }
+.cat-v2-card:hover { transform: translateY(-3px); border-color: var(--gold-dim); }
 .cat-v2-card img { width: 100%; height: 140px; object-fit: cover; }
 .cat-v2-info { padding: 16px; }
 .cat-v2-info h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
@@ -376,7 +380,7 @@ img { display: block; max-width: 100%; }
 }
 .raffle-left { flex: 1; }
 .raffle-right {
-  width: 200px; background: rgba(212,160,23,0.04); border: 1px solid rgba(212,160,23,0.1);
+  width: 200px; background: var(--gold-subtle); border: 1px solid var(--gold-dim);
   border-radius: 12px; padding: 20px; text-align: center;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
 }
@@ -452,8 +456,8 @@ img { display: block; max-width: 100%; }
 .game-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .game-card:hover .game-thumb {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(212,160,23,0.15);
-  border: 1px solid rgba(212,160,23,0.2);
+  box-shadow: 0 12px 40px var(--gold-dim);
+  border: 1px solid var(--gold-hover-border);
 }
 .game-thumb .game-overlay {
   position: absolute; inset: 0;
@@ -479,11 +483,11 @@ img { display: block; max-width: 100%; }
 /* ── DEPOSIT CTA ──────────────────────────────────── */
 .deposit-cta {
   background: linear-gradient(135deg, var(--surface) 0%, #181f48 100%);
-  border: 1px solid rgba(212,160,23,0.12);
+  border: 1px solid var(--gold-dim);
   border-radius: 16px; padding: 40px;
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 36px; flex-wrap: wrap; gap: 20px;
-  box-shadow: 0 0 40px rgba(212,160,23,0.04);
+  box-shadow: 0 0 40px var(--gold-subtle);
 }
 .deposit-left h3 {
   font-family: var(--body); font-size: 16px; font-weight: 400;
@@ -516,7 +520,7 @@ img { display: block; max-width: 100%; }
   padding: 20px; cursor: pointer; transition: all .2s;
 }
 .prov-card:hover {
-  border-color: rgba(212,160,23,0.15); background: rgba(212,160,23,0.05);
+  border-color: var(--gold-dim); background: var(--gold-subtle);
   transform: translateY(-2px);
 }
 .prov-card img {
@@ -548,7 +552,7 @@ img { display: block; max-width: 100%; }
 }
 .footer::before {
   content: ''; display: block; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
   position: absolute; top: 0; left: 0; right: 0;
 }
 .footer-inner {
@@ -627,7 +631,7 @@ img { display: block; max-width: 100%; }
 .modal-left::before {
   content: ''; position: absolute;
   width: 260px; height: 260px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,160,23,0.18) 0%, rgba(212,160,23,0.04) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--gold-dim) 0%, var(--gold-subtle) 50%, transparent 70%);
   top: 50%; left: 50%; transform: translate(-50%,-50%);
 }
 .modal-left h2 {
@@ -678,7 +682,7 @@ img { display: block; max-width: 100%; }
   display: flex; align-items: center; justify-content: center; gap: 8px;
   cursor: pointer; transition: all .2s;
 }
-.social-login-btn:hover { border-color: rgba(212,160,23,0.4); color: var(--white); }
+.social-login-btn:hover { border-color: var(--gold-hover-border); color: var(--white); }
 .social-login-btn svg { width: 18px; height: 18px; }
 .modal-signup {
   margin-top: 20px; font-size: 13px; color: var(--silver); text-align: center;
@@ -767,7 +771,7 @@ img { display: block; max-width: 100%; }
     </button>
     <a href="index.html" class="topnav-logo">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:6px;">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="#d4a017" stroke-width="1.5" fill="rgba(212,160,23,0.15)"/>
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" style="color:var(--gold)" stroke-width="1.5" fill="currentColor" style="opacity:0.15"/>
       </svg>
       <span class="go">Go</span><span class="luna">Luna</span>
     </a>
@@ -1103,7 +1107,7 @@ img { display: block; max-width: 100%; }
   <section class="raffle-widget">
     <div class="raffle-left">
       <div class="raffle-header">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4a017" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--gold)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         <h3>Weekly Raffle</h3>
         <div class="raffle-timer">
           <div class="timer-block"><span id="raffle-d">05</span><small>Days</small></div>
@@ -1124,7 +1128,7 @@ img { display: block; max-width: 100%; }
       </table>
     </div>
     <div class="raffle-right">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d4a017" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color:var(--gold)" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       <p>Play eligible games</p>
       <p>Earn raffle tickets</p>
       <p>Win prizes!</p>
