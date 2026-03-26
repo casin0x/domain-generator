@@ -580,8 +580,9 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .stat-pill { min-width: 100px; padding: 10px 14px; }
   .stat-pill .stat-value { font-size: 16px; }
   .metrics-grid { grid-template-columns: 1fr; }
-  .rank-table { font-size: 12px; }
-  .rank-table th, .rank-table td { padding: 8px 10px; }
+  .rank-table { font-size: 12px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .rank-table thead, .rank-table tbody, .rank-table tfoot { display: table; width: 100%; }
+  .rank-table th, .rank-table td { padding: 8px 10px; white-space: nowrap; }
   .rank-table .hide-mobile { display: none; }
   .acc-grid { grid-template-columns: 1fr; }
   .accordion-header .acc-insight { display: none; }
@@ -728,6 +729,26 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
 @media (max-width: 768px) {
   .pm-metrics-grid { grid-template-columns: 1fr; }
   .pillars-grid { grid-template-columns: 1fr; }
+  .geo-badges { gap: 6px; }
+  .geo-badge-banned, .geo-badge-open { font-size: 10px; padding: 3px 8px; }
+  .opp-card { padding: 16px; }
+  .opp-card h4 { font-size: 15px; }
+  .opp-card p { font-size: 12px; }
+  .ftg-concept { padding: 16px; }
+  .ftg-concept h4 { font-size: 15px; }
+  .ftg-bullets li { font-size: 12px; }
+  .usp-card { padding: 16px; }
+  .usp-card h4 { font-size: 15px; }
+  .pillar-card { padding: 16px; }
+  .pillar-card h5 { font-size: 13px; }
+  .pm-metric { padding: 12px; }
+  .pm-metric .pm-value { font-size: 18px; }
+  .pm-metric .pm-label { font-size: 9px; }
+}
+@media (max-width: 420px) {
+  .pm-metrics-grid { gap: 8px; }
+  .geo-badges { flex-wrap: wrap; }
+  .pillar-card .pm-value { font-size: 16px; }
 }
 </style>
 </head>
