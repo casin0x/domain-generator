@@ -603,6 +603,132 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .footer-grid { grid-template-columns: 1fr; }
   .score-bar-track { width: 50px; }
 }
+
+/* -- PREDICTION MARKETS & PVP SECTIONS -- */
+.pm-metrics-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-bottom: 20px;
+}
+.pm-metric {
+  padding: 16px; border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.pm-metric .pm-label {
+  font-size: 11px; color: var(--silver); text-transform: uppercase;
+  letter-spacing: 0.04em; margin-bottom: 6px;
+}
+.pm-metric .pm-value {
+  font-size: 18px; font-weight: 700; color: var(--white);
+}
+.pm-metric .pm-sub {
+  font-size: 11px; color: var(--silver); margin-top: 4px;
+}
+
+.geo-badges {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+}
+.geo-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.geo-badge-banned { background: rgba(239,68,68,0.15); color: var(--red); }
+.geo-badge-open { background: rgba(34,197,94,0.15); color: var(--green); }
+
+.opp-card {
+  background: rgba(212,160,23,0.04);
+  border: 1px solid rgba(212,160,23,0.15);
+  border-radius: 12px; padding: 24px;
+  margin-top: 16px;
+}
+.opp-card h4 {
+  font-size: 15px; font-weight: 700; color: var(--gold);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.opp-card p {
+  font-size: 13px; color: var(--silver); line-height: 1.65;
+}
+
+.ftg-concept {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 10px; padding: 20px;
+  margin-bottom: 16px;
+}
+.ftg-concept .ftg-title {
+  font-size: 14px; font-weight: 600; color: var(--white);
+  margin-bottom: 8px;
+}
+.ftg-concept .ftg-desc {
+  font-size: 13px; color: var(--silver); line-height: 1.6;
+}
+.ftg-concept .ftg-highlight {
+  display: inline-block; margin-top: 8px; padding: 6px 14px;
+  border-radius: 8px; background: rgba(212,160,23,0.08);
+  border: 1px solid rgba(212,160,23,0.12);
+  font-size: 12px; font-weight: 600; color: var(--gold);
+}
+.ftg-bullets {
+  list-style: none; padding: 0; margin: 12px 0 0;
+}
+.ftg-bullets li {
+  font-size: 13px; color: var(--silver); line-height: 1.6;
+  padding: 4px 0 4px 20px; position: relative;
+}
+.ftg-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 12px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+}
+
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-top: 16px;
+}
+.pillar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  text-align: center;
+}
+.pillar-card .pillar-label {
+  font-size: 13px; font-weight: 600; color: var(--white);
+  margin-bottom: 6px;
+}
+.pillar-card .pillar-value {
+  font-size: 16px; font-weight: 700; color: var(--gold);
+  font-family: var(--heading);
+}
+
+.usp-card {
+  background: linear-gradient(135deg, rgba(212,160,23,0.06) 0%, rgba(212,160,23,0.02) 100%);
+  border: 1px solid rgba(212,160,23,0.2);
+  border-radius: 12px; padding: 28px;
+  margin-top: 16px; text-align: center;
+}
+.usp-card h4 {
+  font-size: 16px; font-weight: 700; color: var(--gold);
+  margin-bottom: 8px;
+}
+.usp-card p {
+  font-size: 14px; color: var(--silver); line-height: 1.6;
+  max-width: 680px; margin: 0 auto;
+}
+.usp-card .usp-tam {
+  font-size: 28px; font-weight: 700; color: var(--gold);
+  font-family: var(--heading); margin-top: 12px;
+}
+
+@media (max-width: 1200px) {
+  .pm-metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .pillars-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .pm-metrics-grid { grid-template-columns: 1fr; }
+  .pillars-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1393,6 +1519,167 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
     <div class="insight-card">
       <h4>"Prediction markets are the differentiator"</h4>
       <p>Polymarket + Kalshi control 97.5% of prediction market volume, but white-label prediction markets remain a wide-open niche. Markets with no explicit ban: Brazil, Nigeria, Philippines, Vietnam, Thailand, Kenya. Banned in: Argentina, Singapore, Australia. This is a product vertical where Stake is not dominant.</p>
+    </div>
+  </div>
+
+  <!-- PREDICTION MARKETS OPPORTUNITY -->
+  <div class="section-header">
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Prediction Markets
+    </h3>
+  </div>
+  <div class="surface-card">
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Market Size &amp; Growth
+    </h3>
+    <div class="pm-metrics-grid">
+      <div class="pm-metric">
+        <div class="pm-label">Total 2025 Volume</div>
+        <div class="pm-value">$40B+</div>
+        <div class="pm-sub">Polymarket + Kalshi combined</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">2026 Run Rate</div>
+        <div class="pm-value">$200B+</div>
+        <div class="pm-sub">Annualized</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">2030 Projection</div>
+        <div class="pm-value">$1.1T</div>
+        <div class="pm-sub">Trillion-dollar vertical</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Market Control</div>
+        <div class="pm-value">97.5%</div>
+        <div class="pm-sub">Polymarket + Kalshi duopoly</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Polymarket Valuation</div>
+        <div class="pm-value">$9B</div>
+        <div class="pm-sub">NYSE parent ICE invested $2B (Oct 2025)</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Sports Share</div>
+        <div class="pm-value">60%+</div>
+        <div class="pm-sub">Of open interest</div>
+      </div>
+    </div>
+
+    <div class="opp-card">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        GoLuna Opportunity
+      </h4>
+      <p>Polymarket is banned in Argentina, Singapore, Australia, France, Belgium, Poland, and Switzerland. White-labeling prediction markets for these GEOs + emerging markets where no explicit ban exists is a wide-open niche. No competitor in crypto gambling offers integrated prediction markets.</p>
+
+      <div style="margin-top:16px;">
+        <div style="font-size:11px;color:var(--silver);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;font-weight:600;">Banned GEOs</div>
+        <div class="geo-badges">
+          <span class="geo-badge geo-badge-banned">&#x1F1E6;&#x1F1F7; Argentina</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1F8;&#x1F1EC; Singapore</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1E6;&#x1F1FA; Australia</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1EB;&#x1F1F7; France</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1E7;&#x1F1EA; Belgium</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1F5;&#x1F1F1; Poland</span>
+          <span class="geo-badge geo-badge-banned">&#x1F1E8;&#x1F1ED; Switzerland</span>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <div style="font-size:11px;color:var(--silver);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;font-weight:600;">Open GEOs (No Explicit Ban)</div>
+        <div class="geo-badges">
+          <span class="geo-badge geo-badge-open">&#x1F1F3;&#x1F1EC; Nigeria</span>
+          <span class="geo-badge geo-badge-open">&#x1F1F5;&#x1F1ED; Philippines</span>
+          <span class="geo-badge geo-badge-open">&#x1F1FB;&#x1F1F3; Vietnam</span>
+          <span class="geo-badge geo-badge-open">&#x1F1F9;&#x1F1ED; Thailand</span>
+          <span class="geo-badge geo-badge-open">&#x1F1F0;&#x1F1EA; Kenya</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PVP SKILL GAMES -->
+  <div class="section-header">
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="11" r="1"/><circle cx="18" cy="14" r="1"/></svg>
+      PVP Skill Games
+    </h3>
+  </div>
+  <div class="surface-card">
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Fast Transaction Gaming (FTG) &mdash; The Next Vertical
+    </h3>
+
+    <div class="ftg-concept">
+      <div class="ftg-title">Concept: Every in-game action is a micro-transaction between players</div>
+      <div class="ftg-desc">Based on the RFUni/Hotshot model. Players enter arenas with real stakes. Each action &mdash; a hit, a kill, a capture &mdash; transfers value from one player to another in real time.</div>
+      <div class="ftg-highlight">Shoot-to-Earn &mdash; players enter $1 / $2 / $5 arenas, each hit transfers value from victim to shooter</div>
+      <ul class="ftg-bullets">
+        <li><strong>Revenue model:</strong> House takes rake on every transaction (not edge on outcomes)</li>
+        <li><strong>Legal advantage:</strong> Skill-based = different regulatory classification than gambling in many jurisdictions</li>
+        <li><strong>Distribution:</strong> Browser-based &mdash; no app store approval needed</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:24px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+      Market Data
+    </h3>
+    <div class="pm-metrics-grid">
+      <div class="pm-metric">
+        <div class="pm-label">Blockchain Gaming</div>
+        <div class="pm-value">$301B</div>
+        <div class="pm-sub">By 2030 (69.4% CAGR) &mdash; Grand View Research</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Skill Gaming TAM</div>
+        <div class="pm-value">$320B</div>
+        <div class="pm-sub">Total market (2025, all platforms)</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Esports + Skill Games</div>
+        <div class="pm-value">41%</div>
+        <div class="pm-sub">Of crypto gambling activity</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Q1 2025 Crypto Gaming</div>
+        <div class="pm-value">$26B</div>
+        <div class="pm-sub">Total wagers</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">Player Demographics</div>
+        <div class="pm-value">70%</div>
+        <div class="pm-sub">Aged 18-44, mobile-first</div>
+      </div>
+      <div class="pm-metric">
+        <div class="pm-label">2024 Blockchain Gaming</div>
+        <div class="pm-value">$13B</div>
+        <div class="pm-sub">Current market size</div>
+      </div>
+    </div>
+
+    <div class="usp-card">
+      <h4>GoLuna USP</h4>
+      <p>No platform currently combines Casino + Sports + Prediction Markets + PVP Skill Games under one roof. GoLuna's combined TAM across all verticals:</p>
+      <div class="usp-tam">$400B+</div>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-label">Casino + Sports</div>
+        <div class="pillar-value">$81B</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-label">Prediction Markets</div>
+        <div class="pillar-value">$40B+</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-label">PVP Skill Games</div>
+        <div class="pillar-value">$301B</div>
+      </div>
     </div>
   </div>
 
