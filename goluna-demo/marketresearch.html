@@ -168,7 +168,7 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
 
 /* -- MAIN CONTENT -- */
 .main {
-  margin-left: var(--sidebar-w);
+  margin-left: 0;
   padding-top: calc(var(--nav-h) + 24px);
   padding-bottom: 0;
 }
@@ -491,8 +491,8 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   background: var(--footer-bg);
   border-top: 1px solid var(--border);
   padding: 56px 0 32px;
-  margin-left: calc(var(--sidebar-w) * -1);
-  padding-left: var(--sidebar-w);
+  margin-left: 0;
+  padding-left: 0;
   position: relative;
 }
 .footer::before {
@@ -755,101 +755,13 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
 <body>
 
 <!-- ============ TOP NAV ============ -->
-<nav class="topnav">
-  <div class="topnav-left">
-    <button class="hamburger" id="hamburgerBtn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-    <a href="index.html" class="topnav-logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="margin-right:6px;">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" style="color:var(--gold)" stroke-width="1.5" fill="currentColor" style="opacity:0.15"/>
-      </svg>
-      <span class="go">Go</span><span class="luna">Luna</span>
-    </a>
-  </div>
 
-  <div class="topnav-pills">
-    <a href="casino.html" class="pill-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>
-      Casino
-    </a>
-    <a href="casino.html" class="pill-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
-      Live
-    </a>
-    <a href="casino.html" class="pill-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      Originals
-    </a>
-    <a href="sports.html" class="pill-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Sports
-    </a>
-    <a href="marketresearch.html" class="pill-btn active">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-      Research
-    </a>
-  </div>
-
-  <div class="topnav-right">
-    <button class="lang-btn" title="Language">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </button>
-    <button class="btn-ghost">Login</button>
-    <button class="btn-gold">Sign Up</button>
-  </div>
-</nav>
 
 <!-- ============ SIDEBAR OVERLAY (mobile) ============ -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 
 <!-- ============ LEFT SIDEBAR ============ -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-auth">
-    <button class="btn-gold">Sign Up</button>
-    <button class="btn-ghost">Login</button>
-  </div>
 
-  <div class="sidebar-nav">
-    <a href="index.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
-      Home
-    </a>
-    <a href="casino.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 4v16"/><path d="M2 12h20"/><circle cx="7" cy="8" r="1" fill="currentColor"/><circle cx="17" cy="16" r="1" fill="currentColor"/></svg>
-      Casino
-    </a>
-    <a href="sports.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      Sports
-    </a>
-    <a href="promotions.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M2 8h20"/><path d="M12 2l4 6H8l4-6z"/></svg>
-      Promotions
-    </a>
-    <a href="vip.html" class="sidebar-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      VIP
-    </a>
-
-    <div class="sidebar-divider"></div>
-
-    <div class="sidebar-secondary">
-      <a href="marketresearch.html" class="sidebar-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        Market Research
-      </a>
-      <a href="deposit.html" class="sidebar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        Deposit
-      </a>
-      <a href="profile.html" class="sidebar-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Profile
-      </a>
-    </div>
-  </div>
-</aside>
 
 <!-- ============ MAIN ============ -->
 <main class="main">
@@ -1783,63 +1695,9 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>GoLuna</h3>
-        <p>The premier crypto casino experience. Fast deposits, instant withdrawals, and provably fair games. Play under the moonlight.</p>
-        <div class="social-icons">
-          <div class="social-icon" title="Twitter / X">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
-          <div class="social-icon" title="Telegram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          </div>
-          <div class="social-icon" title="Discord">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561 19.9312 19.9312 0 005.9932 3.0284.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286 19.8975 19.8975 0 006.0023-3.0283.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
-          </div>
-          <div class="social-icon" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </div>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Casino</h4>
-        <a href="casino.html">Slots</a>
-        <a href="casino.html">Table games</a>
-        <a href="casino.html">Live casino</a>
-        <a href="casino.html">Jackpots</a>
-        <a href="casino.html">New releases</a>
-      </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <a href="casino.html">About us</a>
-        <a href="casino.html">Terms of service</a>
-        <a href="casino.html">Privacy policy</a>
-        <a href="casino.html">Responsible gambling</a>
-        <a href="casino.html">Fairness</a>
-      </div>
-      <div class="footer-col">
-        <h4>Payments</h4>
-        <div class="footer-payments">
-          <div class="payment-badge">BTC</div>
-          <div class="payment-badge">ETH</div>
-          <div class="payment-badge">LTC</div>
-          <div class="payment-badge">DOGE</div>
-          <div class="payment-badge">XRP</div>
-          <div class="payment-badge">USDT</div>
-          <div class="payment-badge">SOL</div>
-          <div class="payment-badge">TRX</div>
-          <div class="payment-badge">BNB</div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 GoLuna. All rights reserved.</p>
-      <p class="license">GoLuna is operated by Luna Digital Entertainment N.V., registered and licensed in Curacao under license number 365/JAZ. Players must be 18+ to participate. Gambling can be addictive, please play responsibly.</p>
-    </div>
-  </div>
+<footer style="padding:40px;text-align:center;background:#080808;border-top:1px solid rgba(255,255,255,0.04);margin-top:60px;">
+  <p style="font-family:var(--heading);font-size:20px;color:var(--gold);margin-bottom:8px;">GoLuna</p>
+  <p style="font-size:12px;color:rgba(255,255,255,0.3);">Market Intelligence Report — March 2026 — Confidential</p>
 </footer>
 
 </main>
@@ -1858,7 +1716,6 @@ function toggleAccordion(header) {
 }
 
 // Mobile sidebar
-const hamburgerBtn = document.getElementById('hamburgerBtn');
 const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 
