@@ -51,7 +51,7 @@ body::after {
 a { color: inherit; text-decoration: none; }
 
 /* -- LAYOUT -- */
-.page { max-width: 960px; margin: 0 auto; padding: 48px 28px 60px; }
+.page { max-width: 1200px; margin: 0 auto; padding: 60px 48px 80px; }
 
 /* -- HERO -- */
 .hero {
@@ -61,7 +61,7 @@ a { color: inherit; text-decoration: none; }
     radial-gradient(ellipse 80% 80% at 50% 120%, #0e1238 0%, transparent 70%),
     linear-gradient(135deg, #0e1238 0%, var(--surface) 40%, var(--bg) 100%);
   position: relative; overflow: hidden;
-  padding: 56px; margin-bottom: 40px;
+  padding: 56px; margin-bottom: 56px;
 }
 .hero::before {
   content: ''; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
@@ -70,33 +70,33 @@ a { color: inherit; text-decoration: none; }
   border-radius: 50%; filter: blur(2px);
 }
 .hero h1 {
-  font-family: var(--heading); font-size: 46px; font-weight: 600;
+  font-family: var(--heading); font-size: 56px; font-weight: 600;
   color: var(--gold); line-height: 1.1; margin-bottom: 12px;
   text-shadow: 0 0 60px var(--gold-text-glow);
   position: relative; z-index: 2;
 }
 .hero .subtitle {
-  font-size: 16px; color: var(--silver); line-height: 1.65;
-  margin-bottom: 20px; max-width: 560px;
+  font-size: 19px; color: var(--silver); line-height: 1.65;
+  margin-bottom: 20px; max-width: 700px;
   position: relative; z-index: 2;
 }
 .hero .badge-conf {
   display: inline-block; padding: 6px 16px; border-radius: 8px;
   background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25);
-  font-size: 11px; font-weight: 700; color: var(--red);
+  font-size: 17px; font-weight: 700; color: var(--red);
   text-transform: uppercase; letter-spacing: 0.08em;
   position: relative; z-index: 2;
 }
 
 /* -- SECTION HEADERS -- */
-.section { margin-bottom: 40px; }
+.section { margin-bottom: 56px; }
 .section-num {
-  font-family: var(--heading); font-size: 14px; color: var(--gold);
+  font-family: var(--heading); font-size: 17px; color: var(--gold);
   font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   margin-bottom: 6px; opacity: 0.8;
 }
 .section-title {
-  font-family: var(--heading); font-size: 30px; font-weight: 600;
+  font-family: var(--heading); font-size: 36px; font-weight: 600;
   color: var(--white); margin-bottom: 20px; line-height: 1.2;
 }
 
@@ -108,11 +108,11 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 20px;
 }
 .card h4 {
-  font-family: var(--body); font-size: 16px; font-weight: 700;
+  font-family: var(--body); font-size: 19px; font-weight: 700;
   color: var(--gold); margin-bottom: 12px;
 }
 .card p, .card li {
-  font-size: 14px; color: var(--silver); line-height: 1.7;
+  font-size: 17px; color: var(--silver); line-height: 1.7;
 }
 .card ul { list-style: none; padding: 0; }
 .card ul li { padding: 5px 0; padding-left: 20px; position: relative; }
@@ -135,13 +135,13 @@ a { color: inherit; text-decoration: none; }
 .flow-step .flow-icon { margin-bottom: 8px; }
 .flow-step .flow-icon svg { width: 32px; height: 32px; color: var(--gold); }
 .flow-step .flow-label {
-  font-size: 13px; font-weight: 600; color: var(--white);
+  font-size: 19px; font-weight: 600; color: var(--white);
 }
 .flow-step .flow-sub {
-  font-size: 11px; color: var(--silver); margin-top: 3px;
+  font-size: 17px; color: var(--silver); margin-top: 3px;
 }
 .flow-arrow {
-  font-size: 24px; color: var(--gold); padding: 0 12px;
+  font-size: 28px; color: var(--gold); padding: 0 12px;
   display: flex; align-items: center;
 }
 
@@ -155,19 +155,19 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface); min-width: 700px;
 }
 .comp-table th {
-  text-align: left; font-size: 11px; color: var(--silver); padding: 14px 14px;
+  text-align: left; font-size: 17px; color: var(--silver); padding: 14px 14px;
   border-bottom: 1px solid var(--border); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em;
   background: rgba(255,255,255,0.02); white-space: nowrap;
 }
 .comp-table th:first-child { color: var(--gold); }
 .comp-table td {
-  padding: 11px 14px; font-size: 12.5px; color: var(--silver);
+  padding: 11px 14px; font-size: 18px; color: var(--silver);
   border-bottom: 1px solid rgba(255,255,255,0.03);
-  vertical-align: top; line-height: 1.5;
+  vertical-align: top; line-height: 1.65;
 }
 .comp-table td:first-child {
-  font-weight: 600; color: var(--white); font-size: 12px;
+  font-weight: 600; color: var(--white); font-size: 18px;
   white-space: nowrap;
 }
 .comp-table tr:last-child td { border-bottom: none; }
@@ -186,12 +186,12 @@ a { color: inherit; text-decoration: none; }
 }
 .col-card {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 24px; position: relative;
+  border-radius: 12px; padding: 32px; position: relative;
 }
 .col-card.col-red { border-top: 3px solid var(--red); }
 .col-card.col-green { border-top: 3px solid var(--green); }
 .col-card h4 {
-  font-family: var(--body); font-size: 15px; font-weight: 700;
+  font-family: var(--body); font-size: 18px; font-weight: 700;
   margin-bottom: 14px;
 }
 .col-card.col-red h4 { color: var(--red); }
@@ -213,14 +213,14 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
 }
 .metric-item .metric-value {
-  font-family: var(--heading); font-size: 22px; font-weight: 700;
+  font-family: var(--heading); font-size: 36px; font-weight: 700;
   color: var(--gold); margin-bottom: 4px;
 }
 .metric-item .metric-label {
-  font-size: 13px; color: var(--white); font-weight: 500; margin-bottom: 4px;
+  font-size: 19px; color: var(--white); font-weight: 500; margin-bottom: 4px;
 }
 .metric-item .metric-src {
-  font-size: 10px; color: var(--silver); opacity: 0.7;
+  font-size: 19px; color: var(--silver); opacity: 0.7;
 }
 
 /* -- COMPETITOR TABLE -- */
@@ -229,20 +229,20 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface); min-width: 600px;
 }
 .comp2-table th {
-  text-align: left; font-size: 11px; color: var(--silver); padding: 13px 14px;
+  text-align: left; font-size: 17px; color: var(--silver); padding: 13px 14px;
   border-bottom: 1px solid var(--border); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.04em;
   background: rgba(255,255,255,0.02);
 }
 .comp2-table td {
-  padding: 11px 14px; font-size: 13px; color: var(--silver);
+  padding: 11px 14px; font-size: 19px; color: var(--silver);
   border-bottom: 1px solid rgba(255,255,255,0.03);
-  vertical-align: top; line-height: 1.5;
+  vertical-align: top; line-height: 1.65;
 }
 .comp2-table td:first-child { font-weight: 600; color: var(--white); white-space: nowrap; }
 .comp2-table tr:last-child td { border-bottom: none; }
 .table-note {
-  font-size: 12px; color: var(--silver); padding: 14px;
+  font-size: 18px; color: var(--silver); padding: 14px;
   background: rgba(212,160,23,0.04); border-top: 1px solid var(--border);
   border-radius: 0 0 12px 12px; font-style: italic;
 }
@@ -260,13 +260,13 @@ a { color: inherit; text-decoration: none; }
 .game-card .game-icon { margin-bottom: 10px; }
 .game-card .game-icon svg { width: 28px; height: 28px; color: var(--gold); }
 .game-card .game-name {
-  font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 5px;
+  font-size: 19px; font-weight: 600; color: var(--white); margin-bottom: 5px;
 }
 .game-card .game-trigger {
-  font-size: 11px; color: var(--gold); margin-bottom: 4px; font-weight: 500;
+  font-size: 17px; color: var(--gold); margin-bottom: 4px; font-weight: 500;
 }
 .game-card .game-example {
-  font-size: 10px; color: var(--silver); opacity: 0.8;
+  font-size: 19px; color: var(--silver); opacity: 0.8;
 }
 
 /* -- RISK CARDS -- */
@@ -281,13 +281,13 @@ a { color: inherit; text-decoration: none; }
 .risk-card.risk-red { border-left: 3px solid var(--red); }
 .risk-card.risk-green { border-left: 3px solid var(--green); }
 .risk-card .risk-label {
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  font-size: 19px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.08em; margin-bottom: 8px;
 }
 .risk-card.risk-red .risk-label { color: var(--red); }
 .risk-card.risk-green .risk-label { color: var(--green); }
 .risk-card p {
-  font-size: 13px; color: var(--silver); line-height: 1.6;
+  font-size: 19px; color: var(--silver); line-height: 1.7;
 }
 
 /* -- PILLAR GRID -- */
@@ -297,27 +297,27 @@ a { color: inherit; text-decoration: none; }
 }
 .pillar-card {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 24px; text-align: center;
+  border-radius: 12px; padding: 32px; text-align: center;
   position: relative;
 }
 .pillar-card .pillar-phase {
-  font-size: 10px; font-weight: 700; color: var(--gold);
+  font-size: 19px; font-weight: 700; color: var(--gold);
   text-transform: uppercase; letter-spacing: 0.1em;
   margin-bottom: 8px;
 }
 .pillar-card .pillar-title {
-  font-family: var(--heading); font-size: 20px; font-weight: 600;
+  font-family: var(--heading); font-size: 28px; font-weight: 600;
   color: var(--white); margin-bottom: 6px;
 }
 .pillar-card .pillar-market {
-  font-size: 12px; color: var(--gold); font-weight: 600; margin-bottom: 10px;
+  font-size: 18px; color: var(--gold); font-weight: 600; margin-bottom: 10px;
 }
 .pillar-card .pillar-desc {
-  font-size: 12px; color: var(--silver); line-height: 1.6;
+  font-size: 18px; color: var(--silver); line-height: 1.7;
 }
 .pillar-card .pillar-status {
   display: inline-block; margin-top: 12px; padding: 4px 12px;
-  border-radius: 6px; font-size: 11px; font-weight: 600;
+  border-radius: 6px; font-size: 17px; font-weight: 600;
 }
 .status-live { background: rgba(34,197,94,0.15); color: var(--green); }
 .status-next { background: rgba(212,160,23,0.12); color: var(--gold); }
@@ -332,7 +332,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 20px;
 }
 .quote-box p {
-  font-size: 14px; color: var(--silver); line-height: 1.7;
+  font-size: 17px; color: var(--silver); line-height: 1.7;
   font-style: italic;
 }
 
@@ -342,7 +342,7 @@ a { color: inherit; text-decoration: none; }
 }
 .infra-item {
   display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 0; font-size: 13px; color: var(--silver);
+  padding: 8px 0; font-size: 19px; color: var(--silver);
 }
 .infra-item svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
 
@@ -353,7 +353,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 20px;
 }
 .page-footer p {
-  font-size: 12px; color: var(--silver); opacity: 0.6;
+  font-size: 18px; color: var(--silver); opacity: 0.6;
 }
 
 /* -- KEY DIFF -- */
@@ -364,7 +364,7 @@ a { color: inherit; text-decoration: none; }
   margin-top: 16px;
 }
 .key-diff p {
-  font-size: 13px; color: var(--silver); line-height: 1.6;
+  font-size: 19px; color: var(--silver); line-height: 1.7;
 }
 .key-diff strong { color: var(--gold); font-weight: 600; }
 
@@ -379,7 +379,7 @@ a { color: inherit; text-decoration: none; }
   height: 100%; justify-content: flex-end;
 }
 .bar-value {
-  font-family: var(--heading); font-size: 15px; font-weight: 700;
+  font-family: var(--heading); font-size: 18px; font-weight: 700;
   color: var(--gold); margin-bottom: 6px;
 }
 .bar-fill {
@@ -397,7 +397,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 20px rgba(212,160,23,0.3);
 }
 .bar-year {
-  font-size: 12px; color: var(--silver); margin-top: 8px; font-weight: 600;
+  font-size: 18px; color: var(--silver); margin-top: 8px; font-weight: 600;
 }
 .bar-year.bar-year-highlight { color: var(--gold); }
 
@@ -420,15 +420,15 @@ a { color: inherit; text-decoration: none; }
 }
 .funnel-step:last-child::after { display: none; }
 .funnel-label {
-  font-size: 10px; font-weight: 700; color: var(--gold);
+  font-size: 19px; font-weight: 700; color: var(--gold);
   text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
 }
 .funnel-val {
-  font-family: var(--heading); font-size: 22px; font-weight: 700;
+  font-family: var(--heading); font-size: 36px; font-weight: 700;
   color: var(--white); margin-bottom: 2px;
 }
 .funnel-desc {
-  font-size: 12px; color: var(--silver); line-height: 1.5;
+  font-size: 18px; color: var(--silver); line-height: 1.65;
 }
 .funnel-result {
   background: rgba(212,160,23,0.08);
@@ -436,7 +436,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 12px; padding: 20px 24px;
   margin: 20px auto 0; text-align: center;
 }
-.funnel-result .funnel-val { color: var(--gold); font-size: 26px; }
+.funnel-result .funnel-val { color: var(--gold); font-size: 36px; }
 
 /* -- POSITIONING MAP -- */
 .pos-map {
@@ -445,7 +445,7 @@ a { color: inherit; text-decoration: none; }
   border-radius: 12px; margin-bottom: 16px; overflow: hidden;
 }
 .pos-axis-x, .pos-axis-y {
-  position: absolute; font-size: 10px; color: var(--silver);
+  position: absolute; font-size: 19px; color: var(--silver);
   text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
 }
 .pos-axis-x.left { left: 12px; bottom: 12px; }
@@ -461,13 +461,13 @@ a { color: inherit; text-decoration: none; }
   background: rgba(255,255,255,0.08);
 }
 .pos-label-x {
-  position: absolute; bottom: 10px; font-size: 10px; color: var(--silver);
+  position: absolute; bottom: 10px; font-size: 19px; color: var(--silver);
   font-weight: 600; letter-spacing: 0.04em;
 }
 .pos-label-x.left { left: 14px; }
 .pos-label-x.right { right: 14px; }
 .pos-label-y {
-  position: absolute; left: 14px; font-size: 10px; color: var(--silver);
+  position: absolute; left: 14px; font-size: 19px; color: var(--silver);
   font-weight: 600; letter-spacing: 0.04em;
 }
 .pos-label-y.top { top: 14px; }
@@ -485,9 +485,9 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 16px rgba(212,160,23,0.5), 0 0 40px rgba(212,160,23,0.2);
 }
 .pos-dot .dot-label {
-  font-size: 10px; color: var(--white); font-weight: 600; white-space: nowrap;
+  font-size: 19px; color: var(--white); font-weight: 600; white-space: nowrap;
 }
-.pos-dot.pos-ftg .dot-label { color: var(--gold); font-size: 11px; }
+.pos-dot.pos-ftg .dot-label { color: var(--gold); font-size: 17px; }
 
 /* -- MILESTONE TIMELINE -- */
 .timeline {
@@ -509,28 +509,28 @@ a { color: inherit; text-decoration: none; }
 }
 .tl-item.tl-gold .tl-dot { background: var(--gold); box-shadow: 0 0 12px rgba(212,160,23,0.4); }
 .tl-month {
-  font-size: 11px; font-weight: 700; color: var(--gold);
+  font-size: 17px; font-weight: 700; color: var(--gold);
   margin-top: 16px; text-transform: uppercase;
 }
 .tl-title {
-  font-size: 12px; font-weight: 600; color: var(--white);
+  font-size: 18px; font-weight: 600; color: var(--white);
   margin-top: 6px; line-height: 1.3;
 }
 .tl-desc {
-  font-size: 10px; color: var(--silver); margin-top: 4px; line-height: 1.4;
+  font-size: 19px; color: var(--silver); margin-top: 4px; line-height: 1.4;
 }
 
 /* -- SEVERITY BADGES -- */
 .sev-badge {
   display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  font-size: 12px; font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.08em; margin-left: 8px; vertical-align: middle;
 }
 .sev-high { background: rgba(239,68,68,0.18); color: var(--red); }
 .sev-med { background: rgba(234,179,8,0.18); color: #eab308; }
 .sev-low { background: rgba(34,197,94,0.18); color: var(--green); }
 .risk-reason {
-  font-size: 11px; color: var(--silver); font-style: italic;
+  font-size: 17px; color: var(--silver); font-style: italic;
   margin-top: 6px; opacity: 0.8;
 }
 
@@ -540,35 +540,35 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px solid var(--border); margin-top: 20px;
 }
 .footer-cta h3 {
-  font-family: var(--heading); font-size: 24px; font-weight: 600;
+  font-family: var(--heading); font-size: 28px; font-weight: 600;
   color: var(--white); margin-bottom: 20px;
 }
 .footer-btns { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
 .btn-gold {
   display: inline-block; padding: 12px 28px; border-radius: 8px;
   background: var(--gold); color: var(--bg); font-weight: 700;
-  font-size: 14px; border: none; cursor: pointer;
+  font-size: 17px; border: none; cursor: pointer;
   transition: background .2s;
 }
 .btn-gold:hover { background: var(--gold-hover); }
 .btn-ghost {
   display: inline-block; padding: 12px 28px; border-radius: 8px;
   background: transparent; color: var(--gold); font-weight: 700;
-  font-size: 14px; border: 1px solid var(--gold); cursor: pointer;
+  font-size: 17px; border: 1px solid var(--gold); cursor: pointer;
   transition: background .2s, color .2s;
 }
 .btn-ghost:hover { background: rgba(212,160,23,0.1); }
 .footer-sub {
-  font-size: 11px; color: var(--silver); opacity: 0.5;
+  font-size: 17px; color: var(--silver); opacity: 0.5;
 }
 
 /* -- RESPONSIVE -- */
 @media (max-width: 768px) {
   .page { padding: 28px 16px 40px; }
   .hero { padding: 36px 24px; }
-  .hero h1 { font-size: 32px; }
+  .hero h1 { font-size: 38px; }
   .hero::before { display: none; }
-  .section-title { font-size: 24px; }
+  .section-title { font-size: 28px; }
   .two-col { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .game-grid { grid-template-columns: repeat(3, 1fr); }
@@ -590,13 +590,13 @@ a { color: inherit; text-decoration: none; }
     height: 28px !important; width: var(--bar-size, 10%) !important;
     border-radius: 0 6px 6px 0;
   }
-  .bar-value { margin-bottom: 0; min-width: 50px; text-align: right; font-size: 13px; }
+  .bar-value { margin-bottom: 0; min-width: 50px; text-align: right; font-size: 19px; }
   .bar-year { margin-top: 0; min-width: 36px; order: -1; }
   /* Funnel: stack vertically (already does) */
   .funnel-step { max-width: 100% !important; width: 100% !important; }
   /* Positioning map: simplify */
   .pos-map { aspect-ratio: 1; min-height: 300px; }
-  .pos-dot .dot-label { font-size: 9px; }
+  .pos-dot .dot-label { font-size: 12px; }
   /* Timeline: vertical stack */
   .timeline { flex-direction: column; padding-left: 30px; }
   .timeline::before { top: 0; bottom: 0; left: 6px; width: 2px; height: auto; right: auto; }
@@ -607,7 +607,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 420px) {
   .hero { padding: 28px 18px; }
-  .hero h1 { font-size: 26px; }
+  .hero h1 { font-size: 36px; }
   .metrics-grid { grid-template-columns: 1fr; }
   .game-grid { grid-template-columns: repeat(2, 1fr); }
   .comp-table { min-width: 560px; }
@@ -804,7 +804,7 @@ a { color: inherit; text-decoration: none; }
           <div class="bar-year">2030</div>
         </div>
       </div>
-      <div style="font-size:11px; color:var(--silver); opacity:0.7; text-align:right;">69.4% CAGR &mdash; Grand View Research</div>
+      <div style="font-size: 17px; color:var(--silver); opacity:0.7; text-align:right;">69.4% CAGR &mdash; Grand View Research</div>
     </div>
 
     <div class="metrics-grid">
