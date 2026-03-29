@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna -- 50-Country Market Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0f2e; --surface: #141a3a; --border: rgba(255,255,255,0.06);
+  --gold: #d4a017; --gold-hover: #e8b52a; --gold-dim: rgba(212,160,23,0.12);
+  --gold-subtle: rgba(212,160,23,0.04);
+  --silver: #c0c7d6; --white: #f0eff4;
+  --green: #22c55e; --red: #ef4444; --yellow: #eab308; --blue: #3b82f6;
+  --heading: 'Inter', sans-serif; --body: 'Jost', sans-serif; --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--bg); color: var(--white); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1400px; margin: 0 auto; padding: 60px 48px 80px; }
+.hero { width: 100%; border-radius: 14px; background: linear-gradient(135deg, #0e1238 0%, var(--surface) 40%, var(--bg) 100%); position: relative; overflow: hidden; padding: 56px; margin-bottom: 0; }
+.hero h1 { font-family: var(--heading); font-size: 44px; font-weight: 800; color: var(--gold); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em; }
+.hero .subtitle { font-size: 18px; color: var(--silver); line-height: 1.65; max-width: 800px; margin-bottom: 20px; }
+.hero .badge-conf { display: inline-block; padding: 6px 16px; border-radius: 8px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); font-size: 14px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
+.section { padding: 48px 0; border-top: 1px solid var(--border); position: relative; }
+.section::before { content: ''; position: absolute; top: 0; left: -48px; right: -48px; bottom: 0; pointer-events: none; z-index: -1; }
+.section-alt::before { background: rgba(255,255,255,0.015); }
+.section-accent::before { background: linear-gradient(180deg, var(--gold-subtle) 0%, transparent 100%); }
+.section-num { font-family: var(--mono); font-size: 12px; color: var(--bg); letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: inline-block; padding: 4px 12px; border-radius: 4px; background: var(--gold); }
+.section-title { font-family: var(--heading); font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.25; letter-spacing: -0.02em; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+.card h4 { font-family: var(--body); font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+.card p, .card li { font-size: 16px; color: var(--silver); line-height: 1.65; }
+.table-wrap { margin-bottom: 20px; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); }
+th { text-align: left; font-size: 11px; color: var(--silver); padding: 10px 10px; border-bottom: 1px solid var(--border); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,255,255,0.02); white-space: nowrap; }
+td { padding: 8px 10px; font-size: 14px; color: var(--silver); border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: middle; }
+td:first-child { font-weight: 600; color: var(--white); }
+tr:last-child td { border-bottom: none; }
+tr:hover { background: rgba(255,255,255,0.02); }
+.score { font-family: var(--mono); font-weight: 700; font-size: 15px; }
+.tier { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.t1 { background: rgba(34,197,94,0.15); color: #22c55e; }
+.t2 { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.t3 { background: rgba(234,179,8,0.15); color: #eab308; }
+.t4 { background: rgba(239,68,68,0.15); color: #ef4444; }
+.dim { font-family: var(--mono); font-size: 13px; text-align: center; }
+.dim-high { color: var(--green); }
+.dim-mid { color: var(--silver); }
+.dim-low { color: var(--red); }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.metric-item { padding: 16px; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+.metric-item .metric-value { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--gold); }
+.metric-item .metric-label { font-size: 13px; color: var(--white); font-weight: 600; margin-top: 4px; }
+.metric-item .metric-src { font-size: 11px; color: var(--silver); margin-top: 2px; opacity: 0.7; }
+.phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.phase-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+.phase-card h5 { font-family: var(--heading); font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+.phase-card .phase-time { font-size: 12px; color: var(--silver); margin-bottom: 10px; font-family: var(--mono); }
+.phase-card ul { list-style: none; padding: 0; }
+.phase-card li { font-size: 14px; color: var(--silver); padding: 2px 0; }
+.avoid-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.avoid-item { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 8px; padding: 12px 16px; }
+.avoid-item strong { color: var(--red); font-size: 14px; }
+.avoid-item p { font-size: 12px; color: var(--silver); margin-top: 4px; line-height: 1.4; }
+@media (max-width: 900px) {
+  .page { padding: 28px 12px 40px; }
+  .section::before { left: -12px; right: -12px; }
+  .hero { padding: 32px 20px; }
+  .hero h1 { font-size: 30px; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .phase-grid { grid-template-columns: 1fr; }
+  .avoid-list { grid-template-columns: 1fr; }
+  th, td { padding: 6px 6px; font-size: 12px; }
+  .dim { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="../index.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <a href="../../goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
+    <a href="../marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Markets</a>
+    <a href="../ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">FTG</a>
+    <a href="../marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">Marketing</a>
+    <a href="../index.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Demo</a>
+  </div>
+</nav>
+<div style="height:52px;"></div>
+
+<div class="page">
+
+  <section class="hero">
+    <h1>50-Country Market Scan</h1>
+    <p class="subtitle">Every country scored across 10 dimensions: market size, crypto adoption, regulatory risk, competition, digital access, payments, ARPU, localization, marketing, and legal risk. Ranked best-to-worst for an offshore crypto casino.</p>
+    <span class="badge-conf">Confidential &mdash; Team &amp; Investors Only</span>
+  </section>
+
+  <!-- TIER OVERVIEW -->
+  <section class="section">
+    <div class="section-num">Overview</div>
+    <h2 class="section-title">Tier Distribution</h2>
+    <div class="metrics-grid">
+      <div class="metric-item"><div class="metric-value" style="color:var(--green);">2</div><div class="metric-label">Tier 1 &mdash; Launch</div><div class="metric-src">Nigeria, New Zealand</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--blue);">29</div><div class="metric-label">Tier 2 &mdash; Expansion</div><div class="metric-src">Brazil, Kenya, Philippines + 26 more</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--yellow);">18</div><div class="metric-label">Tier 3 &mdash; Opportunistic</div><div class="metric-src">S. Korea, Japan, Germany + 15 more</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--red);">1</div><div class="metric-label">Tier 4 &mdash; Avoid</div><div class="metric-src">Egypt</div></div>
+    </div>
+  </section>
+
+  <!-- FULL TABLE -->
+  <section class="section section-alt">
+    <div class="section-num">Full Ranking</div>
+    <h2 class="section-title">50 Countries &mdash; Sorted by Composite Score</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Country</th><th>Mkt</th><th>Crypto</th><th>Reg</th><th>Comp</th><th>Digi</th><th>Pay</th><th>ARPU</th><th>Lang</th><th>Mktg</th><th>Legal</th><th>Total</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Nigeria</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-high">9</td><td class="dim dim-low">3</td><td class="dim dim-high">8</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="score" style="color:var(--green);">73</td><td><span class="tier t1">T1</span></td></tr>
+          <tr><td>2</td><td>New Zealand</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="score" style="color:var(--green);">70</td><td><span class="tier t1">T1</span></td></tr>
+          <tr><td>3</td><td>Brazil</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-high">7</td><td class="score" style="color:var(--blue);">69</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>4</td><td>Kenya</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="score" style="color:var(--blue);">69</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>5</td><td>Philippines</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="score" style="color:var(--blue);">68</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>6</td><td>Ghana</td><td class="dim dim-mid">4</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="score" style="color:var(--blue);">67</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>7</td><td>Argentina</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="score" style="color:var(--blue);">66</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>8</td><td>South Africa</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">66</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>9</td><td>Vietnam</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="score" style="color:var(--blue);">64</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>10</td><td>Hong Kong</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="dim dim-high">9</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--blue);">64</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>11</td><td>Peru</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="score" style="color:var(--blue);">63</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>12</td><td>Chile</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="score" style="color:var(--blue);">63</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>13</td><td>Mexico</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">61</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>14</td><td>Ukraine</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">61</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>15</td><td>India</td><td class="dim dim-high">9</td><td class="dim dim-high">9</td><td class="dim dim-low">3</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-high">7</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="score" style="color:var(--blue);">61</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>16</td><td>Ireland</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--blue);">61</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>17</td><td>Thailand</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--blue);">60</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>18</td><td>Canada</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-mid">5</td><td class="dim dim-low">3</td><td class="score" style="color:var(--blue);">60</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>19</td><td>UAE</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-mid">6</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="score" style="color:var(--blue);">60</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>20</td><td>Indonesia</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--blue);">59</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>21</td><td>Singapore</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-high">10</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-high">9</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--blue);">59</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>22</td><td>Colombia</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">58</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>23</td><td>Czech Rep.</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">58</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>24</td><td>Turkey</td><td class="dim dim-high">8</td><td class="dim dim-high">9</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-low">2</td><td class="score" style="color:var(--blue);">56</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>25</td><td>Taiwan</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-high">9</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--blue);">56</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>26</td><td>Tanzania</td><td class="dim dim-low">3</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-low">2</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="score" style="color:var(--blue);">56</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>27</td><td>Romania</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="score" style="color:var(--blue);">56</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>28</td><td>Australia</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--blue);">56</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>29</td><td>Poland</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--blue);">55</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>30</td><td>Malaysia</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--blue);">55</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>31</td><td>UK</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-low">1</td><td class="dim dim-low">3</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">10</td><td class="dim dim-low">3</td><td class="dim dim-low">1</td><td class="score" style="color:var(--blue);">55</td><td><span class="tier t2">T2</span></td></tr>
+          <tr><td>32</td><td>South Korea</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-high">7</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-mid">5</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">54</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>33</td><td>Portugal</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--yellow);">54</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>34</td><td>Russia</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="dim dim-low">3</td><td class="dim dim-mid">6</td><td class="dim dim-low">3</td><td class="score" style="color:var(--yellow);">53</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>35</td><td>Japan</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">53</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>36</td><td>Greece</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--yellow);">53</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>37</td><td>Netherlands</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">6</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">52</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>38</td><td>Germany</td><td class="dim dim-high">8</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-mid">6</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">51</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>39</td><td>Norway</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">51</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>40</td><td>Finland</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="dim dim-mid">5</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-low">3</td><td class="score" style="color:var(--yellow);">51</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>41</td><td>Sweden</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">50</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>42</td><td>Denmark</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">8</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-low">2</td><td class="score" style="color:var(--yellow);">49</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>43</td><td>Italy</td><td class="dim dim-high">7</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="score" style="color:var(--yellow);">47</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>44</td><td>Spain</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-high">8</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="score" style="color:var(--yellow);">47</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>45</td><td>Pakistan</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">6</td><td class="dim dim-low">2</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-low">3</td><td class="score" style="color:var(--yellow);">47</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>46</td><td>Morocco</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="score" style="color:var(--yellow);">46</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>47</td><td>Bangladesh</td><td class="dim dim-mid">4</td><td class="dim dim-mid">6</td><td class="dim dim-mid">4</td><td class="dim dim-high">7</td><td class="dim dim-mid">5</td><td class="dim dim-mid">5</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--yellow);">46</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>48</td><td>France</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-low">1</td><td class="dim dim-mid">4</td><td class="dim dim-high">9</td><td class="dim dim-mid">5</td><td class="dim dim-high">7</td><td class="dim dim-low">3</td><td class="dim dim-low">3</td><td class="dim dim-low">1</td><td class="score" style="color:var(--yellow);">43</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>49</td><td>Ethiopia</td><td class="dim dim-low">3</td><td class="dim dim-mid">6</td><td class="dim dim-low">3</td><td class="dim dim-high">8</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-low">2</td><td class="dim dim-mid">4</td><td class="dim dim-mid">5</td><td class="dim dim-mid">4</td><td class="score" style="color:var(--yellow);">42</td><td><span class="tier t3">T3</span></td></tr>
+          <tr><td>50</td><td>Egypt</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="dim dim-low">3</td><td class="dim dim-mid">6</td><td class="dim dim-mid">6</td><td class="dim dim-low">3</td><td class="dim dim-low">3</td><td class="dim dim-mid">4</td><td class="dim dim-mid">4</td><td class="dim dim-low">3</td><td class="score" style="color:var(--red);">39</td><td><span class="tier t4">T4</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--silver);opacity:0.6;">Dimensions: Mkt=Market Size, Crypto=Crypto Adoption, Reg=Regulatory Safety, Comp=Low Competition, Digi=Digital Access, Pay=Payment Infra, ARPU=Revenue Potential, Lang=Localization Ease, Mktg=Marketing Feasibility, Legal=Low Legal Risk. Color: <span style="color:var(--green);">green</span>=7+, <span style="color:var(--silver);">grey</span>=4-6, <span style="color:var(--red);">red</span>=1-3. Sources: Chainalysis 2025, ICLG 2025-2026, DemandSage, Statista.</p>
+  </section>
+
+  <!-- LAUNCH SEQUENCE -->
+  <section class="section section-accent">
+    <div class="section-num">Launch Plan</div>
+    <h2 class="section-title">Recommended Launch Sequence</h2>
+    <div class="phase-grid">
+      <div class="phase-card" style="border-color:rgba(34,197,94,0.3);">
+        <h5>Phase 1</h5><div class="phase-time">Month 1&ndash;3</div>
+        <ul><li>Nigeria</li><li>Ghana</li><li>Kenya</li></ul>
+        <p style="font-size:12px;color:var(--silver);margin-top:8px;">English-speaking Africa cluster. Same localization, lowest enforcement.</p>
+      </div>
+      <div class="phase-card" style="border-color:rgba(59,130,246,0.3);">
+        <h5>Phase 2</h5><div class="phase-time">Month 3&ndash;6</div>
+        <ul><li>Brazil</li><li>Argentina</li><li>New Zealand</li></ul>
+        <p style="font-size:12px;color:var(--silver);margin-top:8px;">LatAm cluster + high-ARPU English market.</p>
+      </div>
+      <div class="phase-card" style="border-color:rgba(212,160,23,0.3);">
+        <h5>Phase 3</h5><div class="phase-time">Month 6&ndash;12</div>
+        <ul><li>Philippines + Vietnam</li><li>Peru + Chile + Colombia + Mexico</li><li>South Africa</li></ul>
+        <p style="font-size:12px;color:var(--silver);margin-top:8px;">SEA + LatAm expansion with existing localization.</p>
+      </div>
+      <div class="phase-card" style="border-color:rgba(255,255,255,0.1);">
+        <h5>Phase 4</h5><div class="phase-time">Month 12+</div>
+        <ul><li>Hong Kong + Taiwan</li><li>Ukraine + Thailand</li><li>Malaysia</li></ul>
+        <p style="font-size:12px;color:var(--silver);margin-top:8px;">Higher friction, cherry-pick based on traction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVOID -->
+  <section class="section section-alt">
+    <div class="section-num" style="background:var(--red);">Avoid</div>
+    <h2 class="section-title">Markets to Explicitly Avoid</h2>
+    <div class="avoid-list">
+      <div class="avoid-item"><strong>Turkey</strong><p>Presidential crackdown, $544M USDT seized, 239K domains flagged</p></div>
+      <div class="avoid-item"><strong>India</strong><p>2025 Act blanket-bans real-money gaming. 3yr prison + 1 Cr fine.</p></div>
+      <div class="avoid-item"><strong>UK</strong><p>UKGC is the world's most aggressive gambling regulator</p></div>
+      <div class="avoid-item"><strong>France</strong><p>Online casinos explicitly prohibited. Only sports/poker/horse licensed.</p></div>
+      <div class="avoid-item"><strong>Germany</strong><p>Real-time tracking, ISP blocking, joint EU enforcement</p></div>
+      <div class="avoid-item"><strong>Japan</strong><p>New Sept 2025 law targets offshore casino sites specifically</p></div>
+      <div class="avoid-item"><strong>South Korea</strong><p>One of the most restrictive frameworks in Asia</p></div>
+      <div class="avoid-item"><strong>Australia</strong><p>ACMA blocked 1,455 sites. Interactive Gambling Act.</p></div>
+      <div class="avoid-item"><strong>Egypt</strong><p>Crypto banned, gambling banned, aggressive enforcement</p></div>
+    </div>
+  </section>
+
+  <footer style="text-align:center; padding: 40px 0 20px; opacity: 0.4; font-size: 14px; color: var(--silver);">
+    GoLuna &mdash; 50-Country Market Scan &mdash; March 2026 &mdash; Confidential
+  </footer>
+
+</div>
+</body>
+</html>
