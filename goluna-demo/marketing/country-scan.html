@@ -103,10 +103,68 @@ tr:hover { background: rgba(255,255,255,0.02); }
     <div class="section-num">Overview</div>
     <h2 class="section-title">Tier Distribution</h2>
     <div class="metrics-grid">
-      <div class="metric-item"><div class="metric-value" style="color:var(--green);">2</div><div class="metric-label">Tier 1 &mdash; Launch</div><div class="metric-src">Nigeria, New Zealand</div></div>
-      <div class="metric-item"><div class="metric-value" style="color:var(--blue);">29</div><div class="metric-label">Tier 2 &mdash; Expansion</div><div class="metric-src">Brazil, Kenya, Philippines + 26 more</div></div>
-      <div class="metric-item"><div class="metric-value" style="color:var(--yellow);">18</div><div class="metric-label">Tier 3 &mdash; Opportunistic</div><div class="metric-src">S. Korea, Japan, Germany + 15 more</div></div>
-      <div class="metric-item"><div class="metric-value" style="color:var(--red);">1</div><div class="metric-label">Tier 4 &mdash; Avoid</div><div class="metric-src">Egypt</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--green);">2</div><div class="metric-label">Tier 1 &mdash; Launch First</div><div class="metric-src">Score 70+. Nigeria, New Zealand.</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--blue);">29</div><div class="metric-label">Tier 2 &mdash; Expansion</div><div class="metric-src">Score 55&ndash;69. Brazil, Kenya, Philippines + 26 more.</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--yellow);">18</div><div class="metric-label">Tier 3 &mdash; Opportunistic</div><div class="metric-src">Score 40&ndash;54. S. Korea, Japan, Germany + 15 more.</div></div>
+      <div class="metric-item"><div class="metric-value" style="color:var(--red);">1</div><div class="metric-label">Tier 4 &mdash; Avoid</div><div class="metric-src">Score &lt;40. Egypt.</div></div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="section section-alt">
+    <div class="section-num">Methodology</div>
+    <h2 class="section-title">How the Composite Score Works</h2>
+    <div class="card">
+      <p>Each country is scored <strong style="color:var(--white);">1&ndash;10</strong> across <strong style="color:var(--white);">10 dimensions</strong>. The composite score is the sum (max 100). Higher = better for GoLuna. Scores are based on Chainalysis 2025, ICLG gambling law reports 2025&ndash;2026, Statista, and verified news sources.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;">
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Mkt &mdash; Market Size</h4>
+        <p style="font-size:13px;">Total gambling revenue, online share, growth rate. Bigger market = higher score.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Crypto &mdash; Crypto Adoption</h4>
+        <p style="font-size:13px;">% population using crypto, USDT penetration. Based on Chainalysis 2025 index.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Reg &mdash; Regulatory Safety</h4>
+        <p style="font-size:13px;">Is offshore gambling tolerated? Active enforcement? Higher = safer for operator.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Comp &mdash; Low Competition</h4>
+        <p style="font-size:13px;">Market saturation. Is Stake.com dominant? Higher = more room for new entrants.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Digi &mdash; Digital Access</h4>
+        <p style="font-size:13px;">Internet penetration, smartphone usage, mobile-first culture.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Pay &mdash; Payment Infra</h4>
+        <p style="font-size:13px;">Can players easily buy crypto? Fiat on-ramps available? P2P trading active?</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">ARPU &mdash; Revenue Potential</h4>
+        <p style="font-size:13px;">GDP per capita proxy. Disposable income for gambling. Higher = more $ per player.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Lang &mdash; Localization Ease</h4>
+        <p style="font-size:13px;">English proficiency? Localization cost. 10 = English-native, 3 = full translation needed.</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Mktg &mdash; Marketing Feasibility</h4>
+        <p style="font-size:13px;">Can you run ads? Influencer ecosystem? Active Telegram/Discord communities?</p>
+      </div>
+      <div class="card" style="padding:16px;margin:0;">
+        <h4 style="font-size:14px;">Legal &mdash; Low Legal Risk</h4>
+        <p style="font-size:13px;">Prosecution risk for operators. Historical enforcement. Higher = less risk.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:20px;align-items:center;font-size:14px;color:var(--silver);margin-bottom:10px;">
+      <span><strong>How to read the table:</strong></span>
+      <span style="color:var(--green);">&#9632; 7&ndash;10 = Strong</span>
+      <span style="color:var(--silver);">&#9632; 4&ndash;6 = Average</span>
+      <span style="color:var(--red);">&#9632; 1&ndash;3 = Weak</span>
+      <span style="margin-left:12px;"><span class="tier t1">T1</span> Launch &nbsp; <span class="tier t2">T2</span> Expand &nbsp; <span class="tier t3">T3</span> Cautious &nbsp; <span class="tier t4">T4</span> Avoid</span>
     </div>
   </section>
 
@@ -171,7 +229,63 @@ tr:hover { background: rgba(255,255,255,0.02); }
         </tbody>
       </table>
     </div>
-    <p style="font-size:13px;color:var(--silver);opacity:0.6;">Dimensions: Mkt=Market Size, Crypto=Crypto Adoption, Reg=Regulatory Safety, Comp=Low Competition, Digi=Digital Access, Pay=Payment Infra, ARPU=Revenue Potential, Lang=Localization Ease, Mktg=Marketing Feasibility, Legal=Low Legal Risk. Color: <span style="color:var(--green);">green</span>=7+, <span style="color:var(--silver);">grey</span>=4-6, <span style="color:var(--red);">red</span>=1-3. Sources: Chainalysis 2025, ICLG 2025-2026, DemandSage, Statista.</p>
+  </section>
+
+  <!-- TOP 10 MARKET NOTES -->
+  <section class="section">
+    <div class="section-num">Top 10 Deep Dive</div>
+    <h2 class="section-title">Market Notes &mdash; Top 10 Countries</h2>
+
+    <div class="card">
+      <h4>1. Nigeria &mdash; <span style="font-family:var(--mono);font-size:14px;">73/100</span> <span class="tier t1" style="margin-left:8px;">T1</span></h4>
+      <p>#6 Chainalysis 2025 (down from #2 in 2023 after CBN crackdowns). ~42% crypto engagement. USDT P2P trading dominates &mdash; Nigeria leads Africa in stablecoin volume. Gambling regulation fragmented across states, crypto casinos not specifically prohibited. English-speaking, median age 18, massive Telegram communities.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Low ARPU ($2,100 GDP). Volume-dependent monetization.</p>
+    </div>
+    <div class="card">
+      <h4>2. New Zealand &mdash; <span style="font-family:var(--mono);font-size:14px;">70/100</span> <span class="tier t1" style="margin-left:8px;">T1</span></h4>
+      <p>Crypto casinos explicitly fall outside the Gambling Act 2003. The Online Casino Gambling Bill (introduced June 2025) has not passed yet &mdash; giving a 2+ year window. $48K GDP per capita, English-native, low competition from crypto operators, 95%+ internet penetration.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Small population (~5.2M). New bill will eventually close the gap.</p>
+    </div>
+    <div class="card">
+      <h4>3. Brazil &mdash; <span style="font-family:var(--mono);font-size:14px;">69/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>22.1M active online bettors, ~$7B market, 20.6% crypto ownership. 23.4% of global Bitcoin casino traffic. But SPA has blocked 19,180+ illegal URLs and closed 483 bank accounts since Jan 2025. Massive market rapidly moving from grey to black for unlicensed operators.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Active enforcement accelerating. Payment blocking via Central Bank. Could move to &ldquo;Avoid&rdquo; within 12 months.</p>
+    </div>
+    <div class="card">
+      <h4>4. Kenya &mdash; <span style="font-family:var(--mono);font-size:14px;">69/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>VASP Act 2025 legalized crypto (commenced Nov 4, 2025). Gambling widely popular and culturally accepted. Crypto casinos in grey area &mdash; regulation doesn't address crypto payments. English-speaking, strong M-Pesa mobile money culture, active P2P crypto trading.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Low GDP (~$2,100). Crypto on-ramp friction via M-Pesa.</p>
+    </div>
+    <div class="card">
+      <h4>5. Philippines &mdash; <span style="font-family:var(--mono);font-size:14px;">68/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>Post-POGO ban (Dec 2024) collapsed offshore gambling infrastructure, but domestic demand is massive. Top 10 Chainalysis, strong English proficiency, deep gambling culture. GCash-to-USDT corridors well established.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> PAGCOR could extend enforcement to crypto platforms. Low ARPU (~$3,900 GDP).</p>
+    </div>
+    <div class="card">
+      <h4>6. Ghana &mdash; <span style="font-family:var(--mono);font-size:14px;">67/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>VASP Bill signed into law Dec 30, 2025 &mdash; crypto now legal. 3M Ghanaians (~17% of adults) already use crypto. English-speaking, low competition, gambling regulation doesn't target crypto casinos. Natural expansion from Nigeria.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Very low GDP (~$2,400). Internet penetration ~68%. Small total market.</p>
+    </div>
+    <div class="card">
+      <h4>7. Argentina &mdash; <span style="font-family:var(--mono);font-size:14px;">66/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>Chronic inflation drives massive crypto adoption (#20 Chainalysis, ~8% of population). USDT used as savings vehicle by millions. Gambling culturally embedded, provincial regulation. Offshore crypto casinos face minimal enforcement. VPN usage high.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Fragmented provincial regulation. Peso volatility complicates fiat economics. Spanish localization required.</p>
+    </div>
+    <div class="card">
+      <h4>8. South Africa &mdash; <span style="font-family:var(--mono);font-size:14px;">66/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>Most developed gambling market in Africa (~$3B annual revenue). 19.6% crypto ownership (top 5 globally). English-speaking, $6,500 GDP &mdash; highest ARPU in Africa. FSCA regulates crypto under FATF standards but enforcement against offshore gambling is limited.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> National Gambling Board relatively active by African standards. Remote Gambling Bill discussed but not enacted.</p>
+    </div>
+    <div class="card">
+      <h4>9. Vietnam &mdash; <span style="font-family:var(--mono);font-size:14px;">64/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>#4 Chainalysis 2025. Gambling illegal for citizens but enforcement against players using offshore platforms is practically non-existent &mdash; millions play unregulated. USDT dominant in P2P markets. Police target domestic operators, not offshore websites.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> All gambling technically illegal. Periodic busts create headlines. Vietnamese localization required (low English). Payment disruptions when authorities target corridors.</p>
+    </div>
+    <div class="card">
+      <h4>10. Hong Kong &mdash; <span style="font-family:var(--mono);font-size:14px;">64/100</span> <span class="tier t2" style="margin-left:8px;">T2</span></h4>
+      <p>$52K GDP per capita, 233% YoY growth in bank digital asset transactions (H1 2025). Stablecoin Ordinance (Aug 2025) legitimizes crypto. Tech-savvy population, English widely spoken. Enforcement against offshore platforms limited in practice despite Jockey Club monopoly.</p>
+      <p style="margin-top:8px;"><strong style="color:var(--red);">Risk:</strong> Small population (~7.5M). Gambling Ordinance technically prohibits all unauthorized gambling. China influence could trigger crackdown.</p>
+    </div>
   </section>
 
   <!-- LAUNCH SEQUENCE -->
