@@ -581,6 +581,7 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .stat-pill { min-width: 100px; padding: 10px 14px; }
   .stat-pill .stat-value { font-size: 16px; }
   .metrics-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
   .rank-table { font-size: 12px; }
   .rank-table th, .rank-table td { padding: 8px 8px; white-space: normal; word-break: break-word; }
   .rank-table .hide-mobile { display: none; }
@@ -590,6 +591,8 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .timeline { grid-template-columns: 1fr; }
   .licensing-strip { flex-direction: column; align-items: flex-start; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .card p, .card li { font-size: 15px; }
+  .verdict-box p, .alt-box p { font-size: 15px; }
 }
 @media (max-width: 420px) {
   .topnav { padding: 0 12px; }
@@ -598,6 +601,9 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .mr-hero { padding: 20px 16px; }
   .mr-hero h1 { font-size: 24px; }
   .mr-hero p { font-size: 13px; }
+  .hero h1 { font-size: 26px; }
+  .hero .subtitle { font-size: 15px; }
+  .section-title { font-size: 22px; }
   .stats-row { flex-direction: column; }
   .stat-pill { min-width: 0; width: 100%; }
   .insights-grid { grid-template-columns: 1fr; }
@@ -750,16 +756,25 @@ button { font-family: var(--body); border: none; cursor: pointer; outline: none;
   .geo-badges { flex-wrap: wrap; }
   .pillar-card .pm-value { font-size: 16px; }
 }
+.nav-hamburger { display: none; background: none; border: none; color: var(--silver); cursor: pointer; padding: 4px; font-size: 24px; }
+@media (max-width: 768px) {
+  .nav-hamburger { display: block; }
+  .nav-links { display: none !important; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: rgba(10,10,10,0.98); backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; gap: 4px !important; }
+  .nav-links.open { display: flex !important; }
+  .nav-links a, .nav-links > div { width: 100%; }
+  .nav-links .nav-dd { position: static !important; margin-top: 4px; background: rgba(255,255,255,0.03) !important; border: none !important; }
+}
 </style>
 </head>
 <body>
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;">
-  <a href="index.html" style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
-  <div style="display:flex;gap:8px;align-items:center;">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
+  <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" style="display:flex;gap:8px;align-items:center;">
     <a href="goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
     <a href="marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">Markets</a>
     <a href="ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">FTG</a>
-    <div style="position:relative;" onmouseenter="this.querySelector('.nav-dd').style.display='block'" onmouseleave="this.querySelector('.nav-dd').style.display='none'">
+    <div style="position:relative;" onmouseenter="this.querySelector('.nav-dd').style.display='block'" onmouseleave="this.querySelector('.nav-dd').style.display='none'" onclick="var d=this.querySelector('.nav-dd');d.style.display=d.style.display==='block'?'none':'block'">
       <a href="marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Marketing &#9662;</a>
       <div class="nav-dd" style="display:none;position:absolute;top:100%;right:0;margin-top:4px;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:200px;z-index:200;">
         <a href="marketing.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">Overview</a>
