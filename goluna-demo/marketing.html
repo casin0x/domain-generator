@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna -- Marketing Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0f2e; --surface: #141a3a; --border: rgba(255,255,255,0.06);
+  --gold: #d4a017; --gold-hover: #e8b52a; --gold-dim: rgba(212,160,23,0.12);
+  --gold-glow: rgba(212,160,23,0.08); --gold-subtle: rgba(212,160,23,0.04);
+  --silver: #c0c7d6; --white: #f0eff4;
+  --green: #22c55e; --red: #ef4444; --yellow: #eab308;
+  --heading: 'Inter', sans-serif; --body: 'Jost', sans-serif; --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--bg); color: var(--white); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.page { max-width: 1200px; margin: 0 auto; padding: 60px 48px 80px; }
+
+.hero { width: 100%; border-radius: 14px; background: linear-gradient(135deg, #0e1238 0%, var(--surface) 40%, var(--bg) 100%); position: relative; overflow: hidden; padding: 56px; margin-bottom: 0; }
+.hero h1 { font-family: var(--heading); font-size: 48px; font-weight: 800; color: var(--gold); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em; position: relative; z-index: 2; }
+.hero .subtitle { font-size: 19px; color: var(--silver); line-height: 1.65; margin-bottom: 20px; max-width: 700px; position: relative; z-index: 2; }
+.hero .badge-conf { display: inline-block; padding: 6px 16px; border-radius: 8px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); font-size: 15px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; position: relative; z-index: 2; }
+
+.section { padding: 48px 0; border-top: 1px solid var(--border); position: relative; }
+.section::before { content: ''; position: absolute; top: 0; left: -48px; right: -48px; bottom: 0; pointer-events: none; z-index: -1; }
+.section-alt::before { background: rgba(255,255,255,0.015); }
+.section-accent::before { background: linear-gradient(180deg, var(--gold-subtle) 0%, transparent 100%); }
+.section-red::before { background: linear-gradient(180deg, rgba(239,68,68,0.04) 0%, transparent 100%); }
+.section-num { font-family: var(--mono); font-size: 12px; color: var(--bg); letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: inline-block; padding: 4px 12px; border-radius: 4px; background: var(--gold); }
+.section-num.red { background: var(--red); }
+.section-title { font-family: var(--heading); font-size: 30px; font-weight: 700; color: var(--white); margin-bottom: 20px; line-height: 1.25; letter-spacing: -0.02em; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+.card h4 { font-family: var(--body); font-size: 19px; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+.card p, .card li { font-size: 17px; color: var(--silver); line-height: 1.7; }
+.card ul { list-style: none; padding: 0; }
+.card ul li { padding: 5px 0; padding-left: 20px; position: relative; }
+.card ul li::before { content: ''; position: absolute; left: 0; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
+
+.verdict-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+.verdict-box h4 { font-family: var(--body); font-size: 19px; font-weight: 700; color: var(--red); margin-bottom: 12px; }
+.verdict-box p, .verdict-box li { font-size: 17px; color: var(--silver); line-height: 1.7; }
+
+.alt-box { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+.alt-box h4 { font-family: var(--body); font-size: 19px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+.alt-box p, .alt-box li { font-size: 17px; color: var(--silver); line-height: 1.7; }
+
+/* Table */
+.table-wrap { margin-bottom: 20px; border-radius: 12px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; background: var(--surface); }
+th { text-align: left; font-size: 13px; color: var(--silver); padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; background: rgba(255,255,255,0.02); white-space: nowrap; }
+td { padding: 10px 14px; font-size: 15px; color: var(--silver); border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: top; line-height: 1.5; }
+td:first-child { font-weight: 600; color: var(--white); white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+tr:hover { background: rgba(255,255,255,0.02); }
+
+.badge { display: inline-block; padding: 2px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.badge-illegal { background: rgba(239,68,68,0.15); color: #ef4444; }
+.badge-high { background: rgba(234,179,8,0.15); color: #eab308; }
+.badge-medium { background: rgba(212,160,23,0.15); color: #d4a017; }
+.badge-low { background: rgba(34,197,94,0.15); color: #22c55e; }
+
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+.metric-item { padding: 16px; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); }
+.metric-item .metric-value { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--gold); }
+.metric-item .metric-label { font-size: 13px; color: var(--white); font-weight: 600; margin-top: 4px; }
+.metric-item .metric-src { font-size: 12px; color: var(--silver); margin-top: 2px; opacity: 0.7; }
+.metric-item.red .metric-value { color: var(--red); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+@media (max-width: 768px) {
+  .page { padding: 28px 16px 40px; }
+  .section::before { left: -16px; right: -16px; }
+  .hero { padding: 36px 24px; }
+  .hero h1 { font-size: 34px; }
+  .section-title { font-size: 24px; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  th, td { padding: 8px 10px; font-size: 13px; }
+  td:first-child { white-space: normal; }
+}
+</style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <a href="goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
+    <a href="marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Markets</a>
+    <a href="ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">FTG</a>
+    <a href="marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">Marketing</a>
+    <a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Demo</a>
+  </div>
+</nav>
+<div style="height:52px;"></div>
+
+<div class="page">
+
+  <section class="hero">
+    <h1>Marketing Strategies</h1>
+    <p class="subtitle">Acquisition channel research, compliance analysis, and CAC projections for GoLuna platform growth.</p>
+    <span class="badge-conf">Confidential &mdash; Team &amp; Investors Only</span>
+  </section>
+
+  <!-- STRATEGY 1: AI COLD CALLING -->
+  <section class="section section-red">
+    <div class="section-num red">Strategy 01</div>
+    <h2 class="section-title">AI Cold Calling for iGaming &mdash; Compliance Scan</h2>
+
+    <div class="card">
+      <h4>The Concept</h4>
+      <p>Leverage AI voice agent technology (built via PalmCode for Astos) to cold call known iGaming users, converting them to GoLuna. Operations from <strong style="color:var(--white)">Ethiopia or Hong Kong</strong>, no gambling license initially. Calls target leads who are existing iGaming players.</p>
+    </div>
+
+    <div class="verdict-box">
+      <h4>Verdict: Not Viable As Described</h4>
+      <p>The combination of <strong style="color:var(--white)">no gambling license</strong> + <strong style="color:var(--white)">AI voice agents</strong> + <strong style="color:var(--white)">cold calling gamblers with purchased data</strong> + <strong style="color:var(--white)">promoting a crypto casino</strong> creates compounding criminal exposure in virtually every target market. This is not a gray area &mdash; multiple countries classify this as criminal activity.</p>
+    </div>
+  </section>
+
+  <!-- BASE OF OPERATIONS -->
+  <section class="section section-alt">
+    <div class="section-num">Operations Base</div>
+    <h2 class="section-title">Ethiopia vs Hong Kong Assessment</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <h4>Ethiopia</h4>
+        <ul>
+          <li>Call center license: 35,000 birr (~$280/year) &mdash; legal</li>
+          <li>International call rates spiked <strong style="color:var(--red)">658%</strong> in Oct 2024</li>
+          <li>Gambling promotion is <strong style="color:var(--red)">illegal</strong> &mdash; Ethiopia revoked ALL sports betting licenses in 2025</li>
+          <li>Poor internet infrastructure, history of shutdowns</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Hong Kong</h4>
+        <ul>
+          <li>Excellent telecom infrastructure</li>
+          <li>Advertising offshore gambling is <strong style="color:var(--red)">criminal</strong> under Gambling Ordinance (Cap 148)</li>
+          <li>Gambling promotion penalties: up to <strong style="color:var(--red)">HK$5M fine + 7 years prison</strong></li>
+          <li>HKJC monopoly &mdash; zero private gambling licensing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <h4>Neither Location Provides Legal Cover</h4>
+      <p>Ethiopia bans gambling promotion entirely. Hong Kong criminalizes offshore gambling advertising. Both would expose operators to prosecution <em>before</em> any target-country laws even apply.</p>
+    </div>
+  </section>
+
+  <!-- COUNTRY COMPARISON TABLE -->
+  <section class="section">
+    <div class="section-num">Country Scan</div>
+    <h2 class="section-title">20-Country Compliance Comparison</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Country</th><th>Gambling Telemarketing</th><th>DNC Registry</th><th>Ad Restrictions</th><th>Risk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>UAE</td><td>Effectively illegal</td><td>Yes (DNCR)</td><td>All gambling illegal</td><td><span class="badge badge-illegal">ILLEGAL</span></td></tr>
+          <tr><td>Vietnam</td><td>Effectively illegal</td><td>Yes (opt-in only)</td><td>Gambling promotion illegal</td><td><span class="badge badge-illegal">ILLEGAL</span></td></tr>
+          <tr><td>Thailand</td><td>Restricted</td><td>PDPA consent</td><td>Criminal (up to 1yr prison, active enforcement)</td><td><span class="badge badge-illegal">ILLEGAL</span></td></tr>
+          <tr><td>Netherlands</td><td>Prohibited unlicensed</td><td>Yes (opt-in)</td><td>Near-total ban (July 2025)</td><td><span class="badge badge-illegal">ILLEGAL</span></td></tr>
+          <tr><td>Italy</td><td>Restricted</td><td>Yes (RPO)</td><td>Total ban (Dignity Decree)</td><td><span class="badge badge-illegal">ILLEGAL</span></td></tr>
+          <tr><td>UK</td><td>Strict consent</td><td>Yes (TPS + PECR)</td><td>UKGC per-channel consent</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Germany</td><td>Heavily restricted</td><td>Yes (Robinson List)</td><td>No casino ads 6am-9pm</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Australia</td><td>Restricted (ACMA)</td><td>Yes (DNC Register)</td><td>Moving toward total ban</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Spain</td><td>Opt-in required (2025)</td><td>Yes (Lista Robinson)</td><td>Royal Decree 958/2020</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>France</td><td>Opt-in required (2026)</td><td>Yes (Bloctel)</td><td>ANJ strict regulation</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Japan</td><td>Regulated</td><td>8-day cooling off</td><td>Casino ads = IR areas only</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Canada</td><td>Regulated (CRTC)</td><td>Yes (National DNCL)</td><td>Provincial regulation</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>India</td><td>Restricted (TRAI)</td><td>Yes (NCPR/DND)</td><td>Govt advisories against</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Philippines</td><td>Restricted</td><td>NTC rules</td><td>PAGCOR pre-approval</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Brazil</td><td>Heavily regulated</td><td>Yes (ANATEL)</td><td>Ordinance 1231/2024</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Nigeria</td><td>Restricted (NCC)</td><td>Yes (guidelines)</td><td>NLRC approval needed</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+          <tr><td>Argentina</td><td>Province-dependent</td><td>Limited</td><td>If licensed, permitted</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+          <tr><td>South Africa</td><td>POPIA regulated</td><td>First-contact rule</td><td>Licensed operators only</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+          <tr><td>Kenya</td><td>Limited regulation</td><td>No formal DNC</td><td>BCLB authorization</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+          <tr><td>Mexico</td><td>Limited regulation</td><td>PROFECO oversight</td><td>SEGOB approval needed</td><td><span class="badge badge-medium">MEDIUM</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h4>Three Compounding Risk Layers</h4>
+      <ul>
+        <li><strong style="color:var(--red)">No license</strong> &mdash; Promoting unlicensed gambling is criminal in most regulated markets (UK: 51 weeks prison, Curacao: 4 years, Thailand: 3 years)</li>
+        <li><strong style="color:var(--red)">AI voice calls</strong> &mdash; FCC declared AI robocalls illegal without consent (Feb 2024). EU AI Act requires transparency disclosure. Separate violation layer.</li>
+        <li><strong style="color:var(--red)">Gambling user data</strong> &mdash; Under GDPR, gambling behavior approaches special category data (health-related). Buying/scraping lists without explicit consent is illegal in EU/UK/Brazil/SA.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CAC COMPARISON -->
+  <section class="section section-alt">
+    <div class="section-num">CAC Analysis</div>
+    <h2 class="section-title">Cold Calling CAC vs Digital Channels</h2>
+
+    <div class="metrics-grid">
+      <div class="metric-item red">
+        <div class="metric-value">$500&ndash;2,000+</div>
+        <div class="metric-label">Cold Calling CAC</div>
+        <div class="metric-src">Realistic per FTD (first-time deposit)</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$150&ndash;400</div>
+        <div class="metric-label">Affiliate CAC</div>
+        <div class="metric-src">Industry standard, performance-based</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$20&ndash;80</div>
+        <div class="metric-label">Community CAC</div>
+        <div class="metric-src">Telegram/Discord, lowest cost</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Channel</th><th>CAC per FTD</th><th>Compliance Risk</th><th>Conversion</th></tr></thead>
+        <tbody>
+          <tr><td>Telegram/Discord</td><td style="color:var(--green);">$20&ndash;80</td><td><span class="badge badge-low">LOW</span></td><td>High (crypto-native)</td></tr>
+          <tr><td>SEO/Content</td><td style="color:var(--green);">$30&ndash;100</td><td><span class="badge badge-low">LOW</span></td><td>Medium (long-term)</td></tr>
+          <tr><td>Paid Social</td><td>$50&ndash;200</td><td><span class="badge badge-medium">MEDIUM</span></td><td>Medium</td></tr>
+          <tr><td>Influencer/Streamer</td><td>$100&ndash;300</td><td><span class="badge badge-medium">MEDIUM</span></td><td>High (trust-based)</td></tr>
+          <tr><td>Affiliate Marketing</td><td>$150&ndash;400</td><td><span class="badge badge-medium">MEDIUM</span></td><td>High (intent-based)</td></tr>
+          <tr><td style="color:var(--red);">Cold Calling</td><td style="color:var(--red);">$500&ndash;2,000+</td><td><span class="badge badge-illegal">EXTREME</span></td><td>Sub-0.1% realistic</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h4>Cold Calling Math (Optimistic Scenario)</h4>
+      <ul>
+        <li>10,000 calls &times; 20% connect rate = 2,000 answered</li>
+        <li>5% interested = 100 click-throughs</li>
+        <li>30% register = 30 sign-ups</li>
+        <li>50% deposit = <strong style="color:var(--white)">15 FTDs</strong></li>
+        <li>Total cost: ~$2,500 &rarr; <strong style="color:var(--white)">$167/FTD optimistic</strong></li>
+        <li>Reality: sub-0.1% conversion for unsolicited crypto casino calls &rarr; <strong style="color:var(--red)">$500&ndash;2,000+ actual CAC</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LEAD SOURCING -->
+  <section class="section">
+    <div class="section-num red">Fatal Flaw</div>
+    <h2 class="section-title">Lead Sourcing &mdash; No Legal Path</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Description</th><th>Legal?</th><th>Risk</th></tr></thead>
+        <tbody>
+          <tr><td>Data Brokers</td><td>Lists of known gamblers by country/spend</td><td style="color:var(--red);">Illegal in EU/UK</td><td><span class="badge badge-illegal">EXTREME</span></td></tr>
+          <tr><td>Affiliate Data</td><td>Affiliates sharing user databases</td><td style="color:var(--red);">Illegal without consent</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Scraping</td><td>Forums, social media, betting sites</td><td style="color:var(--red);">Criminal offense</td><td><span class="badge badge-illegal">EXTREME</span></td></tr>
+          <tr><td>Social Media</td><td>Public gambling group members</td><td style="color:var(--yellow);">Gray area</td><td><span class="badge badge-high">HIGH</span></td></tr>
+          <tr><td>Opt-in Campaigns</td><td>Collect numbers with explicit consent</td><td style="color:var(--green);">Legal</td><td><span class="badge badge-low">LOW</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <p><strong style="color:var(--white)">GDPR Article 9:</strong> Gambling behavior data may constitute special category data where it reveals health information (gambling addiction is a recognized medical condition). Multiple DPAs interpret this strictly. Processing requires <strong style="color:var(--red)">explicit consent</strong>, not just legitimate interest. You cannot buy a list of "known iGaming users" and cold call them in any GDPR jurisdiction. The only legal approach (opt-in) defeats the purpose of cold calling.</p>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATION -->
+  <section class="section section-accent">
+    <div class="section-num">Recommendation</div>
+    <h2 class="section-title">Pivoted Approach &mdash; What To Do Instead</h2>
+
+    <div class="alt-box">
+      <h4>If You Still Want Outbound Voice</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:5px 0 5px 20px;position:relative;"><span style="position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#22c55e;opacity:0.7;"></span><strong style="color:var(--white)">Get licensed first</strong> &mdash; Curacao new regime ($150K+), or target-market licenses. Without a license, all other compliance is moot.</li>
+        <li style="padding:5px 0 5px 20px;position:relative;"><span style="position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#22c55e;opacity:0.7;"></span><strong style="color:var(--white)">Build opt-in lists</strong> &mdash; Digital campaigns to collect phone numbers with explicit, granular consent for gambling marketing calls.</li>
+        <li style="padding:5px 0 5px 20px;position:relative;"><span style="position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#22c55e;opacity:0.7;"></span><strong style="color:var(--white)">Warm outbound only</strong> &mdash; Call people who registered but didn't deposit. Legal, effective, and industry-standard.</li>
+        <li style="padding:5px 0 5px 20px;position:relative;"><span style="position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#22c55e;opacity:0.7;"></span><strong style="color:var(--white)">Disclose AI use</strong> &mdash; EU AI Act + FCC require disclosure. Say it at the start of every call.</li>
+        <li style="padding:5px 0 5px 20px;position:relative;"><span style="position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#22c55e;opacity:0.7;"></span><strong style="color:var(--white)">Target Tier 3 first</strong> &mdash; Kenya, Nigeria, Mexico, Argentina &mdash; lighter enforcement, but still get licensed and use opt-in lists.</li>
+      </ul>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-value">$20&ndash;80</div>
+        <div class="metric-label">Telegram/Discord</div>
+        <div class="metric-src">Crypto-native, lowest CAC</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$100&ndash;300</div>
+        <div class="metric-label">Influencer/Streamer</div>
+        <div class="metric-src">Twitch, Kick, YouTube</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">50%+</div>
+        <div class="metric-label">Affiliate FTD Share</div>
+        <div class="metric-src">Global iGaming standard</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align:center; padding: 40px 0 20px; opacity: 0.4; font-size: 14px; color: var(--silver);">
+    GoLuna &mdash; Marketing Strategies &mdash; March 2026 &mdash; Confidential
+  </footer>
+
+</div>
+</body>
+</html>

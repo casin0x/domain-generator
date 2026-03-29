@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GoLuna -- FTG Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -23,8 +23,9 @@
   --white: #f0eff4;
   --green: #22c55e;
   --red: #ef4444;
-  --heading: 'Cormorant Garamond', serif;
+  --heading: 'Inter', sans-serif;
   --body: 'Jost', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 
 html { scroll-behavior: smooth; }
@@ -70,8 +71,8 @@ a { color: inherit; text-decoration: none; }
   border-radius: 50%; filter: blur(2px);
 }
 .hero h1 {
-  font-family: var(--heading); font-size: 56px; font-weight: 600;
-  color: var(--gold); line-height: 1.1; margin-bottom: 12px;
+  font-family: var(--heading); font-size: 48px; font-weight: 800;
+  color: var(--gold); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em;
   text-shadow: 0 0 60px var(--gold-text-glow);
   position: relative; z-index: 2;
 }
@@ -89,15 +90,32 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* -- SECTION HEADERS -- */
-.section { margin-bottom: 56px; }
+.section {
+  margin-bottom: 0;
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+.section::before {
+  content: ''; position: absolute; top: 0; left: -48px; right: -48px; bottom: 0;
+  pointer-events: none; z-index: -1;
+}
+.section-alt::before {
+  background: rgba(255,255,255,0.015);
+}
+.section-accent::before {
+  background: linear-gradient(180deg, var(--gold-subtle) 0%, transparent 100%);
+}
 .section-num {
-  font-family: var(--heading); font-size: 17px; color: var(--gold);
-  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 6px; opacity: 0.8;
+  font-family: var(--mono); font-size: 12px; color: var(--bg); letter-spacing: 0.1em;
+  font-weight: 700; text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block; padding: 4px 12px; border-radius: 4px;
+  background: var(--gold);
 }
 .section-title {
-  font-family: var(--heading); font-size: 36px; font-weight: 600;
-  color: var(--white); margin-bottom: 20px; line-height: 1.2;
+  font-family: var(--heading); font-size: 30px; font-weight: 700;
+  color: var(--white); margin-bottom: 20px; line-height: 1.25; letter-spacing: -0.02em;
 }
 
 /* -- SURFACE CARD -- */
@@ -147,12 +165,12 @@ a { color: inherit; text-decoration: none; }
 
 /* -- COMPARISON TABLE -- */
 .table-wrap {
-  overflow-x: auto; margin-bottom: 20px;
+  margin-bottom: 20px;
   border-radius: 12px; border: 1px solid var(--border);
 }
 .comp-table {
   width: 100%; border-collapse: collapse;
-  background: var(--surface); min-width: 700px;
+  background: var(--surface);
 }
 .comp-table th {
   text-align: left; font-size: 17px; color: var(--silver); padding: 14px 14px;
@@ -226,7 +244,7 @@ a { color: inherit; text-decoration: none; }
 /* -- COMPETITOR TABLE -- */
 .comp2-table {
   width: 100%; border-collapse: collapse;
-  background: var(--surface); min-width: 600px;
+  background: var(--surface);
 }
 .comp2-table th {
   text-align: left; font-size: 17px; color: var(--silver); padding: 13px 14px;
@@ -565,6 +583,7 @@ a { color: inherit; text-decoration: none; }
 /* -- RESPONSIVE -- */
 @media (max-width: 768px) {
   .page { padding: 28px 16px 40px; }
+  .section::before { left: -16px; right: -16px; }
   .hero { padding: 36px 24px; }
   .hero h1 { font-size: 38px; }
   .hero::before { display: none; }
@@ -578,7 +597,10 @@ a { color: inherit; text-decoration: none; }
   .flow { flex-direction: column; gap: 0; }
   .flow-arrow { transform: rotate(90deg); padding: 8px 0; }
   .flow-step { min-width: unset; width: 100%; }
-  .table-wrap { -webkit-overflow-scrolling: touch; }
+  .table-wrap { /* no scroll */ }
+  .comp-table th, .comp-table td,
+  .comp2-table th, .comp2-table td { font-size: 13px; padding: 10px 8px; }
+  .comp-table td, .comp2-table td { white-space: normal; word-break: break-word; }
   /* Bar chart: horizontal on mobile */
   .bar-chart {
     flex-direction: column; height: auto; align-items: stretch; gap: 10px;
@@ -621,6 +643,7 @@ a { color: inherit; text-decoration: none; }
     <a href="goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
     <a href="marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Markets</a>
     <a href="ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">FTG</a>
+    <a href="marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Marketing</a>
     <a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Demo</a>
   </div>
 </nav>
@@ -643,7 +666,7 @@ a { color: inherit; text-decoration: none; }
 
     <div class="card">
       <h4>The Core Technology</h4>
-      <p>A patented real-time transaction engine <strong style="color:var(--gold)">(US Patent #12,303,793 B1)</strong> that sits between games and blockchain. FTG handles only the money &mdash; game studios handle the gameplay.</p>
+      <p>FTG is a <strong style="color:var(--gold)">separate company</strong> (Rapidfire Unicorn Ltd., London) with a patented real-time transaction engine that sits between games and blockchain. FTG handles only the money &mdash; game studios handle the gameplay. <strong style="color:var(--white)">GoLuna partners with FTG</strong> to integrate their infrastructure into our platform.</p>
     </div>
 
     <div class="card">
@@ -679,12 +702,12 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div class="key-diff">
-      <p><strong>Key differentiator:</strong> FTG is infrastructure, not a game. Any studio can build on it &mdash; game-agnostic financial transactions triggered by gameplay events.</p>
+      <p><strong>Key differentiator:</strong> FTG is infrastructure, not a game. Any studio can build on it &mdash; game-agnostic financial transactions triggered by gameplay events. GoLuna leverages this as a collaboration partner, not as the technology owner.</p>
     </div>
   </section>
 
   <!-- SECTION 2: How It Differs -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 02</div>
     <h2 class="section-title">How It Differs From Everything Else</h2>
 
@@ -720,7 +743,7 @@ a { color: inherit; text-decoration: none; }
           <tr>
             <td>Sustainability</td>
             <td>Proven</td>
-            <td>Failed (Axie &minus;99%)</td>
+            <td>Failed (Axie &minus;97%)</td>
             <td>Proven</td>
             <td>Emerging</td>
             <td class="col-ftg">Unproven at scale</td>
@@ -747,7 +770,7 @@ a { color: inherit; text-decoration: none; }
             <td>Crypto / gaming</td>
             <td>Gambling</td>
             <td>Mixed</td>
-            <td class="col-ftg">Skill-based (different framework)</td>
+            <td class="col-ftg">Skill-based (varies by jurisdiction)</td>
           </tr>
         </tbody>
       </table>
@@ -764,9 +787,9 @@ a { color: inherit; text-decoration: none; }
         <h4>P2E Death Spiral</h4>
         <ul>
           <li>Revenue depended on new player inflow (Ponzi dynamics)</li>
-          <li>Axie: ATH to &minus;99% in 18 months</li>
+          <li>Axie: ATH to &minus;97% in 18 months</li>
           <li>StepN, SAND, Decentraland &mdash; same model, same collapse</li>
-          <li>Cornell: "unsustainable economy tied to token supply expansion"</li>
+          <li>Academic consensus: unsustainable economies tied to token supply expansion</li>
         </ul>
       </div>
       <div class="col-card col-green">
@@ -782,7 +805,7 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 4: Market Data -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 04</div>
     <h2 class="section-title">Market Data</h2>
 
@@ -815,24 +838,24 @@ a { color: inherit; text-decoration: none; }
           <div class="bar-year">2030</div>
         </div>
       </div>
-      <div style="font-size: 17px; color:var(--silver); opacity:0.7; text-align:right;">69.4% CAGR &mdash; Grand View Research</div>
+      <div style="font-size: 17px; color:var(--silver); opacity:0.7; text-align:right;">~44% CAGR 2022&ndash;2030 &mdash; Grand View Research</div>
     </div>
 
     <div class="metrics-grid">
       <div class="metric-item">
-        <div class="metric-value">41%</div>
+        <div class="metric-value">~30&ndash;40%</div>
         <div class="metric-label">Skill Gaming Share</div>
-        <div class="metric-src">Of crypto gambling &mdash; Value The Markets</div>
+        <div class="metric-src">Est. share of crypto gambling (industry reports)</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">$26B</div>
-        <div class="metric-label">Q1 2025 Crypto Wagers</div>
-        <div class="metric-src">~2x YoY &mdash; CoinLaw</div>
+        <div class="metric-value">$81B+</div>
+        <div class="metric-label">2025 Crypto Gambling</div>
+        <div class="metric-src">Annual market &mdash; Grand View Research</div>
       </div>
       <div class="metric-item">
-        <div class="metric-value">70%</div>
+        <div class="metric-value">70%+</div>
         <div class="metric-label">Players Aged 18&ndash;44</div>
-        <div class="metric-src">Mobile-first demographics</div>
+        <div class="metric-src">Crypto gambling demographics (Statista)</div>
       </div>
     </div>
   </section>
@@ -850,25 +873,25 @@ a { color: inherit; text-decoration: none; }
       </div>
       <div class="funnel-step" style="max-width:82%;">
         <div class="funnel-label">SAM &mdash; Serviceable Addressable Market</div>
-        <div class="funnel-val">$5.3B</div>
-        <div class="funnel-desc">$13B current blockchain gaming &times; 41% skill-based share</div>
+        <div class="funnel-val">$15&ndash;20B</div>
+        <div class="funnel-desc">$50B 2024 blockchain gaming &times; 30&ndash;40% skill-based share (est.)</div>
       </div>
       <div class="funnel-step" style="max-width:60%;">
         <div class="funnel-label">SOM &mdash; Serviceable Obtainable Market</div>
-        <div class="funnel-val">$26.5M</div>
+        <div class="funnel-val">$75&ndash;100M</div>
         <div class="funnel-desc">0.5% capture of SAM = Year 1 revenue target</div>
       </div>
     </div>
 
     <div class="funnel-result">
       <div class="funnel-label">At 5% Rake on Transactions</div>
-      <div class="funnel-val">$530M player volume</div>
-      <div class="funnel-desc">~53,000 active players &times; $10K annual wagering volume</div>
+      <div class="funnel-val">$1.5&ndash;2.0B player volume needed</div>
+      <div class="funnel-desc">~15&ndash;20K active players &times; $100K est. annual wagering volume</div>
     </div>
   </section>
 
   <!-- SECTION 5: Competitive Landscape -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 05</div>
     <h2 class="section-title">Competitive Landscape (Honest Assessment)</h2>
 
@@ -904,7 +927,7 @@ a { color: inherit; text-decoration: none; }
       <!-- FTG/GoLuna: bottom-right HIGHLIGHTED -->
       <div class="pos-dot pos-ftg" style="left:78%; top:78%;">
         <div class="dot"></div>
-        <div class="dot-label">FTG / GoLuna</div>
+        <div class="dot-label">GoLuna (via FTG)</div>
       </div>
     </div>
 
@@ -944,7 +967,7 @@ a { color: inherit; text-decoration: none; }
           </tr>
           <tr>
             <td>CoinPoker</td>
-            <td>Crypto poker</td>
+            <td>Crypto poker, 5% rake</td>
             <td>Mature</td>
             <td>Established</td>
             <td>Hand-level, not per-action</td>
@@ -1064,7 +1087,7 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 7: Risks & Mitigation -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 07</div>
     <h2 class="section-title">Risks &amp; Mitigation (Honest)</h2>
 
@@ -1086,7 +1109,7 @@ a { color: inherit; text-decoration: none; }
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-med">MEDIUM</span></div>
         <p><strong style="color:var(--white)">Regulatory reclassification</strong> &mdash; skill games ruled as gambling in some jurisdictions.</p>
-        <div class="risk-reason">Active in US only, not our target GEOs</div>
+        <div class="risk-reason">Active in US primarily, not GoLuna's target GEOs</div>
       </div>
       <div class="risk-card risk-green">
         <div class="risk-label">Mitigation</div>
@@ -1125,17 +1148,17 @@ a { color: inherit; text-decoration: none; }
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-low">LOW</span></div>
         <p><strong style="color:var(--white)">No public traction data for Hotshot</strong> &mdash; no published user metrics.</p>
-        <div class="risk-reason">We control game quality, not dependent on Hotshot</div>
+        <div class="risk-reason">GoLuna's value isn't dependent on Hotshot's success</div>
       </div>
       <div class="risk-card risk-green">
         <div class="risk-label">Mitigation</div>
-        <p>FTG is infrastructure. GoLuna controls game quality, marketing, and player experience independently.</p>
+        <p>FTG provides infrastructure; GoLuna controls game selection, marketing, and player experience on its own platform.</p>
       </div>
     </div>
   </section>
 
   <!-- SECTION 8: GoLuna Strategic Position -->
-  <section class="section">
+  <section class="section section-accent">
     <div class="section-num">Section 08</div>
     <h2 class="section-title">GoLuna Strategic Position</h2>
 
@@ -1150,26 +1173,125 @@ a { color: inherit; text-decoration: none; }
       <div class="pillar-card">
         <div class="pillar-phase">Phase 2</div>
         <div class="pillar-title">Prediction Markets</div>
-        <div class="pillar-market">$40B+ market</div>
-        <div class="pillar-desc">White-label Polymarket integration for event-based trading.</div>
+        <div class="pillar-market">Emerging vertical</div>
+        <div class="pillar-desc">Polymarket-style event-based trading. Market sizing TBD.</div>
         <span class="pillar-status status-next">Next Up</span>
       </div>
       <div class="pillar-card">
         <div class="pillar-phase">Phase 3</div>
         <div class="pillar-title">PVP Skill Games</div>
-        <div class="pillar-market">$301B blockchain gaming</div>
-        <div class="pillar-desc">FTG-powered games as the asymmetric high-upside bet.</div>
+        <div class="pillar-market">Subset of $301B TAM</div>
+        <div class="pillar-desc">FTG-powered games via partnership, targeting skill-based share of blockchain gaming.</div>
         <span class="pillar-status status-exp">Experimental</span>
       </div>
     </div>
 
     <div class="quote-box">
-      <p>GoLuna doesn't bet the platform on FTG. Proven verticals are the revenue base; prediction markets the first differentiator; FTG games the high-upside play. If PVP retention proves out, we scale. If not, we still have a fully functioning crypto casino.</p>
+      <p>GoLuna doesn't bet the platform on FTG. Casino + sports are the proven revenue base; prediction markets the first differentiator; FTG-powered PVP games &mdash; offered through partnership &mdash; are the high-upside play. If PVP retention proves out, we scale the collaboration. If not, GoLuna still operates a fully functioning crypto casino.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 8A: Acquisition Funnel -->
+  <section class="section section-accent">
+    <div class="section-num">Section 08A</div>
+    <h2 class="section-title">FTG as a Player Acquisition Channel</h2>
+
+    <div class="card">
+      <h4>The Strategy</h4>
+      <p>FTG games aren't just a revenue vertical &mdash; they're an <strong style="color:var(--white)">acquisition funnel</strong> for GoLuna's entire platform. Skill-based PVP attracts a <strong style="color:var(--gold)">different demographic</strong> than traditional casino marketing (gamers, esports fans, competitive players). Once on-platform, they discover casino, sports, and prediction markets.</p>
+    </div>
+
+    <!-- Funnel Flow -->
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        </div>
+        <div class="flow-label">PVP Game Ad</div>
+        <div class="flow-sub">Gamer clicks &ldquo;Play for real $&rdquo;</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11h-6"/></svg>
+        </div>
+        <div class="flow-label">Sign Up</div>
+        <div class="flow-sub">Email + wallet captured</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="flow-label">Play PVP</div>
+        <div class="flow-sub">First deposit + match</div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step" style="border-color: var(--gold); background: var(--gold-dim);">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 9h18"/></svg>
+        </div>
+        <div class="flow-label" style="color:var(--gold);">Explore Platform</div>
+        <div class="flow-sub">Casino, sports, predictions</div>
+      </div>
+    </div>
+
+    <!-- Retargeting -->
+    <div class="card">
+      <h4>Retargeting &amp; Cross-Sell</h4>
+      <p>Every FTG sign-up gives GoLuna <strong style="color:var(--white)">three retargeting channels</strong> to drive engagement across the platform:</p>
+      <ul>
+        <li><strong style="color:var(--white)">Email</strong> &mdash; Welcome sequences, match results, deposit bonuses for casino/sports. Personalized based on game preferences.</li>
+        <li><strong style="color:var(--white)">Wallet / Push</strong> &mdash; On-chain activity triggers: &ldquo;Your balance is idle &mdash; try these slots&rdquo; or &ldquo;Live match odds on tonight's game.&rdquo;</li>
+        <li><strong style="color:var(--white)">SMS</strong> &mdash; High-value reactivation for churned players. Tournament invites, time-limited bonuses. Especially effective in Brazil, Nigeria, Kenya.</li>
+        <li><strong style="color:var(--white)">Telegram Bot</strong> &mdash; Near-100% deliverability (vs. email's 10&ndash;30% open rate). Balance alerts, tournament reminders, personalized promos. The most underutilized retention channel in crypto gaming.</li>
+      </ul>
+    </div>
+
+    <!-- Cross-sell mechanics -->
+    <div class="two-col">
+      <div class="col-card col-green">
+        <h4>Why It Works</h4>
+        <ul>
+          <li>PVP sidebar shows live casino &amp; sports odds &mdash; passive exposure every session</li>
+          <li>Shared wallet: PVP winnings are immediately playable on casino/sports, zero friction</li>
+          <li>Gamers who wager on skill games have already crossed the psychological barrier to real-money play</li>
+          <li>DraftKings proved this model: cross-sell cut their CAC by 40% YoY, now launching a &ldquo;Super App&rdquo; combining all verticals</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color: rgba(212,160,23,0.3); background: var(--gold-subtle);">
+        <h4 style="color:var(--gold);">Acquisition Edge</h4>
+        <ul>
+          <li>&ldquo;Play for real money&rdquo; PVP ads reach audiences that <strong style="color:var(--white)">ignore casino ads</strong></li>
+          <li>Gamers on Twitch, YouTube, Discord &mdash; untapped by traditional gambling marketing. Germany's GlüNeuRStV exempts skill games from casino regulation.</li>
+          <li>Lower CAC: PVP clips and tournaments are inherently shareable. Slots aren't. Brazil + Argentina = cheapest GEOs (0.4&ndash;0.7x baseline CAC).</li>
+          <li>Organic virality: &ldquo;I just won $50 in a real-money PVP match&rdquo; &mdash; posts itself</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Key metrics -->
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-value">40%</div>
+        <div class="metric-label">CAC Reduction</div>
+        <div class="metric-src">DraftKings YoY via cross-sell strategy (2024 earnings)</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">$6B</div>
+        <div class="metric-label">DraftKings 2025 Rev</div>
+        <div class="metric-src">Built on DFS &rarr; sports &rarr; casino cross-sell model</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">Shared Wallet</div>
+        <div class="metric-label">Zero Friction</div>
+        <div class="metric-src">PVP winnings &rarr; casino/sports in one click</div>
+      </div>
     </div>
   </section>
 
   <!-- SECTION 8B: Milestone Timeline -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 08B</div>
     <h2 class="section-title">Milestone Timeline</h2>
 
@@ -1178,8 +1300,8 @@ a { color: inherit; text-decoration: none; }
         <div class="tl-item tl-gold">
           <div class="tl-dot"></div>
           <div class="tl-month">M1</div>
-          <div class="tl-title">FTG Integration</div>
-          <div class="tl-desc">Technical integration with GoLuna platform</div>
+          <div class="tl-title">FTG Partnership Integration</div>
+          <div class="tl-desc">Integrate FTG's transaction engine into GoLuna platform</div>
         </div>
         <div class="tl-item tl-gold">
           <div class="tl-dot"></div>
@@ -1208,15 +1330,15 @@ a { color: inherit; text-decoration: none; }
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-month">M18</div>
-          <div class="tl-title">Open SDK</div>
-          <div class="tl-desc">Third-party studios build on GoLuna/FTG</div>
+          <div class="tl-title">GoLuna Exclusive Games</div>
+          <div class="tl-desc">Commission studios to build GoLuna-exclusive PVP titles on FTG &mdash; unique content no competitor has</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SECTION 9: Technical Infrastructure -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="section-num">Section 09</div>
     <h2 class="section-title">Technical Infrastructure Summary</h2>
 
@@ -1224,7 +1346,7 @@ a { color: inherit; text-decoration: none; }
       <div class="infra-list">
         <div class="infra-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          <span>35+ tokens, 5+ chains (ETH, Arbitrum, Base, Optimism, Polygon, Tron)</span>
+          <span>35+ tokens, 5+ chains (Solana, Polygon, Arbitrum, Base preferred for micro-tx; Tron USDT for deposits/withdrawals only)</span>
         </div>
         <div class="infra-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -1254,14 +1376,9 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- FOOTER CTA -->
-  <footer class="footer-cta">
-    <h3>Interested in GoLuna's gaming vision?</h3>
-    <div class="footer-btns">
-      <a href="#" class="btn-gold">Request Full Deck</a>
-      <a href="#" class="btn-ghost">Schedule Call</a>
-    </div>
-    <p class="footer-sub">GoLuna &mdash; FTG Research &mdash; March 2026 &mdash; Confidential</p>
+  <!-- FOOTER -->
+  <footer style="text-align:center; padding: 40px 0 20px; opacity: 0.4; font-size: 14px; color: var(--silver);">
+    GoLuna &mdash; FTG Partnership Research &mdash; March 2026 &mdash; Confidential
   </footer>
 
 </div>
