@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Marketing Strategy Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(11,13,20,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); padding: 0 32px;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; height: 56px;
+}
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--text-muted); font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link {
+  padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500;
+  color: var(--text-secondary); text-decoration: none; transition: all 0.15s;
+}
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+
+/* Layout */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Hero */
+.hero { padding: 56px 0 40px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 20px;
+  background: var(--accent-dim); border: 1px solid var(--accent-border);
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero-date { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 720px; }
+.hero-agency { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+.hero-agency strong { color: var(--text); }
+
+/* Sections */
+.section { margin-bottom: 56px; }
+.section-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+
+/* Three Streams */
+.streams { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.stream {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px; position: relative; overflow: hidden;
+}
+.stream::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.stream.s1::before { background: var(--accent); }
+.stream.s2::before { background: var(--green); }
+.stream.s3::before { background: var(--purple); }
+.stream-tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  display: inline-block; margin-bottom: 14px;
+}
+.stream.s1 .stream-tag { background: var(--accent-dim); color: var(--accent); }
+.stream.s2 .stream-tag { background: var(--green-dim); color: var(--green); }
+.stream.s3 .stream-tag { background: var(--purple-dim); color: var(--purple); }
+.stream h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+.stream p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+.stream-meta { display: flex; flex-direction: column; gap: 8px; }
+.stream-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.stream-row .label { color: var(--text-muted); }
+.stream-row .value { color: var(--text); font-weight: 600; font-family: var(--mono); }
+
+/* Positioning */
+.pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pos-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px;
+}
+.pos-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.pos-card.yes h3 { color: var(--green); }
+.pos-card.no h3 { color: var(--rose); }
+.pos-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pos-list li {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  padding-left: 20px; position: relative;
+}
+.pos-list li::before {
+  content: ''; position: absolute; left: 0; top: 6px;
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.pos-card.yes .pos-list li::before { background: var(--green-dim); border: 1.5px solid var(--green); }
+.pos-card.no .pos-list li::before { background: var(--rose-dim); border: 1.5px solid var(--rose); }
+
+/* Audience */
+.audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.audience-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px;
+}
+.audience-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.audience-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+.channel-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ch-tag {
+  font-size: 11px; font-weight: 600; padding: 3px 10px;
+  border-radius: 6px; background: var(--surface-2);
+  border: 1px solid var(--border); color: var(--text-secondary);
+}
+
+/* Channel Strategy */
+.channel-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.channel-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px; position: relative; overflow: hidden;
+}
+.channel-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.channel-card.gen::before { background: var(--cyan); }
+.channel-card.cap::before { background: var(--amber); }
+.channel-card.trust::before { background: var(--green); }
+.channel-card .ch-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 12px; display: inline-block; padding: 3px 8px; border-radius: 4px;
+}
+.channel-card.gen .ch-label { background: var(--cyan-dim); color: var(--cyan); }
+.channel-card.cap .ch-label { background: var(--amber-dim); color: var(--amber); }
+.channel-card.trust .ch-label { background: var(--green-dim); color: var(--green); }
+.channel-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.channel-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+.tactic-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.tactic-list li { font-size: 12px; color: var(--text-secondary); padding-left: 14px; position: relative; line-height: 1.5; }
+.tactic-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); }
+
+/* Regional Funnel */
+.region-funnel { display: flex; flex-direction: column; gap: 0; }
+.region-phase {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 24px 28px; display: flex; align-items: flex-start; gap: 20px;
+  position: relative;
+}
+.region-phase:first-child { border-radius: 14px 14px 0 0; }
+.region-phase:last-child { border-radius: 0 0 14px 14px; }
+.region-phase:not(:last-child) { border-bottom: none; }
+.region-phase::before {
+  content: ''; position: absolute; left: 44px; top: 52px; bottom: -1px;
+  width: 2px; background: var(--border);
+}
+.region-phase:last-child::before { display: none; }
+.phase-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  flex-shrink: 0; margin-top: 2px;
+}
+.region-phase.p1 .phase-dot { background: var(--green-dim); color: var(--green); border: 1.5px solid var(--green-border); }
+.region-phase.p2 .phase-dot { background: var(--amber-dim); color: var(--amber); border: 1.5px solid var(--amber-border); }
+.region-phase.p3 .phase-dot { background: var(--rose-dim); color: var(--rose); border: 1.5px solid var(--rose-border); }
+.phase-content { flex: 1; }
+.phase-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.phase-content .phase-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em; }
+.phase-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.region-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.r-tag { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+.region-phase.p1 .r-tag { background: var(--green-dim); color: var(--green); }
+.region-phase.p2 .r-tag { background: var(--amber-dim); color: var(--amber); }
+.region-phase.p3 .r-tag { background: var(--rose-dim); color: var(--rose); }
+
+/* GTM Timeline */
+.gtm-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+.gtm-track::before {
+  content: ''; position: absolute; top: 18px; left: 10%; right: 10%;
+  height: 2px; background: linear-gradient(90deg, var(--cyan), var(--amber), var(--green));
+  border-radius: 1px;
+}
+.gtm-step { text-align: center; padding: 0 16px; position: relative; }
+.gtm-dot {
+  width: 36px; height: 36px; border-radius: 50%;
+  margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  position: relative; z-index: 1;
+}
+.gtm-step:nth-child(1) .gtm-dot { background: var(--cyan-dim); color: var(--cyan); border: 2px solid var(--cyan-border); }
+.gtm-step:nth-child(2) .gtm-dot { background: var(--amber-dim); color: var(--amber); border: 2px solid var(--amber-border); }
+.gtm-step:nth-child(3) .gtm-dot { background: var(--green-dim); color: var(--green); border: 2px solid var(--green-border); }
+.gtm-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.gtm-step p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.gtm-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-top: 16px; text-align: left;
+}
+.gtm-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.gtm-card li { font-size: 12px; color: var(--text-secondary); padding-left: 14px; position: relative; line-height: 1.5; }
+.gtm-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); }
+
+/* Budget */
+.budget-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.budget-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px; text-align: center;
+}
+.budget-card .amount { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; font-family: var(--mono); }
+.budget-card .per { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+.budget-card .bname { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.budget-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.budget-card.b1 .amount { color: var(--accent); }
+.budget-card.b2 .amount { color: var(--green); }
+.budget-card.b3 .amount { color: var(--purple); }
+.budget-note {
+  margin-top: 16px; padding: 16px 20px; border-radius: 10px;
+  background: var(--amber-dim); border: 1px solid var(--amber-border);
+  font-size: 13px; color: var(--amber); line-height: 1.6;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.budget-note svg { flex-shrink: 0; margin-top: 1px; }
+
+/* KOL Strategy */
+.kol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.kol-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px;
+}
+.kol-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.kol-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.kol-list li { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-left: 18px; position: relative; }
+.kol-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 2px; }
+.kol-card:nth-child(1) .kol-list li::before { background: var(--cyan); }
+.kol-card:nth-child(2) .kol-list li::before { background: var(--amber); }
+.kol-card:nth-child(3) .kol-list li::before { background: var(--green); }
+.kol-card:nth-child(4) .kol-list li::before { background: var(--purple); }
+
+/* Action Items */
+.actions-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  background: var(--surface); border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+}
+.actions-table th {
+  text-align: left; padding: 14px 20px; font-size: 11px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.actions-table td {
+  padding: 14px 20px; font-size: 13px; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border); line-height: 1.5;
+}
+.actions-table tr:last-child td { border-bottom: none; }
+.actions-table .owner { font-weight: 600; color: var(--text); white-space: nowrap; }
+.actions-table .deadline {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  padding: 3px 8px; border-radius: 4px;
+  background: var(--accent-dim); color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Decisions */
+.decisions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.decision-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px;
+  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.decision-q {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  padding: 2px 6px; border-radius: 3px;
+  background: var(--rose-dim); color: var(--rose);
+  flex-shrink: 0; margin-top: 2px;
+}
+
+/* Footer */
+.footer {
+  text-align: center; padding: 40px 0 24px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--text-muted);
+}
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .streams, .channel-cols, .audience-grid, .budget-grid { grid-template-columns: 1fr; }
+  .pos-grid, .kol-grid, .decisions-grid { grid-template-columns: 1fr; }
+  .gtm-track { grid-template-columns: 1fr; gap: 24px; }
+  .gtm-track::before { display: none; }
+  .actions-table { font-size: 12px; }
+  .actions-table th, .actions-table td { padding: 10px 12px; }
+}
+@media (max-width: 640px) {
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 28px; }
+  .hero h1 { font-size: 28px; }
+  .hamburger { display: block; }
+  .header-right {
+    display: none; flex-direction: column;
+    position: absolute; top: 56px; left: 0; right: 0;
+    background: rgba(11,13,20,0.98); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border); padding: 12px 16px;
+  }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Key Metrics Strip */
+.metrics-strip {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  margin-bottom: 48px;
+}
+.metric-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 16px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.metric-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+}
+.metric-card .metric-val {
+  font-family: var(--mono); font-size: 26px; font-weight: 800;
+  letter-spacing: -0.02em; margin-bottom: 4px; line-height: 1.2;
+}
+.metric-card .metric-label {
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* Flow Connector */
+.flow-connector {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 24px 0 48px; position: relative;
+}
+.flow-node {
+  padding: 10px 20px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  text-align: center; white-space: nowrap; position: relative; z-index: 1;
+}
+.flow-arrow {
+  width: 48px; height: 2px; position: relative; flex-shrink: 0;
+}
+.flow-arrow::after {
+  content: ''; position: absolute; right: -1px; top: -4px;
+  width: 0; height: 0;
+  border-left: 6px solid var(--text-muted);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.flow-arrow-split { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; position: relative; }
+.flow-arrow-split::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--text-muted);
+}
+
+/* Callout stat */
+.callout-stat {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  margin-left: auto;
+}
+
+/* Verdict banner */
+.verdict-banner {
+  display: flex; gap: 16px; margin-top: 20px;
+}
+.verdict-item {
+  flex: 1; padding: 16px 20px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+.verdict-item h4 {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 10px;
+}
+.verdict-item.go h4 { color: var(--green); }
+.verdict-item.caution h4 { color: var(--amber); }
+.verdict-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px; }
+.verdict-item strong { color: var(--text); }
+
+/* Section insight box */
+.section-insight {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 18px; border-radius: 10px; margin-bottom: 20px;
+  font-size: 13px; line-height: 1.5;
+}
+.section-insight.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.section-insight.tip { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.section-insight.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.section-insight svg { flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .metrics-strip { grid-template-columns: repeat(3, 1fr); }
+  .flow-connector { flex-wrap: wrap; gap: 8px; }
+  .verdict-banner { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna <span>Strategy</span></a>
+    <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')">&#9776;</button>
+    <div class="header-right">
+      <a href="#streams" class="header-link">Streams</a>
+      <a href="#channels" class="header-link">Channels</a>
+      <a href="#regions" class="header-link">Regions</a>
+      <a href="#budget" class="header-link">Budget</a>
+      <a href="#adnet" class="header-link">Ad Networks</a>
+      <a href="#actions" class="header-link">Actions</a>
+      <a href="index.html" class="header-link" style="color:var(--accent);font-weight:600;">Hub</a>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge"><span class="dot"></span> Marketing Plan</div>
+      <span class="hero-date">AADS Agency Meeting &mdash; April 4, 2026</span>
+    </div>
+    <h1>Marketing Strategy Overview</h1>
+    <p>Consolidated marketing plan across three business streams &mdash; iGaming, Hotshot D2C, and BetArena B2B. Budget structure, channel strategy, regional rollout, KOL approach, and action items for team and investors.</p>
+    <div class="hero-agency">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Agency: <strong>AADS</strong> &mdash; Nur Demir, Eva Nevraj, Sarah Asfandiiar, Rodion Patlis
+    </div>
+  </section>
+
+  <!-- Key Metrics Strip -->
+  <div class="metrics-strip">
+    <div class="metric-card" style="--c:var(--accent);">
+      <div class="metric-val" style="color:var(--accent);">3</div>
+      <div class="metric-label">Revenue Streams</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);"></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" style="color:var(--green);">$90K</div>
+      <div class="metric-label">Monthly Budget (Total)</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--green);"></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" style="color:var(--cyan);">5</div>
+      <div class="metric-label">Ad Networks Evaluated</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cyan);"></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" style="color:var(--amber);">7+</div>
+      <div class="metric-label">Launch Markets</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--amber);"></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-val" style="color:var(--rose);">9</div>
+      <div class="metric-label">Action Items</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--rose);"></div>
+    </div>
+  </div>
+
+  <!-- Business Model Flow -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;margin-bottom:48px;">
+    <div style="font-size:13px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:20px;">How the three streams connect</div>
+    <div class="flow-connector">
+      <div class="flow-node" style="background:var(--green-dim);border:1.5px solid var(--green-border);color:var(--green);">
+        <div style="font-size:10px;opacity:0.7;margin-bottom:2px;">STREAM B</div>
+        Hotshot PvP
+      </div>
+      <div class="flow-arrow" style="background:var(--text-muted);"></div>
+      <div class="flow-node" style="background:var(--surface-2);border:1.5px solid var(--border-hover);color:var(--text);">
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px;">LEAD MAGNET</div>
+        Players Funneled
+      </div>
+      <div class="flow-arrow" style="background:var(--text-muted);"></div>
+      <div class="flow-node" style="background:var(--accent-dim);border:1.5px solid var(--accent-border);color:var(--accent);">
+        <div style="font-size:10px;opacity:0.7;margin-bottom:2px;">STREAM A</div>
+        GoLuna iGaming
+      </div>
+      <div class="flow-arrow" style="background:var(--text-muted);"></div>
+      <div class="flow-node" style="background:var(--surface-2);border:1.5px solid var(--border-hover);color:var(--text);">
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:2px;">PROVEN DATA</div>
+        Traction + Metrics
+      </div>
+      <div class="flow-arrow" style="background:var(--text-muted);"></div>
+      <div class="flow-node" style="background:var(--purple-dim);border:1.5px solid var(--purple-border);color:var(--purple);">
+        <div style="font-size:10px;opacity:0.7;margin-bottom:2px;">STREAM C</div>
+        BetArena B2B
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:8px;">Hotshot acquires players &rarr; funnels into GoLuna casino &rarr; traction data unlocks B2B distribution to other platforms</div>
+  </div>
+
+  <!-- 01: Three Business Streams -->
+  <section class="section" id="streams">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--accent-dim);color:var(--accent);">01</span>
+      <span class="section-title">Three Business Streams</span>
+    </div>
+    <div class="streams">
+      <div class="stream s1">
+        <span class="stream-tag">Stream A</span>
+        <h3>GoLuna iGaming</h3>
+        <p>Full casino, sportsbook, poker, and Polymarket white-label platform. Primary revenue driver. Onboarding starts next week.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--green);">Active</span></div>
+          <div class="stream-row"><span class="label">Onboarding</span><span class="value">4-5 weeks</span></div>
+          <div class="stream-row"><span class="label">Budget</span><span class="value">~$30K/mo</span></div>
+          <div class="stream-row"><span class="label">Priority</span><span class="value">1st</span></div>
+        </div>
+      </div>
+      <div class="stream s2">
+        <span class="stream-tag">Stream B</span>
+        <h3>Hotshot D2C</h3>
+        <p>Skill-based PVP gaming platform. Lead magnet for iGaming. Players compete against each other, not the system. Separate investor funding.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--amber);">Pending</span></div>
+          <div class="stream-row"><span class="label">Integration</span><span class="value">TBD</span></div>
+          <div class="stream-row"><span class="label">Budget</span><span class="value">~$30K/mo</span></div>
+          <div class="stream-row"><span class="label">Priority</span><span class="value">2nd</span></div>
+        </div>
+      </div>
+      <div class="stream s3">
+        <span class="stream-tag">Stream C</span>
+        <h3>BetArena (B2B)</h3>
+        <p>Distribute Hotshot to other casinos and platforms. B2B play. Requires proven D2C traction data first. Longer timeline.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--text-muted);">Future</span></div>
+          <div class="stream-row"><span class="label">Timeline</span><span class="value">3-4 months</span></div>
+          <div class="stream-row"><span class="label">Budget</span><span class="value">~$30K/mo</span></div>
+          <div class="stream-row"><span class="label">Priority</span><span class="value">3rd</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: Product Positioning -->
+  <section class="section" id="positioning">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--green-dim);color:var(--green);">02</span>
+      <span class="section-title">Hotshot &mdash; Product Positioning</span>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-card yes">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          What Hotshot IS
+        </h3>
+        <ul class="pos-list">
+          <li>Skill-based PVP gaming platform</li>
+          <li>Players compete against real users, not the system</li>
+          <li>Outcomes determined by player performance, not chance</li>
+          <li>Built for fair competition and player progression</li>
+          <li>Lead magnet funnel into iGaming ecosystem</li>
+        </ul>
+      </div>
+      <div class="pos-card no">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          What Hotshot is NOT
+        </h3>
+        <ul class="pos-list">
+          <li>Not an iGaming or gambling product</li>
+          <li>No luck-based mechanics</li>
+          <li>Not a system where users compete against the platform</li>
+          <li>Not regulated under gambling laws in most jurisdictions</li>
+          <li>Not to be marketed with gambling messaging</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03: Target Audiences -->
+  <section class="section" id="audience">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--cyan-dim);color:var(--cyan);">03</span>
+      <span class="section-title">Target Audiences</span>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h4>Crypto &amp; Web3 Gamers</h4>
+        <p>Active in DeFi and NFT spaces. Follow token launches. High risk appetite. Early adopters.</p>
+        <div class="channel-tags">
+          <span class="ch-tag">X / Twitter</span>
+          <span class="ch-tag">Discord</span>
+          <span class="ch-tag">Telegram</span>
+          <span class="ch-tag">Reddit</span>
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Competitive &amp; Mobile Gamers</h4>
+        <p>Daily PVP players. Mobile-first. Driven by leaderboards and skill progression.</p>
+        <div class="channel-tags">
+          <span class="ch-tag">TikTok</span>
+          <span class="ch-tag">YouTube</span>
+          <span class="ch-tag">Meta</span>
+          <span class="ch-tag">Twitch</span>
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Play-to-Earn Veterans</h4>
+        <p>Already playing Axie Infinity or similar. Seeking next opportunity. Community-driven.</p>
+        <div class="channel-tags">
+          <span class="ch-tag">Telegram</span>
+          <span class="ch-tag">Reddit</span>
+          <span class="ch-tag">YouTube</span>
+          <span class="ch-tag">Play2Earn</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04: Channel Strategy -->
+  <section class="section" id="channels">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--amber-dim);color:var(--amber);">04</span>
+      <span class="section-title">Channel Strategy</span>
+    </div>
+    <div class="section-insight info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      Three-phase approach: first create awareness (paid), then convert traffic (content + tournaments), then build long-term trust (PR + community).
+    </div>
+    <div class="channel-cols">
+      <div class="channel-card gen">
+        <span class="ch-label">Phase 1</span>
+        <h4>Demand Generation</h4>
+        <p>Create awareness and attract new users to the platform.</p>
+        <ul class="tactic-list">
+          <li>Paid ads on X, Meta, TikTok, Telegram</li>
+          <li>Google and Reddit banner placements</li>
+          <li>Crypto-focused ad networks (AADS + Slise)</li>
+          <li>On-chain targeting via Slise wallet inventory</li>
+          <li>KOL and influencer partnerships</li>
+          <li>Launch tournament for initial activation</li>
+        </ul>
+      </div>
+      <div class="channel-card cap">
+        <span class="ch-label">Phase 2</span>
+        <h4>Demand Capture</h4>
+        <p>Convert traffic into active, retained users.</p>
+        <ul class="tactic-list">
+          <li>Short-form clips on TikTok (clipping campaign)</li>
+          <li>Gameplay highlights on YouTube</li>
+          <li>Streamer content for UGC pipeline</li>
+          <li>Launch tournament for initial engagement</li>
+          <li>Retargeting campaigns for non-converters</li>
+          <li>Email / wallet capture for remarketing</li>
+        </ul>
+      </div>
+      <div class="channel-card trust">
+        <span class="ch-label">Phase 3</span>
+        <h4>Trust &amp; Authority</h4>
+        <p>Build credibility and long-term brand equity.</p>
+        <ul class="tactic-list">
+          <li>PR articles on industry-relevant sites</li>
+          <li>Product reviews on Trustpilot, Google, Reddit</li>
+          <li>Organic Reddit community management</li>
+          <li>Partnership announcements</li>
+          <li>Investor / founder public backing</li>
+          <li>Ongoing social proof and testimonials</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05: Regional Rollout -->
+  <section class="section" id="regions">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--green-dim);color:var(--green);">05</span>
+      <span class="section-title">Regional Growth Strategy</span>
+    </div>
+    <div class="section-insight tip">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Start where CPA is lowest and play-to-earn culture exists. Validate unit economics before entering expensive Western markets.
+    </div>
+    <div class="region-funnel">
+      <div class="region-phase p1">
+        <div class="phase-dot">1</div>
+        <div class="phase-content">
+          <div class="phase-sub">Launch Markets</div>
+          <h4>Southeast Asia, Turkey, MENA &amp; LATAM</h4>
+          <p>Play-to-earn culture is deeply rooted in SEA. High engagement and low CPA across all launch regions. LATAM added per Eva's recommendation &mdash; strong micro-KOL ecosystem and growing crypto gaming adoption. Ideal for model validation.</p>
+          <div class="region-tags">
+            <span class="r-tag">Philippines</span>
+            <span class="r-tag">Vietnam</span>
+            <span class="r-tag">Indonesia</span>
+            <span class="r-tag">Turkey</span>
+            <span class="r-tag">Brazil</span>
+            <span class="r-tag">Mexico</span>
+            <span class="r-tag">UAE</span>
+          </div>
+        </div>
+      </div>
+      <div class="region-phase p2">
+        <div class="phase-dot">2</div>
+        <div class="phase-content">
+          <div class="phase-sub">Scale Markets</div>
+          <h4>India &amp; Eastern Europe</h4>
+          <p>Optimize for player quality over volume. Use validated data from Phase 1 to refine targeting. Higher mobile penetration. Moderate CPA.</p>
+          <div class="region-tags">
+            <span class="r-tag">India</span>
+            <span class="r-tag">Poland</span>
+            <span class="r-tag">Romania</span>
+            <span class="r-tag">Ukraine</span>
+          </div>
+        </div>
+      </div>
+      <div class="region-phase p3">
+        <div class="phase-dot">3</div>
+        <div class="phase-content">
+          <div class="phase-sub">Premium Markets</div>
+          <h4>US &amp; Western Europe</h4>
+          <p>Highest LTV but significantly higher acquisition costs. Approach once unit economics are proven. Requires larger budget allocation and regulatory consideration.</p>
+          <div class="region-tags">
+            <span class="r-tag">United States</span>
+            <span class="r-tag">United Kingdom</span>
+            <span class="r-tag">Germany</span>
+            <span class="r-tag">Sweden</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06: GTM Phases -->
+  <section class="section" id="gtm">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--cyan-dim);color:var(--cyan);">06</span>
+      <span class="section-title">Go-to-Market Phases</span>
+    </div>
+    <div class="gtm-track">
+      <div class="gtm-step">
+        <div class="gtm-dot">1</div>
+        <h4>Pre-Launch</h4>
+        <p>Foundation and preparation</p>
+        <div class="gtm-card">
+          <ul>
+            <li>Set up all social media accounts</li>
+            <li>Integrate analytics and tracking tools</li>
+            <li>Finalize influencer and KOL deals</li>
+            <li>Run waitlist campaign</li>
+            <li>Share gameplay previews to build anticipation</li>
+            <li>Prepare two landing pages (iGaming + standalone)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-dot">2</div>
+        <h4>Launch</h4>
+        <p>Go live and capture initial traction</p>
+        <div class="gtm-card">
+          <ul>
+            <li>Activate all paid channels simultaneously</li>
+            <li>Run PR for credibility and awareness</li>
+            <li>Launch tournament in first market (SEA)</li>
+            <li>Active social media posting cadence</li>
+            <li>Collect first user feedback (product + marketing)</li>
+            <li>Begin clipping campaign from streamer content</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gtm-step">
+        <div class="gtm-dot">3</div>
+        <h4>Scale</h4>
+        <p>Optimize, expand, and compound</p>
+        <div class="gtm-card">
+          <ul>
+            <li>Optimize paid spend based on conversion data</li>
+            <li>Retarget non-converting users</li>
+            <li>Announce partnerships to build trust</li>
+            <li>Expand to Phase 2 regions (India, E. Europe)</li>
+            <li>Scale clipping to 50-100M impressions</li>
+            <li>Convert KOLs to long-term ambassadors</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07: Budget Structure -->
+  <section class="section" id="budget">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--amber-dim);color:var(--amber);">07</span>
+      <span class="section-title">Budget Structure</span>
+    </div>
+    <div class="budget-grid">
+      <div class="budget-card b1">
+        <div class="amount">$30K</div>
+        <div class="per">per month</div>
+        <div class="bname">GoLuna iGaming</div>
+        <p>Programmatic ads, AdSlice, KOLs, and social media management across SEA and LATAM. Agency fee separate from ad spend.</p>
+      </div>
+      <div class="budget-card b2">
+        <div class="amount">$30K</div>
+        <div class="per">per month</div>
+        <div class="bname">Hotshot D2C</div>
+        <p>Streamers, clipping campaigns, launch tournament, and content creation. Funded by Hotshot game investors separately.</p>
+      </div>
+      <div class="budget-card b3">
+        <div class="amount">$30K</div>
+        <div class="per">per month</div>
+        <div class="bname">BetArena B2B</div>
+        <p>B2B outreach, partnership campaigns, and case study content. Deferred 3-4 months until D2C traction is proven.</p>
+      </div>
+    </div>
+    <div class="budget-note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Baseline is ~$30K/month per stream. Total investment range under discussion: $300K &ndash; $3M depending on investor commitment. Eva recommends concentrating initial spend on iGaming rather than splitting across products. Three-tier proposals (small / medium / high) being prepared for investor presentation.</span>
+    </div>
+  </section>
+
+  <!-- 08: Ad Network Evaluation -->
+  <section class="section" id="adnet">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--cyan-dim);color:var(--cyan);">08</span>
+      <span class="section-title">Ad Network Evaluation</span>
+    </div>
+
+    <!-- Network Overview -->
+    <div class="streams" style="margin-bottom:20px;">
+      <div class="stream" style="border-top:3px solid var(--green);">
+        <span class="stream-tag" style="background:var(--green-dim);color:var(--green);">Proceed</span>
+        <h3>HypeLab</h3>
+        <p>60% crypto traffic. CPM $2, no minimum spend. Casino clients: BC Game, Rain, MetaWin. Registered on hypelab.com. Ranked #1 pick for GoLuna.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--green);">Answered</span></div>
+          <div class="stream-row"><span class="label">Formats</span><span class="value">Display, Native</span></div>
+          <div class="stream-row"><span class="label">Min Budget</span><span class="value">No minimum</span></div>
+          <div class="stream-row"><span class="label">Allocation</span><span class="value">TBD</span></div>
+        </div>
+      </div>
+      <div class="stream" style="border-top:3px solid var(--green);">
+        <span class="stream-tag" style="background:var(--green-dim);color:var(--green);">Proceed</span>
+        <h3>ROIAds</h3>
+        <p>iGaming-specialized managed network. Push + pop formats. Full managed campaigns with S2S deposit tracking. Explicit crypto casino support.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--green);">Fully Answered</span></div>
+          <div class="stream-row"><span class="label">Formats</span><span class="value">Push, Pop</span></div>
+          <div class="stream-row"><span class="label">Min Budget</span><span class="value">$1.5-2K</span></div>
+          <div class="stream-row"><span class="label">Allocation</span><span class="value">10% ($3K)</span></div>
+        </div>
+      </div>
+      <div class="stream" style="border-top:3px solid var(--green);">
+        <span class="stream-tag" style="background:var(--green-dim);color:var(--green);">Proceed</span>
+        <h3>AADS</h3>
+        <p>Web3-native full-funnel. Two platforms: AADS (600+ crypto publishers) and Slise (100+ wallet-connected inventory). Only network with KOL, editorial, and streamer channels.</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--green);">Fully Answered</span></div>
+          <div class="stream-row"><span class="label">Formats</span><span class="value">Banner, KOL, Editorial</span></div>
+          <div class="stream-row"><span class="label">Min Budget</span><span class="value">~$20K+</span></div>
+          <div class="stream-row"><span class="label">Allocation</span><span class="value">30% ($9K)</span></div>
+        </div>
+      </div>
+      <div class="stream" style="border-top:3px solid var(--green);">
+        <span class="stream-tag" style="background:var(--green-dim);color:var(--green);">Proceed</span>
+        <h3>RichAds</h3>
+        <p>190+ GEOs. Unique Telegram mini-app inventory. 12 anonymised case studies received. Best eCPAs: NLD Telegram $1.50, ARE Telegram $2.99, FRA Push $3.18. Start self-serve ($150 min) before VIP ($10K).</p>
+        <div class="stream-meta">
+          <div class="stream-row"><span class="label">Status</span><span class="value" style="color:var(--green);">Case Study Received</span></div>
+          <div class="stream-row"><span class="label">Formats</span><span class="value">Push, Pop, Telegram, Native</span></div>
+          <div class="stream-row"><span class="label">Min Budget</span><span class="value">$150 (self-serve)</span></div>
+          <div class="stream-row"><span class="label">Allocation</span><span class="value">25% ($7.5K)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="streams" style="grid-template-columns:1fr;margin-bottom:20px;">
+      <div class="stream" style="border-top:3px solid var(--green);">
+        <span class="stream-tag" style="background:var(--green-dim);color:var(--green);">Proceed</span>
+        <h3>Blockchain-Ads</h3>
+        <p>Strongest iGaming case studies (Stake, Roobet, DafaBet, BetPanda). Web3 programmatic DSP. Now fully answered &mdash; formats, GEOs, exclusivity, and pixel onboarding confirmed. Reintegrated into budget. Display, Native, Push/Under, Video, In-App, CCTV.</p>
+        <div class="stream-meta" style="flex-direction:row;flex-wrap:wrap;gap:16px;">
+          <div class="stream-row" style="flex:1;min-width:120px;"><span class="label">Status</span><span class="value" style="color:var(--green);">Answered</span></div>
+          <div class="stream-row" style="flex:1;min-width:120px;"><span class="label">Formats</span><span class="value">Display, Native, Video, In-App</span></div>
+          <div class="stream-row" style="flex:1;min-width:120px;"><span class="label">Allocation</span><span class="value">35% ($10.5K)</span></div>
+          <div class="stream-row" style="flex:1;min-width:120px;"><span class="label">GEOs</span><span class="value">Global (DE 1.7M+, CA 813K+)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product-Channel Fit -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;padding-top:8px;">Product-Channel Fit Rankings</div>
+    <div class="section-insight tip" style="margin-bottom:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      NEW: HypeLab added as #1 pick for GoLuna &mdash; 60% crypto traffic, CPM $2, casino clients BC Game, Rain, MetaWin.
+    </div>
+    <div class="pos-grid" style="margin-bottom:20px;">
+      <div class="pos-card">
+        <h3 style="color:var(--accent);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          GoLuna (Crypto Casino)
+        </h3>
+        <ul class="pos-list">
+          <li><strong style="color:var(--text);">#1 HypeLab</strong> &mdash; 60% crypto traffic, CPM $2, no minimum. Casino clients: BC Game, Rain, MetaWin</li>
+          <li><strong style="color:var(--text);">#2 Blockchain-Ads</strong> &mdash; Directly comparable crypto casino case studies (Stake, Roobet)</li>
+          <li><strong style="color:var(--text);">#3 AADS</strong> &mdash; Crypto-native audience: wallet holders, DeFi users, NFT buyers</li>
+          <li><strong style="color:var(--text);">#4 RichAds</strong> &mdash; GEO-level CPA data + unique Telegram mini-app channel</li>
+          <li><strong style="color:var(--text);">#5 ROIAds</strong> &mdash; Overlaps with RichAds; use for adult-placement GEOs only</li>
+        </ul>
+      </div>
+      <div class="pos-card">
+        <h3 style="color:var(--green);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Hotshot (PvP Game)
+        </h3>
+        <ul class="pos-list">
+          <li><strong style="color:var(--text);">#1 AADS</strong> &mdash; KOL/streamer channel is highest-value for competitive PvP. Gaming wiki inventory.</li>
+          <li><strong style="color:var(--text);">#2 RichAds</strong> &mdash; Telegram gaming communities are a natural fit for playable demos</li>
+          <li><strong style="color:var(--text);">#3 HypeLab</strong> &mdash; 60% crypto traffic, casino-adjacent audience. Good for awareness.</li>
+          <li><strong style="color:var(--text);">#4 ROIAds</strong> &mdash; Skin-buying site placements overlap with competitive shooter audience</li>
+          <li><strong style="color:var(--text);">#5 Blockchain-Ads</strong> &mdash; No gaming/esports evidence. Casino-only portfolio.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Overlap Risk -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">Overlap &amp; Deduplication Risk</div>
+    <div class="audience-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+      <div class="audience-card" style="border-top:3px solid var(--rose);">
+        <h4 style="font-size:13px;">RichAds + ROIAds</h4>
+        <p style="font-size:12px;color:var(--rose);">HIGH &mdash; Same formats, overlapping push databases. Do not run on same GEOs without S2S deduplication.</p>
+      </div>
+      <div class="audience-card" style="border-top:3px solid var(--amber);">
+        <h4 style="font-size:13px;">AADS + Blockchain-Ads</h4>
+        <p style="font-size:12px;color:var(--amber);">MEDIUM &mdash; Both target Web3/crypto publishers. Confirm inventory overlap before running concurrently.</p>
+      </div>
+      <div class="audience-card" style="border-top:3px solid var(--cyan);">
+        <h4 style="font-size:13px;">RichAds + AADS</h4>
+        <p style="font-size:12px;color:var(--text-secondary);">LOW-MED &mdash; Different inventory pools (mainstream vs crypto-native). Frequency capping sufficient.</p>
+      </div>
+      <div class="audience-card" style="border-top:3px solid var(--green);">
+        <h4 style="font-size:13px;">ROIAds + AADS</h4>
+        <p style="font-size:12px;color:var(--green);">LOW &mdash; Safest pair. Different formats and sources. No deduplication needed.</p>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:-12px;margin-bottom:20px;">HypeLab overlap: MEDIUM with AADS/Blockchain-Ads (shared crypto publisher audience). LOW with RichAds/ROIAds (different inventory types).</div>
+
+    <!-- SEA & LATAM Performance Data -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">SEA &amp; LATAM Performance Data (RichAds)</div>
+    <div class="pos-grid" style="margin-bottom:16px;">
+      <div class="pos-card" style="padding:24px;">
+        <h3 style="color:var(--amber);font-size:15px;margin-bottom:14px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          LATAM &mdash; 7 GEOs
+        </h3>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">COL Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--green);font-family:var(--mono);text-align:right;">$0.81 eCPA</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--green);text-align:right;">Best in dataset</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">BRA Direct Click</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$2.62</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--amber);text-align:right;">Low approval (12%)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">BRA Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$3.86</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--amber);text-align:right;">Low approval</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">PER Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$8.63</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">CHL Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$9.15</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">MEX Pops</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$19.84</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">ARG Pops</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$24.34</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="pos-card" style="padding:24px;">
+        <h3 style="color:var(--cyan);font-size:15px;margin-bottom:14px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          SEA &mdash; 6 GEOs (8 campaigns)
+        </h3>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">VNM Push #2</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--green);font-family:var(--mono);text-align:right;">$2.95</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--green);text-align:right;">Best SEA</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">MMR Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$6.95</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--amber);text-align:right;">19% approval only</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">PHL Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$7.98</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--green);text-align:right;">Active</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">VNM Push #1</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$8.02</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">THA Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$10.77</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">MYS Pops</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$12.38</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">IDN Pops</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$13.85</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0;font-size:12px;color:var(--text-secondary);">IDN Push</td>
+            <td style="padding:6px 0;font-size:12px;font-weight:700;color:var(--text);font-family:var(--mono);text-align:right;">$22.07</td>
+            <td style="padding:6px 0 6px 10px;font-size:11px;color:var(--text-muted);text-align:right;"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="section-insight tip" style="margin-bottom:20px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Start with COL Push ($0.81) or VNM Push ($2.95) &mdash; both at CPC $0.03 or less. Very low spend to validate before scaling.
+    </div>
+
+    <!-- Budget Allocation -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">$30K Test Budget Allocation (4 original networks + HypeLab TBD)</div>
+    <div style="display:flex;gap:2px;height:40px;border-radius:8px;overflow:hidden;margin-bottom:8px;">
+      <div style="flex:35;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);">Blockchain-Ads 35%</div>
+      <div style="flex:30;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);">AADS 30%</div>
+      <div style="flex:25;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);">RichAds 25%</div>
+      <div style="flex:10;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--bg);">ROI 10%</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);font-family:var(--mono);margin-bottom:6px;">
+      <span>$10,500</span><span>$9,000</span><span>$7,500</span><span>$3,000</span>
+    </div>
+    <div style="font-size:11px;color:var(--cyan);margin-bottom:16px;">+ HypeLab: No minimum spend, CPM $2. Allocation to be determined after initial test. Register at hypelab.com.</div>
+    <div class="budget-note" style="margin-top:0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Stagger Blockchain-Ads + RichAds push by 1 week on overlapping GEOs. Establish clean baseline before overlap activates. Launch ROIAds + AADS together (safest pair). Full interactive allocator: <a href="https://adnet-analysis.vercel.app/" style="color:var(--accent);text-decoration:underline;">adnet-analysis.vercel.app</a></span>
+    </div>
+
+    <!-- Verdict -->
+    <div style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 14px;">Verdict &mdash; All 5 Networks Proceed</div>
+    <div class="verdict-banner">
+      <div class="verdict-item go">
+        <h4>Proceed Now &mdash; All 5</h4>
+        <p><strong>HypeLab</strong> &mdash; 60% crypto traffic, CPM $2, no minimum. Casino clients BC Game, Rain, MetaWin. Send GEO targets + creatives + attribution link. #1 GoLuna pick.</p>
+        <p><strong>Blockchain-Ads</strong> &mdash; Managed service + creatives confirmed. CPA $6.40&ndash;$11.40. Casino must be live first. $10K activation. FTD cost data pending &mdash; do not activate until received.</p>
+        <p><strong>AADS</strong> &mdash; Solid answers. Book call to lock in budget split and confirm Slise S2S setup.</p>
+        <p><strong>RichAds</strong> &mdash; Case study received. Best eCPAs: Telegram NLD $1.50, ARE $2.99. Start self-serve ($150) before committing to $10K VIP.</p>
+        <p><strong>ROIAds</strong> &mdash; $1,500 LATAM FTD test. Casino clients: BC Game, 1xPartners, Melbet, Betpawa. Still need FTD cost figures before scaling.</p>
+      </div>
+      <div class="verdict-item caution">
+        <h4>Watch Closely</h4>
+        <p><strong>RichAds VIP</strong> &mdash; $10K managed is NOT a qualification tier &mdash; unlocks automatically at that deposit level. Test with $150 self-serve first. Non-refundable.</p>
+        <p><strong>Deduplication</strong> &mdash; Never run RichAds + ROIAds concurrently on same GEOs without S2S deduplication in place.</p>
+        <p><strong>ROIAds LATAM insight</strong> &mdash; MX/BRA FTD cost is 3x cheaper than Tier 1. 60% repeat deposit rate vs 70% in Europe. Volume potential much higher. Strong case for LATAM-first approach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09: KOL & Influencer Strategy -->
+  <section class="section" id="kol">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--rose-dim);color:var(--rose);">09</span>
+      <span class="section-title">KOL &amp; Influencer Strategy</span>
+    </div>
+    <div class="section-insight warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Quality over quantity. One streamer with 200 viewers who brings 50 real players is worth more than a mega-influencer pushing empty impressions.
+    </div>
+    <div class="kol-grid">
+      <div class="kol-card">
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Micro-KOL Focus
+        </h4>
+        <ul class="kol-list">
+          <li>Prioritize smaller streamers with authentic engagement</li>
+          <li>200-300 viewers is enough if content quality is high</li>
+          <li>50-100 strong players from a good streamer beats mass impressions</li>
+          <li>Quality of traffic is everything &mdash; not volume</li>
+        </ul>
+      </div>
+      <div class="kol-card">
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Payment Model
+        </h4>
+        <ul class="kol-list">
+          <li>Push for ambassador / rev-share deals first</li>
+          <li>Flat fee fallback if rev-share rejected</li>
+          <li>Hybrid: lower flat fee + higher percentage</li>
+          <li>Trial period: flat fee month 1, transition to rev-share</li>
+        </ul>
+      </div>
+      <div class="kol-card">
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Content &amp; Clipping
+        </h4>
+        <ul class="kol-list">
+          <li>Streamers play Hotshot, creating raw gameplay content</li>
+          <li>Clips distributed across 50+ TikTok accounts</li>
+          <li>Target: 50-100 million impressions from clips</li>
+          <li>AADS handles clipping in-house (confirmed by Eva)</li>
+        </ul>
+      </div>
+      <div class="kol-card">
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Regional Approach
+        </h4>
+        <ul class="kol-list">
+          <li>Two landing pages per region (iGaming cross-sell vs pure Hotshot)</li>
+          <li>Strict regions: Hotshot-only branding (no iGaming references)</li>
+          <li>Relaxed regions: iGaming platform with Hotshot as entry point</li>
+          <li>Vietnam-specific: find local streamer with good persona</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10: Action Items -->
+  <section class="section" id="actions">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--accent-dim);color:var(--accent);">10</span>
+      <span class="section-title">Action Items</span>
+    </div>
+    <table class="actions-table">
+      <thead>
+        <tr><th>Owner</th><th>Action</th><th>Deadline</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="owner">Nur (AADS)</td>
+          <td>Send detailed iGaming budget breakdown and pricing slides</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Eva &amp; Nur</td>
+          <td>Prepare two proposals: GoLuna/iGaming and Hotshot (small/medium/high tiers)</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Eva (AADS)</td>
+          <td>Provide average CPM and impression benchmarks for SEA and LATAM</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Eva (AADS)</td>
+          <td>Confirm clipping capacity and pricing for 50-100M impression target</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Sarah (AADS)</td>
+          <td>Compile influencer/KOL list with reach estimates and formats</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Christian</td>
+          <td>Confirm Hotshot integration timeline with white-label provider</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Christian</td>
+          <td>Ask Hotshot founders if they want to be publicly associated with product</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+        <tr>
+          <td class="owner">Christian</td>
+          <td>Summarize this call and share materials with investors and other teams</td>
+          <td><span class="deadline">Done</span></td>
+        </tr>
+        <tr>
+          <td class="owner">All</td>
+          <td>Regroup to review both iGaming and Hotshot proposals</td>
+          <td><span class="deadline">W/C Apr 7</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11: Key Decisions -->
+  <section class="section" id="decisions">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--rose-dim);color:var(--rose);">11</span>
+      <span class="section-title">Open Decisions Needed</span>
+    </div>
+    <div class="decisions-grid">
+      <div class="decision-item">
+        <span class="decision-q">Q1</span>
+        Will Hotshot founders go public to strengthen KOL outreach and brand trust?
+      </div>
+      <div class="decision-item">
+        <span class="decision-q">Q2</span>
+        What is the final Hotshot white-label integration timeline &mdash; 1 week, 2 weeks, or longer?
+      </div>
+      <div class="decision-item">
+        <span class="decision-q">Q3</span>
+        Which tracking platform for iGaming conversions &mdash; in-house or third-party (Volume, TrafficManager)?
+      </div>
+      <div class="decision-item">
+        <span class="decision-q">Q4</span>
+        Final investor commitment level &mdash; does budget stay at $30K/stream or scale to $60-90K?
+      </div>
+      <div class="decision-item">
+        <span class="decision-q">Q5</span>
+        KOL payment model per region &mdash; flat fee, rev-share, or hybrid? Need region-by-region plan.
+      </div>
+      <div class="decision-item">
+        <span class="decision-q">Q6</span>
+        Which markets are "strict" (Hotshot-only branding) vs "relaxed" (iGaming cross-sell allowed)?
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitors Reference -->
+  <section class="section" id="competitors">
+    <div class="section-label">
+      <span class="section-num" style="background:var(--purple-dim);color:var(--purple);">REF</span>
+      <span class="section-title">Competitor Landscape</span>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h4>Axie Infinity</h4>
+        <p>Blockchain PVP pioneer. NFT-based characters. Massively popular in Philippines and Southeast Asia. Launched during COVID &mdash; perfect timing. Vietnam-based developer.</p>
+        <div class="channel-tags">
+          <span class="ch-tag" style="background:var(--green-dim);color:var(--green);border-color:var(--green-border);">Market Leader</span>
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Gods Unchained</h4>
+        <p>Blockchain PVP card game. Free-to-play model makes it accessible. NFT card trading. Very niche audience limits growth potential.</p>
+        <div class="channel-tags">
+          <span class="ch-tag">NFT Cards</span>
+          <span class="ch-tag">Free-to-Play</span>
+        </div>
+      </div>
+      <div class="audience-card">
+        <h4>Splinterlands</h4>
+        <p>PVP card game with NFT cards and token economy. Mobile-friendly. Low social media presence and limited marketing visibility.</p>
+        <div class="channel-tags">
+          <span class="ch-tag">Token Economy</span>
+          <span class="ch-tag">Mobile</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Marketing Strategy &mdash; AADS Agency Recap &mdash; April 2026 &mdash; Confidential &mdash; <a href="index.html">Back to Hub &rarr;</a>
+  </footer>
+</div>
+
+</body>
+</html>
