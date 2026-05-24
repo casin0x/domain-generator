@@ -43,3 +43,11 @@ New domain names are generated in batch runs (see batch files in ~/tmp/) using c
 - **casin0x account only.** Never push to or reference Astos-ai.
 - **All data is inline.** No external API calls or database. Domain data lives in the HTML file itself.
 - **Dark theme only.** Background #0a0a0f, accent #6c5ce7.
+
+---
+
+## Obsidian Vault
+
+**Vault path:** `~/Documents/Developments/Obsidian-Vaults/GoLuna-Vault/`
+
+When notable work happens (features shipped, decisions made), update the relevant file in the vault. Use `[[wikilinks]]` for cross-references.

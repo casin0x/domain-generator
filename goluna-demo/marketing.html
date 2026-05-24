@@ -3,89 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoLuna -- Marketing Strategies</title>
+<title>GoLuna — Marketing Strategies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #0a0f2e; --surface: #141a3a; --border: rgba(255,255,255,0.06);
-  --gold: #d4a017; --gold-hover: #e8b52a; --gold-dim: rgba(212,160,23,0.12);
-  --gold-subtle: rgba(212,160,23,0.04);
-  --silver: #c0c7d6; --white: #f0eff4;
-  --green: #22c55e; --red: #ef4444;
-  --heading: 'Inter', sans-serif; --body: 'Jost', sans-serif; --mono: 'JetBrains Mono', monospace;
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--body); background: var(--bg); color: var(--white); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-.page { max-width: 1200px; margin: 0 auto; padding: 60px 48px 80px; }
-.hero { width: 100%; border-radius: 14px; background: linear-gradient(135deg, #0e1238 0%, var(--surface) 40%, var(--bg) 100%); position: relative; overflow: hidden; padding: 56px; margin-bottom: 40px; }
-.hero h1 { font-family: var(--heading); font-size: 48px; font-weight: 800; color: var(--gold); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em; }
-.hero .subtitle { font-size: 19px; color: var(--silver); line-height: 1.65; max-width: 700px; margin-bottom: 20px; }
-.hero .badge-conf { display: inline-block; padding: 6px 16px; border-radius: 8px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); font-size: 15px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; }
-.strat-card { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin-bottom: 16px; transition: border-color 0.2s, transform 0.15s; cursor: pointer; }
-.strat-card:hover { border-color: rgba(212,160,23,0.4); transform: translateY(-2px); }
-.strat-card.red:hover { border-color: rgba(239,68,68,0.4); }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--text-muted); font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--accent); font-weight: 600; }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+
+/* Layout */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Hero */
+.hero { padding: 56px 0 40px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--rose-dim); border: 1px solid rgba(251,113,133,0.20); font-size: 11px; font-weight: 600; color: var(--rose); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 20px; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; color: var(--text); }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 700px; }
+
+/* Strategy Cards */
+.strat-card { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-bottom: 16px; transition: border-color 0.2s, transform 0.15s; cursor: pointer; position: relative; overflow: hidden; }
+.strat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.2s; }
+.strat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.strat-card:hover::before { opacity: 1; }
+.strat-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.strat-card.green::before { background: var(--green); }
+.strat-card.red::before { background: var(--rose); }
 .strat-card .strat-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.strat-card .strat-num { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; background: var(--gold); color: var(--bg); margin-bottom: 8px; display: inline-block; }
-.strat-card .strat-num.red { background: var(--red); }
-.strat-card h3 { font-family: var(--heading); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
-.strat-card p { font-size: 16px; color: var(--silver); line-height: 1.6; }
-.strat-card .arrow { font-size: 28px; color: var(--silver); opacity: 0.3; flex-shrink: 0; }
-.strat-card .verdict { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px; display: inline-block; padding: 3px 10px; border-radius: 4px; }
-.verdict-red { background: rgba(239,68,68,0.12); color: var(--red); }
-.strat-placeholder { background: var(--surface); border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; padding: 28px 32px; margin-bottom: 16px; opacity: 0.5; }
-.strat-placeholder h3 { font-family: var(--heading); font-size: 22px; font-weight: 700; color: var(--silver); margin-bottom: 6px; }
-.strat-placeholder p { font-size: 16px; color: var(--silver); opacity: 0.6; }
+.strat-card .strat-num { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; display: inline-block; }
+.strat-card .strat-num.green { background: var(--green-dim); color: var(--green); }
+.strat-card .strat-num.red { background: var(--rose-dim); color: var(--rose); }
+.strat-card .strat-num.amber { background: var(--amber-dim); color: var(--amber); }
+.strat-card h3 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+.strat-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.strat-card .arrow { font-size: 20px; color: var(--text-muted); opacity: 0; transition: all 0.2s; }
+.strat-card:hover .arrow { opacity: 1; transform: translateX(2px); }
+.verdict-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 10px; display: inline-block; padding: 3px 10px; border-radius: 4px; }
+.verdict-badge.red { background: var(--rose-dim); color: var(--rose); }
+.verdict-badge.green { background: var(--green-dim); color: var(--green); }
+
+/* Placeholder */
+.strat-placeholder { background: var(--surface); border: 1px dashed rgba(255,255,255,0.08); border-radius: 14px; padding: 28px 32px; margin-bottom: 16px; opacity: 0.4; }
+.strat-placeholder h3 { font-size: 20px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.strat-placeholder p { font-size: 14px; color: var(--text-muted); }
+
+/* Footer */
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
 @media (max-width: 768px) {
-  .page { padding: 28px 16px 40px; }
-  .hero { padding: 36px 24px; }
-  .hero h1 { font-size: 34px; }
-  .card p, .card li { font-size: 15px; }
-  .verdict-box p, .alt-box p { font-size: 15px; }
+  .page { padding: 0 16px 60px; }
+  .hero { padding: 36px 0 28px; }
+  .hero h1 { font-size: 28px; }
+  .strat-card { padding: 20px 24px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
 }
-@media (max-width: 420px) {
-  .hero h1 { font-size: 26px; }
-  .hero .subtitle { font-size: 15px; }
-  .section-title { font-size: 22px; }
-}
-.nav-hamburger { display: none; background: none; border: none; color: var(--silver); cursor: pointer; padding: 4px; font-size: 24px; }
-@media (max-width: 768px) {
-  .nav-hamburger { display: block; }
-  .nav-links { display: none !important; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: rgba(10,10,10,0.98); backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; gap: 4px !important; }
-  .nav-links.open { display: flex !important; }
-  .nav-links a, .nav-links > div { width: 100%; }
-  .nav-links .nav-dd { position: static !important; margin-top: 4px; background: rgba(255,255,255,0.03) !important; border: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
 <body>
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
-  <a href="index.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
-  <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')">&#9776;</button>
-  <div class="nav-links" style="display:flex;gap:8px;align-items:center;">
-    <a href="goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
-    <a href="marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Markets</a>
-    <a href="ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">FTG</a>
-    <div style="position:relative;" onmouseenter="this.querySelector('.nav-dd').style.display='block'" onmouseleave="this.querySelector('.nav-dd').style.display='none'" onclick="var d=this.querySelector('.nav-dd');d.style.display=d.style.display==='block'?'none':'block'">
-      <a href="marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">Marketing &#9662;</a>
-      <div class="nav-dd" style="display:none;position:absolute;top:100%;right:0;margin-top:4px;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:200px;z-index:200;">
-        <a href="marketing.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;background:rgba(212,160,23,0.08);">Overview</a>
-        <a href="marketing/ai-caller.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">AI Cold Calling Scan</a>
-        <a href="marketing/country-scan.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">50-Country Scan</a>
-      </div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna <span>Strategies</span></a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <div class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="ftg-research.html" class="header-link">FTG</a>
+      <a href="strategy.html" class="header-link">Marketing Plan</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="competitors.html" class="header-link">Competitors</a>
+      <a href="index.html" class="header-link" style="color:var(--accent);font-weight:600;">Hub</a>
     </div>
-    <a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Demo</a>
   </div>
-</nav>
-<div style="height:52px;"></div>
+</header>
 
 <div class="page">
 
   <section class="hero">
+    <div class="hero-badge">Confidential &mdash; Team &amp; Investors</div>
     <h1>Marketing Strategies</h1>
-    <p class="subtitle">Acquisition channel research, compliance analysis, and CAC projections for GoLuna platform growth.</p>
-    <span class="badge-conf">Confidential &mdash; Team &amp; Investors Only</span>
+    <p>Acquisition channel research, compliance analysis, and CAC projections for GoLuna platform growth.</p>
   </section>
 
   <a href="marketing/ai-caller.html" class="strat-card red">
@@ -94,34 +129,35 @@ body { font-family: var(--body); background: var(--bg); color: var(--white); min
         <span class="strat-num red">Strategy 01</span>
         <h3>AI Cold Calling for iGaming</h3>
         <p>Compliance scan across 20 countries. Ethiopia &amp; Hong Kong operations assessment. CAC projections vs digital channels. Lead sourcing legality analysis.</p>
-        <span class="verdict verdict-red">Verdict: Not Viable</span>
+        <span class="verdict-badge red">Verdict: Not Viable</span>
       </div>
       <div class="arrow">&rarr;</div>
     </div>
   </a>
 
-  <a href="marketing/country-scan.html" class="strat-card">
+  <a href="marketing/country-scan.html" class="strat-card green">
     <div class="strat-row">
       <div>
-        <span class="strat-num">Strategy 02</span>
+        <span class="strat-num green">Strategy 02</span>
         <h3>50-Country Market Scan</h3>
         <p>Every country scored across 10 dimensions. Full comparison table ranked best-to-worst. 4-phase launch sequence. Markets to avoid.</p>
-        <span class="verdict" style="background:rgba(34,197,94,0.12);color:#22c55e;">2 Tier 1 &bull; 29 Tier 2 &bull; 18 Tier 3 &bull; 1 Avoid</span>
+        <span class="verdict-badge green">2 Tier 1 &bull; 29 Tier 2 &bull; 18 Tier 3 &bull; 1 Avoid</span>
       </div>
       <div class="arrow">&rarr;</div>
     </div>
   </a>
 
   <div class="strat-placeholder">
-    <span class="strat-num" style="opacity:0.5;">Strategy 03</span>
+    <span class="strat-num amber" style="opacity:0.5;">Strategy 03</span>
     <h3>Coming Soon</h3>
     <p>Additional strategies in development.</p>
   </div>
 
-  <footer style="text-align:center; padding: 60px 0 20px; opacity: 0.4; font-size: 14px; color: var(--silver);">
-    GoLuna &mdash; Marketing Strategies &mdash; March 2026 &mdash; Confidential
+  <footer class="footer">
+    GoLuna &mdash; Marketing Strategies &mdash; Confidential &mdash; <a href="index.html">Back to Hub &rarr;</a>
   </footer>
 
 </div>
+
 </body>
 </html>

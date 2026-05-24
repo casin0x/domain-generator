@@ -3,680 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoLuna -- FTG Research</title>
+<title>GoLuna — FTG Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --bg: #0a0f2e;
-  --surface: #141a3a;
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
   --border: rgba(255,255,255,0.06);
-  --gold: #d4a017;
-  --gold-hover: #e8b52a;
-  --gold-dim: rgba(212,160,23,0.12);
-  --gold-glow: rgba(212,160,23,0.08);
-  --gold-subtle: rgba(212,160,23,0.04);
-  --gold-text-glow: rgba(212,160,23,0.12);
-  --silver: #c0c7d6;
-  --white: #f0eff4;
-  --green: #22c55e;
-  --red: #ef4444;
-  --heading: 'Inter', sans-serif;
-  --body: 'Jost', sans-serif;
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
-
 html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--body);
-  background: var(--bg);
-  color: var(--white);
-  min-height: 100vh;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  pointer-events: none; z-index: 9999;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
-
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 
-/* -- LAYOUT -- */
-.page { max-width: 1200px; margin: 0 auto; padding: 60px 48px 80px; }
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--text-muted); font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.header-link.active { color: var(--accent); font-weight: 600; }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
 
-/* -- HERO -- */
-.hero {
-  width: 100%; border-radius: 14px;
-  background:
-    radial-gradient(ellipse 40% 60% at 75% 50%, var(--gold-dim) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 80% at 50% 120%, #0e1238 0%, transparent 70%),
-    linear-gradient(135deg, #0e1238 0%, var(--surface) 40%, var(--bg) 100%);
-  position: relative; overflow: hidden;
-  padding: 56px; margin-bottom: 56px;
-}
-.hero::before {
-  content: ''; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
-  width: 260px; height: 260px;
-  background: radial-gradient(circle, var(--gold-dim) 0%, var(--gold-subtle) 35%, transparent 65%);
-  border-radius: 50%; filter: blur(2px);
-}
-.hero h1 {
-  font-family: var(--heading); font-size: 48px; font-weight: 800;
-  color: var(--gold); line-height: 1.1; margin-bottom: 12px; letter-spacing: -0.02em;
-  text-shadow: 0 0 60px var(--gold-text-glow);
-  position: relative; z-index: 2;
-}
-.hero .subtitle {
-  font-size: 19px; color: var(--silver); line-height: 1.65;
-  margin-bottom: 20px; max-width: 700px;
-  position: relative; z-index: 2;
-}
-.hero .badge-conf {
-  display: inline-block; padding: 6px 16px; border-radius: 8px;
-  background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25);
-  font-size: 17px; font-weight: 700; color: var(--red);
-  text-transform: uppercase; letter-spacing: 0.08em;
-  position: relative; z-index: 2;
-}
+/* Layout */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 32px 80px; }
 
-/* -- SECTION HEADERS -- */
-.section {
-  margin-bottom: 0;
-  padding: 48px 0;
-  border-top: 1px solid var(--border);
-  position: relative;
-}
-.section::before {
-  content: ''; position: absolute; top: 0; left: -48px; right: -48px; bottom: 0;
-  pointer-events: none; z-index: -1;
-}
-.section-alt::before {
-  background: rgba(255,255,255,0.015);
-}
-.section-accent::before {
-  background: linear-gradient(180deg, var(--gold-subtle) 0%, transparent 100%);
-}
-.section-num {
-  font-family: var(--mono); font-size: 12px; color: var(--bg); letter-spacing: 0.1em;
-  font-weight: 700; text-transform: uppercase;
-  margin-bottom: 10px;
-  display: inline-block; padding: 4px 12px; border-radius: 4px;
-  background: var(--gold);
-}
-.section-title {
-  font-family: var(--heading); font-size: 30px; font-weight: 700;
-  color: var(--white); margin-bottom: 20px; line-height: 1.25; letter-spacing: -0.02em;
-}
+/* Hero */
+.hero { padding: 56px 0 40px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--rose-dim); border: 1px solid rgba(251,113,133,0.20); font-size: 11px; font-weight: 600; color: var(--rose); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 20px; }
+.hero h1 { font-size: 42px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; color: var(--text); }
+.hero .subtitle { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 700px; }
 
-/* -- SURFACE CARD -- */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px; padding: 28px;
-  margin-bottom: 20px;
-}
-.card h4 {
-  font-family: var(--body); font-size: 19px; font-weight: 700;
-  color: var(--gold); margin-bottom: 12px;
-}
-.card p, .card li {
-  font-size: 17px; color: var(--silver); line-height: 1.7;
-}
+/* Section */
+.section { padding: 48px 0 8px; border-top: 1px solid var(--border); margin-top: 8px; }
+.section:first-of-type { border-top: none; padding-top: 32px; }
+.section-num { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; display: inline-block; padding: 4px 12px; border-radius: 6px; background: var(--accent-dim); border: 1px solid var(--accent-border); }
+.section-title { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 24px; line-height: 1.2; letter-spacing: -0.02em; }
+
+/* Surface card */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; margin-bottom: 16px; }
+.card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -0.005em; }
+.card p, .card li { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
 .card ul { list-style: none; padding: 0; }
-.card ul li { padding: 5px 0; padding-left: 20px; position: relative; }
-.card ul li::before {
-  content: ''; position: absolute; left: 0; top: 13px;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--gold); opacity: 0.7;
-}
+.card ul li { padding: 5px 0; padding-left: 18px; position: relative; }
+.card ul li::before { content: ''; position: absolute; left: 0; top: 14px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.8; }
 
-/* -- FLOW STEPS -- */
-.flow {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0; margin: 28px 0;
-}
-.flow-step {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 20px 24px; text-align: center;
-  min-width: 180px;
-}
-.flow-step .flow-icon { margin-bottom: 8px; }
-.flow-step .flow-icon svg { width: 32px; height: 32px; color: var(--gold); }
-.flow-step .flow-label {
-  font-size: 19px; font-weight: 600; color: var(--white);
-}
-.flow-step .flow-sub {
-  font-size: 17px; color: var(--silver); margin-top: 3px;
-}
-.flow-arrow {
-  font-size: 28px; color: var(--gold); padding: 0 12px;
-  display: flex; align-items: center;
-}
+/* Flow */
+.flow { display: flex; align-items: center; justify-content: center; gap: 0; margin: 24px 0 8px; flex-wrap: wrap; }
+.flow-step { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; text-align: center; min-width: 180px; }
+.flow-step.flow-highlight { background: var(--accent-dim); border-color: var(--accent-border); }
+.flow-step.flow-highlight .flow-label { color: var(--accent); }
+.flow-icon { margin-bottom: 10px; }
+.flow-icon svg { width: 28px; height: 28px; color: var(--accent); }
+.flow-label { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.flow-sub { font-size: 12px; color: var(--text-muted); }
+.flow-arrow { font-size: 20px; color: var(--text-muted); padding: 0 12px; display: flex; align-items: center; }
 
-/* -- COMPARISON TABLE -- */
-.table-wrap {
-  margin-bottom: 20px;
-  border-radius: 12px; border: 1px solid var(--border);
-}
-.comp-table {
-  width: 100%; border-collapse: collapse;
-  background: var(--surface);
-}
-.comp-table th {
-  text-align: left; font-size: 17px; color: var(--silver); padding: 14px 14px;
-  border-bottom: 1px solid var(--border); font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.04em;
-  background: rgba(255,255,255,0.02); white-space: nowrap;
-}
-.comp-table th:first-child { color: var(--gold); }
-.comp-table td {
-  padding: 11px 14px; font-size: 18px; color: var(--silver);
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  vertical-align: top; line-height: 1.65;
-}
-.comp-table td:first-child {
-  font-weight: 600; color: var(--white); font-size: 18px;
-  white-space: nowrap;
-}
-.comp-table tr:last-child td { border-bottom: none; }
-.comp-table .col-ftg {
-  background: rgba(212,160,23,0.04);
-  border-left: 2px solid rgba(212,160,23,0.2);
-}
-.comp-table th.col-ftg {
-  color: var(--gold); background: rgba(212,160,23,0.06);
-  border-left: 2px solid rgba(212,160,23,0.2);
-}
+/* Comparison table */
+.table-wrap { overflow-x: auto; margin-bottom: 16px; border-radius: 12px; border: 1px solid var(--border); }
+.comp-table, .comp2-table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13px; }
+.comp-table th, .comp2-table th { text-align: left; font-family: var(--mono); font-size: 11px; color: var(--text-secondary); padding: 14px 14px; border-bottom: 1px solid var(--border); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; background: var(--surface-2); white-space: nowrap; }
+.comp-table td, .comp2-table td { padding: 13px 14px; font-size: 13px; color: var(--text-secondary); border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+.comp-table td:first-child, .comp2-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+.comp-table tr:last-child td, .comp2-table tr:last-child td { border-bottom: none; }
+.comp-table .col-ftg { background: var(--accent-dim); border-left: 2px solid var(--accent-border); color: var(--text); }
+.comp-table th.col-ftg { color: var(--accent); background: rgba(129,140,248,0.14); border-left: 2px solid var(--accent-border); }
+.table-note { font-size: 12px; color: var(--text-muted); padding: 12px 16px; background: var(--surface-2); border-top: 1px solid var(--border); font-style: italic; }
 
-/* -- TWO COLUMN COMPARE -- */
-.two-col {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-}
-.col-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 32px; position: relative;
-}
-.col-card.col-red { border-top: 3px solid var(--red); }
-.col-card.col-green { border-top: 3px solid var(--green); }
-.col-card h4 {
-  font-family: var(--body); font-size: 18px; font-weight: 700;
-  margin-bottom: 14px;
-}
-.col-card.col-red h4 { color: var(--red); }
+/* Two column */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.col-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.col-card.col-red { border-top: 2px solid var(--rose); }
+.col-card.col-green { border-top: 2px solid var(--green); }
+.col-card.col-accent { border-top: 2px solid var(--accent); }
+.col-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.005em; }
+.col-card.col-red h4 { color: var(--rose); }
 .col-card.col-green h4 { color: var(--green); }
-.col-card ul li::before {
-  background: inherit;
-}
-.col-card.col-red ul li::before { background: var(--red); opacity: 0.6; }
-.col-card.col-green ul li::before { background: var(--green); opacity: 0.6; }
+.col-card.col-accent h4 { color: var(--accent); }
+.col-card ul li::before { opacity: 0.7; }
+.col-card.col-red ul li::before { background: var(--rose); }
+.col-card.col-green ul li::before { background: var(--green); }
+.col-card.col-accent ul li::before { background: var(--accent); }
 
-/* -- METRICS GRID -- */
-.metrics-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-bottom: 20px;
-}
-.metric-item {
-  padding: 18px; border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-}
-.metric-item .metric-value {
-  font-family: var(--heading); font-size: 36px; font-weight: 700;
-  color: var(--gold); margin-bottom: 4px;
-}
-.metric-item .metric-label {
-  font-size: 19px; color: var(--white); font-weight: 500; margin-bottom: 4px;
-}
-.metric-item .metric-src {
-  font-size: 19px; color: var(--silver); opacity: 0.7;
-}
+/* Metrics grid */
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px; }
+.metric-item { padding: 20px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); }
+.metric-item .metric-value { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 6px; letter-spacing: -0.01em; }
+.metric-item .metric-label { font-size: 13px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+.metric-item .metric-src { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
 
-/* -- COMPETITOR TABLE -- */
-.comp2-table {
-  width: 100%; border-collapse: collapse;
-  background: var(--surface);
-}
-.comp2-table th {
-  text-align: left; font-size: 17px; color: var(--silver); padding: 13px 14px;
-  border-bottom: 1px solid var(--border); font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.04em;
-  background: rgba(255,255,255,0.02);
-}
-.comp2-table td {
-  padding: 11px 14px; font-size: 19px; color: var(--silver);
-  border-bottom: 1px solid rgba(255,255,255,0.03);
-  vertical-align: top; line-height: 1.65;
-}
-.comp2-table td:first-child { font-weight: 600; color: var(--white); white-space: nowrap; }
-.comp2-table tr:last-child td { border-bottom: none; }
-.table-note {
-  font-size: 18px; color: var(--silver); padding: 14px;
-  background: rgba(212,160,23,0.04); border-top: 1px solid var(--border);
-  border-radius: 0 0 12px 12px; font-style: italic;
-}
+/* Game grid */
+.game-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.game-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-align: center; transition: border-color 0.2s, transform 0.15s; }
+.game-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.game-icon { margin-bottom: 10px; }
+.game-icon svg { width: 26px; height: 26px; color: var(--accent); }
+.game-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; letter-spacing: -0.005em; }
+.game-trigger { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 6px; font-weight: 500; }
+.game-example { font-size: 11px; color: var(--text-muted); }
 
-/* -- GAME GRID -- */
-.game-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
-}
-.game-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 20px 16px; text-align: center;
-  transition: border-color .2s;
-}
-.game-card:hover { border-color: rgba(212,160,23,0.3); }
-.game-card .game-icon { margin-bottom: 10px; }
-.game-card .game-icon svg { width: 28px; height: 28px; color: var(--gold); }
-.game-card .game-name {
-  font-size: 19px; font-weight: 600; color: var(--white); margin-bottom: 5px;
-}
-.game-card .game-trigger {
-  font-size: 17px; color: var(--gold); margin-bottom: 4px; font-weight: 500;
-}
-.game-card .game-example {
-  font-size: 19px; color: var(--silver); opacity: 0.8;
-}
-
-/* -- RISK CARDS -- */
-.risk-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  margin-bottom: 16px;
-}
-.risk-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 22px; position: relative;
-}
-.risk-card.risk-red { border-left: 3px solid var(--red); }
+/* Risk cards */
+.risk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+.risk-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.risk-card.risk-red { border-left: 3px solid var(--rose); }
 .risk-card.risk-green { border-left: 3px solid var(--green); }
-.risk-card .risk-label {
-  font-size: 19px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; margin-bottom: 8px;
-}
-.risk-card.risk-red .risk-label { color: var(--red); }
+.risk-label { font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.risk-card.risk-red .risk-label { color: var(--rose); }
 .risk-card.risk-green .risk-label { color: var(--green); }
-.risk-card p {
-  font-size: 19px; color: var(--silver); line-height: 1.7;
-}
+.risk-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+.risk-reason { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 8px; }
 
-/* -- PILLAR GRID -- */
-.pillar-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-bottom: 24px;
-}
-.pillar-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 32px; text-align: center;
-  position: relative;
-}
-.pillar-card .pillar-phase {
-  font-size: 19px; font-weight: 700; color: var(--gold);
-  text-transform: uppercase; letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-.pillar-card .pillar-title {
-  font-family: var(--heading); font-size: 28px; font-weight: 600;
-  color: var(--white); margin-bottom: 6px;
-}
-.pillar-card .pillar-market {
-  font-size: 18px; color: var(--gold); font-weight: 600; margin-bottom: 10px;
-}
-.pillar-card .pillar-desc {
-  font-size: 18px; color: var(--silver); line-height: 1.7;
-}
-.pillar-card .pillar-status {
-  display: inline-block; margin-top: 12px; padding: 4px 12px;
-  border-radius: 6px; font-size: 17px; font-weight: 600;
-}
-.status-live { background: rgba(34,197,94,0.15); color: var(--green); }
-.status-next { background: rgba(212,160,23,0.12); color: var(--gold); }
-.status-exp { background: rgba(99,102,241,0.15); color: #818cf8; }
+/* Severity badges */
+.sev-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.sev-high { background: var(--rose-dim); color: var(--rose); }
+.sev-med { background: var(--amber-dim); color: var(--amber); }
+.sev-low { background: var(--green-dim); color: var(--green); }
 
-/* -- QUOTE BOX -- */
-.quote-box {
-  background: linear-gradient(135deg, rgba(212,160,23,0.06) 0%, rgba(212,160,23,0.02) 100%);
-  border: 1px solid rgba(212,160,23,0.15);
-  border-left: 3px solid var(--gold);
-  border-radius: 12px; padding: 24px 28px;
-  margin-bottom: 20px;
-}
-.quote-box p {
-  font-size: 17px; color: var(--silver); line-height: 1.7;
-  font-style: italic;
-}
+/* Pillars */
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+.pillar-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 26px; text-align: center; }
+.pillar-phase { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.pillar-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.02em; }
+.pillar-market { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.pillar-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; }
+.pillar-status { display: inline-block; padding: 4px 12px; border-radius: 6px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+.status-live { background: var(--green-dim); color: var(--green); }
+.status-next { background: var(--amber-dim); color: var(--amber); }
+.status-exp { background: var(--purple-dim); color: var(--purple); }
 
-/* -- INFRA LIST -- */
-.infra-list {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
-}
-.infra-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 0; font-size: 19px; color: var(--silver);
-}
-.infra-item svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+/* Quote box */
+.quote-box { background: linear-gradient(135deg, var(--accent-dim), var(--purple-dim)); border: 1px solid var(--accent-border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 22px 26px; margin-bottom: 8px; }
+.quote-box p { font-size: 14px; color: var(--text); line-height: 1.7; }
 
-/* -- FOOTER -- */
-.page-footer {
-  text-align: center; padding: 32px 28px;
-  border-top: 1px solid var(--border);
-  margin-top: 20px;
-}
-.page-footer p {
-  font-size: 18px; color: var(--silver); opacity: 0.6;
-}
+/* Key diff */
+.key-diff { background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 10px; padding: 16px 20px; margin-top: 8px; }
+.key-diff p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+.key-diff strong { color: var(--accent); font-weight: 600; }
 
-/* -- KEY DIFF -- */
-.key-diff {
-  background: rgba(212,160,23,0.05);
-  border: 1px solid rgba(212,160,23,0.12);
-  border-radius: 10px; padding: 16px 20px;
-  margin-top: 16px;
-}
-.key-diff p {
-  font-size: 19px; color: var(--silver); line-height: 1.7;
-}
-.key-diff strong { color: var(--gold); font-weight: 600; }
+/* Bar chart */
+.bar-chart { display: flex; align-items: flex-end; gap: 14px; height: 240px; padding: 20px 0 0; margin-bottom: 12px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.bar-value { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.bar-fill { width: 100%; height: var(--bar-size, 10%); border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--accent) 0%, rgba(129,140,248,0.3) 100%); }
+.bar-fill.bar-projected { background: transparent; border: 2px dashed var(--accent); }
+.bar-fill.bar-highlight { background: linear-gradient(180deg, var(--accent-hover) 0%, var(--accent) 100%); box-shadow: 0 0 24px rgba(129,140,248,0.25); }
+.bar-year { font-family: var(--mono); font-size: 12px; color: var(--text-secondary); margin-top: 8px; font-weight: 600; }
+.bar-year.bar-year-highlight { color: var(--accent); }
+.bar-footnote { font-size: 12px; color: var(--text-muted); text-align: right; font-style: italic; }
 
-/* -- BAR CHART -- */
-.bar-chart {
-  display: flex; align-items: flex-end; gap: 16px;
-  height: 260px; padding: 20px 0 0;
-  margin-bottom: 20px;
-}
-.bar-col {
-  flex: 1; display: flex; flex-direction: column; align-items: center;
-  height: 100%; justify-content: flex-end;
-}
-.bar-value {
-  font-family: var(--heading); font-size: 18px; font-weight: 700;
-  color: var(--gold); margin-bottom: 6px;
-}
-.bar-fill {
-  width: 100%; height: var(--bar-size, 10%);
-  border-radius: 6px 6px 0 0;
-  background: linear-gradient(180deg, var(--gold) 0%, rgba(212,160,23,0.5) 100%);
-  transition: height .4s ease;
-}
-.bar-fill.bar-projected {
-  background: transparent;
-  border: 2px dashed var(--gold);
-}
-.bar-fill.bar-highlight {
-  background: linear-gradient(180deg, var(--gold-hover) 0%, var(--gold) 100%);
-  box-shadow: 0 0 20px rgba(212,160,23,0.3);
-}
-.bar-year {
-  font-size: 18px; color: var(--silver); margin-top: 8px; font-weight: 600;
-}
-.bar-year.bar-year-highlight { color: var(--gold); }
-
-/* -- REVENUE FUNNEL -- */
-.funnel { margin: 20px 0; }
-.funnel-step {
-  border: 1px solid rgba(212,160,23,0.25);
-  border-radius: 10px; padding: 16px 24px;
-  margin: 0 auto 12px; text-align: center;
-  background: var(--surface);
-  position: relative;
-}
-.funnel-step::after {
-  content: ''; position: absolute; left: 50%; bottom: -12px;
-  transform: translateX(-50%);
-  width: 0; height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid var(--gold);
-}
+/* Funnel */
+.funnel { margin: 16px 0 12px; }
+.funnel-step { border: 1px solid var(--accent-border); border-radius: 10px; padding: 16px 24px; margin: 0 auto 12px; text-align: center; background: var(--surface); position: relative; }
+.funnel-step::after { content: ''; position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 7px solid var(--accent); }
 .funnel-step:last-child::after { display: none; }
-.funnel-label {
-  font-size: 19px; font-weight: 700; color: var(--gold);
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
-}
-.funnel-val {
-  font-family: var(--heading); font-size: 36px; font-weight: 700;
-  color: var(--white); margin-bottom: 2px;
-}
-.funnel-desc {
-  font-size: 18px; color: var(--silver); line-height: 1.65;
-}
-.funnel-result {
-  background: rgba(212,160,23,0.08);
-  border: 2px solid rgba(212,160,23,0.3);
-  border-radius: 12px; padding: 20px 24px;
-  margin: 20px auto 0; text-align: center;
-}
-.funnel-result .funnel-val { color: var(--gold); font-size: 36px; }
+.funnel-label { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.funnel-val { font-size: 26px; font-weight: 800; color: var(--text); margin-bottom: 4px; letter-spacing: -0.02em; }
+.funnel-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.funnel-result { background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 12px; padding: 20px 24px; margin: 16px auto 0; text-align: center; }
+.funnel-result .funnel-val { color: var(--accent); font-size: 26px; }
 
-/* -- POSITIONING MAP -- */
-.pos-map {
-  position: relative; width: 100%; aspect-ratio: 1.4;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; margin-bottom: 16px; overflow: hidden;
-}
-.pos-axis-x, .pos-axis-y {
-  position: absolute; font-size: 19px; color: var(--silver);
-  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
-}
-.pos-axis-x.left { left: 12px; bottom: 12px; }
-.pos-axis-x.right { right: 12px; bottom: 12px; }
-.pos-axis-y.top { left: 12px; top: 12px; }
-.pos-axis-y.bottom { left: 12px; bottom: 32px; }
-.pos-line-x {
-  position: absolute; top: 50%; left: 8%; right: 8%; height: 1px;
-  background: rgba(255,255,255,0.08);
-}
-.pos-line-y {
-  position: absolute; left: 50%; top: 8%; bottom: 8%; width: 1px;
-  background: rgba(255,255,255,0.08);
-}
-.pos-label-x {
-  position: absolute; bottom: 10px; font-size: 19px; color: var(--silver);
-  font-weight: 600; letter-spacing: 0.04em;
-}
-.pos-label-x.left { left: 14px; }
-.pos-label-x.right { right: 14px; }
-.pos-label-y {
-  position: absolute; left: 14px; font-size: 19px; color: var(--silver);
-  font-weight: 600; letter-spacing: 0.04em;
-}
-.pos-label-y.top { top: 14px; }
-.pos-label-y.bottom { bottom: 30px; }
-.pos-dot {
-  position: absolute; transform: translate(-50%, -50%);
-  text-align: center; z-index: 2;
-}
-.pos-dot .dot {
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--silver); margin: 0 auto 4px;
-}
-.pos-dot.pos-ftg .dot {
-  width: 18px; height: 18px; background: var(--gold);
-  box-shadow: 0 0 16px rgba(212,160,23,0.5), 0 0 40px rgba(212,160,23,0.2);
-}
-.pos-dot .dot-label {
-  font-size: 19px; color: var(--white); font-weight: 600; white-space: nowrap;
-}
-.pos-dot.pos-ftg .dot-label { color: var(--gold); font-size: 17px; }
+/* Positioning map */
+.pos-map { position: relative; width: 100%; aspect-ratio: 1.6; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+.pos-line-x { position: absolute; top: 50%; left: 8%; right: 8%; height: 1px; background: var(--border); }
+.pos-line-y { position: absolute; left: 50%; top: 8%; bottom: 8%; width: 1px; background: var(--border); }
+.pos-label-x, .pos-label-y { position: absolute; font-family: var(--mono); font-size: 11px; color: var(--text-secondary); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.pos-label-x.left { left: 14px; bottom: 14px; }
+.pos-label-x.right { right: 14px; bottom: 14px; }
+.pos-label-y.top { left: 14px; top: 14px; }
+.pos-label-y.bottom { left: 14px; bottom: 38px; }
+.pos-dot { position: absolute; transform: translate(-50%, -50%); text-align: center; z-index: 2; }
+.pos-dot .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--text-muted); margin: 0 auto 6px; }
+.pos-dot.pos-ftg .dot { width: 16px; height: 16px; background: var(--accent); box-shadow: 0 0 16px rgba(129,140,248,0.5), 0 0 36px rgba(129,140,248,0.2); }
+.pos-dot .dot-label { font-size: 12px; color: var(--text); font-weight: 600; white-space: nowrap; }
+.pos-dot.pos-ftg .dot-label { color: var(--accent); font-weight: 700; }
 
-/* -- MILESTONE TIMELINE -- */
-.timeline {
-  display: flex; align-items: flex-start; position: relative;
-  padding: 20px 0 0; margin-bottom: 20px;
-}
-.timeline::before {
-  content: ''; position: absolute; top: 28px; left: 0; right: 0;
-  height: 2px; background: rgba(255,255,255,0.08);
-}
-.tl-item {
-  flex: 1; text-align: center; position: relative; padding-top: 24px;
-}
-.tl-dot {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--silver); border: 2px solid var(--bg);
-  position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
-  z-index: 2;
-}
-.tl-item.tl-gold .tl-dot { background: var(--gold); box-shadow: 0 0 12px rgba(212,160,23,0.4); }
-.tl-month {
-  font-size: 17px; font-weight: 700; color: var(--gold);
-  margin-top: 16px; text-transform: uppercase;
-}
-.tl-title {
-  font-size: 18px; font-weight: 600; color: var(--white);
-  margin-top: 6px; line-height: 1.3;
-}
-.tl-desc {
-  font-size: 19px; color: var(--silver); margin-top: 4px; line-height: 1.4;
-}
+/* Timeline */
+.timeline { display: flex; align-items: flex-start; position: relative; padding: 20px 0 0; margin-bottom: 8px; }
+.timeline::before { content: ''; position: absolute; top: 27px; left: 5%; right: 5%; height: 1px; background: var(--border); }
+.tl-item { flex: 1; text-align: center; position: relative; padding-top: 22px; }
+.tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--text-muted); border: 3px solid var(--surface); position: absolute; top: 22px; left: 50%; transform: translateX(-50%); z-index: 2; }
+.tl-item.tl-accent .tl-dot { background: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.tl-month { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); margin-top: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
+.tl-title { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 6px; line-height: 1.35; }
+.tl-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; padding: 0 6px; }
 
-/* -- SEVERITY BADGES -- */
-.sev-badge {
-  display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 12px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.08em; margin-left: 8px; vertical-align: middle;
-}
-.sev-high { background: rgba(239,68,68,0.18); color: var(--red); }
-.sev-med { background: rgba(234,179,8,0.18); color: #eab308; }
-.sev-low { background: rgba(34,197,94,0.18); color: var(--green); }
-.risk-reason {
-  font-size: 17px; color: var(--silver); font-style: italic;
-  margin-top: 6px; opacity: 0.8;
-}
+/* Infra list */
+.infra-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+.infra-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.infra-item svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
 
-/* -- FOOTER CTA -- */
-.footer-cta {
-  text-align: center; padding: 40px 28px 24px;
-  border-top: 1px solid var(--border); margin-top: 20px;
-}
-.footer-cta h3 {
-  font-family: var(--heading); font-size: 28px; font-weight: 600;
-  color: var(--white); margin-bottom: 20px;
-}
-.footer-btns { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; }
-.btn-gold {
-  display: inline-block; padding: 12px 28px; border-radius: 8px;
-  background: var(--gold); color: var(--bg); font-weight: 700;
-  font-size: 17px; border: none; cursor: pointer;
-  transition: background .2s;
-}
-.btn-gold:hover { background: var(--gold-hover); }
-.btn-ghost {
-  display: inline-block; padding: 12px 28px; border-radius: 8px;
-  background: transparent; color: var(--gold); font-weight: 700;
-  font-size: 17px; border: 1px solid var(--gold); cursor: pointer;
-  transition: background .2s, color .2s;
-}
-.btn-ghost:hover { background: rgba(212,160,23,0.1); }
-.footer-sub {
-  font-size: 17px; color: var(--silver); opacity: 0.5;
-}
+/* Fact-check */
+.fact-check { margin-top: 36px; padding: 18px 22px; background: var(--green-dim); border: 1px solid rgba(52,211,153,0.20); border-radius: 10px; display: flex; gap: 14px; align-items: flex-start; }
+.fact-check svg { width: 20px; height: 20px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+.fact-check span { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
 
-/* -- RESPONSIVE -- */
-@media (max-width: 768px) {
-  .page { padding: 28px 16px 40px; }
-  .section::before { left: -16px; right: -16px; }
-  .hero { padding: 36px 24px; }
-  .hero h1 { font-size: 38px; }
-  .hero::before { display: none; }
-  .section-title { font-size: 28px; }
-  .two-col { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: 1fr; }
+/* Footer */
+.footer { text-align: center; padding: 40px 0 24px; margin-top: 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .game-grid { grid-template-columns: repeat(3, 1fr); }
-  .risk-row { grid-template-columns: 1fr; }
   .pillar-grid { grid-template-columns: 1fr; }
-  .infra-list { grid-template-columns: 1fr; }
   .flow { flex-direction: column; gap: 0; }
   .flow-arrow { transform: rotate(90deg); padding: 8px 0; }
   .flow-step { min-width: unset; width: 100%; }
-  .table-wrap { /* no scroll */ }
-  .comp-table th, .comp-table td,
-  .comp2-table th, .comp2-table td { font-size: 13px; padding: 10px 8px; }
-  .comp-table td, .comp2-table td { white-space: normal; word-break: break-word; }
-  .card p, .card li { font-size: 15px; }
-  .verdict-box p, .alt-box p { font-size: 15px; }
-  /* Bar chart: horizontal on mobile */
-  .bar-chart {
-    flex-direction: column; height: auto; align-items: stretch; gap: 10px;
-  }
-  .bar-col {
-    flex-direction: row; align-items: center; height: auto; gap: 10px;
-  }
-  .bar-fill {
-    height: 28px !important; width: var(--bar-size, 10%) !important;
-    border-radius: 0 6px 6px 0;
-  }
-  .bar-value { margin-bottom: 0; min-width: 50px; text-align: right; font-size: 19px; }
-  .bar-year { margin-top: 0; min-width: 36px; order: -1; }
-  /* Funnel: stack vertically (already does) */
-  .funnel-step { max-width: 100% !important; width: 100% !important; }
-  /* Positioning map: simplify */
-  .pos-map { aspect-ratio: 1; min-height: 300px; }
-  .pos-dot .dot-label { font-size: 12px; }
-  /* Timeline: vertical stack */
-  .timeline { flex-direction: column; padding-left: 30px; }
-  .timeline::before { top: 0; bottom: 0; left: 6px; width: 2px; height: auto; right: auto; }
-  .tl-item { text-align: left; padding-top: 0; padding-left: 20px; padding-bottom: 24px; }
-  .tl-dot { top: 2px; left: -24px; }
-  .footer-btns { flex-direction: column; align-items: center; }
+  .timeline { flex-direction: column; padding-left: 30px; padding-top: 12px; }
+  .timeline::before { top: 0; bottom: 0; left: 6px; width: 1px; height: auto; right: auto; }
+  .tl-item { text-align: left; padding-top: 0; padding-left: 20px; padding-bottom: 22px; }
+  .tl-dot { top: 4px; left: -24px; }
 }
-
-@media (max-width: 420px) {
-  .hero { padding: 28px 18px; }
-  .hero h1 { font-size: 26px; }
-  .hero .subtitle { font-size: 15px; }
-  .section-title { font-size: 22px; }
+@media (max-width: 768px) {
+  .page { padding: 0 16px 60px; }
+  .hero { padding: 36px 0 28px; }
+  .hero h1 { font-size: 28px; }
+  .section-title { font-size: 20px; }
+  .card { padding: 20px; }
+  .two-col { grid-template-columns: 1fr; }
+  .risk-row { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: 1fr; }
   .game-grid { grid-template-columns: repeat(2, 1fr); }
-  .comp-table { min-width: 560px; }
+  .infra-list { grid-template-columns: 1fr; }
+  .bar-chart { flex-direction: column; height: auto; align-items: stretch; gap: 10px; }
+  .bar-col { flex-direction: row; align-items: center; height: auto; gap: 10px; }
+  .bar-fill { height: 28px !important; width: var(--bar-size, 10%) !important; border-radius: 0 6px 6px 0; min-width: 20px; }
+  .bar-value { margin-bottom: 0; min-width: 52px; text-align: right; }
+  .bar-year { margin-top: 0; min-width: 40px; order: -1; }
+  .pos-map { aspect-ratio: 1; min-height: 320px; }
+  .pos-dot .dot-label { font-size: 11px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; gap: 4px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; padding: 10px 12px; }
+  .comp-table th, .comp-table td, .comp2-table th, .comp2-table td { font-size: 12px; padding: 10px 10px; white-space: normal; }
+  .comp-table td:first-child, .comp2-table td:first-child { white-space: normal; }
 }
-.nav-hamburger { display: none; background: none; border: none; color: var(--silver); cursor: pointer; padding: 4px; font-size: 24px; }
-@media (max-width: 768px) {
-  .nav-hamburger { display: block; }
-  .nav-links { display: none !important; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: rgba(10,10,10,0.98); backdrop-filter: blur(16px); border-top: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; gap: 4px !important; }
-  .nav-links.open { display: flex !important; }
-  .nav-links a, .nav-links > div { width: 100%; }
-  .nav-links .nav-dd { position: static !important; margin-top: 4px; background: rgba(255,255,255,0.03) !important; border: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
 }
 </style>
 </head>
 <body>
-<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;">
-  <a href="index.html" style="font-family:'Inter',sans-serif;font-size:20px;font-weight:700;color:#d4a017;text-decoration:none;">GoLuna</a>
-  <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')">&#9776;</button>
-  <div class="nav-links" style="display:flex;gap:8px;align-items:center;">
-    <a href="goluna-brand.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Brand</a>
-    <a href="marketresearch.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Markets</a>
-    <a href="ftg-research.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:#d4a017;text-decoration:none;font-family:'Jost',sans-serif;font-weight:600;">FTG</a>
-    <div style="position:relative;" onmouseenter="this.querySelector('.nav-dd').style.display='block'" onmouseleave="this.querySelector('.nav-dd').style.display='none'" onclick="var d=this.querySelector('.nav-dd');d.style.display=d.style.display==='block'?'none':'block'">
-      <a href="marketing.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Marketing &#9662;</a>
-      <div class="nav-dd" style="display:none;position:absolute;top:100%;right:0;margin-top:4px;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px;min-width:200px;z-index:200;">
-        <a href="marketing.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">Overview</a>
-        <a href="marketing/ai-caller.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">AI Cold Calling Scan</a>
-        <a href="marketing/country-scan.html" style="display:block;padding:8px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-family:'Jost',sans-serif;transition:all 0.15s;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.color='rgba(255,255,255,0.7)';this.style.background='transparent'">50-Country Scan</a>
-      </div>
-    </div>
-    <a href="index.html" style="padding:6px 14px;border-radius:6px;font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.2s;font-family:'Jost',sans-serif;" onmouseover="this.style.color='#fff';this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.color='rgba(255,255,255,0.6)';this.style.background='transparent'">Demo</a>
-  </div>
-</nav>
-<div style="height:52px;"></div>
 
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna <span>Strategies</span></a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <div class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="ftg-research.html" class="header-link active">FTG</a>
+      <a href="marketing.html" class="header-link">Marketing Plan</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="competitors.html" class="header-link">Competitors</a>
+      <a href="index.html" class="header-link" style="color:var(--accent);font-weight:600;">Hub</a>
+    </div>
+  </div>
+</header>
 
 <div class="page">
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-badge">Confidential &mdash; Team &amp; Investors Only</div>
     <h1>Fast Transaction Gaming</h1>
     <p class="subtitle">Skill-Based PVP Gaming Infrastructure &mdash; Market Research &amp; Strategic Analysis</p>
-    <span class="badge-conf">Confidential &mdash; Team &amp; Investors Only</span>
   </section>
 
   <!-- SECTION 1: What is FTG? -->
@@ -686,12 +304,12 @@ a { color: inherit; text-decoration: none; }
 
     <div class="card">
       <h4>The Core Technology</h4>
-      <p>FTG is a <strong style="color:var(--gold)">separate company</strong> (Rapidfire Unicorn Ltd., London) with a patented real-time transaction engine that sits between games and blockchain. FTG handles only the money &mdash; game studios handle the gameplay. <strong style="color:var(--white)">GoLuna partners with FTG</strong> to integrate their infrastructure into our platform.</p>
+      <p>FTG is a <strong style="color:var(--accent)">separate company</strong> (Rapidfire Unicorn Ltd., London) with a patented real-time transaction engine that sits between games and blockchain. FTG handles only the money &mdash; game studios handle the gameplay. <strong style="color:var(--text)">GoLuna partners with FTG</strong> to integrate their infrastructure into our platform.</p>
     </div>
 
     <div class="card">
       <h4>Core Mechanic</h4>
-      <p>When Player A hits Player B, money moves instantly from B to A. Not at match end. <strong style="color:var(--white)">The moment the server reports the action.</strong></p>
+      <p>When Player A hits Player B, money moves instantly from B to A. Not at match end. <strong style="color:var(--text)">The moment the server reports the action.</strong></p>
     </div>
 
     <!-- Flow visual -->
@@ -727,7 +345,7 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 2: How It Differs -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="section-num">Section 02</div>
     <h2 class="section-title">How It Differs From Everything Else</h2>
 
@@ -825,7 +443,7 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 4: Market Data -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="section-num">Section 04</div>
     <h2 class="section-title">Market Data</h2>
 
@@ -858,7 +476,7 @@ a { color: inherit; text-decoration: none; }
           <div class="bar-year">2030</div>
         </div>
       </div>
-      <div style="font-size: 17px; color:var(--silver); opacity:0.7; text-align:right;">~44% CAGR 2022&ndash;2030 &mdash; Grand View Research</div>
+      <div class="bar-footnote">~44% CAGR 2022&ndash;2030 &mdash; Grand View Research</div>
     </div>
 
     <div class="metrics-grid">
@@ -911,7 +529,7 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 5: Competitive Landscape -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="section-num">Section 05</div>
     <h2 class="section-title">Competitive Landscape (Honest Assessment)</h2>
 
@@ -922,36 +540,30 @@ a { color: inherit; text-decoration: none; }
       <div class="pos-label-x left">Match-Level Wagering</div>
       <div class="pos-label-x right">Per-Action Micro-Txns</div>
       <div class="pos-label-y top">Single Game</div>
-      <div class="pos-label-y bottom">Infrastructure Platform</div>
+      <div class="pos-label-y bottom">Infra Platform</div>
 
-      <!-- CoinPoker: top-left -->
       <div class="pos-dot" style="left:25%; top:22%;">
         <div class="dot"></div>
         <div class="dot-label">CoinPoker</div>
       </div>
-      <!-- Mutable PVP: top-left area -->
       <div class="pos-dot" style="left:32%; top:30%;">
         <div class="dot"></div>
         <div class="dot-label">Mutable PVP</div>
       </div>
-      <!-- Clinch: mid-left -->
       <div class="pos-dot" style="left:30%; top:48%;">
         <div class="dot"></div>
         <div class="dot-label">Clinch</div>
       </div>
-      <!-- Noodle.gg: top-right -->
       <div class="pos-dot" style="left:75%; top:24%;">
         <div class="dot"></div>
         <div class="dot-label">Noodle.gg</div>
       </div>
-      <!-- FTG/GoLuna: bottom-right HIGHLIGHTED -->
       <div class="pos-dot pos-ftg" style="left:78%; top:78%;">
         <div class="dot"></div>
         <div class="dot-label">GoLuna (via FTG)</div>
       </div>
     </div>
 
-    <!-- Supporting detail table -->
     <div class="table-wrap">
       <table class="comp2-table">
         <thead>
@@ -1013,25 +625,22 @@ a { color: inherit; text-decoration: none; }
     <h2 class="section-title">Game Types That Work on FTG</h2>
 
     <div class="game-grid">
-      <!-- 1 Shooters -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
         </div>
         <div class="game-name">Shooters</div>
-        <div class="game-trigger">Every hit = $1&ndash;5 transfer</div>
+        <div class="game-trigger">Every hit = $1&ndash;5</div>
         <div class="game-example">Hotshot (live)</div>
       </div>
-      <!-- 2 Fighting -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8h1a4 4 0 010 8h-1M6 8H5a4 4 0 000 8h1M8 12h8"/></svg>
         </div>
         <div class="game-name">Fighting Games</div>
-        <div class="game-trigger">Every combo = transaction</div>
+        <div class="game-trigger">Every combo = txn</div>
         <div class="game-example">Combo-based PVP</div>
       </div>
-      <!-- 3 Battle Royale -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 19h20L12 2z"/><path d="M12 9v4M12 16h.01"/></svg>
@@ -1040,7 +649,6 @@ a { color: inherit; text-decoration: none; }
         <div class="game-trigger">Each elim = payout</div>
         <div class="game-example">Last-player-standing</div>
       </div>
-      <!-- 4 Racing -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 17h2l2-4h6l2 4h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M14 7l-5 6"/></svg>
@@ -1049,7 +657,6 @@ a { color: inherit; text-decoration: none; }
         <div class="game-trigger">Every overtake = txn</div>
         <div class="game-example">Position-based payouts</div>
       </div>
-      <!-- 5 Sports Sims -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><path d="M2 12h20"/></svg>
@@ -1058,7 +665,6 @@ a { color: inherit; text-decoration: none; }
         <div class="game-trigger">Goals, assists, saves</div>
         <div class="game-example">Soccer/basketball PVP</div>
       </div>
-      <!-- 6 Card/Board -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 9h18"/></svg>
@@ -1067,34 +673,30 @@ a { color: inherit; text-decoration: none; }
         <div class="game-trigger">Hand pot, winner takes</div>
         <div class="game-example">Poker-style minus rake</div>
       </div>
-      <!-- 7 Strategy -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21V3h18v18H3z"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>
         </div>
-        <div class="game-name">Strategy / Territory</div>
-        <div class="game-trigger">Territory captured = txn</div>
+        <div class="game-name">Strategy</div>
+        <div class="game-trigger">Territory captured</div>
         <div class="game-example">Hex/grid conquest</div>
       </div>
-      <!-- 8 Tower Defense -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V10l8-7 8 7v11H4z"/><path d="M9 21v-6h6v6"/></svg>
         </div>
-        <div class="game-name">Tower Defense PVP</div>
-        <div class="game-trigger">Waves survived = earnings</div>
+        <div class="game-name">Tower Defense</div>
+        <div class="game-trigger">Waves survived</div>
         <div class="game-example">Defend &amp; earn</div>
       </div>
-      <!-- 9 Puzzle -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
         </div>
         <div class="game-name">Puzzle PVP</div>
-        <div class="game-trigger">Attacks = money transfer</div>
+        <div class="game-trigger">Attacks = transfer</div>
         <div class="game-example">Tetris-style battles</div>
       </div>
-      <!-- 10 Rhythm -->
       <div class="game-card">
         <div class="game-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
@@ -1106,16 +708,15 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- SECTION 7: Risks & Mitigation -->
-  <section class="section section-alt">
+  <!-- SECTION 7: Risks -->
+  <section class="section">
     <div class="section-num">Section 07</div>
     <h2 class="section-title">Risks &amp; Mitigation (Honest)</h2>
 
-    <!-- Risk 1 -->
     <div class="risk-row">
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-high">HIGH</span></div>
-        <p><strong style="color:var(--white)">Shark tank problem</strong> &mdash; skilled players drain newcomers, causing rapid churn.</p>
+        <p><strong style="color:var(--text)">Shark tank problem</strong> &mdash; skilled players drain newcomers, causing rapid churn.</p>
         <div class="risk-reason">#1 reason PVP games fail historically</div>
       </div>
       <div class="risk-card risk-green">
@@ -1124,11 +725,10 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- Risk 2 -->
     <div class="risk-row">
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-med">MEDIUM</span></div>
-        <p><strong style="color:var(--white)">Regulatory reclassification</strong> &mdash; skill games ruled as gambling in some jurisdictions.</p>
+        <p><strong style="color:var(--text)">Regulatory reclassification</strong> &mdash; skill games ruled as gambling in some jurisdictions.</p>
         <div class="risk-reason">Active in US primarily, not GoLuna's target GEOs</div>
       </div>
       <div class="risk-card risk-green">
@@ -1137,11 +737,10 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- Risk 3 -->
     <div class="risk-row">
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-high">HIGH</span></div>
-        <p><strong style="color:var(--white)">Per-action model unproven at scale</strong> &mdash; no platform has hit mass adoption.</p>
+        <p><strong style="color:var(--text)">Per-action model unproven at scale</strong> &mdash; no platform has hit mass adoption.</p>
         <div class="risk-reason">No platform has proven this model at 10K+ users</div>
       </div>
       <div class="risk-card risk-green">
@@ -1150,11 +749,10 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- Risk 4 -->
     <div class="risk-row">
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-med">MEDIUM</span></div>
-        <p><strong style="color:var(--white)">Losers churn</strong> &mdash; 50% of players lose every game by definition.</p>
+        <p><strong style="color:var(--text)">Losers churn</strong> &mdash; 50% of players lose every game by definition.</p>
         <div class="risk-reason">Solvable with matchmaking and low stakes</div>
       </div>
       <div class="risk-card risk-green">
@@ -1163,11 +761,10 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- Risk 5 -->
     <div class="risk-row">
       <div class="risk-card risk-red">
         <div class="risk-label">Risk <span class="sev-badge sev-low">LOW</span></div>
-        <p><strong style="color:var(--white)">No public traction data for Hotshot</strong> &mdash; no published user metrics.</p>
+        <p><strong style="color:var(--text)">No public traction data for Hotshot</strong> &mdash; no published user metrics.</p>
         <div class="risk-reason">GoLuna's value isn't dependent on Hotshot's success</div>
       </div>
       <div class="risk-card risk-green">
@@ -1177,8 +774,8 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- SECTION 8: GoLuna Strategic Position -->
-  <section class="section section-accent">
+  <!-- SECTION 8: Strategic Position -->
+  <section class="section">
     <div class="section-num">Section 08</div>
     <h2 class="section-title">GoLuna Strategic Position</h2>
 
@@ -1212,16 +809,15 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 8A: Acquisition Funnel -->
-  <section class="section section-accent">
+  <section class="section">
     <div class="section-num">Section 08A</div>
     <h2 class="section-title">FTG as a Player Acquisition Channel</h2>
 
     <div class="card">
       <h4>The Strategy</h4>
-      <p>FTG games aren't just a revenue vertical &mdash; they're an <strong style="color:var(--white)">acquisition funnel</strong> for GoLuna's entire platform. Skill-based PVP attracts a <strong style="color:var(--gold)">different demographic</strong> than traditional casino marketing (gamers, esports fans, competitive players). Once on-platform, they discover casino, sports, and prediction markets.</p>
+      <p>FTG games aren't just a revenue vertical &mdash; they're an <strong style="color:var(--text)">acquisition funnel</strong> for GoLuna's entire platform. Skill-based PVP attracts a <strong style="color:var(--accent)">different demographic</strong> than traditional casino marketing (gamers, esports fans, competitive players). Once on-platform, they discover casino, sports, and prediction markets.</p>
     </div>
 
-    <!-- Funnel Flow -->
     <div class="flow">
       <div class="flow-step">
         <div class="flow-icon">
@@ -1247,28 +843,26 @@ a { color: inherit; text-decoration: none; }
         <div class="flow-sub">First deposit + match</div>
       </div>
       <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color: var(--gold); background: var(--gold-dim);">
+      <div class="flow-step flow-highlight">
         <div class="flow-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M3 9h18"/></svg>
         </div>
-        <div class="flow-label" style="color:var(--gold);">Explore Platform</div>
+        <div class="flow-label">Explore Platform</div>
         <div class="flow-sub">Casino, sports, predictions</div>
       </div>
     </div>
 
-    <!-- Retargeting -->
     <div class="card">
       <h4>Retargeting &amp; Cross-Sell</h4>
-      <p>Every FTG sign-up gives GoLuna <strong style="color:var(--white)">three retargeting channels</strong> to drive engagement across the platform:</p>
+      <p>Every FTG sign-up gives GoLuna <strong style="color:var(--text)">three retargeting channels</strong> to drive engagement across the platform:</p>
       <ul>
-        <li><strong style="color:var(--white)">Email</strong> &mdash; Welcome sequences, match results, deposit bonuses for casino/sports. Personalized based on game preferences.</li>
-        <li><strong style="color:var(--white)">Wallet / Push</strong> &mdash; On-chain activity triggers: &ldquo;Your balance is idle &mdash; try these slots&rdquo; or &ldquo;Live match odds on tonight's game.&rdquo;</li>
-        <li><strong style="color:var(--white)">SMS</strong> &mdash; High-value reactivation for churned players. Tournament invites, time-limited bonuses. Especially effective in Brazil, Nigeria, Kenya.</li>
-        <li><strong style="color:var(--white)">Telegram Bot</strong> &mdash; Near-100% deliverability (vs. email's 10&ndash;30% open rate). Balance alerts, tournament reminders, personalized promos. The most underutilized retention channel in crypto gaming.</li>
+        <li><strong style="color:var(--text)">Email</strong> &mdash; Welcome sequences, match results, deposit bonuses for casino/sports. Personalized based on game preferences.</li>
+        <li><strong style="color:var(--text)">Wallet / Push</strong> &mdash; On-chain activity triggers: &ldquo;Your balance is idle &mdash; try these slots&rdquo; or &ldquo;Live match odds on tonight's game.&rdquo;</li>
+        <li><strong style="color:var(--text)">SMS</strong> &mdash; High-value reactivation for churned players. Tournament invites, time-limited bonuses. Especially effective in Brazil, Nigeria, Kenya.</li>
+        <li><strong style="color:var(--text)">Telegram Bot</strong> &mdash; Near-100% deliverability (vs. email's 10&ndash;30% open rate). Balance alerts, tournament reminders, personalized promos. The most underutilized retention channel in crypto gaming.</li>
       </ul>
     </div>
 
-    <!-- Cross-sell mechanics -->
     <div class="two-col">
       <div class="col-card col-green">
         <h4>Why It Works</h4>
@@ -1279,10 +873,10 @@ a { color: inherit; text-decoration: none; }
           <li>DraftKings proved this model: cross-sell cut their CAC by 40% YoY, now launching a &ldquo;Super App&rdquo; combining all verticals</li>
         </ul>
       </div>
-      <div class="col-card" style="border-color: rgba(212,160,23,0.3); background: var(--gold-subtle);">
-        <h4 style="color:var(--gold);">Acquisition Edge</h4>
+      <div class="col-card col-accent">
+        <h4>Acquisition Edge</h4>
         <ul>
-          <li>&ldquo;Play for real money&rdquo; PVP ads reach audiences that <strong style="color:var(--white)">ignore casino ads</strong></li>
+          <li>&ldquo;Play for real money&rdquo; PVP ads reach audiences that <strong style="color:var(--text)">ignore casino ads</strong></li>
           <li>Gamers on Twitch, YouTube, Discord &mdash; untapped by traditional gambling marketing. Germany's GlüNeuRStV exempts skill games from casino regulation.</li>
           <li>Lower CAC: PVP clips and tournaments are inherently shareable. Slots aren't. Brazil + Argentina = cheapest GEOs (0.4&ndash;0.7x baseline CAC).</li>
           <li>Organic virality: &ldquo;I just won $50 in a real-money PVP match&rdquo; &mdash; posts itself</li>
@@ -1290,7 +884,6 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
-    <!-- Key metrics -->
     <div class="metrics-grid">
       <div class="metric-item">
         <div class="metric-value">40%</div>
@@ -1311,19 +904,19 @@ a { color: inherit; text-decoration: none; }
   </section>
 
   <!-- SECTION 8B: Milestone Timeline -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="section-num">Section 08B</div>
     <h2 class="section-title">Milestone Timeline</h2>
 
     <div class="card">
       <div class="timeline">
-        <div class="tl-item tl-gold">
+        <div class="tl-item tl-accent">
           <div class="tl-dot"></div>
           <div class="tl-month">M1</div>
           <div class="tl-title">FTG Partnership Integration</div>
           <div class="tl-desc">Integrate FTG's transaction engine into GoLuna platform</div>
         </div>
-        <div class="tl-item tl-gold">
+        <div class="tl-item tl-accent">
           <div class="tl-dot"></div>
           <div class="tl-month">M3</div>
           <div class="tl-title">Game 1 Launch</div>
@@ -1350,15 +943,15 @@ a { color: inherit; text-decoration: none; }
         <div class="tl-item">
           <div class="tl-dot"></div>
           <div class="tl-month">M18</div>
-          <div class="tl-title">GoLuna Exclusive Games</div>
-          <div class="tl-desc">Commission studios to build GoLuna-exclusive PVP titles on FTG &mdash; unique content no competitor has</div>
+          <div class="tl-title">GoLuna Exclusives</div>
+          <div class="tl-desc">Commission studios to build GoLuna-exclusive PVP titles on FTG</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SECTION 9: Technical Infrastructure -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="section-num">Section 09</div>
     <h2 class="section-title">Technical Infrastructure Summary</h2>
 
@@ -1394,11 +987,15 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
     </div>
+
+    <div class="fact-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+      <span>FTG research compiled from Rapidfire Unicorn Ltd. (London) public materials, Grand View Research blockchain gaming forecasts, Statista crypto gambling demographics, Axie Infinity public post-mortems, DraftKings 2024 earnings reports, and competitor platform disclosures. Market sizing figures are estimates &mdash; validate before using in public materials.</span>
+    </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer style="text-align:center; padding: 40px 0 20px; opacity: 0.4; font-size: 14px; color: var(--silver);">
-    GoLuna &mdash; FTG Partnership Research &mdash; March 2026 &mdash; Confidential
+  <footer class="footer">
+    GoLuna &mdash; FTG Partnership Research &mdash; Confidential &mdash; <a href="index.html">Back to Hub &rarr;</a>
   </footer>
 
 </div>
