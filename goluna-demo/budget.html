@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Budget &amp; Runway</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1200px; margin: 0 auto; padding: 0 32px 80px; }
+
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--text-muted); font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--accent); font-weight: 600; }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--accent-dim); border: 1px solid var(--accent-border); font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 760px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+
+.section { margin-bottom: 56px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--accent-dim); color: var(--accent); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+
+/* Top metrics strip */
+.metrics-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; position: relative; overflow: hidden; }
+.metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.metric-card.total::before { background: var(--accent); }
+.metric-card.reserve::before { background: var(--cyan); }
+.metric-card.operating::before { background: var(--green); }
+.metric-card.spent::before { background: var(--amber); }
+.metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
+.metric-card .val.green { color: var(--green); }
+.metric-card .val.cyan { color: var(--cyan); }
+.metric-card .val.accent { color: var(--accent); }
+.metric-card .val.amber { color: var(--amber); }
+.metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+
+/* Runway banner */
+.runway { background: linear-gradient(135deg, var(--accent-dim) 0%, rgba(167,139,250,0.05) 100%); border: 1px solid var(--accent-border); border-radius: 14px; padding: 28px 32px; margin-bottom: 56px; }
+.runway-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+.runway-top .runway-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.runway-top .runway-val { font-family: var(--mono); font-size: 42px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
+.runway-top .runway-sub { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+.runway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.runway-mini { background: rgba(11,13,20,0.5); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.runway-mini .mini-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.runway-mini .mini-val { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--text); }
+.runway-mini .mini-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Generic line-item table */
+.lit { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.lit th, .lit td { padding: 12px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.lit th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; background: var(--surface-2); }
+.lit tr:last-child td { border-bottom: none; }
+.lit td.num { font-family: var(--mono); font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+.lit td.cat { color: var(--text-secondary); font-size: 12px; }
+.lit tr.total td { background: var(--surface-2); font-weight: 700; color: var(--text); }
+.lit tr.total td.num { font-size: 14px; color: var(--accent); }
+.lit tr.note td { background: rgba(251,191,36,0.04); font-size: 11px; color: var(--text-muted); padding: 8px 18px; font-style: italic; }
+.lit td .tag { font-family: var(--mono); font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+.lit td .tag.paid { background: var(--green-dim); color: var(--green); }
+.lit td .tag.planned { background: var(--amber-dim); color: var(--amber); }
+.lit td .tag.recurring { background: var(--purple-dim); color: var(--purple); }
+.lit td .tag.deferred { background: rgba(251,113,133,0.10); color: var(--rose); }
+
+/* Cards used in monthly sections */
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.ic-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; position: relative; }
+.ic-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.ic-card.green::before { background: var(--green); }
+.ic-card.purple::before { background: var(--purple); }
+.ic-card.amber::before { background: var(--amber); }
+.ic-card.cyan::before { background: var(--cyan); }
+.ic-card.rose::before { background: var(--rose); }
+.ic-card .ic-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.ic-card .ic-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.ic-card .ic-price { font-family: var(--mono); font-size: 16px; font-weight: 800; color: var(--text); }
+.ic-card .ic-price.green { color: var(--green); }
+.ic-card .ic-price.amber { color: var(--amber); }
+.ic-card .ic-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-family: var(--mono); }
+.ic-card .ic-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+/* Burn comparison */
+.burn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+.burn-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; position: relative; overflow: hidden; }
+.burn-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.burn-card.now::before { background: var(--green); }
+.burn-card.later::before { background: var(--amber); }
+.burn-card .burn-period { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.burn-card .burn-amount { font-family: var(--mono); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
+.burn-card .burn-amount.green { color: var(--green); }
+.burn-card .burn-amount.amber { color: var(--amber); }
+.burn-card .burn-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; }
+.burn-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.burn-card li { font-size: 12px; color: var(--text-secondary); padding-left: 14px; position: relative; line-height: 1.5; display: flex; justify-content: space-between; }
+.burn-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); }
+.burn-card li .li-num { font-family: var(--mono); font-weight: 600; color: var(--text); }
+
+/* 12-month forecast bar */
+.forecast { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.forecast-bar { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; height: 160px; margin-bottom: 12px; align-items: end; }
+.fc-col { background: linear-gradient(to top, var(--surface-2), var(--surface-3)); border-radius: 4px 4px 0 0; position: relative; min-height: 8px; transition: all 0.2s; cursor: pointer; }
+.fc-col:hover { background: linear-gradient(to top, var(--accent-dim), rgba(129,140,248,0.4)); }
+.fc-col.warn { background: linear-gradient(to top, rgba(251,191,36,0.20), rgba(251,191,36,0.50)); }
+.fc-col.crit { background: linear-gradient(to top, rgba(251,113,133,0.20), rgba(251,113,133,0.60)); }
+.fc-labels { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; }
+.fc-labels span { font-family: var(--mono); font-size: 10px; color: var(--text-muted); text-align: center; }
+.fc-legend { display: flex; gap: 18px; margin-top: 16px; font-size: 11px; color: var(--text-muted); flex-wrap: wrap; }
+.fc-legend .ldot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 6px; }
+
+/* Note box */
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.rose { background: var(--rose-dim); border: 1px solid var(--rose-border); color: var(--rose); }
+.note-box strong { color: var(--text); font-weight: 600; }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+  .card-grid, .burn-grid { grid-template-columns: 1fr; }
+  .runway-grid { grid-template-columns: 1fr; }
+  .forecast-bar { height: 120px; }
+}
+@media (max-width: 640px) {
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 28px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+  .lit th, .lit td { padding: 10px 12px; font-size: 12px; }
+  .forecast-bar { height: 100px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna <span>Budget</span></a>
+    <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')">&#9776;</button>
+    <div class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing Plan</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link active">Budget</a>
+      <a href="index.html" class="header-link" style="color:var(--accent);font-weight:600;">Hub</a>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge"><span class="dot"></span> Operating Budget</div>
+      <span class="hero-date">v0.1 &middot; May 2026</span>
+    </div>
+    <h1>Budget &amp; Runway</h1>
+    <p>Full cost stack for the GoLuna launch: spent to date, monthly recurring burn, planned marketing, and 12-month runway. All figures shown in SEK and USD with explicit FX assumptions.</p>
+  </section>
+
+  <!-- FX assumptions -->
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>FX assumptions (override if you have spot rates):</strong> 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08 &middot; 1 EUR &asymp; 11.34 SEK. All conversions in this page apply these rates.</div>
+  </div>
+
+  <!-- Top metrics strip -->
+  <div class="metrics-strip">
+    <div class="metric-card total">
+      <div class="label">Total Budget</div>
+      <div class="val accent">3.0M SEK</div>
+      <div class="sub">~$286K &middot; ~&euro;265K</div>
+    </div>
+    <div class="metric-card reserve">
+      <div class="label">Bankroll Reserve</div>
+      <div class="val cyan">1.5M SEK</div>
+      <div class="sub">~$143K &middot; locked, not spent</div>
+    </div>
+    <div class="metric-card operating">
+      <div class="label">Operating Budget</div>
+      <div class="val green">1.5M SEK</div>
+      <div class="sub">~$143K &middot; everything else</div>
+    </div>
+    <div class="metric-card spent">
+      <div class="label">Spent To Date</div>
+      <div class="val amber">220K SEK</div>
+      <div class="sub">~$21K &middot; 15% of operating</div>
+    </div>
+  </div>
+
+  <!-- Runway hero -->
+  <div class="runway">
+    <div class="runway-top">
+      <div>
+        <div class="runway-label">Projected Runway (pre-revenue)</div>
+        <div class="runway-val">~10 months</div>
+        <div class="runway-sub">Operating budget covers ~10 months of fixed burn after planned marketing. Cubeia revenue share + GGR ramp must intercept before month 10–11.</div>
+      </div>
+    </div>
+    <div class="runway-grid">
+      <div class="runway-mini">
+        <div class="mini-label">Operating remaining</div>
+        <div class="mini-val">1.28M SEK</div>
+        <div class="mini-sub">~$122K after spent-to-date</div>
+      </div>
+      <div class="runway-mini">
+        <div class="mini-label">After clipping (250K SEK)</div>
+        <div class="mini-val">1.03M SEK</div>
+        <div class="mini-sub">~$98K to fund monthly burn</div>
+      </div>
+      <div class="runway-mini">
+        <div class="mini-label">Burn switch (month 7)</div>
+        <div class="mini-val">$7.4K &rarr; $12.8K /mo</div>
+        <div class="mini-sub">Cubeia platform min kicks in</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01: SPENT TO DATE -->
+  <section class="section" id="spent">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-title">Spent To Date</span>
+    </div>
+    <table class="lit">
+      <thead>
+        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th style="text-align:right;">EUR</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cubeia <span class="tag paid">paid</span></td>
+          <td class="cat">Platform setup / hosting</td>
+          <td class="num">150,000</td>
+          <td class="num">$14,286</td>
+          <td class="num">&euro;13,228</td>
+        </tr>
+        <tr class="note">
+          <td colspan="5">Contract setup is &euro;15K split 50/50 (&euro;7.5K up front, &euro;7.5K on go-live) + &euro;1,700/mo AWS hosting from day one. 150K SEK &asymp; &euro;13.2K — confirm whether this covers both setup halves, or setup + initial hosting prepay.</td>
+        </tr>
+        <tr>
+          <td>Company registration <span class="tag paid">paid</span></td>
+          <td class="cat">Legal / formation</td>
+          <td class="num">30,000</td>
+          <td class="num">$2,857</td>
+          <td class="num">&euro;2,646</td>
+        </tr>
+        <tr>
+          <td>Designer <span class="tag paid">paid</span></td>
+          <td class="cat">Brand / creative</td>
+          <td class="num">40,000</td>
+          <td class="num">$3,810</td>
+          <td class="num">&euro;3,527</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Subtotal — spent</strong></td>
+          <td class="cat">3 line items</td>
+          <td class="num">220,000</td>
+          <td class="num">$20,952</td>
+          <td class="num">&euro;19,401</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 02: ONE-TIME PLANNED -->
+  <section class="section" id="planned">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-title">One-Time Planned (not yet spent)</span>
+    </div>
+    <table class="lit">
+      <thead>
+        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th style="text-align:right;">EUR</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clipping campaign <span class="tag planned">planned</span></td>
+          <td class="cat">Marketing &middot; 100M views over 3 months</td>
+          <td class="num">250,000</td>
+          <td class="num">$23,810</td>
+          <td class="num">&euro;22,046</td>
+        </tr>
+        <tr>
+          <td>Security stack core <span class="tag planned">planned</span></td>
+          <td class="cat">YubiKeys, routers, Starlink, faraday, privacy filters</td>
+          <td class="num">~23,800</td>
+          <td class="num">~$2,268</td>
+          <td class="num">~&euro;2,100</td>
+        </tr>
+        <tr class="note">
+          <td colspan="5">Mid-range estimate. Range is &euro;1,800–2,400 depending on whether SV2 needs Pixel 9 Pro (&euro;1,000) or team uses existing devices. If all four upgrade laptops + phones, add +&euro;8–10K.</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Subtotal — planned one-time</strong></td>
+          <td class="cat">2 line items</td>
+          <td class="num">~273,800</td>
+          <td class="num">~$26,078</td>
+          <td class="num">~&euro;24,146</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 03: MONTHLY RECURRING -->
+  <section class="section" id="monthly">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-title">Monthly Recurring</span>
+    </div>
+
+    <table class="lit" style="margin-bottom:20px;">
+      <thead>
+        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">USD / mo</th><th style="text-align:right;">SEK / mo</th><th style="text-align:right;">EUR / mo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Samira <span class="tag recurring">salary</span></td>
+          <td class="cat">Team</td>
+          <td class="num">$2,000</td>
+          <td class="num">21,000</td>
+          <td class="num">&euro;1,852</td>
+        </tr>
+        <tr>
+          <td>Saam <span class="tag recurring">salary</span></td>
+          <td class="cat">Team</td>
+          <td class="num">$2,000</td>
+          <td class="num">21,000</td>
+          <td class="num">&euro;1,852</td>
+        </tr>
+        <tr>
+          <td>Harry <span class="tag recurring">salary</span></td>
+          <td class="cat">Team</td>
+          <td class="num">$1,000</td>
+          <td class="num">10,500</td>
+          <td class="num">&euro;926</td>
+        </tr>
+        <tr>
+          <td>Cubeia hosting (AWS) <span class="tag recurring">platform</span></td>
+          <td class="cat">From day 1</td>
+          <td class="num">$1,836</td>
+          <td class="num">19,278</td>
+          <td class="num">&euro;1,700</td>
+        </tr>
+        <tr>
+          <td>Cubeia platform minimum <span class="tag deferred">mo 7+</span></td>
+          <td class="cat">&euro;0 mo 1–6, then &euro;5K/mo</td>
+          <td class="num">$5,400</td>
+          <td class="num">56,700</td>
+          <td class="num">&euro;5,000</td>
+        </tr>
+        <tr>
+          <td>Security stack subs <span class="tag recurring">opsec</span></td>
+          <td class="cat">VPN, Proton, 1Password, MySudo, Starlink, Cloudflare Pro, Hetzner, B2</td>
+          <td class="num">$356</td>
+          <td class="num">3,742</td>
+          <td class="num">&euro;330</td>
+        </tr>
+        <tr>
+          <td>Claude Max <span class="tag recurring">tooling</span></td>
+          <td class="cat">1 seat assumed</td>
+          <td class="num">$200</td>
+          <td class="num">2,100</td>
+          <td class="num">&euro;185</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="burn-grid">
+      <div class="burn-card now">
+        <div class="burn-period">Months 1–6 (now)</div>
+        <div class="burn-amount green">$7,392 / mo</div>
+        <div class="burn-sub">77,616 SEK &middot; &euro;6,846 — Cubeia platform minimum waived</div>
+        <ul>
+          <li>Salaries (S+S+H)<span class="li-num">$5,000</span></li>
+          <li>Cubeia hosting<span class="li-num">$1,836</span></li>
+          <li>Security subs<span class="li-num">$356</span></li>
+          <li>Claude Max<span class="li-num">$200</span></li>
+        </ul>
+      </div>
+      <div class="burn-card later">
+        <div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
+        <div class="burn-amount amber">$12,792 / mo</div>
+        <div class="burn-sub">134,316 SEK &middot; &euro;11,845 — adds &euro;5K/mo platform min</div>
+        <ul>
+          <li>Everything in months 1–6<span class="li-num">$7,392</span></li>
+          <li>Cubeia platform min<span class="li-num">$5,400</span></li>
+          <li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Variable costs not in monthly burn</strong> — these only apply once GGR exists: Cubeia revenue share 5% &middot; Game provider (Pragmatic) ~10% &middot; Payment/FX ~1.5% to 3rd party. Bankroll is self-funded from the reserved 1.5M SEK.</div>
+    </div>
+  </section>
+
+  <!-- 04: CUBEIA CONTRACT REFERENCE -->
+  <section class="section" id="cubeia">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-title">Cubeia Contract — Key Terms</span>
+    </div>
+    <div class="card-grid">
+      <div class="ic-card green">
+        <div class="ic-head"><span class="ic-name">Setup fee</span><span class="ic-price green">&euro;15K</span></div>
+        <div class="ic-meta">Split 50/50 &middot; up front + go-live</div>
+        <div class="ic-desc">Two payments of &euro;7,500. Cashflow-friendly relative to DeGaming's lump-on-signing.</div>
+      </div>
+      <div class="ic-card purple">
+        <div class="ic-head"><span class="ic-name">Hosting (AWS)</span><span class="ic-price">&euro;1,700 /mo</span></div>
+        <div class="ic-meta">From day 1 &middot; no ramp</div>
+        <div class="ic-desc">Fixed monthly. Hits from the first invoice cycle whether you have GGR or not.</div>
+      </div>
+      <div class="ic-card amber">
+        <div class="ic-head"><span class="ic-name">Platform minimum</span><span class="ic-price amber">&euro;5K /mo</span></div>
+        <div class="ic-meta">&euro;0 in months 1–6 &middot; then &euro;5K floor</div>
+        <div class="ic-desc">The 6-month runway grace is the single biggest deal term. After month 6 the minimum applies whether GGR justifies it or not.</div>
+      </div>
+      <div class="ic-card cyan">
+        <div class="ic-head"><span class="ic-name">Revenue share</span><span class="ic-price">5%</span></div>
+        <div class="ic-meta">Flat &middot; on GGR</div>
+        <div class="ic-desc">Half of DeGaming's blended rate. Pays for itself once monthly GGR &gt; &euro;100K.</div>
+      </div>
+      <div class="ic-card rose">
+        <div class="ic-head"><span class="ic-name">Bankroll</span><span class="ic-price">Self-fund</span></div>
+        <div class="ic-meta">~7.5&times; monthly GGR rule-of-thumb</div>
+        <div class="ic-desc">1.5M SEK reserved here. At &euro;200K/mo GGR that covers ~&euro;1.5M lock-up requirement comfortably.</div>
+      </div>
+      <div class="ic-card purple">
+        <div class="ic-head"><span class="ic-name">License</span><span class="ic-price">$25–50K</span></div>
+        <div class="ic-meta">+ annual renewal &middot; you obtain</div>
+        <div class="ic-desc">Not in current budget — only if/when we pursue licensed path. DeGaming bundles this; Cubeia does not.</div>
+      </div>
+    </div>
+    <div class="note-box info" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <div>Full Cubeia vs DeGaming side-by-side: <strong>contract-comparison/comparison.html</strong> in the repo, or the PDF <strong>GoLuna_Cubeia_vs_DeGaming.pdf</strong>.</div>
+    </div>
+  </section>
+
+  <!-- 05: 12-MONTH FORECAST -->
+  <section class="section" id="forecast">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-title">12-Month Cumulative Burn Forecast</span>
+    </div>
+    <div class="forecast">
+      <div class="forecast-bar" id="fcBar">
+        <div class="fc-col" style="height:8%;" title="Month 1 · $7.4K"></div>
+        <div class="fc-col" style="height:16%;" title="Month 2 · $14.8K"></div>
+        <div class="fc-col" style="height:24%;" title="Month 3 · $22.2K"></div>
+        <div class="fc-col" style="height:32%;" title="Month 4 · $29.6K"></div>
+        <div class="fc-col" style="height:40%;" title="Month 5 · $37.0K"></div>
+        <div class="fc-col" style="height:48%;" title="Month 6 · $44.4K"></div>
+        <div class="fc-col warn" style="height:61%;" title="Month 7 · $57.2K — Cubeia min activates"></div>
+        <div class="fc-col warn" style="height:74%;" title="Month 8 · $70.0K"></div>
+        <div class="fc-col warn" style="height:87%;" title="Month 9 · $82.8K"></div>
+        <div class="fc-col crit" style="height:100%;" title="Month 10 · $95.6K — approaching limit"></div>
+        <div class="fc-col crit" style="height:100%;opacity:0.4;" title="Month 11 · $108.4K — over budget"></div>
+        <div class="fc-col crit" style="height:100%;opacity:0.25;" title="Month 12 · $121.2K — over budget"></div>
+      </div>
+      <div class="fc-labels">
+        <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
+      </div>
+      <div class="fc-legend">
+        <span><span class="ldot" style="background:var(--surface-3);"></span> Months 1–6 burn ($7.4K/mo)</span>
+        <span><span class="ldot" style="background:rgba(251,191,36,0.5);"></span> Months 7–9 burn ($12.8K/mo)</span>
+        <span><span class="ldot" style="background:rgba(251,113,133,0.5);"></span> Out of operating budget</span>
+      </div>
+      <div class="note-box rose" style="margin-top:24px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div><strong>Read of the chart:</strong> after clipping (250K SEK) and 6 months of grace-period burn, ~$54K is left. At the post-grace burn of $12.8K/mo, that's ~4 more months. <strong>Cumulative spend hits the operating-budget ceiling around month 10</strong> with no revenue. Margin of safety is thin — GGR ramp before month 7 is the single most important commercial milestone.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06: OPEN QUESTIONS -->
+  <section class="section" id="open">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-title">Open Questions / To Confirm</span>
+    </div>
+    <table class="lit">
+      <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Does the 150K SEK to Cubeia cover full setup, or first 50% + hosting prepay?</td><td>Determines whether ~&euro;7.5K more is committed shortly.</td></tr>
+        <tr><td>Spot FX rates as of payment dates</td><td>USD/SEK and EUR/SEK have moved 3–5% recently; total budget USD figure changes by ~$10K either way.</td></tr>
+        <tr><td>Claude Max seats: 1 or 3?</td><td>1 seat = $200/mo; 3 seats = $600/mo &rarr; +$4.8K/year.</td></tr>
+        <tr><td>Security stack: 4 users or scaled-down 2?</td><td>Cuts monthly subs from $356 to ~$180. One-time core from ~$2.3K to ~$1.5K.</td></tr>
+        <tr><td>Are salaries gross or net?</td><td>If gross, employer-side taxes (Sweden ~31%) add ~$1.5K/mo to the burn.</td></tr>
+        <tr><td>Domain, hosting (Vercel), email beyond Proton?</td><td>Not currently in budget; small but recurring.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Budget &amp; Runway &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="index.html">Back to Hub &rarr;</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
