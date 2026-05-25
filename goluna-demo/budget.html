@@ -295,7 +295,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
           <td class="num">&euro;13,228</td>
         </tr>
         <tr class="note">
-          <td colspan="5">Contract setup is &euro;15K split 50/50 (&euro;7.5K up front, &euro;7.5K on go-live) + &euro;1,700/mo AWS hosting from day one. 150K SEK &asymp; &euro;13.2K — confirm whether this covers both setup halves, or setup + initial hosting prepay.</td>
+          <td colspan="5">Contract §4i: setup &euro;15K split 50/50 (&euro;7,500 upfront + &euro;7,500 on delivery/go-live). 150K SEK &asymp; &euro;13.2K. Plausible: first &euro;7,500 + ~3 months AWS prepay (&euro;5,100), or full &euro;15K minus a small FX delta. <strong>Account not enabled until full setup paid (§4)</strong> — confirm what was invoiced and whether ~&euro;1.8K is still owed before go-live.</td>
         </tr>
         <tr>
           <td>Company registration <span class="tag paid">paid</span></td>
@@ -451,8 +451,38 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Variable costs not in monthly burn</strong> — these only apply once GGR exists: Cubeia revenue share 5% &middot; Game provider (Pragmatic) ~10% &middot; Payment/FX ~1.5% to 3rd party. Bankroll is self-funded from the reserved 1.5M SEK.</div>
+      <div><strong>Variable costs not in monthly burn</strong> — these apply on top of revenue once GGR exists: Cubeia platform rev share <strong>5% flat</strong> &middot; Casino game providers (QTech / Hub88 / St8 / Slotegrator) <strong>6–15% blended</strong> &middot; Cubeia Originals <strong>6% + €2,000/mo</strong> if used &middot; Cubeia Poker <strong>10%</strong> (blocks UK/US) &middot; Sportsbook (Betby / Ultraplay / SABA / Song88) <strong>TBD</strong>. Bankroll is self-funded from the reserved 1.5M SEK. <em>(Source: Cubeia Nano License Agreement, Appendix A.)</em></div>
     </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Optional 3rd-party add-ons (Appendix B)</h3>
+    <table class="lit">
+      <thead>
+        <tr><th>Service</th><th>Purpose</th><th style="text-align:right;">EUR / mo</th><th style="text-align:right;">USD / mo</th><th style="text-align:right;">Required?</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Customer.io <span class="tag planned">optional</span></td>
+          <td class="cat">Email / lifecycle CRM (player retention)</td>
+          <td class="num">&euro;300</td>
+          <td class="num">$324</td>
+          <td class="num" style="color:var(--text-muted);">No</td>
+        </tr>
+        <tr>
+          <td>Freshchat <span class="tag planned">optional</span></td>
+          <td class="cat">Live support chat (1st-line CS is Operator responsibility)</td>
+          <td class="num">&euro;50</td>
+          <td class="num">$54</td>
+          <td class="num" style="color:var(--text-muted);">No</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Add-on cost if both adopted</strong></td>
+          <td class="cat">Adds to monthly burn</td>
+          <td class="num">&euro;350</td>
+          <td class="num">$378</td>
+          <td class="num">—</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- 04: CUBEIA CONTRACT REFERENCE -->
@@ -464,38 +494,58 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     <div class="card-grid">
       <div class="ic-card green">
         <div class="ic-head"><span class="ic-name">Setup fee</span><span class="ic-price green">&euro;15K</span></div>
-        <div class="ic-meta">Split 50/50 &middot; up front + go-live</div>
-        <div class="ic-desc">Two payments of &euro;7,500. Cashflow-friendly relative to DeGaming's lump-on-signing.</div>
+        <div class="ic-meta">§4i &middot; split 50/50</div>
+        <div class="ic-desc">&euro;7,500 upfront + &euro;7,500 on delivery and go-live. <strong>Account not enabled in test or production until full setup is paid.</strong></div>
       </div>
       <div class="ic-card purple">
-        <div class="ic-head"><span class="ic-name">Hosting (AWS)</span><span class="ic-price">&euro;1,700 /mo</span></div>
-        <div class="ic-meta">From day 1 &middot; no ramp</div>
-        <div class="ic-desc">Fixed monthly. Hits from the first invoice cycle whether you have GGR or not.</div>
+        <div class="ic-head"><span class="ic-name">AWS hosting</span><span class="ic-price">&euro;1,700 /mo</span></div>
+        <div class="ic-meta">App. B &middot; required</div>
+        <div class="ic-desc">Fixed monthly from day 1. Required line item — invoiced through Cubeia.</div>
       </div>
       <div class="ic-card amber">
         <div class="ic-head"><span class="ic-name">Platform minimum</span><span class="ic-price amber">&euro;5K /mo</span></div>
-        <div class="ic-meta">&euro;0 in months 1–6 &middot; then &euro;5K floor</div>
-        <div class="ic-desc">The 6-month runway grace is the single biggest deal term. After month 6 the minimum applies whether GGR justifies it or not.</div>
+        <div class="ic-meta">§4ii &middot; from month 7+</div>
+        <div class="ic-desc"><strong>6-month clock starts at go-live</strong> (when Cubeia verifies key functionality via the Preflight checklist — App. C), not at contract signing. Month 1 fee is pro-rata on remaining days of the month after go-live.</div>
       </div>
       <div class="ic-card cyan">
         <div class="ic-head"><span class="ic-name">Revenue share</span><span class="ic-price">5%</span></div>
-        <div class="ic-meta">Flat &middot; on GGR</div>
-        <div class="ic-desc">Half of DeGaming's blended rate. Pays for itself once monthly GGR &gt; &euro;100K.</div>
+        <div class="ic-meta">§4ii.a &middot; flat on GGR</div>
+        <div class="ic-desc">Invoiced in EUR using the official rate on the day of issue. Crypto-paying operators can settle in BTC via wallet address.</div>
       </div>
       <div class="ic-card rose">
-        <div class="ic-head"><span class="ic-name">Bankroll</span><span class="ic-price">Self-fund</span></div>
-        <div class="ic-meta">~7.5&times; monthly GGR rule-of-thumb</div>
-        <div class="ic-desc">1.5M SEK reserved here. At &euro;200K/mo GGR that covers ~&euro;1.5M lock-up requirement comfortably.</div>
+        <div class="ic-head"><span class="ic-name">Restricted territories</span><span class="ic-price" style="font-size:14px;">UK · US · SE</span></div>
+        <div class="ic-meta">§5 &middot; IP-block + registration block required</div>
+        <div class="ic-desc"><strong>Sweden is blocked</strong> — relevant since Operator and Provider are both Swedish entities. Cubeia can add jurisdictions on notice if laws change.</div>
       </div>
       <div class="ic-card purple">
-        <div class="ic-head"><span class="ic-name">License</span><span class="ic-price">$25–50K</span></div>
-        <div class="ic-meta">+ annual renewal &middot; you obtain</div>
-        <div class="ic-desc">Not in current budget — only if/when we pursue licensed path. DeGaming bundles this; Cubeia does not.</div>
+        <div class="ic-head"><span class="ic-name">Termination</span><span class="ic-price">30 days</span></div>
+        <div class="ic-meta">§7 &middot; either party, any reason</div>
+        <div class="ic-desc">Cubeia can terminate immediately for undisputed non-payment (§7). Operator can terminate if Cubeia is offline &gt; 24h consecutive (§7).</div>
       </div>
     </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Game provider economics (Appendix A)</h3>
+    <table class="lit">
+      <thead>
+        <tr><th>Vertical</th><th>Provider</th><th style="text-align:right;">Rev share (on GGR)</th><th style="text-align:right;">Monthly fee</th><th>Blocked regions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Casino</td><td>QTech</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino</td><td>Hub88</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino</td><td>St8</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino</td><td>Slotegrator</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Cubeia Originals</td><td>Cubeia</td><td class="num">6%</td><td class="num">&euro;2,000</td><td class="cat">—</td></tr>
+        <tr><td>Poker</td><td>Cubeia</td><td class="num">10%</td><td class="num">—</td><td class="cat">UK, US</td></tr>
+        <tr><td>Sportsbook</td><td>Betby / Ultraplay / SABA / Song88</td><td class="num">TBD</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr class="note">
+          <td colspan="5">If Cubeia Originals are used, add <strong>€2,000/mo</strong> to the recurring burn (this stacks with the platform minimum from month 7). Sportsbook revenue shares are TBD on a per-provider basis once selected.</td>
+        </tr>
+      </tbody>
+    </table>
+
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <div>Full Cubeia vs DeGaming side-by-side: <strong>contract-comparison/comparison.html</strong> in the repo, or the PDF <strong>GoLuna_Cubeia_vs_DeGaming.pdf</strong>.</div>
+      <div>Source: <strong>Cubeia_nano_license_Draft2_2026.pdf</strong> (held privately — not committed to this repo). Sec/Appendix references in the cards above point into that document.</div>
     </div>
   </section>
 
@@ -544,12 +594,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     <table class="lit">
       <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
       <tbody>
-        <tr><td>Does the 150K SEK to Cubeia cover full setup, or first 50% + hosting prepay?</td><td>Determines whether ~&euro;7.5K more is committed shortly.</td></tr>
-        <tr><td>Spot FX rates as of payment dates</td><td>USD/SEK and EUR/SEK have moved 3–5% recently; total budget USD figure changes by ~$10K either way.</td></tr>
+        <tr><td>What does the 150K SEK already paid to Cubeia cover? Full &euro;15K setup, or first &euro;7,500 + hosting prepay?</td><td>If only first half, ~&euro;7,500 must be paid before go-live (account stays disabled until full setup paid, §4).</td></tr>
+        <tr><td>Go-live target date for the 6-month grace clock</td><td>The &euro;5K/mo platform min only kicks in 6 months after Cubeia verifies the Preflight checklist (App. C), not 6 months after signing. Slipping go-live extends the grace window.</td></tr>
+        <tr><td>Which game providers / verticals are we launching with?</td><td>Casino @ 6–15% rev share (4 providers) vs Cubeia Originals 6% + &euro;2,000/mo flat vs Poker 10% — all separate from Cubeia's 5% platform share. Mix determines total take-rate.</td></tr>
+        <tr><td>Adding Customer.io (&euro;300/mo) and/or Freshchat (&euro;50/mo)?</td><td>App. B optional. Customer.io is the standard for casino lifecycle email; Freshchat is one of many support-chat options. Adds &euro;350/mo ($378) if both.</td></tr>
+        <tr><td>Sweden is a restricted territory (§5) — does this affect any marketing?</td><td>No Swedish player can register. Confirm Swedish-language clipping / KOL content excludes Sweden as a target.</td></tr>
+        <tr><td>Spot FX rates as of payment dates</td><td>USD/SEK and EUR/SEK can swing 3–5%; total budget USD figure shifts ~$10K either way.</td></tr>
         <tr><td>Claude Max seats: 1 or 3?</td><td>1 seat = $200/mo; 3 seats = $600/mo &rarr; +$4.8K/year.</td></tr>
         <tr><td>Security stack: 4 users or scaled-down 2?</td><td>Cuts monthly subs from $356 to ~$180. One-time core from ~$2.3K to ~$1.5K.</td></tr>
         <tr><td>Are salaries gross or net?</td><td>If gross, employer-side taxes (Sweden ~31%) add ~$1.5K/mo to the burn.</td></tr>
-        <tr><td>Domain, hosting (Vercel), email beyond Proton?</td><td>Not currently in budget; small but recurring.</td></tr>
+        <tr><td>Domain, Vercel, email beyond Proton?</td><td>Not currently in budget; small but recurring.</td></tr>
       </tbody>
     </table>
   </section>
