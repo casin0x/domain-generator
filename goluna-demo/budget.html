@@ -252,9 +252,9 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   <div class="runway">
     <div class="runway-top">
       <div>
-        <div class="runway-label">Projected Runway (pre-revenue)</div>
-        <div class="runway-val">~10 months</div>
-        <div class="runway-sub">Operating budget covers ~10 months of fixed burn after planned marketing. Cubeia revenue share + GGR ramp must intercept before month 10–11.</div>
+        <div class="runway-label">Target Runway</div>
+        <div class="runway-val">6 months</div>
+        <div class="runway-sub">GGR ramp must intercept before month 7 — same window as Cubeia's &euro;0 platform-min grace period. After month 6 the platform min activates regardless of revenue.</div>
       </div>
     </div>
     <div class="runway-grid">
@@ -264,16 +264,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         <div class="mini-sub">~$122K after spent-to-date</div>
       </div>
       <div class="runway-mini">
-        <div class="mini-label">After clipping (250K SEK)</div>
-        <div class="mini-val">1.03M SEK</div>
-        <div class="mini-sub">~$98K to fund monthly burn</div>
+        <div class="mini-label">Marketing budget (6 mo)</div>
+        <div class="mini-val" style="color:var(--green);">~790K SEK</div>
+        <div class="mini-sub">~$75K &middot; ~&euro;70K &middot; ex-salaries &amp; fixed</div>
       </div>
       <div class="runway-mini">
-        <div class="mini-label">Burn switch (month 7)</div>
-        <div class="mini-val">$7.4K &rarr; $12.8K /mo</div>
-        <div class="mini-sub">Cubeia platform min kicks in</div>
+        <div class="mini-label">Marketing buffer after clipping</div>
+        <div class="mini-val">~540K SEK</div>
+        <div class="mini-sub">~$51K &middot; unallocated, post clipping 250K</div>
       </div>
     </div>
+  </div>
+
+  <!-- 6-month allocation breakdown -->
+  <div class="note-box info" style="margin-bottom:48px;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6&times;$5K = $30K <strong>minus</strong> Cubeia AWS 6&times;&euro;1,700 = $11K <strong>minus</strong> security subs 6&times;&euro;330 = $2.1K <strong>minus</strong> Claude Max 6&times;$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K = <strong>$75K / ~790K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK) is already committed against this, leaving ~540K SEK / $51K of marketing buffer for anything else (KOL, paid social, additional clipping, agency spend, etc.).</div>
   </div>
 
   <!-- 01: SPENT TO DATE -->
@@ -580,7 +586,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       </div>
       <div class="note-box rose" style="margin-top:24px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <div><strong>Read of the chart:</strong> after clipping (250K SEK) and 6 months of grace-period burn, ~$54K is left. At the post-grace burn of $12.8K/mo, that's ~4 more months. <strong>Cumulative spend hits the operating-budget ceiling around month 10</strong> with no revenue. Margin of safety is thin — GGR ramp before month 7 is the single most important commercial milestone.</div>
+        <div><strong>Target = revenue by month 6.</strong> If GGR doesn't ramp before month 7 (when Cubeia's grace ends): after clipping (250K SEK) and 6 months of grace-period burn, ~$54K is left. At the post-grace burn of $12.8K/mo that's ~4 more months &mdash; cumulative spend hits the operating-budget ceiling around month 10. The 12-month chart shows the slip scenario, not the plan.</div>
       </div>
     </div>
   </section>
