@@ -257,7 +257,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     <a href="#pnl" class="subnav-link">P&amp;L</a>
     <a href="#vsspend" class="subnav-link">M1–M6 Profit</a>
     <a href="#open" class="subnav-link">Open Qs</a>
-    <a href="#pool" class="subnav-link">Pool</a>
+    <a href="#pool" class="subnav-link">Loyalty Pool</a>
   </div>
 </div>
 
@@ -829,11 +829,16 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </table>
   </section>
 
-  <!-- §09 PROFIT-SHARE POOL -->
+  <!-- §09 EARLY-TEAM LOYALTY PROFIT-SHARE -->
   <section class="section" id="pool">
     <div class="section-label">
       <span class="section-num">09</span>
-      <span class="section-title">Core-Team Profit-Share Pool</span>
+      <span class="section-title">Early-Team Loyalty Profit-Share</span>
+    </div>
+
+    <div class="note-box" style="background:rgba(108,92,231,0.08);border:1px solid rgba(108,92,231,0.3);padding:14px 16px;border-radius:8px;display:flex;gap:12px;align-items:flex-start;margin-bottom:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;color:#a39bfa;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <div><strong>What this section is.</strong> The three people in this pool — <strong>Toro (back-office + anti-fraud), Owl (finance + reporting + ops PM), Gibbiana (affiliate + PR)</strong> — are Nordic/German operators in mid-level functional roles. Open-market base for these roles in their home countries runs roughly <strong>€45–75K/year</strong>; they're currently accepting <strong>$12–24K/year</strong> base (~25–30% of market). The profit-share below is the mechanism that compensates that haircut once the business is profitable. It is a <strong>loyalty / early-team allocation</strong>, not market-rate exec comp. Decision-making investors are compensated separately via equity returns, not this pool.</div>
     </div>
 
     <div class="note-box green">
@@ -889,9 +894,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Why this structure</h3>
     <div class="card-grid" style="margin-bottom:24px;">
       <div class="bonus-card welcome">
-        <h3>Flat 10% · simple</h3>
-        <div class="term">No escalating tiers to argue over</div>
-        <div class="desc">One rule for every month above $25K NP. Easier to compute, easier to budget, harder to game. Industry-standard SaaS bonus pool size.</div>
+        <h3>Loyalty comp, not market comp</h3>
+        <div class="term">Compensates ~70% base haircut</div>
+        <div class="desc">Nordic/German mid-level base for these roles ≈ €45–75K/yr. They're on $12–24K/yr base. The pool exists to make them whole-plus-some once the business is actually profitable. At the $25K/mo per-person cap ($300K/yr), total comp lands at ~4–5× their open-market base — appropriate for years of below-market acceptance.</div>
       </div>
       <div class="bonus-card reload">
         <h3>$0 when unprofitable</h3>
@@ -924,6 +929,42 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       <div><strong>Implementation note:</strong> the pool comes out of operating Net Profit before founder distribution. At <strong>$55K M7+ base-case NP</strong> (per §06.5), 10% × $55K = $5.5K pool = <strong>~$1.8K/person uplift</strong>. Per-person cap binds at <strong>$750K monthly NP</strong> — above that, every $1 of extra NP stays with the company. Pool stays at 0% until $25K NP — so M1–M6 has no pool impact even if some months are net-positive on contribution.</div>
     </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Operating Rules</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Rule</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fixed allocation</strong></td>
+          <td class="cat">The pool is permanently allocated to <strong>Toro, Owl, and Gibbiana</strong>. Later hires receive market-rate base + role-appropriate bonuses (or none), <em>not</em> a share of this pool. This is an early-team-only arrangement and does not set precedent for future comp.</td>
+        </tr>
+        <tr>
+          <td><strong>Leaver clause</strong></td>
+          <td class="cat"><strong>Default:</strong> if a member departs (voluntarily or otherwise), their pool share ends at the departure date. No clawback on previously paid months. Their share is <strong>not redistributed</strong> to the remaining two — it stays with the company. (Alternative if preferred: 60-day tail then ends.)</td>
+        </tr>
+        <tr>
+          <td><strong>Investor compensation</strong></td>
+          <td class="cat">Decision-making investors are compensated via equity returns (dividends, exit). They do <strong>not</strong> draw from this pool. Pool sits as an opex line above the dividend distribution waterfall.</td>
+        </tr>
+        <tr>
+          <td><strong>Underperformance / disputes</strong></td>
+          <td class="cat">Pool share is tied to membership in the role, not individual KPIs. If performance becomes an issue, the conversation is "role change or departure" — not "reduce your pool share". Keeps the loyalty mechanic clean and non-political.</td>
+        </tr>
+        <tr>
+          <td><strong>Re-evaluation trigger</strong></td>
+          <td class="cat">Structure is re-evaluated when (a) headcount exceeds 6, (b) any member's role materially expands beyond current scope, or (c) the cap binds for 3+ consecutive months at $750K+ NP. Until then, the structure stays as written.</td>
+        </tr>
+        <tr>
+          <td><strong>Documentation</strong></td>
+          <td class="cat">Once the first profitable month arrives, this becomes a written side-letter between the company and each member. Do not rely on this dashboard alone as the agreement of record.</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Alternative structures (other shapes considered)</h3>
     <table class="lit">
