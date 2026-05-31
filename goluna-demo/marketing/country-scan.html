@@ -42,6 +42,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .header-right { display: flex; align-items: center; gap: 6px; }
 .header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
 .header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
 .header-link.active { color: var(--accent); font-weight: 600; }
 .hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
 
@@ -181,16 +183,17 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="../index.html" class="logo">GoLuna <span>Strategies</span></a>
+    <a href="../index.html" class="logo">GoLuna</a>
     <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
-    <div class="header-right">
+    <nav class="header-right">
       <a href="../marketresearch.html" class="header-link">Markets</a>
-      <a href="../marketing.html" class="header-link active">Marketing Plan</a>
+      <a href="../strategy.html" class="header-link active">Marketing</a>
       <a href="../channels.html" class="header-link">Channels</a>
+      <a href="../vendors.html" class="header-link">Vendors</a>
       <a href="../budget.html" class="header-link">Budget</a>
       <a href="../forecast.html" class="header-link">Forecast</a>
-      <a href="../index.html" class="header-link" style="color:var(--accent);font-weight:600;">Hub</a>
-    </div>
+      <a href="../index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
   </div>
 </header>
 
