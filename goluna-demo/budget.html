@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>GoLuna — Budget &amp; Runway</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -59,6 +60,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
 .subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 @media (max-width: 640px) { .subnav { padding: 0 16px; } .subnav-inner { height: 36px; } }
+/* === CURRENCY SWITCHER === */
+.fx-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; vertical-align: middle; margin: 0 4px; }
+.fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-switch-btn:hover { color: var(--text); }
+.fx-switch-btn.active { color: var(--bg); background: var(--accent); }
+.cur-usd, .cur-sek, .cur-eur { display: none; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: inline; }
+body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
+body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
+body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
 .header-link.active { color: var(--accent); font-weight: 600; }
 .hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
 
@@ -199,476 +210,475 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 </style>
 </head>
 <body>
-
 <header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="logo">GoLuna</a>
-    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
-    <nav class="header-right">
-      <a href="marketresearch.html" class="header-link">Markets</a>
-      <a href="strategy.html" class="header-link">Marketing</a>
-      <a href="channels.html" class="header-link">Channels</a>
-      <a href="vendors.html" class="header-link">Vendors</a>
-      <a href="budget.html" class="header-link active">Budget</a>
-      <a href="forecast.html" class="header-link">Forecast</a>
-      <a href="index.html" class="header-link header-link-hub">Hub</a>
-    </nav>
-  </div>
+<div class="header-inner">
+<a class="logo" href="index.html">GoLuna</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="hamburger" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
+<nav class="header-right">
+<a class="header-link" href="marketresearch.html">Markets</a>
+<a class="header-link" href="strategy.html">Marketing</a>
+<a class="header-link" href="channels.html">Channels</a>
+<a class="header-link" href="vendors.html">Vendors</a>
+<a class="header-link active" href="budget.html">Budget</a>
+<a class="header-link" href="forecast.html">Forecast</a>
+<a class="header-link header-link-hub" href="index.html">Hub</a>
+</nav>
+</div>
 </header>
-
 <div class="subnav">
-  <div class="subnav-inner">
-    <a href="#spent" class="subnav-link">Spent</a>
-    <a href="#planned" class="subnav-link">Planned</a>
-    <a href="#monthly" class="subnav-link">Monthly</a>
-    <a href="#cubeia" class="subnav-link">Cubeia</a>
-    <a href="#forecast" class="subnav-link">12-Mo Chart</a>
-    <a href="#open" class="subnav-link">Open Qs</a>
-  </div>
+<div class="subnav-inner">
+<a class="subnav-link" href="#spent">Spent</a>
+<a class="subnav-link" href="#planned">Planned</a>
+<a class="subnav-link" href="#monthly">Monthly</a>
+<a class="subnav-link" href="#cubeia">Cubeia</a>
+<a class="subnav-link" href="#forecast">12-Mo Chart</a>
+<a class="subnav-link" href="#open">Open Qs</a>
 </div>
-
+</div>
 <div class="page">
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-top">
-      <div class="hero-badge"><span class="dot"></span> Operating Budget</div>
-      <span class="hero-date">v0.1 &middot; May 2026</span>
-    </div>
-    <h1>Budget &amp; Runway</h1>
-    <p>Full cost stack for the GoLuna launch: spent to date, monthly recurring burn, planned marketing, and 12-month runway. All figures shown in SEK and USD with explicit FX assumptions.</p>
-  </section>
-
-  <!-- FX assumptions -->
-  <div class="note-box info">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    <div><strong>FX assumptions (override if you have spot rates):</strong> 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08 &middot; 1 EUR &asymp; 11.34 SEK. All conversions in this page apply these rates.</div>
-  </div>
-
-  <!-- Top metrics strip -->
-  <div class="metrics-strip">
-    <div class="metric-card total">
-      <div class="label">Total Budget</div>
-      <div class="val accent">3.0M SEK</div>
-      <div class="sub">~$286K &middot; ~&euro;265K</div>
-    </div>
-    <div class="metric-card reserve">
-      <div class="label">Bankroll Reserve</div>
-      <div class="val cyan">1.5M SEK</div>
-      <div class="sub">~$143K &middot; locked, not spent</div>
-    </div>
-    <div class="metric-card operating">
-      <div class="label">Operating Budget</div>
-      <div class="val green">1.5M SEK</div>
-      <div class="sub">~$143K &middot; everything else</div>
-    </div>
-    <div class="metric-card spent">
-      <div class="label">Spent To Date</div>
-      <div class="val amber">220K SEK</div>
-      <div class="sub">~$21K &middot; 15% of operating</div>
-    </div>
-  </div>
-
-  <!-- Runway hero -->
-  <div class="runway">
-    <div class="runway-top">
-      <div>
-        <div class="runway-label">Target Runway</div>
-        <div class="runway-val">6 months</div>
-        <div class="runway-sub">GGR ramp must intercept before month 7 — same window as Cubeia's &euro;0 platform-min grace period. After month 6 the platform min activates regardless of revenue.</div>
-      </div>
-    </div>
-    <div class="runway-grid">
-      <div class="runway-mini">
-        <div class="mini-label">Operating remaining</div>
-        <div class="mini-val">1.28M SEK</div>
-        <div class="mini-sub">~$122K after spent-to-date</div>
-      </div>
-      <div class="runway-mini">
-        <div class="mini-label">Marketing budget (6 mo)</div>
-        <div class="mini-val" style="color:var(--green);">~655K SEK</div>
-        <div class="mini-sub">~$62.4K &middot; ~&euro;57.7K &middot; ex-salaries, fixed, CR corp &amp; app. b</div>
-      </div>
-      <div class="runway-mini">
-        <div class="mini-label">Marketing buffer after clipping</div>
-        <div class="mini-val">~393K SEK</div>
-        <div class="mini-sub">~$37.4K &middot; unallocated, post clipping 250K</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6-month allocation breakdown -->
-  <div class="note-box info" style="margin-bottom:48px;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    <div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6&times;$5K = $30K <strong>minus</strong> Cubeia AWS 6&times;&euro;1,700 = $11K <strong>minus</strong> Customer.io + Freshchat (Cubeia App. B) 6&times;&euro;350 = $2.3K <strong>minus</strong> security subs 6&times;&euro;330 = $2.1K <strong>minus</strong> Claude Max 6&times;$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K <strong>minus</strong> Costa Rica corp maintenance 2026 ~$10.7K = <strong>$62.4K / ~655K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK / $25K) is already committed, leaving ~393K SEK / ~$37.4K of marketing buffer.</div>
-  </div>
-
-  <!-- 01: SPENT TO DATE -->
-  <section class="section" id="spent">
-    <div class="section-label">
-      <span class="section-num">01</span>
-      <span class="section-title">Spent To Date</span>
-    </div>
-    <table class="lit">
-      <thead>
-        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th style="text-align:right;">EUR</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cubeia <span class="tag paid">paid</span></td>
-          <td class="cat">Platform setup / hosting</td>
-          <td class="num">150,000</td>
-          <td class="num">$14,286</td>
-          <td class="num">&euro;13,228</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">Contract §4i: setup &euro;15K split 50/50 (&euro;7,500 upfront + &euro;7,500 on delivery/go-live). 150K SEK &asymp; &euro;13.2K. Plausible: first &euro;7,500 + ~3 months AWS prepay (&euro;5,100), or full &euro;15K minus a small FX delta. <strong>Account not enabled until full setup paid (§4)</strong> — confirm what was invoiced and whether ~&euro;1.8K is still owed before go-live.</td>
-        </tr>
-        <tr>
-          <td>Company registration <span class="tag paid">paid</span></td>
-          <td class="cat">Legal / formation</td>
-          <td class="num">30,000</td>
-          <td class="num">$2,857</td>
-          <td class="num">&euro;2,646</td>
-        </tr>
-        <tr>
-          <td>Designer <span class="tag paid">paid</span></td>
-          <td class="cat">Brand / creative</td>
-          <td class="num">40,000</td>
-          <td class="num">$3,810</td>
-          <td class="num">&euro;3,527</td>
-        </tr>
-        <tr class="total">
-          <td><strong>Subtotal — spent</strong></td>
-          <td class="cat">3 line items</td>
-          <td class="num">220,000</td>
-          <td class="num">$20,952</td>
-          <td class="num">&euro;19,401</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 02: ONE-TIME PLANNED -->
-  <section class="section" id="planned">
-    <div class="section-label">
-      <span class="section-num">02</span>
-      <span class="section-title">One-Time Planned (not yet spent)</span>
-    </div>
-    <table class="lit">
-      <thead>
-        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th style="text-align:right;">EUR</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Clipping campaign <span class="tag planned">planned</span></td>
-          <td class="cat">Marketing &middot; 250M views over 3 months &middot; includes 1 streamer @ $3K to produce raw clips</td>
-          <td class="num">~250,000</td>
-          <td class="num">$25,000</td>
-          <td class="num">~&euro;23,150</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">$25K total: ~$22K to clipper distribution (cross-platform short-form farm) + <strong>$3K to 1 streamer</strong> for raw gameplay/content that the clippers cut into 100s of clips. Streamer cost is bundled inside the $25K, not on top.</td>
-        </tr>
-        <tr>
-          <td>Security stack core <span class="tag planned">planned</span></td>
-          <td class="cat">YubiKeys, routers, Starlink, faraday, privacy filters</td>
-          <td class="num">~23,800</td>
-          <td class="num">~$2,268</td>
-          <td class="num">~&euro;2,100</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">Mid-range estimate. Range is &euro;1,800–2,400 depending on whether SV2 needs Pixel 9 Pro (&euro;1,000) or team uses existing devices. If all four upgrade laptops + phones, add +&euro;8–10K.</td>
-        </tr>
-        <tr>
-          <td>Costa Rica corp maintenance 2026 <span class="tag planned">annual</span></td>
-          <td class="cat">Maintenance bundle &euro;3,585 + Drift &euro;5,500 + Local UBO &euro;850</td>
-          <td class="num">~112,660</td>
-          <td class="num">~$10,730</td>
-          <td class="num">~&euro;9,935</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">CR-side corporate keeping costs for 2026. Full line-item breakdown lives in <a href="forecast.html#cr-corp" style="color:var(--accent);text-decoration:underline;">Forecast §06</a>. Recurring annually.</td>
-        </tr>
-        <tr class="total">
-          <td><strong>Subtotal — planned one-time</strong></td>
-          <td class="cat">3 line items</td>
-          <td class="num">~386,460</td>
-          <td class="num">~$36,808</td>
-          <td class="num">~&euro;34,081</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 03: MONTHLY RECURRING -->
-  <section class="section" id="monthly">
-    <div class="section-label">
-      <span class="section-num">03</span>
-      <span class="section-title">Monthly Recurring</span>
-    </div>
-
-    <table class="lit" style="margin-bottom:20px;">
-      <thead>
-        <tr><th>Line item</th><th>Category</th><th style="text-align:right;">USD / mo</th><th style="text-align:right;">SEK / mo</th><th style="text-align:right;">EUR / mo</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Gibbiana <span class="tag recurring">salary</span></td>
-          <td class="cat">Team</td>
-          <td class="num">$2,000</td>
-          <td class="num">21,000</td>
-          <td class="num">&euro;1,852</td>
-        </tr>
-        <tr>
-          <td>Frog <span class="tag recurring">salary</span></td>
-          <td class="cat">Team</td>
-          <td class="num">$2,000</td>
-          <td class="num">21,000</td>
-          <td class="num">&euro;1,852</td>
-        </tr>
-        <tr>
-          <td>Owl <span class="tag recurring">salary</span></td>
-          <td class="cat">Team</td>
-          <td class="num">$1,000</td>
-          <td class="num">10,500</td>
-          <td class="num">&euro;926</td>
-        </tr>
-        <tr>
-          <td>Cubeia hosting (AWS) <span class="tag recurring">platform</span></td>
-          <td class="cat">From day 1</td>
-          <td class="num">$1,836</td>
-          <td class="num">19,278</td>
-          <td class="num">&euro;1,700</td>
-        </tr>
-        <tr>
-          <td>Cubeia platform minimum <span class="tag deferred">mo 7+</span></td>
-          <td class="cat">&euro;0 mo 1–6, then &euro;5K/mo</td>
-          <td class="num">$5,400</td>
-          <td class="num">56,700</td>
-          <td class="num">&euro;5,000</td>
-        </tr>
-        <tr>
-          <td>Security stack subs <span class="tag recurring">opsec</span></td>
-          <td class="cat">VPN, Proton, 1Password, MySudo, Starlink, Cloudflare Pro, Hetzner, B2</td>
-          <td class="num">$356</td>
-          <td class="num">3,742</td>
-          <td class="num">&euro;330</td>
-        </tr>
-        <tr>
-          <td>Claude Max <span class="tag recurring">tooling</span></td>
-          <td class="cat">1 seat assumed</td>
-          <td class="num">$200</td>
-          <td class="num">2,100</td>
-          <td class="num">&euro;185</td>
-        </tr>
-        <tr>
-          <td>Customer.io <span class="tag recurring">cubeia app. b</span></td>
-          <td class="cat">Lifecycle email / CRM (committed)</td>
-          <td class="num">$324</td>
-          <td class="num">3,402</td>
-          <td class="num">&euro;300</td>
-        </tr>
-        <tr>
-          <td>Freshchat <span class="tag recurring">cubeia app. b</span></td>
-          <td class="cat">Live support chat (committed)</td>
-          <td class="num">$54</td>
-          <td class="num">567</td>
-          <td class="num">&euro;50</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="burn-grid">
-      <div class="burn-card now">
-        <div class="burn-period">Months 1–6 (now)</div>
-        <div class="burn-amount green">$7,770 / mo</div>
-        <div class="burn-sub">81,585 SEK &middot; &euro;7,194 — Cubeia platform minimum waived</div>
-        <ul>
-          <li>Salaries (G+F+O)<span class="li-num">$5,000</span></li>
-          <li>Cubeia hosting<span class="li-num">$1,836</span></li>
-          <li>Security subs<span class="li-num">$356</span></li>
-          <li>Claude Max<span class="li-num">$200</span></li>
-          <li>Customer.io<span class="li-num">$324</span></li>
-          <li>Freshchat<span class="li-num">$54</span></li>
-        </ul>
-      </div>
-      <div class="burn-card later">
-        <div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
-        <div class="burn-amount amber">$13,170 / mo</div>
-        <div class="burn-sub">138,285 SEK &middot; &euro;12,194 — adds &euro;5K/mo platform min</div>
-        <ul>
-          <li>Everything in months 1–6<span class="li-num">$7,770</span></li>
-          <li>Cubeia platform min<span class="li-num">$5,400</span></li>
-          <li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="note-box info">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Variable costs not in monthly burn</strong> — these apply on top of revenue once GGR exists: Cubeia platform rev share <strong>5% flat</strong> &middot; Casino game providers (QTech / Hub88 / St8 / Slotegrator) <strong>6–15% blended</strong> &middot; Cubeia Originals <strong>6% + €2,000/mo</strong> if used &middot; Cubeia Poker <strong>10%</strong> (blocks UK/US) &middot; Sportsbook (Betby / Ultraplay / SABA / Song88) <strong>TBD</strong>. Bankroll is self-funded from the reserved 1.5M SEK. <em>(Source: Cubeia Nano License Agreement, Appendix A.)</em></div>
-    </div>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Optional 3rd-party add-ons (Appendix B)</h3>
-    <table class="lit">
-      <thead>
-        <tr><th>Service</th><th>Purpose</th><th style="text-align:right;">EUR / mo</th><th style="text-align:right;">USD / mo</th><th style="text-align:right;">Required?</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Customer.io <span class="tag planned">optional</span></td>
-          <td class="cat">Email / lifecycle CRM (player retention)</td>
-          <td class="num">&euro;300</td>
-          <td class="num">$324</td>
-          <td class="num" style="color:var(--text-muted);">No</td>
-        </tr>
-        <tr>
-          <td>Freshchat <span class="tag planned">optional</span></td>
-          <td class="cat">Live support chat (1st-line CS is Operator responsibility)</td>
-          <td class="num">&euro;50</td>
-          <td class="num">$54</td>
-          <td class="num" style="color:var(--text-muted);">No</td>
-        </tr>
-        <tr class="total">
-          <td><strong>Add-on cost if both adopted</strong></td>
-          <td class="cat">Adds to monthly burn</td>
-          <td class="num">&euro;350</td>
-          <td class="num">$378</td>
-          <td class="num">—</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- 04: CUBEIA CONTRACT REFERENCE -->
-  <section class="section" id="cubeia">
-    <div class="section-label">
-      <span class="section-num">04</span>
-      <span class="section-title">Cubeia Contract — Key Terms</span>
-    </div>
-    <div class="card-grid">
-      <div class="ic-card green">
-        <div class="ic-head"><span class="ic-name">Setup fee</span><span class="ic-price green">&euro;15K</span></div>
-        <div class="ic-meta">§4i &middot; split 50/50</div>
-        <div class="ic-desc">&euro;7,500 upfront + &euro;7,500 on delivery and go-live. <strong>Account not enabled in test or production until full setup is paid.</strong></div>
-      </div>
-      <div class="ic-card purple">
-        <div class="ic-head"><span class="ic-name">AWS hosting</span><span class="ic-price">&euro;1,700 /mo</span></div>
-        <div class="ic-meta">App. B &middot; required</div>
-        <div class="ic-desc">Fixed monthly from day 1. Required line item — invoiced through Cubeia.</div>
-      </div>
-      <div class="ic-card amber">
-        <div class="ic-head"><span class="ic-name">Platform minimum</span><span class="ic-price amber">&euro;5K /mo</span></div>
-        <div class="ic-meta">§4ii &middot; from month 7+</div>
-        <div class="ic-desc"><strong>6-month clock starts at go-live</strong> (when Cubeia verifies key functionality via the Preflight checklist — App. C), not at contract signing. Month 1 fee is pro-rata on remaining days of the month after go-live.</div>
-      </div>
-      <div class="ic-card cyan">
-        <div class="ic-head"><span class="ic-name">Revenue share</span><span class="ic-price">5%</span></div>
-        <div class="ic-meta">§4ii.a &middot; flat on GGR</div>
-        <div class="ic-desc">Invoiced in EUR using the official rate on the day of issue. Crypto-paying operators can settle in BTC via wallet address.</div>
-      </div>
-      <div class="ic-card rose">
-        <div class="ic-head"><span class="ic-name">Restricted territories</span><span class="ic-price" style="font-size:14px;">UK · US · SE</span></div>
-        <div class="ic-meta">§5 &middot; IP-block + registration block required</div>
-        <div class="ic-desc"><strong>Sweden is blocked</strong> — relevant since Operator and Provider are both Swedish entities. Cubeia can add jurisdictions on notice if laws change.</div>
-      </div>
-      <div class="ic-card purple">
-        <div class="ic-head"><span class="ic-name">Termination</span><span class="ic-price">30 days</span></div>
-        <div class="ic-meta">§7 &middot; either party, any reason</div>
-        <div class="ic-desc">Cubeia can terminate immediately for undisputed non-payment (§7). Operator can terminate if Cubeia is offline &gt; 24h consecutive (§7).</div>
-      </div>
-    </div>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Game provider economics (Appendix A)</h3>
-    <table class="lit">
-      <thead>
-        <tr><th>Vertical</th><th>Provider</th><th style="text-align:right;">Rev share (on GGR)</th><th style="text-align:right;">Monthly fee</th><th>Blocked regions</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Casino</td><td>QTech</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
-        <tr><td>Casino</td><td>Hub88</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
-        <tr><td>Casino</td><td>St8</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
-        <tr><td>Casino</td><td>Slotegrator</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
-        <tr><td>Cubeia Originals</td><td>Cubeia</td><td class="num">6%</td><td class="num">&euro;2,000</td><td class="cat">—</td></tr>
-        <tr><td>Poker</td><td>Cubeia</td><td class="num">10%</td><td class="num">—</td><td class="cat">UK, US</td></tr>
-        <tr><td>Sportsbook</td><td>Betby / Ultraplay / SABA / Song88</td><td class="num">TBD</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
-        <tr class="note">
-          <td colspan="5">If Cubeia Originals are used, add <strong>€2,000/mo</strong> to the recurring burn (this stacks with the platform minimum from month 7). Sportsbook revenue shares are TBD on a per-provider basis once selected.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-box info" style="margin-top:18px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <div>Source: <strong>Cubeia_nano_license_Draft2_2026.pdf</strong> (held privately — not committed to this repo). Sec/Appendix references in the cards above point into that document.</div>
-    </div>
-  </section>
-
-  <!-- 05: 12-MONTH FORECAST -->
-  <section class="section" id="forecast">
-    <div class="section-label">
-      <span class="section-num">05</span>
-      <span class="section-title">12-Month Cumulative Burn Forecast</span>
-    </div>
-    <div class="forecast">
-      <div class="forecast-bar" id="fcBar">
-        <div class="fc-col" style="height:18%;" title="Month 1 · $29.1K cumulative (incl. CR corp + security HW + clipping start)"></div>
-        <div class="fc-col" style="height:28%;" title="Month 2 · $45.2K"></div>
-        <div class="fc-col" style="height:37%;" title="Month 3 · $61.3K"></div>
-        <div class="fc-col" style="height:42%;" title="Month 4 · $69.1K"></div>
-        <div class="fc-col" style="height:47%;" title="Month 5 · $76.8K"></div>
-        <div class="fc-col" style="height:52%;" title="Month 6 · $84.6K"></div>
-        <div class="fc-col warn" style="height:60%;" title="Month 7 · $97.8K — Cubeia min activates"></div>
-        <div class="fc-col warn" style="height:68%;" title="Month 8 · $111.0K — approaching ceiling"></div>
-        <div class="fc-col crit" style="height:76%;" title="Month 9 · $124.1K — over by $2K"></div>
-        <div class="fc-col crit" style="height:84%;" title="Month 10 · $137.3K — over by $15K"></div>
-        <div class="fc-col crit" style="height:92%;" title="Month 11 · $150.5K — over by $28K"></div>
-        <div class="fc-col crit" style="height:100%;" title="Month 12 · $163.6K — over by $42K"></div>
-      </div>
-      <div class="fc-labels">
-        <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
-      </div>
-      <div class="fc-legend">
-        <span><span class="ldot" style="background:var(--surface-3);"></span> Months 1–6 burn ($7.4K/mo)</span>
-        <span><span class="ldot" style="background:rgba(251,191,36,0.5);"></span> Months 7–9 burn ($12.8K/mo)</span>
-        <span><span class="ldot" style="background:rgba(251,113,133,0.5);"></span> Out of operating budget</span>
-      </div>
-      <div class="note-box rose" style="margin-top:24px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <div><strong>Target = revenue by month 6.</strong> If GGR doesn't ramp before month 7 (when Cubeia's grace ends): after clipping (250K SEK), CR corp maintenance (~$10.7K), Customer.io + Freshchat at &euro;350/mo, and 6 months of grace-period burn, ~$37K is left. At the post-grace burn of $13.2K/mo that's ~2.8 more months &mdash; cumulative spend hits the operating-budget ceiling around month 8–9. The 12-month chart shows the slip scenario, not the plan. See <a href="forecast.html" style="color:var(--rose);text-decoration:underline;">Forecast</a> for the full month-by-month table.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06: OPEN QUESTIONS -->
-  <section class="section" id="open">
-    <div class="section-label">
-      <span class="section-num">06</span>
-      <span class="section-title">Open Questions / To Confirm</span>
-    </div>
-    <table class="lit">
-      <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
-      <tbody>
-        <tr><td>What does the 150K SEK already paid to Cubeia cover? Full &euro;15K setup, or first &euro;7,500 + hosting prepay?</td><td>If only first half, ~&euro;7,500 must be paid before go-live (account stays disabled until full setup paid, §4).</td></tr>
-        <tr><td>Go-live target date for the 6-month grace clock</td><td>The &euro;5K/mo platform min only kicks in 6 months after Cubeia verifies the Preflight checklist (App. C), not 6 months after signing. Slipping go-live extends the grace window.</td></tr>
-        <tr><td>Which game providers / verticals are we launching with?</td><td>Casino @ 6–15% rev share (4 providers) vs Cubeia Originals 6% + &euro;2,000/mo flat vs Poker 10% — all separate from Cubeia's 5% platform share. Mix determines total take-rate.</td></tr>
-        <tr><td>Adding Customer.io (&euro;300/mo) and/or Freshchat (&euro;50/mo)?</td><td>App. B optional. Customer.io is the standard for casino lifecycle email; Freshchat is one of many support-chat options. Adds &euro;350/mo ($378) if both.</td></tr>
-        <tr><td>Sweden is a restricted territory (§5) — does this affect any marketing?</td><td>No Swedish player can register. Confirm Swedish-language clipping / KOL content excludes Sweden as a target.</td></tr>
-        <tr><td>Spot FX rates as of payment dates</td><td>USD/SEK and EUR/SEK can swing 3–5%; total budget USD figure shifts ~$10K either way.</td></tr>
-        <tr><td>Claude Max seats: 1 or 3?</td><td>1 seat = $200/mo; 3 seats = $600/mo &rarr; +$4.8K/year.</td></tr>
-        <tr><td>Security stack: 4 users or scaled-down 2?</td><td>Cuts monthly subs from $356 to ~$180. One-time core from ~$2.3K to ~$1.5K.</td></tr>
-        <tr><td>Are salaries gross or net?</td><td>If gross, employer-side taxes (Sweden ~31%) add ~$1.5K/mo to the burn.</td></tr>
-        <tr><td>Domain, Vercel, email beyond Proton?</td><td>Not currently in budget; small but recurring.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <footer class="footer">
-    GoLuna &mdash; Budget &amp; Runway &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="index.html">Back to Hub &rarr;</a>
-  </footer>
-
+<!-- Hero -->
+<section class="hero">
+<div class="hero-top">
+<div class="hero-badge"><span class="dot"></span> Operating Budget</div>
+<span class="hero-date">v0.1 · May 2026</span>
 </div>
-
+<h1>Budget &amp; Runway</h1>
+<p>Full cost stack for the GoLuna launch: spent to date, monthly recurring burn, planned marketing, and 12-month runway. All figures shown in SEK and USD with explicit FX assumptions.</p>
+</section>
+<!-- FX assumptions -->
+<div class="note-box info">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div><strong>Currency: </strong><span class="fx-switch"><button class="fx-switch-btn" data-cur="usd">USD</button><button class="fx-switch-btn" data-cur="sek">SEK</button><button class="fx-switch-btn" data-cur="eur">EUR</button></span><strong>FX assumptions (override if you have spot rates):</strong> 1 USD ≈ 10.5 SEK · 1 EUR ≈ $1.08 · 1 EUR ≈ 11.34 SEK. All conversions in this page apply these rates.</div>
+</div>
+<!-- Top metrics strip -->
+<div class="metrics-strip">
+<div class="metric-card total">
+<div class="label">Total Budget</div>
+<div class="val accent">3.0M SEK</div>
+<div class="sub">~$286K · ~€265K</div>
+</div>
+<div class="metric-card reserve">
+<div class="label">Bankroll Reserve</div>
+<div class="val cyan">1.5M SEK</div>
+<div class="sub">~$143K · locked, not spent</div>
+</div>
+<div class="metric-card operating">
+<div class="label">Operating Budget</div>
+<div class="val green">1.5M SEK</div>
+<div class="sub">~$143K · everything else</div>
+</div>
+<div class="metric-card spent">
+<div class="label">Spent To Date</div>
+<div class="val amber">220K SEK</div>
+<div class="sub">~$21K · 15% of operating</div>
+</div>
+</div>
+<!-- Runway hero -->
+<div class="runway">
+<div class="runway-top">
+<div>
+<div class="runway-label">Target Runway</div>
+<div class="runway-val">6 months</div>
+<div class="runway-sub">GGR ramp must intercept before month 7 — same window as Cubeia's €0 platform-min grace period. After month 6 the platform min activates regardless of revenue.</div>
+</div>
+</div>
+<div class="runway-grid">
+<div class="runway-mini">
+<div class="mini-label">Operating remaining</div>
+<div class="mini-val">1.28M SEK</div>
+<div class="mini-sub">~$122K after spent-to-date</div>
+</div>
+<div class="runway-mini">
+<div class="mini-label">Marketing budget (6 mo)</div>
+<div class="mini-val" style="color:var(--green);">~655K SEK</div>
+<div class="mini-sub">~$62.4K · ~€57.7K · ex-salaries, fixed, CR corp &amp; app. b</div>
+</div>
+<div class="runway-mini">
+<div class="mini-label">Marketing buffer after clipping</div>
+<div class="mini-val">~393K SEK</div>
+<div class="mini-sub">~$37.4K · unallocated, post clipping 250K</div>
+</div>
+</div>
+</div>
+<!-- 6-month allocation breakdown -->
+<div class="note-box info" style="margin-bottom:48px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6×$5K = $30K <strong>minus</strong> Cubeia AWS 6×€1,700 = $11K <strong>minus</strong> Customer.io + Freshchat (Cubeia App. B) 6×€350 = $2.3K <strong>minus</strong> security subs 6×€330 = $2.1K <strong>minus</strong> Claude Max 6×$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K <strong>minus</strong> Costa Rica corp maintenance 2026 ~$10.7K = <strong>$62.4K / ~655K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK / $25K) is already committed, leaving ~393K SEK / ~$37.4K of marketing buffer.</div>
+</div>
+<!-- 01: SPENT TO DATE -->
+<section class="section" id="spent">
+<div class="section-label">
+<span class="section-num">01</span>
+<span class="section-title">Spent To Date</span>
+</div>
+<table class="lit">
+<thead>
+<tr><th>Line item</th><th>Category</th><th class="col-sek" style="text-align:right;">SEK</th><th class="col-usd" style="text-align:right;">USD</th><th class="col-eur" style="text-align:right;">EUR</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Cubeia <span class="tag paid">paid</span></td>
+<td class="cat">Platform setup / hosting</td>
+<td class="num col-sek">150,000</td>
+<td class="num col-usd">$14,286</td>
+<td class="num col-eur">€13,228</td>
+</tr>
+<tr class="note">
+<td colspan="5">Contract §4i: setup €15K split 50/50 (€7,500 upfront + €7,500 on delivery/go-live). 150K SEK ≈ €13.2K. Plausible: first €7,500 + ~3 months AWS prepay (€5,100), or full €15K minus a small FX delta. <strong>Account not enabled until full setup paid (§4)</strong> — confirm what was invoiced and whether ~€1.8K is still owed before go-live.</td>
+</tr>
+<tr>
+<td>Company registration <span class="tag paid">paid</span></td>
+<td class="cat">Legal / formation</td>
+<td class="num col-sek">30,000</td>
+<td class="num col-usd">$2,857</td>
+<td class="num col-eur">€2,646</td>
+</tr>
+<tr>
+<td>Designer <span class="tag paid">paid</span></td>
+<td class="cat">Brand / creative</td>
+<td class="num col-sek">40,000</td>
+<td class="num col-usd">$3,810</td>
+<td class="num col-eur">€3,527</td>
+</tr>
+<tr class="total">
+<td><strong>Subtotal — spent</strong></td>
+<td class="cat">3 line items</td>
+<td class="num col-sek">220,000</td>
+<td class="num col-usd">$20,952</td>
+<td class="num col-eur">€19,401</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- 02: ONE-TIME PLANNED -->
+<section class="section" id="planned">
+<div class="section-label">
+<span class="section-num">02</span>
+<span class="section-title">One-Time Planned (not yet spent)</span>
+</div>
+<table class="lit">
+<thead>
+<tr><th>Line item</th><th>Category</th><th class="col-sek" style="text-align:right;">SEK</th><th class="col-usd" style="text-align:right;">USD</th><th class="col-eur" style="text-align:right;">EUR</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Clipping campaign <span class="tag planned">planned</span></td>
+<td class="cat">Marketing · 250M views over 3 months · includes 1 streamer @ $3K to produce raw clips</td>
+<td class="num col-sek">~250,000</td>
+<td class="num col-usd">$25,000</td>
+<td class="num col-eur">~€23,150</td>
+</tr>
+<tr class="note">
+<td colspan="5">$25K total: ~$22K to clipper distribution (cross-platform short-form farm) + <strong>$3K to 1 streamer</strong> for raw gameplay/content that the clippers cut into 100s of clips. Streamer cost is bundled inside the $25K, not on top.</td>
+</tr>
+<tr>
+<td>Security stack core <span class="tag planned">planned</span></td>
+<td class="cat">YubiKeys, routers, Starlink, faraday, privacy filters</td>
+<td class="num col-sek">~23,800</td>
+<td class="num col-usd">~$2,268</td>
+<td class="num col-eur">~€2,100</td>
+</tr>
+<tr class="note">
+<td colspan="5">Mid-range estimate. Range is €1,800–2,400 depending on whether SV2 needs Pixel 9 Pro (€1,000) or team uses existing devices. If all four upgrade laptops + phones, add +€8–10K.</td>
+</tr>
+<tr>
+<td>Costa Rica corp maintenance 2026 <span class="tag planned">annual</span></td>
+<td class="cat">Maintenance bundle €3,585 + Drift €5,500 + Local UBO €850</td>
+<td class="num col-sek">~112,660</td>
+<td class="num col-usd">~$10,730</td>
+<td class="num col-eur">~€9,935</td>
+</tr>
+<tr class="note">
+<td colspan="5">CR-side corporate keeping costs for 2026. Full line-item breakdown lives in <a href="forecast.html#cr-corp" style="color:var(--accent);text-decoration:underline;">Forecast §06</a>. Recurring annually.</td>
+</tr>
+<tr class="total">
+<td><strong>Subtotal — planned one-time</strong></td>
+<td class="cat">3 line items</td>
+<td class="num col-sek">~386,460</td>
+<td class="num col-usd">~$36,808</td>
+<td class="num col-eur">~€34,081</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- 03: MONTHLY RECURRING -->
+<section class="section" id="monthly">
+<div class="section-label">
+<span class="section-num">03</span>
+<span class="section-title">Monthly Recurring</span>
+</div>
+<table class="lit" style="margin-bottom:20px;">
+<thead>
+<tr><th>Line item</th><th>Category</th><th class="col-usd" style="text-align:right;">USD / mo</th><th class="col-sek" style="text-align:right;">SEK / mo</th><th class="col-eur" style="text-align:right;">EUR / mo</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Gibbiana <span class="tag recurring">salary</span></td>
+<td class="cat">Team</td>
+<td class="num col-usd">$2,000</td>
+<td class="num col-sek">21,000</td>
+<td class="num col-eur">€1,852</td>
+</tr>
+<tr>
+<td>Frog <span class="tag recurring">salary</span></td>
+<td class="cat">Team</td>
+<td class="num col-usd">$2,000</td>
+<td class="num col-sek">21,000</td>
+<td class="num col-eur">€1,852</td>
+</tr>
+<tr>
+<td>Owl <span class="tag recurring">salary</span></td>
+<td class="cat">Team</td>
+<td class="num col-usd">$1,000</td>
+<td class="num col-sek">10,500</td>
+<td class="num col-eur">€926</td>
+</tr>
+<tr>
+<td>Cubeia hosting (AWS) <span class="tag recurring">platform</span></td>
+<td class="cat">From day 1</td>
+<td class="num col-usd">$1,836</td>
+<td class="num col-sek">19,278</td>
+<td class="num col-eur">€1,700</td>
+</tr>
+<tr>
+<td>Cubeia platform minimum <span class="tag deferred">mo 7+</span></td>
+<td class="cat">€0 mo 1–6, then €5K/mo</td>
+<td class="num col-usd">$5,400</td>
+<td class="num col-sek">56,700</td>
+<td class="num col-eur">€5,000</td>
+</tr>
+<tr>
+<td>Security stack subs <span class="tag recurring">opsec</span></td>
+<td class="cat">VPN, Proton, 1Password, MySudo, Starlink, Cloudflare Pro, Hetzner, B2</td>
+<td class="num col-usd">$356</td>
+<td class="num col-sek">3,742</td>
+<td class="num col-eur">€330</td>
+</tr>
+<tr>
+<td>Claude Max <span class="tag recurring">tooling</span></td>
+<td class="cat">1 seat assumed</td>
+<td class="num col-usd">$200</td>
+<td class="num col-sek">2,100</td>
+<td class="num col-eur">€185</td>
+</tr>
+<tr>
+<td>Customer.io <span class="tag recurring">cubeia app. b</span></td>
+<td class="cat">Lifecycle email / CRM (committed)</td>
+<td class="num col-usd">$324</td>
+<td class="num col-sek">3,402</td>
+<td class="num col-eur">€300</td>
+</tr>
+<tr>
+<td>Freshchat <span class="tag recurring">cubeia app. b</span></td>
+<td class="cat">Live support chat (committed)</td>
+<td class="num col-usd">$54</td>
+<td class="num col-sek">567</td>
+<td class="num col-eur">€50</td>
+</tr>
+</tbody>
+</table>
+<div class="burn-grid">
+<div class="burn-card now">
+<div class="burn-period">Months 1–6 (now)</div>
+<div class="burn-amount green">$7,770 / mo</div>
+<div class="burn-sub">81,585 SEK · €7,194 — Cubeia platform minimum waived</div>
+<ul>
+<li>Salaries (G+F+O)<span class="li-num">$5,000</span></li>
+<li>Cubeia hosting<span class="li-num">$1,836</span></li>
+<li>Security subs<span class="li-num">$356</span></li>
+<li>Claude Max<span class="li-num">$200</span></li>
+<li>Customer.io<span class="li-num">$324</span></li>
+<li>Freshchat<span class="li-num">$54</span></li>
+</ul>
+</div>
+<div class="burn-card later">
+<div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
+<div class="burn-amount amber">$13,170 / mo</div>
+<div class="burn-sub">138,285 SEK · €12,194 — adds €5K/mo platform min</div>
+<ul>
+<li>Everything in months 1–6<span class="li-num">$7,770</span></li>
+<li>Cubeia platform min<span class="li-num">$5,400</span></li>
+<li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
+</ul>
+</div>
+</div>
+<div class="note-box info">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div><strong>Variable costs not in monthly burn</strong> — these apply on top of revenue once GGR exists: Cubeia platform rev share <strong>5% flat</strong> · Casino game providers (QTech / Hub88 / St8 / Slotegrator) <strong>6–15% blended</strong> · Cubeia Originals <strong>6% + €2,000/mo</strong> if used · Cubeia Poker <strong>10%</strong> (blocks UK/US) · Sportsbook (Betby / Ultraplay / SABA / Song88) <strong>TBD</strong>. Bankroll is self-funded from the reserved 1.5M SEK. <em>(Source: Cubeia Nano License Agreement, Appendix A.)</em></div>
+</div>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Optional 3rd-party add-ons (Appendix B)</h3>
+<table class="lit">
+<thead>
+<tr><th>Service</th><th>Purpose</th><th class="col-eur" style="text-align:right;">EUR / mo</th><th class="col-usd" style="text-align:right;">USD / mo</th><th style="text-align:right;">Required?</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Customer.io <span class="tag planned">optional</span></td>
+<td class="cat">Email / lifecycle CRM (player retention)</td>
+<td class="num col-eur">€300</td>
+<td class="num col-usd">$324</td>
+<td class="num" style="color:var(--text-muted);">No</td>
+</tr>
+<tr>
+<td>Freshchat <span class="tag planned">optional</span></td>
+<td class="cat">Live support chat (1st-line CS is Operator responsibility)</td>
+<td class="num col-eur">€50</td>
+<td class="num col-usd">$54</td>
+<td class="num" style="color:var(--text-muted);">No</td>
+</tr>
+<tr class="total">
+<td><strong>Add-on cost if both adopted</strong></td>
+<td class="cat">Adds to monthly burn</td>
+<td class="num col-eur">€350</td>
+<td class="num col-usd">$378</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- 04: CUBEIA CONTRACT REFERENCE -->
+<section class="section" id="cubeia">
+<div class="section-label">
+<span class="section-num">04</span>
+<span class="section-title">Cubeia Contract — Key Terms</span>
+</div>
+<div class="card-grid">
+<div class="ic-card green">
+<div class="ic-head"><span class="ic-name">Setup fee</span><span class="ic-price green">€15K</span></div>
+<div class="ic-meta">§4i · split 50/50</div>
+<div class="ic-desc">€7,500 upfront + €7,500 on delivery and go-live. <strong>Account not enabled in test or production until full setup is paid.</strong></div>
+</div>
+<div class="ic-card purple">
+<div class="ic-head"><span class="ic-name">AWS hosting</span><span class="ic-price">€1,700 /mo</span></div>
+<div class="ic-meta">App. B · required</div>
+<div class="ic-desc">Fixed monthly from day 1. Required line item — invoiced through Cubeia.</div>
+</div>
+<div class="ic-card amber">
+<div class="ic-head"><span class="ic-name">Platform minimum</span><span class="ic-price amber">€5K /mo</span></div>
+<div class="ic-meta">§4ii · from month 7+</div>
+<div class="ic-desc"><strong>6-month clock starts at go-live</strong> (when Cubeia verifies key functionality via the Preflight checklist — App. C), not at contract signing. Month 1 fee is pro-rata on remaining days of the month after go-live.</div>
+</div>
+<div class="ic-card cyan">
+<div class="ic-head"><span class="ic-name">Revenue share</span><span class="ic-price">5%</span></div>
+<div class="ic-meta">§4ii.a · flat on GGR</div>
+<div class="ic-desc">Invoiced in EUR using the official rate on the day of issue. Crypto-paying operators can settle in BTC via wallet address.</div>
+</div>
+<div class="ic-card rose">
+<div class="ic-head"><span class="ic-name">Restricted territories</span><span class="ic-price" style="font-size:14px;">UK · US · SE</span></div>
+<div class="ic-meta">§5 · IP-block + registration block required</div>
+<div class="ic-desc"><strong>Sweden is blocked</strong> — relevant since Operator and Provider are both Swedish entities. Cubeia can add jurisdictions on notice if laws change.</div>
+</div>
+<div class="ic-card purple">
+<div class="ic-head"><span class="ic-name">Termination</span><span class="ic-price">30 days</span></div>
+<div class="ic-meta">§7 · either party, any reason</div>
+<div class="ic-desc">Cubeia can terminate immediately for undisputed non-payment (§7). Operator can terminate if Cubeia is offline &gt; 24h consecutive (§7).</div>
+</div>
+</div>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:32px 0 12px;">Game provider economics (Appendix A)</h3>
+<table class="lit">
+<thead>
+<tr><th>Vertical</th><th>Provider</th><th style="text-align:right;">Rev share (on GGR)</th><th style="text-align:right;">Monthly fee</th><th>Blocked regions</th></tr>
+</thead>
+<tbody>
+<tr><td>Casino</td><td>QTech</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+<tr><td>Casino</td><td>Hub88</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+<tr><td>Casino</td><td>St8</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+<tr><td>Casino</td><td>Slotegrator</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+<tr><td>Cubeia Originals</td><td>Cubeia</td><td class="num">6%</td><td class="num">€2,000</td><td class="cat">—</td></tr>
+<tr><td>Poker</td><td>Cubeia</td><td class="num">10%</td><td class="num">—</td><td class="cat">UK, US</td></tr>
+<tr><td>Sportsbook</td><td>Betby / Ultraplay / SABA / Song88</td><td class="num">TBD</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+<tr class="note">
+<td colspan="5">If Cubeia Originals are used, add <strong>€2,000/mo</strong> to the recurring burn (this stacks with the platform minimum from month 7). Sportsbook revenue shares are TBD on a per-provider basis once selected.</td>
+</tr>
+</tbody>
+</table>
+<div class="note-box info" style="margin-top:18px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+<div>Source: <strong>Cubeia_nano_license_Draft2_2026.pdf</strong> (held privately — not committed to this repo). Sec/Appendix references in the cards above point into that document.</div>
+</div>
+</section>
+<!-- 05: 12-MONTH FORECAST -->
+<section class="section" id="forecast">
+<div class="section-label">
+<span class="section-num">05</span>
+<span class="section-title">12-Month Cumulative Burn Forecast</span>
+</div>
+<div class="forecast">
+<div class="forecast-bar" id="fcBar">
+<div class="fc-col" style="height:18%;" title="Month 1 · $29.1K cumulative (incl. CR corp + security HW + clipping start)"></div>
+<div class="fc-col" style="height:28%;" title="Month 2 · $45.2K"></div>
+<div class="fc-col" style="height:37%;" title="Month 3 · $61.3K"></div>
+<div class="fc-col" style="height:42%;" title="Month 4 · $69.1K"></div>
+<div class="fc-col" style="height:47%;" title="Month 5 · $76.8K"></div>
+<div class="fc-col" style="height:52%;" title="Month 6 · $84.6K"></div>
+<div class="fc-col warn" style="height:60%;" title="Month 7 · $97.8K — Cubeia min activates"></div>
+<div class="fc-col warn" style="height:68%;" title="Month 8 · $111.0K — approaching ceiling"></div>
+<div class="fc-col crit" style="height:76%;" title="Month 9 · $124.1K — over by $2K"></div>
+<div class="fc-col crit" style="height:84%;" title="Month 10 · $137.3K — over by $15K"></div>
+<div class="fc-col crit" style="height:92%;" title="Month 11 · $150.5K — over by $28K"></div>
+<div class="fc-col crit" style="height:100%;" title="Month 12 · $163.6K — over by $42K"></div>
+</div>
+<div class="fc-labels">
+<span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
+</div>
+<div class="fc-legend">
+<span><span class="ldot" style="background:var(--surface-3);"></span> Months 1–6 burn ($7.4K/mo)</span>
+<span><span class="ldot" style="background:rgba(251,191,36,0.5);"></span> Months 7–9 burn ($12.8K/mo)</span>
+<span><span class="ldot" style="background:rgba(251,113,133,0.5);"></span> Out of operating budget</span>
+</div>
+<div class="note-box rose" style="margin-top:24px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<div><strong>Target = revenue by month 6.</strong> If GGR doesn't ramp before month 7 (when Cubeia's grace ends): after clipping (250K SEK), CR corp maintenance (~$10.7K), Customer.io + Freshchat at €350/mo, and 6 months of grace-period burn, ~$37K is left. At the post-grace burn of $13.2K/mo that's ~2.8 more months — cumulative spend hits the operating-budget ceiling around month 8–9. The 12-month chart shows the slip scenario, not the plan. See <a href="forecast.html" style="color:var(--rose);text-decoration:underline;">Forecast</a> for the full month-by-month table.</div>
+</div>
+</div>
+</section>
+<!-- 06: OPEN QUESTIONS -->
+<section class="section" id="open">
+<div class="section-label">
+<span class="section-num">06</span>
+<span class="section-title">Open Questions / To Confirm</span>
+</div>
+<table class="lit">
+<thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td>What does the 150K SEK already paid to Cubeia cover? Full €15K setup, or first €7,500 + hosting prepay?</td><td>If only first half, ~€7,500 must be paid before go-live (account stays disabled until full setup paid, §4).</td></tr>
+<tr><td>Go-live target date for the 6-month grace clock</td><td>The €5K/mo platform min only kicks in 6 months after Cubeia verifies the Preflight checklist (App. C), not 6 months after signing. Slipping go-live extends the grace window.</td></tr>
+<tr><td>Which game providers / verticals are we launching with?</td><td>Casino @ 6–15% rev share (4 providers) vs Cubeia Originals 6% + €2,000/mo flat vs Poker 10% — all separate from Cubeia's 5% platform share. Mix determines total take-rate.</td></tr>
+<tr><td>Adding Customer.io (€300/mo) and/or Freshchat (€50/mo)?</td><td>App. B optional. Customer.io is the standard for casino lifecycle email; Freshchat is one of many support-chat options. Adds €350/mo ($378) if both.</td></tr>
+<tr><td>Sweden is a restricted territory (§5) — does this affect any marketing?</td><td>No Swedish player can register. Confirm Swedish-language clipping / KOL content excludes Sweden as a target.</td></tr>
+<tr><td>Spot FX rates as of payment dates</td><td>USD/SEK and EUR/SEK can swing 3–5%; total budget USD figure shifts ~$10K either way.</td></tr>
+<tr><td>Claude Max seats: 1 or 3?</td><td>1 seat = $200/mo; 3 seats = $600/mo → +$4.8K/year.</td></tr>
+<tr><td>Security stack: 4 users or scaled-down 2?</td><td>Cuts monthly subs from $356 to ~$180. One-time core from ~$2.3K to ~$1.5K.</td></tr>
+<tr><td>Are salaries gross or net?</td><td>If gross, employer-side taxes (Sweden ~31%) add ~$1.5K/mo to the burn.</td></tr>
+<tr><td>Domain, Vercel, email beyond Proton?</td><td>Not currently in budget; small but recurring.</td></tr>
+</tbody>
+</table>
+</section>
+<footer class="footer">
+    GoLuna — Budget &amp; Runway — v0.1 · May 2026 — Confidential — <a href="index.html">Back to Hub →</a>
+</footer>
+</div>
+<script>
+(function(){
+  function setCur(c){
+    var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
+    b.classList.add('fx-'+c);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.cur===c);
+    });
+    try{localStorage.setItem('goluna-fx',c)}catch(e){}
+  }
+  function init(){
+    var saved='usd';
+    try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
+    setCur(saved);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){setCur(btn.dataset.cur)});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
+})();
+</script>
 </body>
 </html>

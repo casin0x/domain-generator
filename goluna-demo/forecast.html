@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>GoLuna — 12-Month Forecast</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -59,6 +60,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
 .subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 @media (max-width: 640px) { .subnav { padding: 0 16px; } .subnav-inner { height: 36px; } }
+/* === CURRENCY SWITCHER === */
+.fx-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; vertical-align: middle; margin: 0 4px; }
+.fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-switch-btn:hover { color: var(--text); }
+.fx-switch-btn.active { color: var(--bg); background: var(--accent); }
+.cur-usd, .cur-sek, .cur-eur { display: none; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: inline; }
+body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
+body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
+body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
 .header-link.active { color: var(--accent); font-weight: 600; }
 .hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
 
@@ -189,628 +200,627 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 </style>
 </head>
 <body>
-
 <header class="site-header">
-  <div class="header-inner">
-    <a href="index.html" class="logo">GoLuna</a>
-    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
-    <nav class="header-right">
-      <a href="marketresearch.html" class="header-link">Markets</a>
-      <a href="strategy.html" class="header-link">Marketing</a>
-      <a href="channels.html" class="header-link">Channels</a>
-      <a href="vendors.html" class="header-link">Vendors</a>
-      <a href="budget.html" class="header-link">Budget</a>
-      <a href="forecast.html" class="header-link active">Forecast</a>
-      <a href="index.html" class="header-link header-link-hub">Hub</a>
-    </nav>
-  </div>
+<div class="header-inner">
+<a class="logo" href="index.html">GoLuna</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="hamburger" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">☰</button>
+<nav class="header-right">
+<a class="header-link" href="marketresearch.html">Markets</a>
+<a class="header-link" href="strategy.html">Marketing</a>
+<a class="header-link" href="channels.html">Channels</a>
+<a class="header-link" href="vendors.html">Vendors</a>
+<a class="header-link" href="budget.html">Budget</a>
+<a class="header-link active" href="forecast.html">Forecast</a>
+<a class="header-link header-link-hub" href="index.html">Hub</a>
+</nav>
+</div>
 </header>
-
 <div class="subnav">
-  <div class="subnav-inner">
-    <a href="#onetime" class="subnav-link">One-Time</a>
-    <a href="#monthly" class="subnav-link">Monthly</a>
-    <a href="#cumchart" class="subnav-link">Cumulative</a>
-    <a href="#share" class="subnav-link">Share</a>
-    <a href="#security" class="subnav-link">Security</a>
-    <a href="#cr-corp" class="subnav-link">CR Corp</a>
-    <a href="#scenarios" class="subnav-link">Scenarios</a>
-    <a href="#excluded" class="subnav-link">Excluded</a>
-  </div>
+<div class="subnav-inner">
+<a class="subnav-link" href="#onetime">One-Time</a>
+<a class="subnav-link" href="#monthly">Monthly</a>
+<a class="subnav-link" href="#cumchart">Cumulative</a>
+<a class="subnav-link" href="#share">Share</a>
+<a class="subnav-link" href="#security">Security</a>
+<a class="subnav-link" href="#cr-corp">CR Corp</a>
+<a class="subnav-link" href="#scenarios">Scenarios</a>
+<a class="subnav-link" href="#excluded">Excluded</a>
 </div>
-
+</div>
 <div class="page">
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-top">
-      <div class="hero-badge"><span class="dot"></span> 12-Month Forecast</div>
-      <span class="hero-date">v0.1 &middot; May 2026</span>
-    </div>
-    <h1>Monthly Cost Forecast</h1>
-    <p>Full month-by-month spend across salaries, platform, marketing, subscriptions, security, and one-time costs. Use this for runway tracking and cashflow planning — see <a href="budget.html" style="color:var(--accent);">Budget</a> for the strategic overview.</p>
-  </section>
-
-  <!-- FX assumption note -->
-  <div class="note-box info">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    <div><strong>FX assumptions:</strong> 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08 &middot; 1 EUR &asymp; 11.34 SEK. All forecast numbers are in USD as the working currency. Override in <a href="budget.html" style="color:var(--accent);text-decoration:underline;">Budget</a> if your spot rates differ.</div>
-  </div>
-
-  <!-- Top metric strip -->
-  <div class="metrics-strip">
-    <div class="metric-card accent">
-      <div class="label">Operating budget</div>
-      <div class="val accent">$143K</div>
-      <div class="sub">3M SEK total &minus; 1.5M bankroll reserve</div>
-    </div>
-    <div class="metric-card green">
-      <div class="label">Already paid (pre-launch)</div>
-      <div class="val green">$21K</div>
-      <div class="sub">220K SEK &middot; Cubeia 150K + designer 40K + reg 30K</div>
-    </div>
-    <div class="metric-card amber">
-      <div class="label">12-mo committed (M1–M12)</div>
-      <div class="val amber">$164K</div>
-      <div class="sub">incl. CR corp + Cubeia 3rd-party &middot; excl. legal</div>
-    </div>
-    <div class="metric-card rose">
-      <div class="label">Operating shortfall at M12</div>
-      <div class="val rose">−$42K</div>
-      <div class="sub">budget tops out ~M8–M9 if no revenue</div>
-    </div>
-  </div>
-
-  <!-- ONE-TIME COSTS -->
-  <section class="section" id="onetime">
-    <div class="section-label">
-      <span class="section-num">01</span>
-      <span class="section-title">One-Time Costs (Paid + Planned)</span>
-    </div>
-    <table class="lit">
-      <thead>
-        <tr><th>Line item</th><th>Category</th><th>Status</th><th style="text-align:right;">USD</th><th style="text-align:right;">SEK</th><th style="text-align:right;">EUR</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cubeia setup</td>
-          <td class="cat">Platform &middot; partial setup paid</td>
-          <td><span class="tag paid">paid</span></td>
-          <td class="num">$14,286</td>
-          <td class="num">150,000</td>
-          <td class="num">~&euro;13,228</td>
-        </tr>
-        <tr>
-          <td>Designer</td>
-          <td class="cat">Brand / creative</td>
-          <td><span class="tag paid">paid</span></td>
-          <td class="num">$3,810</td>
-          <td class="num">40,000</td>
-          <td class="num">~&euro;3,527</td>
-        </tr>
-        <tr>
-          <td>Company registration</td>
-          <td class="cat">Legal / formation</td>
-          <td><span class="tag paid">paid</span></td>
-          <td class="num">$2,857</td>
-          <td class="num">30,000</td>
-          <td class="num">~&euro;2,646</td>
-        </tr>
-        <tr class="total">
-          <td><strong>Subtotal paid</strong></td>
-          <td class="cat">Sunk to date</td>
-          <td>—</td>
-          <td class="num">$20,952</td>
-          <td class="num">220,000</td>
-          <td class="num">~&euro;19,401</td>
-        </tr>
-        <tr><td colspan="6" style="padding:6px 18px;background:var(--bg);"></td></tr>
-        <tr>
-          <td>Clipping campaign</td>
-          <td class="cat">Marketing &middot; 250M views over 3 mo, incl. $3K streamer</td>
-          <td><span class="tag planned">planned</span></td>
-          <td class="num">$25,000</td>
-          <td class="num">~250,000</td>
-          <td class="num">~&euro;23,150</td>
-        </tr>
-        <tr>
-          <td>Security stack — core hardware</td>
-          <td class="cat">YubiKeys, routers, Starlink kits, faraday bag, privacy filters</td>
-          <td><span class="tag planned">planned</span></td>
-          <td class="num">~$2,268</td>
-          <td class="num">~23,800</td>
-          <td class="num">~&euro;2,100</td>
-        </tr>
-        <tr class="note">
-          <td colspan="6">Range &euro;1,800–2,400 depending on whether all 4 users upgrade phones / get Pixel 9 Pro for SV2. Mid-estimate shown. See Section 04 for breakdown.</td>
-        </tr>
-        <tr>
-          <td>Cubeia setup balance (if first-half only)</td>
-          <td class="cat">~&euro;1,800 if 150K SEK was just first &euro;7.5K + hosting prepay</td>
-          <td><span class="tag planned">tbd</span></td>
-          <td class="num">~$1,940</td>
-          <td class="num">~20,400</td>
-          <td class="num">~&euro;1,800</td>
-        </tr>
-        <tr>
-          <td>Costa Rica corp maintenance 2026</td>
-          <td class="cat">Maintenance bundle &euro;3,585 + Drift &euro;5,500 + Local UBO &euro;850 — see §06</td>
-          <td><span class="tag planned">annual</span></td>
-          <td class="num">~$10,730</td>
-          <td class="num">~112,660</td>
-          <td class="num">~&euro;9,935</td>
-        </tr>
-        <tr class="total">
-          <td><strong>Subtotal planned (in operating budget)</strong></td>
-          <td class="cat">Drawdown from 1.5M SEK</td>
-          <td>—</td>
-          <td class="num">~$39,938</td>
-          <td class="num">~406,860</td>
-          <td class="num">~&euro;36,985</td>
-        </tr>
-        <tr><td colspan="6" style="padding:6px 18px;background:var(--bg);"></td></tr>
-        <tr>
-          <td>Legal counsel (T&amp;Cs, structure)</td>
-          <td class="cat">Per Tools &amp; Opsec doc — described as separate one-time investment</td>
-          <td><span class="tag separate">separate</span></td>
-          <td class="num">~$27,000</td>
-          <td class="num">~283,500</td>
-          <td class="num">~&euro;25,000</td>
-        </tr>
-        <tr class="note">
-          <td colspan="6">Treated as <strong>separate cash outlay</strong> rather than operating-budget drawdown per the original framing. If actually funded from operating, runway shortens by ~2 months — flagged in Section 03.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- MAIN MONTHLY FORECAST TABLE -->
-  <section class="section" id="monthly">
-    <div class="section-label">
-      <span class="section-num">02</span>
-      <span class="section-title">Month-by-Month Forecast (USD)</span>
-    </div>
-    <div class="fc-table-wrap">
-      <table class="fc-table">
-        <thead>
-          <tr>
-            <th>Line</th>
-            <th>M1</th>
-            <th>M2</th>
-            <th>M3</th>
-            <th>M4</th>
-            <th>M5</th>
-            <th>M6</th>
-            <th>M7</th>
-            <th>M8</th>
-            <th>M9</th>
-            <th>M10</th>
-            <th>M11</th>
-            <th>M12</th>
-            <th>12-mo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Salaries (G + F + O)</td>
-            <td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td>
-            <td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td>
-            <td class="cum">60,000</td>
-          </tr>
-          <tr>
-            <td>Cubeia AWS hosting</td>
-            <td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td>
-            <td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td>
-            <td class="cum">22,032</td>
-          </tr>
-          <tr>
-            <td>Customer.io (Cubeia App. B)</td>
-            <td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td>
-            <td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td>
-            <td class="cum">3,888</td>
-          </tr>
-          <tr>
-            <td>Freshchat (Cubeia App. B)</td>
-            <td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td>
-            <td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td>
-            <td class="cum">648</td>
-          </tr>
-          <tr>
-            <td>Cubeia platform min</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td>
-            <td class="cum">32,400</td>
-          </tr>
-          <tr>
-            <td>Security stack subs</td>
-            <td>356</td><td>356</td><td>356</td><td>356</td><td>356</td><td>356</td>
-            <td>356</td><td>356</td><td>356</td><td>356</td><td>356</td><td>356</td>
-            <td class="cum">4,272</td>
-          </tr>
-          <tr>
-            <td>Claude Max</td>
-            <td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td>
-            <td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td>
-            <td class="cum">2,400</td>
-          </tr>
-          <tr>
-            <td>Clipping campaign</td>
-            <td>8,333</td><td>8,333</td><td>8,334</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="cum">25,000</td>
-          </tr>
-          <tr>
-            <td>Security stack — hardware (one-time)</td>
-            <td>2,268</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td>
-            <td class="cum">2,268</td>
-          </tr>
-          <tr>
-            <td>Costa Rica corp maintenance (2026)</td>
-            <td>10,730</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-            <td class="zero">0</td><td class="zero">0</td>
-            <td class="cum">10,730</td>
-          </tr>
-          <tr style="border-top:1px solid var(--border-hover);">
-            <td><strong>Monthly total</strong></td>
-            <td class="month-tot">29,101</td>
-            <td class="month-tot">16,103</td>
-            <td class="month-tot">16,104</td>
-            <td class="month-tot">7,770</td>
-            <td class="month-tot">7,770</td>
-            <td class="month-tot">7,770</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot">13,170</td>
-            <td class="month-tot" style="color:var(--accent);">163,638</td>
-          </tr>
-          <tr class="grace-end">
-            <td><strong>Cumulative</strong></td>
-            <td class="cum">29,101</td>
-            <td class="cum">45,204</td>
-            <td class="cum">61,308</td>
-            <td class="cum">69,078</td>
-            <td class="cum">76,848</td>
-            <td class="cum">84,618</td>
-            <td class="cum">97,788</td>
-            <td class="cum">110,958</td>
-            <td class="cum" style="color:var(--rose);">124,128</td>
-            <td class="cum" style="color:var(--rose);">137,298</td>
-            <td class="cum" style="color:var(--rose);">150,468</td>
-            <td class="cum" style="color:var(--rose);">163,638</td>
-            <td class="cum">—</td>
-          </tr>
-          <tr>
-            <td>Operating budget remaining</td>
-            <td>$93K</td>
-            <td>$77K</td>
-            <td>$61K</td>
-            <td>$53K</td>
-            <td>$45K</td>
-            <td>$37K</td>
-            <td>$24K</td>
-            <td>$11K</td>
-            <td style="color:var(--rose);">−$2K</td>
-            <td style="color:var(--rose);">−$15K</td>
-            <td style="color:var(--rose);">−$28K</td>
-            <td style="color:var(--rose);">−$42K</td>
-            <td>—</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td>Phase</td>
-            <td colspan="6" style="text-align:center;background:var(--green-dim);color:var(--green);">M1–M6 &middot; Cubeia grace period &middot; $7.8K base burn</td>
-            <td colspan="2" style="text-align:center;background:var(--amber-dim);color:var(--amber);">M7–M8 &middot; Min on &middot; $13.2K</td>
-            <td colspan="4" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M9–M12 &middot; Over operating budget</td>
-            <td>—</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-    <div class="note-box warn" style="margin-top:18px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Reading the table:</strong> with no revenue, the operating budget runs out around <strong>month 9</strong>. The 6-month target runway lines up with the end of Cubeia's grace period — revenue needs to land before M7, otherwise the burn jumps 70% from $7.8K to $13.2K/mo (CR corp + Customer.io + Freshchat now in the base). Marketing buffer sits inside the M1–M12 totals as headroom but is unallocated to specific months.</div>
-    </div>
-  </section>
-
-  <!-- CUMULATIVE CHART -->
-  <section class="section" id="cumchart">
-    <div class="section-label">
-      <span class="section-num">03</span>
-      <span class="section-title">Cumulative Burn vs Operating Budget Ceiling</span>
-    </div>
-    <div class="cum-chart">
-      <div class="cum-bar-wrap">
-        <div class="cum-ceiling" style="bottom:74.5%;"><span class="lbl">Operating ceiling · $122K available</span></div>
-        <div class="cum-bar-line">
-          <div class="cum-col grace" style="height:18%;" title="M1 cumulative $29,101"></div>
-          <div class="cum-col grace" style="height:28%;" title="M2 cumulative $45,204"></div>
-          <div class="cum-col grace" style="height:37%;" title="M3 cumulative $61,308"></div>
-          <div class="cum-col grace" style="height:42%;" title="M4 cumulative $69,078"></div>
-          <div class="cum-col grace" style="height:47%;" title="M5 cumulative $76,848"></div>
-          <div class="cum-col grace" style="height:52%;" title="M6 cumulative $84,618"></div>
-          <div class="cum-col post-grace" style="height:60%;" title="M7 cumulative $97,788"></div>
-          <div class="cum-col post-grace" style="height:68%;" title="M8 cumulative $110,958 — almost at ceiling"></div>
-          <div class="cum-col over" style="height:76%;" title="M9 cumulative $124,128 — over by $2K"></div>
-          <div class="cum-col over" style="height:84%;" title="M10 cumulative $137,298 — over by $15K"></div>
-          <div class="cum-col over" style="height:92%;" title="M11 cumulative $150,468 — over by $28K"></div>
-          <div class="cum-col over" style="height:100%;" title="M12 cumulative $163,638 — over by $42K"></div>
-        </div>
-      </div>
-      <div class="cum-labels">
-        <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span>
-        <span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
-      </div>
-      <div class="cum-legend">
-        <span><span class="ldot" style="background:rgba(52,211,153,0.45);"></span> Grace period (M1–M6)</span>
-        <span><span class="ldot" style="background:rgba(251,191,36,0.45);"></span> Post-grace (M7–M9)</span>
-        <span><span class="ldot" style="background:rgba(251,113,133,0.45);"></span> Over budget (M10–M12)</span>
-        <span><span class="ldot" style="background:var(--rose);height:2px;margin-top:4px;"></span> Operating ceiling</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- COST SHARE -->
-  <section class="section" id="share">
-    <div class="section-label">
-      <span class="section-num">04</span>
-      <span class="section-title">12-Month Cost Share by Category</span>
-    </div>
-    <div class="share-grid">
-      <div class="share-card">
-        <div class="share-title">By line item (12-month total · $164K)</div>
-        <div class="share-bar">
-          <div class="share-seg" style="flex:60000;background:var(--accent);">37%</div>
-          <div class="share-seg" style="flex:54432;background:var(--cyan);">33%</div>
-          <div class="share-seg" style="flex:25000;background:var(--amber);">15%</div>
-          <div class="share-seg" style="flex:10730;background:var(--green);">7%</div>
-          <div class="share-seg" style="flex:11208;background:var(--purple);">7%</div>
-          <div class="share-seg" style="flex:2268;background:var(--rose);">1%</div>
-        </div>
-        <div class="share-rows">
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--accent);"></span>Salaries (G+F+O)</span><span class="v">$60,000 · 37%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--cyan);"></span>Cubeia platform (AWS + min)</span><span class="v">$54,432 · 33%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--amber);"></span>Marketing (clipping)</span><span class="v">$25,000 · 15%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--green);"></span>CR corp maintenance (2026)</span><span class="v">$10,730 · 7%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--purple);"></span>Subs (security + Claude + Cubeia App. B)</span><span class="v">$11,208 · 7%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--rose);"></span>One-time hardware</span><span class="v">$2,268 · 1%</span></div>
-        </div>
-      </div>
-      <div class="share-card">
-        <div class="share-title">Marketing budget allocation ($75K available over 6 mo)</div>
-        <div class="share-bar">
-          <div class="share-seg" style="flex:25000;background:var(--amber);">33%</div>
-          <div class="share-seg" style="flex:50283;background:var(--green);">67%</div>
-        </div>
-        <div class="share-rows">
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--amber);"></span>Clipping (committed)</span><span class="v">$25,000 · 33%</span></div>
-          <div class="share-row"><span class="nm"><span class="sd" style="background:var(--green);"></span>Buffer (unallocated)</span><span class="v">~$50,283 · 67%</span></div>
-        </div>
-        <div class="note-box info" style="margin-top:14px;font-size:12px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          <div>Buffer can be deployed across M4–M6 (still in grace period) for additional clipping rounds, KOL deals, paid social, or a content agency retainer. Reserve some for unforeseen ops costs.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECURITY STACK BREAKDOWN -->
-  <section class="section" id="security">
-    <div class="section-label">
-      <span class="section-num">05</span>
-      <span class="section-title">Security Stack — Detail</span>
-    </div>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">One-time hardware (~&euro;1,800–2,400 · 4 users: C / S / H / SV2)</h3>
-    <table class="lit" style="margin-bottom:24px;">
-      <thead>
-        <tr><th>Item</th><th>For</th><th style="text-align:right;">Unit</th><th style="text-align:right;">Total EUR</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>YubiKey 5C NFC ×2</td><td class="cat">C, S, H (3 people)</td><td class="num">~&euro;120/person</td><td class="num">~&euro;360</td></tr>
-        <tr><td>YubiKey 5 FIPS ×2 (government-grade)</td><td class="cat">SV2 (highest-exposure role)</td><td class="num">~&euro;170/set</td><td class="num">~&euro;170</td></tr>
-        <tr><td>GL.iNet Flint 2 (AX6000 travel router)</td><td class="cat">1× C (the constant traveler)</td><td class="num">~&euro;180</td><td class="num">~&euro;180</td></tr>
-        <tr><td>GL.iNet Brume 2 (fixed-base VPN gateway)</td><td class="cat">1× Malta office</td><td class="num">~&euro;90</td><td class="num">~&euro;90</td></tr>
-        <tr><td>UniFi U7 Pro (Wi-Fi 7 AP)</td><td class="cat">1× shared at team-gather location</td><td class="num">~&euro;200</td><td class="num">~&euro;200</td></tr>
-        <tr><td>Starlink Mini (portable)</td><td class="cat">1× C, travels</td><td class="num">~&euro;600</td><td class="num">~&euro;600</td></tr>
-        <tr><td>Starlink Standard Gen 3 (fixed)</td><td class="cat">1× Malta office</td><td class="num">~&euro;400</td><td class="num">~&euro;400</td></tr>
-        <tr><td>Mission Darkness faraday bag</td><td class="cat">1× C — hotel/at-rest storage</td><td class="num">~&euro;80</td><td class="num">~&euro;80</td></tr>
-        <tr><td>3M GPF Gold privacy filter</td><td class="cat">4 users</td><td class="num">~&euro;60/person</td><td class="num">~&euro;240</td></tr>
-        <tr><td>Webcam covers (3-pack)</td><td class="cat">Everyone</td><td class="num">~&euro;10</td><td class="num">~&euro;10</td></tr>
-        <tr class="total"><td><strong>Core one-time total</strong></td><td class="cat">Mid estimate &euro;2,100 used in forecast</td><td class="num">—</td><td class="num">~&euro;1,800–2,400</td></tr>
-        <tr class="note"><td colspan="4">Optional device upgrades NOT in base forecast: MacBook Pro M4 ~&euro;2,400 / MacBook Air M4 ~&euro;1,500 / iPhone 16 Pro ~&euro;1,200 / Pixel 9 Pro for SV2 ~&euro;1,000 (the doc recommends skipping the Pixel — SV2 manages X from PC). All-team device upgrade = +&euro;8–10K to one-time. 2nd fixed base (CR villa) = +&euro;700 one-time + &euro;120/mo.</td></tr>
-      </tbody>
-    </table>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Monthly recurring subscriptions (~&euro;310–350/mo · used at &euro;330 mid)</h3>
-    <table class="lit">
-      <thead>
-        <tr><th>Service</th><th>Scope</th><th style="text-align:right;">EUR /mo</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Mullvad VPN</td><td class="cat">5 devices × &euro;5/device</td><td class="num">&euro;25</td></tr>
-        <tr><td>Proton Unlimited</td><td class="cat">4 users × ~&euro;12 — Mail+Drive+VPN+Pass+Sentinel</td><td class="num">~&euro;48</td></tr>
-        <tr><td>1Password Business</td><td class="cat">4 users × ~&euro;8</td><td class="num">~&euro;32</td></tr>
-        <tr><td>MySudo Pro (burner phone numbers)</td><td class="cat">4 users × ~&euro;5</td><td class="num">~&euro;20</td></tr>
-        <tr><td>Starlink Mini service (Roam unlimited)</td><td class="cat">1 kit</td><td class="num">~&euro;50</td></tr>
-        <tr><td>Starlink Standard service (Priority data)</td><td class="cat">1 kit · Malta</td><td class="num">~&euro;70</td></tr>
-        <tr><td>Cloudflare Pro (public site WAF)</td><td class="cat">Zero Trust for CRM stays free tier</td><td class="num">~&euro;23</td></tr>
-        <tr><td>Hetzner CCX23 (CRM/Mautic hosting)</td><td class="cat">Dedicated 4 vCPU / 16 GB / 160 GB NVMe</td><td class="num">~&euro;30</td></tr>
-        <tr><td>Backblaze B2 (encrypted nightly backups)</td><td class="cat">~&euro;5/TB · team total</td><td class="num">~&euro;10–20</td></tr>
-        <tr class="total"><td><strong>Team recurring total</strong></td><td class="cat">~$356 in forecast at &euro;330 mid</td><td class="num">~&euro;310–350</td></tr>
-        <tr class="note"><td colspan="3">2nd Starlink Standard for CR villa = +&euro;120/mo if expansion happens.</td></tr>
-      </tbody>
-    </table>
-
-    <div class="note-box green" style="margin-top:18px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <div><strong>Free-tier core (not a line item but worth knowing):</strong> Signal, Brave, Tor, Mullvad Browser, Cloudflare Zero Trust free tier, SimpleLogin, ProtonVPN Plus, Proton Pass/Drive/Calendar, Proton Sentinel — all included in subscriptions above or genuinely free.</div>
-    </div>
-  </section>
-
-  <!-- COSTA RICA CORPORATE MAINTENANCE -->
-  <section class="section" id="cr-corp">
-    <div class="section-label">
-      <span class="section-num">06</span>
-      <span class="section-title">Costa Rica Corporate Maintenance — 2026 &amp; Onwards</span>
-    </div>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Annual maintenance package (per CR registry)</h3>
-    <table class="lit" style="margin-bottom:24px;">
-      <thead>
-        <tr><th>Line item</th><th style="text-align:right;">Legal fees</th><th style="text-align:right;">20% VAT</th><th style="text-align:right;">Expenses</th><th style="text-align:right;">Total</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Manager Service</td><td class="num">&euro;2,250</td><td class="num">&euro;450</td><td class="num">&euro;0</td><td class="num">&euro;2,700</td></tr>
-        <tr><td>Corporate Tax</td><td class="num">&euro;25</td><td class="num">&euro;5</td><td class="num">&euro;140</td><td class="num">&euro;170</td></tr>
-        <tr><td>Payment of Education and Culture Stamp</td><td class="num">&euro;25</td><td class="num">&euro;5</td><td class="num">&euro;25</td><td class="num">&euro;55</td></tr>
-        <tr><td>Book Custody</td><td class="num">&euro;150</td><td class="num">&euro;30</td><td class="num">&euro;0</td><td class="num">&euro;180</td></tr>
-        <tr><td>RTBF</td><td class="num">&euro;200</td><td class="num">&euro;40</td><td class="num">&euro;0</td><td class="num">&euro;240</td></tr>
-        <tr><td>Declaration of Inactive Companies</td><td class="num">&euro;200</td><td class="num">&euro;40</td><td class="num">&euro;0</td><td class="num">&euro;240</td></tr>
-        <tr class="total">
-          <td><strong>Maintenance subtotal</strong></td>
-          <td class="num">&euro;2,850</td>
-          <td class="num">&euro;570</td>
-          <td class="num">&euro;165</td>
-          <td class="num">&euro;3,585</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">2026 supplementary fees</h3>
-    <table class="lit">
-      <thead>
-        <tr><th>Line item</th><th>Note</th><th style="text-align:right;">EUR</th><th style="text-align:right;">USD</th><th style="text-align:right;">SEK</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Maintenance package <span class="tag planned">2026</span></td>
-          <td class="cat">From table above</td>
-          <td class="num">&euro;3,585</td>
-          <td class="num">~$3,872</td>
-          <td class="num">~40,650</td>
-        </tr>
-        <tr>
-          <td>Drift (operations) 2026 <span class="tag planned">2026</span></td>
-          <td class="cat">Operational running fee — separate from maintenance bundle</td>
-          <td class="num">&euro;5,500</td>
-          <td class="num">~$5,940</td>
-          <td class="num">~62,370</td>
-        </tr>
-        <tr>
-          <td>Local UBO <span class="tag planned">extra</span></td>
-          <td class="cat">Local UBO registration / declaration</td>
-          <td class="num">&euro;850</td>
-          <td class="num">~$918</td>
-          <td class="num">~9,640</td>
-        </tr>
-        <tr class="total">
-          <td><strong>CR corporate total 2026</strong></td>
-          <td class="cat">Annual recurring (in M1 of base forecast)</td>
-          <td class="num">~&euro;9,935</td>
-          <td class="num">~$10,730</td>
-          <td class="num">~112,660</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">Placed in <strong>M1</strong> of the monthly forecast as a conservative front-load. Actual billing cadence may differ (quarterly / on registry anniversary) — confirm with the registry. Also confirm whether "Drift" and "Manager Service" overlap (both could be ongoing director/management fees) — if they do, the true annual is closer to ~&euro;7,200 ($7,780).</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-box warn" style="margin-top:18px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Why this matters:</strong> Adding ~$10.7K to the 12-month total pushes the operating-budget ceiling from M10 down to between M9 and M10. The 6-month grace runway is unchanged (Cubeia's clock didn't move), but the cushion for the post-grace burn shrank from ~$23K to ~$13K. Recommend confirming the actual billing cadence so this can be amortised more accurately than a single M1 charge.</div>
-    </div>
-  </section>
-
-  <!-- OPTIONAL / SCENARIO -->
-  <section class="section" id="scenarios">
-    <div class="section-label">
-      <span class="section-num">07</span>
-      <span class="section-title">Scenario Add-Ons (NOT in base forecast)</span>
-    </div>
-    <table class="lit">
-      <thead>
-        <tr><th>Add-on</th><th>Type</th><th style="text-align:right;">Monthly USD</th><th style="text-align:right;">12-mo impact</th><th style="text-align:right;">Runway impact</th></tr>
-      </thead>
-      <tbody>
-        <tr class="note">
-          <td colspan="5"><strong>Customer.io ($324/mo) and Freshchat ($54/mo)</strong> were moved into the committed base forecast — see the monthly table in §02. They're no longer in this scenarios list.</td>
-        </tr>
-        <tr>
-          <td>Cubeia Originals <span class="tag optional">if used</span></td>
-          <td class="cat">6% rev share + flat &euro;2K/mo</td>
-          <td class="num">$2,160</td>
-          <td class="num">$25,920</td>
-          <td class="num" style="color:var(--rose);">−2.0 mo</td>
-        </tr>
-        <tr>
-          <td>2nd Starlink Standard (CR villa) <span class="tag optional">optional</span></td>
-          <td class="cat">2nd fixed base for security ops</td>
-          <td class="num">$130</td>
-          <td class="num">$1,560</td>
-          <td class="num" style="color:var(--text-muted);">−0.1 mo</td>
-        </tr>
-        <tr>
-          <td>Device upgrades (all team) <span class="tag optional">one-time</span></td>
-          <td class="cat">MacBooks + iPhones per opsec baseline</td>
-          <td class="num">—</td>
-          <td class="num">$8,640–$10,800</td>
-          <td class="num" style="color:var(--rose);">−0.7 to −0.9 mo</td>
-        </tr>
-        <tr>
-          <td>Legal counsel moved INTO operating <span class="tag optional">scenario</span></td>
-          <td class="cat">If &euro;25K legal is paid from the 1.5M SEK pot</td>
-          <td class="num">—</td>
-          <td class="num">$27,000</td>
-          <td class="num" style="color:var(--rose);">−2.1 mo</td>
-        </tr>
-        <tr class="note">
-          <td colspan="5">"Runway impact" = how many months earlier the operating budget exhausts if this add-on is enabled, assuming no revenue intercept. Base case: budget exhausts ~M10.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- WHAT'S NOT INCLUDED -->
-  <section class="section" id="excluded">
-    <div class="section-label">
-      <span class="section-num">08</span>
-      <span class="section-title">What's NOT in this forecast</span>
-    </div>
-    <table class="lit">
-      <thead><tr><th>Excluded</th><th>Why / status</th></tr></thead>
-      <tbody>
-        <tr><td>Bankroll (1.5M SEK / $143K)</td><td>Reserved separately. Self-funded liquidity for player winnings, not operating spend. Rule-of-thumb 7.5× monthly GGR.</td></tr>
-        <tr><td>Cubeia revenue share (5% of GGR)</td><td>Variable, only applies once revenue exists. Not a fixed cost.</td></tr>
-        <tr><td>Casino game-provider rev share (6–15%)</td><td>Variable. Applies to whichever of QTech / Hub88 / St8 / Slotegrator is plugged in.</td></tr>
-        <tr><td>Cubeia Poker rev share (10%)</td><td>Variable. Only if poker vertical launches. Blocks UK/US.</td></tr>
-        <tr><td>Payment / FX processing fees</td><td>Variable, ~1–3% of transaction flow depending on rails.</td></tr>
-        <tr><td>Sweden employer-side taxes on salaries</td><td>If salaries are gross-Swedish-employer (not contractor), add ~31% to the $5K = ~$1.55K/mo or ~$18.6K/year. Forecast assumes contractor / net.</td></tr>
-        <tr><td>Domain, Vercel, accountant, banking fees</td><td>Not yet itemised. Small but recurring. Flag if you want me to add stub lines with estimates.</td></tr>
-        <tr><td>Tier-D VA hardware keys (~&euro;300)</td><td>Per Tools &amp; Opsec: senior VAs need cheap hardware keys or YubiKey. Junior VAs use TOTP (free). Not in base — add later when hiring.</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <footer class="footer">
-    GoLuna &mdash; 12-Month Forecast &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="budget.html">Back to Budget &rarr;</a>
-  </footer>
-
+<!-- Hero -->
+<section class="hero">
+<div class="hero-top">
+<div class="hero-badge"><span class="dot"></span> 12-Month Forecast</div>
+<span class="hero-date">v0.1 · May 2026</span>
 </div>
-
+<h1>Monthly Cost Forecast</h1>
+<p>Full month-by-month spend across salaries, platform, marketing, subscriptions, security, and one-time costs. Use this for runway tracking and cashflow planning — see <a href="budget.html" style="color:var(--accent);">Budget</a> for the strategic overview.</p>
+</section>
+<!-- FX assumption note -->
+<div class="note-box info">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div><strong>Currency: </strong><span class="fx-switch"><button class="fx-switch-btn" data-cur="usd">USD</button><button class="fx-switch-btn" data-cur="sek">SEK</button><button class="fx-switch-btn" data-cur="eur">EUR</button></span><strong>FX assumptions:</strong> 1 USD ≈ 10.5 SEK · 1 EUR ≈ $1.08 · 1 EUR ≈ 11.34 SEK. All forecast numbers are in USD as the working currency. Override in <a href="budget.html" style="color:var(--accent);text-decoration:underline;">Budget</a> if your spot rates differ.</div>
+</div>
+<!-- Top metric strip -->
+<div class="metrics-strip">
+<div class="metric-card accent">
+<div class="label">Operating budget</div>
+<div class="val accent">$143K</div>
+<div class="sub">3M SEK total − 1.5M bankroll reserve</div>
+</div>
+<div class="metric-card green">
+<div class="label">Already paid (pre-launch)</div>
+<div class="val green">$21K</div>
+<div class="sub">220K SEK · Cubeia 150K + designer 40K + reg 30K</div>
+</div>
+<div class="metric-card amber">
+<div class="label">12-mo committed (M1–M12)</div>
+<div class="val amber">$164K</div>
+<div class="sub">incl. CR corp + Cubeia 3rd-party · excl. legal</div>
+</div>
+<div class="metric-card rose">
+<div class="label">Operating shortfall at M12</div>
+<div class="val rose">−$42K</div>
+<div class="sub">budget tops out ~M8–M9 if no revenue</div>
+</div>
+</div>
+<!-- ONE-TIME COSTS -->
+<section class="section" id="onetime">
+<div class="section-label">
+<span class="section-num">01</span>
+<span class="section-title">One-Time Costs (Paid + Planned)</span>
+</div>
+<table class="lit">
+<thead>
+<tr><th>Line item</th><th>Category</th><th>Status</th><th class="col-usd" style="text-align:right;">USD</th><th class="col-sek" style="text-align:right;">SEK</th><th class="col-eur" style="text-align:right;">EUR</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Cubeia setup</td>
+<td class="cat">Platform · partial setup paid</td>
+<td><span class="tag paid">paid</span></td>
+<td class="num col-usd">$14,286</td>
+<td class="num col-sek">150,000</td>
+<td class="num col-eur">~€13,228</td>
+</tr>
+<tr>
+<td>Designer</td>
+<td class="cat">Brand / creative</td>
+<td><span class="tag paid">paid</span></td>
+<td class="num col-usd">$3,810</td>
+<td class="num col-sek">40,000</td>
+<td class="num col-eur">~€3,527</td>
+</tr>
+<tr>
+<td>Company registration</td>
+<td class="cat">Legal / formation</td>
+<td><span class="tag paid">paid</span></td>
+<td class="num col-usd">$2,857</td>
+<td class="num col-sek">30,000</td>
+<td class="num col-eur">~€2,646</td>
+</tr>
+<tr class="total">
+<td><strong>Subtotal paid</strong></td>
+<td class="cat">Sunk to date</td>
+<td>—</td>
+<td class="num col-usd">$20,952</td>
+<td class="num col-sek">220,000</td>
+<td class="num col-eur">~€19,401</td>
+</tr>
+<tr><td colspan="6" style="padding:6px 18px;background:var(--bg);"></td></tr>
+<tr>
+<td>Clipping campaign</td>
+<td class="cat">Marketing · 250M views over 3 mo, incl. $3K streamer</td>
+<td><span class="tag planned">planned</span></td>
+<td class="num col-usd">$25,000</td>
+<td class="num col-sek">~250,000</td>
+<td class="num col-eur">~€23,150</td>
+</tr>
+<tr>
+<td>Security stack — core hardware</td>
+<td class="cat">YubiKeys, routers, Starlink kits, faraday bag, privacy filters</td>
+<td><span class="tag planned">planned</span></td>
+<td class="num col-usd">~$2,268</td>
+<td class="num col-sek">~23,800</td>
+<td class="num col-eur">~€2,100</td>
+</tr>
+<tr class="note">
+<td colspan="6">Range €1,800–2,400 depending on whether all 4 users upgrade phones / get Pixel 9 Pro for SV2. Mid-estimate shown. See Section 04 for breakdown.</td>
+</tr>
+<tr>
+<td>Cubeia setup balance (if first-half only)</td>
+<td class="cat">~€1,800 if 150K SEK was just first €7.5K + hosting prepay</td>
+<td><span class="tag planned">tbd</span></td>
+<td class="num col-usd">~$1,940</td>
+<td class="num col-sek">~20,400</td>
+<td class="num col-eur">~€1,800</td>
+</tr>
+<tr>
+<td>Costa Rica corp maintenance 2026</td>
+<td class="cat">Maintenance bundle €3,585 + Drift €5,500 + Local UBO €850 — see §06</td>
+<td><span class="tag planned">annual</span></td>
+<td class="num col-usd">~$10,730</td>
+<td class="num col-sek">~112,660</td>
+<td class="num col-eur">~€9,935</td>
+</tr>
+<tr class="total">
+<td><strong>Subtotal planned (in operating budget)</strong></td>
+<td class="cat">Drawdown from 1.5M SEK</td>
+<td>—</td>
+<td class="num col-usd">~$39,938</td>
+<td class="num col-sek">~406,860</td>
+<td class="num col-eur">~€36,985</td>
+</tr>
+<tr><td colspan="6" style="padding:6px 18px;background:var(--bg);"></td></tr>
+<tr>
+<td>Legal counsel (T&amp;Cs, structure)</td>
+<td class="cat">Per Tools &amp; Opsec doc — described as separate one-time investment</td>
+<td><span class="tag separate">separate</span></td>
+<td class="num col-usd">~$27,000</td>
+<td class="num col-sek">~283,500</td>
+<td class="num col-eur">~€25,000</td>
+</tr>
+<tr class="note">
+<td colspan="6">Treated as <strong>separate cash outlay</strong> rather than operating-budget drawdown per the original framing. If actually funded from operating, runway shortens by ~2 months — flagged in Section 03.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- MAIN MONTHLY FORECAST TABLE -->
+<section class="section" id="monthly">
+<div class="section-label">
+<span class="section-num">02</span>
+<span class="section-title">Month-by-Month Forecast (USD)</span>
+</div>
+<div class="fc-table-wrap">
+<table class="fc-table">
+<thead>
+<tr>
+<th>Line</th>
+<th>M1</th>
+<th>M2</th>
+<th>M3</th>
+<th>M4</th>
+<th>M5</th>
+<th>M6</th>
+<th>M7</th>
+<th>M8</th>
+<th>M9</th>
+<th>M10</th>
+<th>M11</th>
+<th>M12</th>
+<th>12-mo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Salaries (G + F + O)</td>
+<td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td>
+<td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td>
+<td class="cum">60,000</td>
+</tr>
+<tr>
+<td>Cubeia AWS hosting</td>
+<td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td>
+<td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td>
+<td class="cum">22,032</td>
+</tr>
+<tr>
+<td>Customer.io (Cubeia App. B)</td>
+<td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td>
+<td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td>
+<td class="cum">3,888</td>
+</tr>
+<tr>
+<td>Freshchat (Cubeia App. B)</td>
+<td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td>
+<td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td>
+<td class="cum">648</td>
+</tr>
+<tr>
+<td>Cubeia platform min</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td>
+<td class="cum">32,400</td>
+</tr>
+<tr>
+<td>Security stack subs</td>
+<td>356</td><td>356</td><td>356</td><td>356</td><td>356</td><td>356</td>
+<td>356</td><td>356</td><td>356</td><td>356</td><td>356</td><td>356</td>
+<td class="cum">4,272</td>
+</tr>
+<tr>
+<td>Claude Max</td>
+<td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td>
+<td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td>
+<td class="cum">2,400</td>
+</tr>
+<tr>
+<td>Clipping campaign</td>
+<td>8,333</td><td>8,333</td><td>8,334</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="cum">25,000</td>
+</tr>
+<tr>
+<td>Security stack — hardware (one-time)</td>
+<td>2,268</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td>
+<td class="cum">2,268</td>
+</tr>
+<tr>
+<td>Costa Rica corp maintenance (2026)</td>
+<td>10,730</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td>
+<td class="cum">10,730</td>
+</tr>
+<tr style="border-top:1px solid var(--border-hover);">
+<td><strong>Monthly total</strong></td>
+<td class="month-tot">29,101</td>
+<td class="month-tot">16,103</td>
+<td class="month-tot">16,104</td>
+<td class="month-tot">7,770</td>
+<td class="month-tot">7,770</td>
+<td class="month-tot">7,770</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot">13,170</td>
+<td class="month-tot" style="color:var(--accent);">163,638</td>
+</tr>
+<tr class="grace-end">
+<td><strong>Cumulative</strong></td>
+<td class="cum">29,101</td>
+<td class="cum">45,204</td>
+<td class="cum">61,308</td>
+<td class="cum">69,078</td>
+<td class="cum">76,848</td>
+<td class="cum">84,618</td>
+<td class="cum">97,788</td>
+<td class="cum">110,958</td>
+<td class="cum" style="color:var(--rose);">124,128</td>
+<td class="cum" style="color:var(--rose);">137,298</td>
+<td class="cum" style="color:var(--rose);">150,468</td>
+<td class="cum" style="color:var(--rose);">163,638</td>
+<td class="cum">—</td>
+</tr>
+<tr>
+<td>Operating budget remaining</td>
+<td>$93K</td>
+<td>$77K</td>
+<td>$61K</td>
+<td>$53K</td>
+<td>$45K</td>
+<td>$37K</td>
+<td>$24K</td>
+<td>$11K</td>
+<td style="color:var(--rose);">−$2K</td>
+<td style="color:var(--rose);">−$15K</td>
+<td style="color:var(--rose);">−$28K</td>
+<td style="color:var(--rose);">−$42K</td>
+<td>—</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td>Phase</td>
+<td colspan="6" style="text-align:center;background:var(--green-dim);color:var(--green);">M1–M6 · Cubeia grace period · $7.8K base burn</td>
+<td colspan="2" style="text-align:center;background:var(--amber-dim);color:var(--amber);">M7–M8 · Min on · $13.2K</td>
+<td colspan="4" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M9–M12 · Over operating budget</td>
+<td>—</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div class="note-box warn" style="margin-top:18px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<div><strong>Reading the table:</strong> with no revenue, the operating budget runs out around <strong>month 9</strong>. The 6-month target runway lines up with the end of Cubeia's grace period — revenue needs to land before M7, otherwise the burn jumps 70% from $7.8K to $13.2K/mo (CR corp + Customer.io + Freshchat now in the base). Marketing buffer sits inside the M1–M12 totals as headroom but is unallocated to specific months.</div>
+</div>
+</section>
+<!-- CUMULATIVE CHART -->
+<section class="section" id="cumchart">
+<div class="section-label">
+<span class="section-num">03</span>
+<span class="section-title">Cumulative Burn vs Operating Budget Ceiling</span>
+</div>
+<div class="cum-chart">
+<div class="cum-bar-wrap">
+<div class="cum-ceiling" style="bottom:74.5%;"><span class="lbl">Operating ceiling · $122K available</span></div>
+<div class="cum-bar-line">
+<div class="cum-col grace" style="height:18%;" title="M1 cumulative $29,101"></div>
+<div class="cum-col grace" style="height:28%;" title="M2 cumulative $45,204"></div>
+<div class="cum-col grace" style="height:37%;" title="M3 cumulative $61,308"></div>
+<div class="cum-col grace" style="height:42%;" title="M4 cumulative $69,078"></div>
+<div class="cum-col grace" style="height:47%;" title="M5 cumulative $76,848"></div>
+<div class="cum-col grace" style="height:52%;" title="M6 cumulative $84,618"></div>
+<div class="cum-col post-grace" style="height:60%;" title="M7 cumulative $97,788"></div>
+<div class="cum-col post-grace" style="height:68%;" title="M8 cumulative $110,958 — almost at ceiling"></div>
+<div class="cum-col over" style="height:76%;" title="M9 cumulative $124,128 — over by $2K"></div>
+<div class="cum-col over" style="height:84%;" title="M10 cumulative $137,298 — over by $15K"></div>
+<div class="cum-col over" style="height:92%;" title="M11 cumulative $150,468 — over by $28K"></div>
+<div class="cum-col over" style="height:100%;" title="M12 cumulative $163,638 — over by $42K"></div>
+</div>
+</div>
+<div class="cum-labels">
+<span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span>
+<span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
+</div>
+<div class="cum-legend">
+<span><span class="ldot" style="background:rgba(52,211,153,0.45);"></span> Grace period (M1–M6)</span>
+<span><span class="ldot" style="background:rgba(251,191,36,0.45);"></span> Post-grace (M7–M9)</span>
+<span><span class="ldot" style="background:rgba(251,113,133,0.45);"></span> Over budget (M10–M12)</span>
+<span><span class="ldot" style="background:var(--rose);height:2px;margin-top:4px;"></span> Operating ceiling</span>
+</div>
+</div>
+</section>
+<!-- COST SHARE -->
+<section class="section" id="share">
+<div class="section-label">
+<span class="section-num">04</span>
+<span class="section-title">12-Month Cost Share by Category</span>
+</div>
+<div class="share-grid">
+<div class="share-card">
+<div class="share-title">By line item (12-month total · $164K)</div>
+<div class="share-bar">
+<div class="share-seg" style="flex:60000;background:var(--accent);">37%</div>
+<div class="share-seg" style="flex:54432;background:var(--cyan);">33%</div>
+<div class="share-seg" style="flex:25000;background:var(--amber);">15%</div>
+<div class="share-seg" style="flex:10730;background:var(--green);">7%</div>
+<div class="share-seg" style="flex:11208;background:var(--purple);">7%</div>
+<div class="share-seg" style="flex:2268;background:var(--rose);">1%</div>
+</div>
+<div class="share-rows">
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--accent);"></span>Salaries (G+F+O)</span><span class="v">$60,000 · 37%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--cyan);"></span>Cubeia platform (AWS + min)</span><span class="v">$54,432 · 33%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--amber);"></span>Marketing (clipping)</span><span class="v">$25,000 · 15%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--green);"></span>CR corp maintenance (2026)</span><span class="v">$10,730 · 7%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--purple);"></span>Subs (security + Claude + Cubeia App. B)</span><span class="v">$11,208 · 7%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--rose);"></span>One-time hardware</span><span class="v">$2,268 · 1%</span></div>
+</div>
+</div>
+<div class="share-card">
+<div class="share-title">Marketing budget allocation ($75K available over 6 mo)</div>
+<div class="share-bar">
+<div class="share-seg" style="flex:25000;background:var(--amber);">33%</div>
+<div class="share-seg" style="flex:50283;background:var(--green);">67%</div>
+</div>
+<div class="share-rows">
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--amber);"></span>Clipping (committed)</span><span class="v">$25,000 · 33%</span></div>
+<div class="share-row"><span class="nm"><span class="sd" style="background:var(--green);"></span>Buffer (unallocated)</span><span class="v">~$50,283 · 67%</span></div>
+</div>
+<div class="note-box info" style="margin-top:14px;font-size:12px;">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div>Buffer can be deployed across M4–M6 (still in grace period) for additional clipping rounds, KOL deals, paid social, or a content agency retainer. Reserve some for unforeseen ops costs.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECURITY STACK BREAKDOWN -->
+<section class="section" id="security">
+<div class="section-label">
+<span class="section-num">05</span>
+<span class="section-title">Security Stack — Detail</span>
+</div>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">One-time hardware (~€1,800–2,400 · 4 users: C / S / H / SV2)</h3>
+<table class="lit" style="margin-bottom:24px;">
+<thead>
+<tr><th>Item</th><th>For</th><th style="text-align:right;">Unit</th><th style="text-align:right;">Total EUR</th></tr>
+</thead>
+<tbody>
+<tr><td>YubiKey 5C NFC ×2</td><td class="cat">C, S, H (3 people)</td><td class="num">~€120/person</td><td class="num">~€360</td></tr>
+<tr><td>YubiKey 5 FIPS ×2 (government-grade)</td><td class="cat">SV2 (highest-exposure role)</td><td class="num">~€170/set</td><td class="num">~€170</td></tr>
+<tr><td>GL.iNet Flint 2 (AX6000 travel router)</td><td class="cat">1× C (the constant traveler)</td><td class="num">~€180</td><td class="num">~€180</td></tr>
+<tr><td>GL.iNet Brume 2 (fixed-base VPN gateway)</td><td class="cat">1× Malta office</td><td class="num">~€90</td><td class="num">~€90</td></tr>
+<tr><td>UniFi U7 Pro (Wi-Fi 7 AP)</td><td class="cat">1× shared at team-gather location</td><td class="num">~€200</td><td class="num">~€200</td></tr>
+<tr><td>Starlink Mini (portable)</td><td class="cat">1× C, travels</td><td class="num">~€600</td><td class="num">~€600</td></tr>
+<tr><td>Starlink Standard Gen 3 (fixed)</td><td class="cat">1× Malta office</td><td class="num">~€400</td><td class="num">~€400</td></tr>
+<tr><td>Mission Darkness faraday bag</td><td class="cat">1× C — hotel/at-rest storage</td><td class="num">~€80</td><td class="num">~€80</td></tr>
+<tr><td>3M GPF Gold privacy filter</td><td class="cat">4 users</td><td class="num">~€60/person</td><td class="num">~€240</td></tr>
+<tr><td>Webcam covers (3-pack)</td><td class="cat">Everyone</td><td class="num">~€10</td><td class="num">~€10</td></tr>
+<tr class="total"><td><strong>Core one-time total</strong></td><td class="cat">Mid estimate €2,100 used in forecast</td><td class="num">—</td><td class="num">~€1,800–2,400</td></tr>
+<tr class="note"><td colspan="4">Optional device upgrades NOT in base forecast: MacBook Pro M4 ~€2,400 / MacBook Air M4 ~€1,500 / iPhone 16 Pro ~€1,200 / Pixel 9 Pro for SV2 ~€1,000 (the doc recommends skipping the Pixel — SV2 manages X from PC). All-team device upgrade = +€8–10K to one-time. 2nd fixed base (CR villa) = +€700 one-time + €120/mo.</td></tr>
+</tbody>
+</table>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Monthly recurring subscriptions (~€310–350/mo · used at €330 mid)</h3>
+<table class="lit">
+<thead>
+<tr><th>Service</th><th>Scope</th><th class="col-eur" style="text-align:right;">EUR /mo</th></tr>
+</thead>
+<tbody>
+<tr><td>Mullvad VPN</td><td class="cat">5 devices × €5/device</td><td class="num col-eur">€25</td></tr>
+<tr><td>Proton Unlimited</td><td class="cat">4 users × ~€12 — Mail+Drive+VPN+Pass+Sentinel</td><td class="num col-eur">~€48</td></tr>
+<tr><td>1Password Business</td><td class="cat">4 users × ~€8</td><td class="num col-eur">~€32</td></tr>
+<tr><td>MySudo Pro (burner phone numbers)</td><td class="cat">4 users × ~€5</td><td class="num col-eur">~€20</td></tr>
+<tr><td>Starlink Mini service (Roam unlimited)</td><td class="cat">1 kit</td><td class="num col-eur">~€50</td></tr>
+<tr><td>Starlink Standard service (Priority data)</td><td class="cat">1 kit · Malta</td><td class="num col-eur">~€70</td></tr>
+<tr><td>Cloudflare Pro (public site WAF)</td><td class="cat">Zero Trust for CRM stays free tier</td><td class="num col-eur">~€23</td></tr>
+<tr><td>Hetzner CCX23 (CRM/Mautic hosting)</td><td class="cat">Dedicated 4 vCPU / 16 GB / 160 GB NVMe</td><td class="num col-eur">~€30</td></tr>
+<tr><td>Backblaze B2 (encrypted nightly backups)</td><td class="cat">~€5/TB · team total</td><td class="num col-eur">~€10–20</td></tr>
+<tr class="total"><td><strong>Team recurring total</strong></td><td class="cat">~$356 in forecast at €330 mid</td><td class="num col-eur">~€310–350</td></tr>
+<tr class="note"><td colspan="3">2nd Starlink Standard for CR villa = +€120/mo if expansion happens.</td></tr>
+</tbody>
+</table>
+<div class="note-box green" style="margin-top:18px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><polyline points="20 6 9 17 4 12"></polyline></svg>
+<div><strong>Free-tier core (not a line item but worth knowing):</strong> Signal, Brave, Tor, Mullvad Browser, Cloudflare Zero Trust free tier, SimpleLogin, ProtonVPN Plus, Proton Pass/Drive/Calendar, Proton Sentinel — all included in subscriptions above or genuinely free.</div>
+</div>
+</section>
+<!-- COSTA RICA CORPORATE MAINTENANCE -->
+<section class="section" id="cr-corp">
+<div class="section-label">
+<span class="section-num">06</span>
+<span class="section-title">Costa Rica Corporate Maintenance — 2026 &amp; Onwards</span>
+</div>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Annual maintenance package (per CR registry)</h3>
+<table class="lit" style="margin-bottom:24px;">
+<thead>
+<tr><th>Line item</th><th style="text-align:right;">Legal fees</th><th style="text-align:right;">20% VAT</th><th style="text-align:right;">Expenses</th><th style="text-align:right;">Total</th></tr>
+</thead>
+<tbody>
+<tr><td>Manager Service</td><td class="num">€2,250</td><td class="num">€450</td><td class="num">€0</td><td class="num">€2,700</td></tr>
+<tr><td>Corporate Tax</td><td class="num">€25</td><td class="num">€5</td><td class="num">€140</td><td class="num">€170</td></tr>
+<tr><td>Payment of Education and Culture Stamp</td><td class="num">€25</td><td class="num">€5</td><td class="num">€25</td><td class="num">€55</td></tr>
+<tr><td>Book Custody</td><td class="num">€150</td><td class="num">€30</td><td class="num">€0</td><td class="num">€180</td></tr>
+<tr><td>RTBF</td><td class="num">€200</td><td class="num">€40</td><td class="num">€0</td><td class="num">€240</td></tr>
+<tr><td>Declaration of Inactive Companies</td><td class="num">€200</td><td class="num">€40</td><td class="num">€0</td><td class="num">€240</td></tr>
+<tr class="total">
+<td><strong>Maintenance subtotal</strong></td>
+<td class="num">€2,850</td>
+<td class="num">€570</td>
+<td class="num">€165</td>
+<td class="num">€3,585</td>
+</tr>
+</tbody>
+</table>
+<h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">2026 supplementary fees</h3>
+<table class="lit">
+<thead>
+<tr><th>Line item</th><th>Note</th><th class="col-eur" style="text-align:right;">EUR</th><th class="col-usd" style="text-align:right;">USD</th><th class="col-sek" style="text-align:right;">SEK</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Maintenance package <span class="tag planned">2026</span></td>
+<td class="cat">From table above</td>
+<td class="num col-eur">€3,585</td>
+<td class="num col-usd">~$3,872</td>
+<td class="num col-sek">~40,650</td>
+</tr>
+<tr>
+<td>Drift (operations) 2026 <span class="tag planned">2026</span></td>
+<td class="cat">Operational running fee — separate from maintenance bundle</td>
+<td class="num col-eur">€5,500</td>
+<td class="num col-usd">~$5,940</td>
+<td class="num col-sek">~62,370</td>
+</tr>
+<tr>
+<td>Local UBO <span class="tag planned">extra</span></td>
+<td class="cat">Local UBO registration / declaration</td>
+<td class="num col-eur">€850</td>
+<td class="num col-usd">~$918</td>
+<td class="num col-sek">~9,640</td>
+</tr>
+<tr class="total">
+<td><strong>CR corporate total 2026</strong></td>
+<td class="cat">Annual recurring (in M1 of base forecast)</td>
+<td class="num col-eur">~€9,935</td>
+<td class="num col-usd">~$10,730</td>
+<td class="num col-sek">~112,660</td>
+</tr>
+<tr class="note">
+<td colspan="5">Placed in <strong>M1</strong> of the monthly forecast as a conservative front-load. Actual billing cadence may differ (quarterly / on registry anniversary) — confirm with the registry. Also confirm whether "Drift" and "Manager Service" overlap (both could be ongoing director/management fees) — if they do, the true annual is closer to ~€7,200 ($7,780).</td>
+</tr>
+</tbody>
+</table>
+<div class="note-box warn" style="margin-top:18px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<div><strong>Why this matters:</strong> Adding ~$10.7K to the 12-month total pushes the operating-budget ceiling from M10 down to between M9 and M10. The 6-month grace runway is unchanged (Cubeia's clock didn't move), but the cushion for the post-grace burn shrank from ~$23K to ~$13K. Recommend confirming the actual billing cadence so this can be amortised more accurately than a single M1 charge.</div>
+</div>
+</section>
+<!-- OPTIONAL / SCENARIO -->
+<section class="section" id="scenarios">
+<div class="section-label">
+<span class="section-num">07</span>
+<span class="section-title">Scenario Add-Ons (NOT in base forecast)</span>
+</div>
+<table class="lit">
+<thead>
+<tr><th>Add-on</th><th>Type</th><th style="text-align:right;">Monthly USD</th><th style="text-align:right;">12-mo impact</th><th style="text-align:right;">Runway impact</th></tr>
+</thead>
+<tbody>
+<tr class="note">
+<td colspan="5"><strong>Customer.io ($324/mo) and Freshchat ($54/mo)</strong> were moved into the committed base forecast — see the monthly table in §02. They're no longer in this scenarios list.</td>
+</tr>
+<tr>
+<td>Cubeia Originals <span class="tag optional">if used</span></td>
+<td class="cat">6% rev share + flat €2K/mo</td>
+<td class="num">$2,160</td>
+<td class="num">$25,920</td>
+<td class="num" style="color:var(--rose);">−2.0 mo</td>
+</tr>
+<tr>
+<td>2nd Starlink Standard (CR villa) <span class="tag optional">optional</span></td>
+<td class="cat">2nd fixed base for security ops</td>
+<td class="num">$130</td>
+<td class="num">$1,560</td>
+<td class="num" style="color:var(--text-muted);">−0.1 mo</td>
+</tr>
+<tr>
+<td>Device upgrades (all team) <span class="tag optional">one-time</span></td>
+<td class="cat">MacBooks + iPhones per opsec baseline</td>
+<td class="num">—</td>
+<td class="num">$8,640–$10,800</td>
+<td class="num" style="color:var(--rose);">−0.7 to −0.9 mo</td>
+</tr>
+<tr>
+<td>Legal counsel moved INTO operating <span class="tag optional">scenario</span></td>
+<td class="cat">If €25K legal is paid from the 1.5M SEK pot</td>
+<td class="num">—</td>
+<td class="num">$27,000</td>
+<td class="num" style="color:var(--rose);">−2.1 mo</td>
+</tr>
+<tr class="note">
+<td colspan="5">"Runway impact" = how many months earlier the operating budget exhausts if this add-on is enabled, assuming no revenue intercept. Base case: budget exhausts ~M10.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- WHAT'S NOT INCLUDED -->
+<section class="section" id="excluded">
+<div class="section-label">
+<span class="section-num">08</span>
+<span class="section-title">What's NOT in this forecast</span>
+</div>
+<table class="lit">
+<thead><tr><th>Excluded</th><th>Why / status</th></tr></thead>
+<tbody>
+<tr><td>Bankroll (1.5M SEK / $143K)</td><td>Reserved separately. Self-funded liquidity for player winnings, not operating spend. Rule-of-thumb 7.5× monthly GGR.</td></tr>
+<tr><td>Cubeia revenue share (5% of GGR)</td><td>Variable, only applies once revenue exists. Not a fixed cost.</td></tr>
+<tr><td>Casino game-provider rev share (6–15%)</td><td>Variable. Applies to whichever of QTech / Hub88 / St8 / Slotegrator is plugged in.</td></tr>
+<tr><td>Cubeia Poker rev share (10%)</td><td>Variable. Only if poker vertical launches. Blocks UK/US.</td></tr>
+<tr><td>Payment / FX processing fees</td><td>Variable, ~1–3% of transaction flow depending on rails.</td></tr>
+<tr><td>Sweden employer-side taxes on salaries</td><td>If salaries are gross-Swedish-employer (not contractor), add ~31% to the $5K = ~$1.55K/mo or ~$18.6K/year. Forecast assumes contractor / net.</td></tr>
+<tr><td>Domain, Vercel, accountant, banking fees</td><td>Not yet itemised. Small but recurring. Flag if you want me to add stub lines with estimates.</td></tr>
+<tr><td>Tier-D VA hardware keys (~€300)</td><td>Per Tools &amp; Opsec: senior VAs need cheap hardware keys or YubiKey. Junior VAs use TOTP (free). Not in base — add later when hiring.</td></tr>
+</tbody>
+</table>
+</section>
+<footer class="footer">
+    GoLuna — 12-Month Forecast — v0.1 · May 2026 — Confidential — <a href="budget.html">Back to Budget →</a>
+</footer>
+</div>
+<script>
+(function(){
+  function setCur(c){
+    var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
+    b.classList.add('fx-'+c);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.cur===c);
+    });
+    try{localStorage.setItem('goluna-fx',c)}catch(e){}
+  }
+  function init(){
+    var saved='usd';
+    try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
+    setCur(saved);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){setCur(btn.dataset.cur)});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
+})();
+</script>
 </body>
 </html>
