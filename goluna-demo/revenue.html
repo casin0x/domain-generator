@@ -841,7 +841,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div><strong>Trigger:</strong> only active when monthly Net Profit / EBITDA is <strong>≥ $25K</strong>. Below that, base salaries stay as-is (Toro $2K, Owl $1K, Gibbiana $2K = $5K/mo total). The pool is a % of <em>that month's</em> Net Profit, distributed equally to the 3 core team members.</div>
     </div>
 
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 12px;">Tiered Pool %</h3>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 12px;">Pool Structure (flat 10% with cap)</h3>
     <table class="lit" style="margin-bottom:24px;">
       <thead>
         <tr>
@@ -854,12 +854,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       </thead>
       <tbody>
         <tr><td>&lt; $25K</td><td class="num" style="color:var(--text-muted);">0%</td><td class="num" style="color:var(--text-muted);">$0</td><td class="num" style="color:var(--text-muted);">$0</td><td class="cat">Pool dormant · focus on getting profitable first</td></tr>
-        <tr><td><strong>$25K – $50K</strong></td><td class="num" style="color:var(--green);">12%</td><td class="num">$3K – $6K</td><td class="num">$1K – $2K</td><td class="cat">First profitable months · doubles Owl's pay, +50–100% on T/G</td></tr>
-        <tr><td><strong>$50K – $100K</strong></td><td class="num" style="color:var(--green);">12%</td><td class="num">$6K – $12K</td><td class="num">$2K – $4K</td><td class="cat">Same %, larger pool · sustainable territory</td></tr>
-        <tr><td><strong>$100K – $200K</strong></td><td class="num" style="color:var(--green);">15%</td><td class="num">$15K – $30K</td><td class="num">$5K – $10K</td><td class="cat">First bump · matches the base-case M6 target</td></tr>
-        <tr><td><strong>$200K – $500K</strong></td><td class="num" style="color:var(--green);">17.5%</td><td class="num">$35K – $87.5K</td><td class="num">$11.7K – $29.2K</td><td class="cat">Total comp now competitive with EU senior crypto roles</td></tr>
-        <tr><td><strong>$500K – $1M</strong></td><td class="num" style="color:var(--green);">20%</td><td class="num">$100K – $200K</td><td class="num">$33.3K – $66.7K</td><td class="cat">Founder-grade total comp at this NP</td></tr>
-        <tr><td><strong>$1M+</strong></td><td class="num" style="color:var(--green);">22.5%</td><td class="num">$225K+</td><td class="num">$75K+</td><td class="cat">Above this you should be raising base + tightening pool %</td></tr>
+        <tr><td><strong>$25K – $750K</strong></td><td class="num" style="color:var(--green);">10% flat</td><td class="num">$2.5K – $75K</td><td class="num">$833 – $25,000</td><td class="cat">Linear · scales with NP up to the per-person cap</td></tr>
+        <tr><td><strong>$750K +</strong></td><td class="num" style="color:var(--amber);">capped</td><td class="num">$75K max</td><td class="num">$25,000 max</td><td class="cat">Per-person hits $25K/mo cap · excess NP stays with company</td></tr>
       </tbody>
     </table>
 
@@ -868,7 +864,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <thead>
         <tr>
           <th>Monthly Net Profit</th>
-          <th style="text-align:right;">Pool</th>
+          <th style="text-align:right;">Pool (10%)</th>
           <th style="text-align:right;">Per person</th>
           <th style="text-align:right;">Toro total</th>
           <th style="text-align:right;">Owl total</th>
@@ -877,66 +873,67 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       </thead>
       <tbody>
         <tr><td class="cat">Below threshold</td><td class="num">$0</td><td class="num">$0</td><td class="num">$2,000</td><td class="num">$1,000</td><td class="num">$2,000</td></tr>
-        <tr><td><strong>$25K</strong></td><td class="num">$3,000</td><td class="num">$1,000</td><td class="num" style="color:var(--green);">$3,000</td><td class="num" style="color:var(--green);">$2,000</td><td class="num" style="color:var(--green);">$3,000</td></tr>
-        <tr><td><strong>$50K</strong></td><td class="num">$6,000</td><td class="num">$2,000</td><td class="num" style="color:var(--green);">$4,000</td><td class="num" style="color:var(--green);">$3,000</td><td class="num" style="color:var(--green);">$4,000</td></tr>
-        <tr><td><strong>$100K</strong></td><td class="num">$15,000</td><td class="num">$5,000</td><td class="num" style="color:var(--green);">$7,000</td><td class="num" style="color:var(--green);">$6,000</td><td class="num" style="color:var(--green);">$7,000</td></tr>
-        <tr><td><strong>$150K</strong></td><td class="num">$22,500</td><td class="num">$7,500</td><td class="num" style="color:var(--green);">$9,500</td><td class="num" style="color:var(--green);">$8,500</td><td class="num" style="color:var(--green);">$9,500</td></tr>
-        <tr><td><strong>$250K</strong></td><td class="num">$43,750</td><td class="num">$14,580</td><td class="num" style="color:var(--green);">$16,580</td><td class="num" style="color:var(--green);">$15,580</td><td class="num" style="color:var(--green);">$16,580</td></tr>
-        <tr><td><strong>$500K</strong></td><td class="num">$100,000</td><td class="num">$33,330</td><td class="num" style="color:var(--green);">$35,330</td><td class="num" style="color:var(--green);">$34,330</td><td class="num" style="color:var(--green);">$35,330</td></tr>
-        <tr><td><strong>$1M</strong></td><td class="num">$225,000</td><td class="num">$75,000</td><td class="num" style="color:var(--green);">$77,000</td><td class="num" style="color:var(--green);">$76,000</td><td class="num" style="color:var(--green);">$77,000</td></tr>
+        <tr><td><strong>$25K</strong></td><td class="num">$2,500</td><td class="num">$833</td><td class="num" style="color:var(--green);">$2,833</td><td class="num" style="color:var(--green);">$1,833</td><td class="num" style="color:var(--green);">$2,833</td></tr>
+        <tr><td><strong>$50K</strong></td><td class="num">$5,000</td><td class="num">$1,667</td><td class="num" style="color:var(--green);">$3,667</td><td class="num" style="color:var(--green);">$2,667</td><td class="num" style="color:var(--green);">$3,667</td></tr>
+        <tr><td><strong>$100K</strong></td><td class="num">$10,000</td><td class="num">$3,333</td><td class="num" style="color:var(--green);">$5,333</td><td class="num" style="color:var(--green);">$4,333</td><td class="num" style="color:var(--green);">$5,333</td></tr>
+        <tr><td><strong>$150K</strong></td><td class="num">$15,000</td><td class="num">$5,000</td><td class="num" style="color:var(--green);">$7,000</td><td class="num" style="color:var(--green);">$6,000</td><td class="num" style="color:var(--green);">$7,000</td></tr>
+        <tr><td><strong>$250K</strong></td><td class="num">$25,000</td><td class="num">$8,333</td><td class="num" style="color:var(--green);">$10,333</td><td class="num" style="color:var(--green);">$9,333</td><td class="num" style="color:var(--green);">$10,333</td></tr>
+        <tr><td><strong>$500K</strong></td><td class="num">$50,000</td><td class="num">$16,667</td><td class="num" style="color:var(--green);">$18,667</td><td class="num" style="color:var(--green);">$17,667</td><td class="num" style="color:var(--green);">$18,667</td></tr>
+        <tr><td><strong>$750K</strong> <span class="tag confirmed">cap binds</span></td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$26,000</td><td class="num" style="color:var(--green);">$27,000</td></tr>
+        <tr><td><strong>$1M</strong></td><td class="num">$75,000 <span style="color:var(--amber);font-size:10px;">(capped from $100K)</span></td><td class="num">$25,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$26,000</td><td class="num" style="color:var(--green);">$27,000</td></tr>
       </tbody>
     </table>
 
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Why this structure</h3>
     <div class="card-grid" style="margin-bottom:24px;">
       <div class="bonus-card welcome">
-        <h3>Below-market base</h3>
-        <div class="term">$60K/year for 3 senior people</div>
-        <div class="desc">Base ($5K/mo combined) is well under market for crypto operators in EU/Malta. Profit-share fixes that without inflating burn during the unprofitable months.</div>
+        <h3>Flat 10% · simple</h3>
+        <div class="term">No escalating tiers to argue over</div>
+        <div class="desc">One rule for every month above $25K NP. Easier to compute, easier to budget, harder to game. Industry-standard SaaS bonus pool size.</div>
       </div>
       <div class="bonus-card reload">
         <h3>$0 when unprofitable</h3>
         <div class="term">No cash-flow risk</div>
-        <div class="desc">Pool only triggers above $25K NP. If you never hit profitability, the pool costs nothing. Doesn't conflict with the runway / spend-by-M6 strategy.</div>
+        <div class="desc">Pool only triggers above $25K NP. If you never hit profitability, the pool costs nothing. Doesn't conflict with runway / spend-by-M6 strategy.</div>
       </div>
       <div class="bonus-card cashback">
-        <h3>Aligned with shareholders</h3>
-        <div class="term">% of NP, not % of GGR</div>
-        <div class="desc">Team only gets paid when the business actually makes money. Doesn't reward gross revenue growth that loses on bonuses + provider fees.</div>
+        <h3>$25K per-person cap</h3>
+        <div class="term">Predictable upside</div>
+        <div class="desc">Each member capped at $25K/mo from the pool ($75K total pool). Cap binds at $750K NP. Above that, excess profit stays with the company for reinvestment / shareholders.</div>
       </div>
       <div class="bonus-card fs">
-        <h3>Equal third</h3>
-        <div class="term">No politics</div>
-        <div class="desc">At 3-person scale, weighting by individual contribution becomes contentious and arbitrary. Equal split keeps things simple and culture-friendly.</div>
+        <h3>Aligned with shareholders</h3>
+        <div class="term">% of NP, not GGR</div>
+        <div class="desc">Team paid when the business actually makes money. Doesn't reward gross-revenue growth that loses money on bonuses + provider fees.</div>
       </div>
       <div class="bonus-card vip">
-        <h3>Escalating %, not capped</h3>
-        <div class="term">12% → 22.5% as NP grows</div>
-        <div class="desc">Standard SaaS bonus pool would be 10–15% capped. Crypto upside is non-linear so the pool % grows. Past $1M/mo NP the structure should be renegotiated — raise base, tighten pool.</div>
+        <h3>Equal third split</h3>
+        <div class="term">No politics at 3-person scale</div>
+        <div class="desc">Weighting by individual contribution becomes contentious at this scale. Equal split keeps things simple. Re-evaluate at headcount 6+.</div>
       </div>
       <div class="bonus-card rake">
         <h3>Monthly settlement</h3>
         <div class="term">Pay as profits land</div>
-        <div class="desc">Settle each month based on that month's NP. No annual cliff, no clawback. Keeps motivation tight to the immediate trailing month's performance.</div>
+        <div class="desc">Settle each month based on that month's NP. No annual cliff, no clawback. Motivation tracks the trailing month tightly.</div>
       </div>
     </div>
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Implementation note:</strong> the pool comes out of <em>operating Net Profit before founder distribution</em>. It's an opex line, not a dividend. At $55K M7+ base-case NP (per §06.5), 12% × $55K = $6.6K pool = ~$2.2K/person uplift. So actually <strong>almost immediately payable when the base-case lands</strong>. The pool stays at 0% until $25K NP — so M1–M6 has no pool impact even though some months may be profitable on a contribution basis.</div>
+      <div><strong>Implementation note:</strong> the pool comes out of operating Net Profit before founder distribution. At <strong>$55K M7+ base-case NP</strong> (per §06.5), 10% × $55K = $5.5K pool = <strong>~$1.8K/person uplift</strong>. Per-person cap binds at <strong>$750K monthly NP</strong> — above that, every $1 of extra NP stays with the company. Pool stays at 0% until $25K NP — so M1–M6 has no pool impact even if some months are net-positive on contribution.</div>
     </div>
 
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Alternative structures (less aggressive options)</h3>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Alternative structures (other shapes considered)</h3>
     <table class="lit">
       <thead>
-        <tr><th>Structure</th><th>Trigger</th><th>Pool %</th><th>When this fits</th></tr>
+        <tr><th>Structure</th><th>Trigger</th><th>Pool</th><th>Cap</th><th>When this fits</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Recommended</strong> <span class="tag confirmed">picked above</span></td><td>$25K NP</td><td>12% → 22.5%</td><td class="cat">Crypto-aggressive · matches upside expectation · keeps team locked in at scale</td></tr>
-        <tr><td>Standard SaaS pool</td><td>$25K NP</td><td>Flat 10%</td><td class="cat">Conservative · suits investor-backed structure · easier to model</td></tr>
-        <tr><td>Step-function only</td><td>$25K NP</td><td>Fixed $5K → $10K → $25K pool tiers</td><td class="cat">Caps total bonus cost · gives predictable bonus ceiling · less aligned at scale</td></tr>
-        <tr><td>Equity in lieu</td><td>—</td><td>5% equity each</td><td class="cat">No cash burn · founder dilution instead · only works if exit story is real</td></tr>
-        <tr><td>Hybrid</td><td>$25K NP</td><td>8% cash pool + 3% equity</td><td class="cat">Aligns long-term + short-term · most complex to administer</td></tr>
+        <tr><td><strong>Flat 10% + $25K cap</strong> <span class="tag confirmed">picked</span></td><td>$25K NP</td><td>10% flat</td><td>$25K/person/mo</td><td class="cat">SaaS-standard % · predictable upside ceiling · binds at $750K NP</td></tr>
+        <tr><td>Escalating tiers</td><td>$25K NP</td><td>12% → 22.5%</td><td>Uncapped</td><td class="cat">Crypto-aggressive · attractive at very large NP but harder to budget</td></tr>
+        <tr><td>Step-function</td><td>$25K NP</td><td>Fixed $5K → $10K → $25K tiers</td><td>$25K pool</td><td class="cat">Cleanest budgeting · less aligned at the tier boundaries</td></tr>
+        <tr><td>Equity in lieu</td><td>—</td><td>5% equity each</td><td>—</td><td class="cat">No cash burn · founder dilution instead · only works with real exit story</td></tr>
+        <tr><td>Hybrid</td><td>$25K NP</td><td>8% cash pool + 3% equity</td><td>$20K cash cap</td><td class="cat">Aligns long + short term · most complex to administer</td></tr>
       </tbody>
     </table>
   </section>
