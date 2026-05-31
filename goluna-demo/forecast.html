@@ -65,8 +65,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
 .fx-switch-btn:hover { color: var(--text); }
 .fx-switch-btn.active { color: var(--bg); background: var(--accent); }
-.cur-usd, .cur-sek, .cur-eur { display: none; }
-body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: inline; }
+.cur-usd, .cur-sek, .cur-eur { display: none !important; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: revert !important; }
 body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
 body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
 body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
@@ -246,23 +246,19 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="metrics-strip">
 <div class="metric-card accent">
 <div class="label">Operating budget</div>
-<div class="val accent">$143K</div>
-<div class="sub">3M SEK total − 1.5M bankroll reserve</div>
+<div class="val accent cur cur-usd">~$142.9K</div><div class="val accent cur cur-sek">1.5M SEK</div><div class="val accent cur cur-eur">~€132.3K</div><div class="sub">After 1.5M SEK bankroll reserve</div>
 </div>
 <div class="metric-card green">
 <div class="label">Already paid (pre-launch)</div>
-<div class="val green">$21K</div>
-<div class="sub">220K SEK · Cubeia 150K + designer 40K + reg 30K</div>
+<div class="val green cur cur-usd">~$21K</div><div class="val green cur cur-sek">220K SEK</div><div class="val green cur cur-eur">~€19.4K</div><div class="sub">Cubeia 150K + designer 40K + reg 30K SEK</div>
 </div>
 <div class="metric-card amber">
 <div class="label">12-mo committed (M1–M12)</div>
-<div class="val amber">$164K</div>
-<div class="sub">incl. CR corp + Cubeia 3rd-party · excl. legal</div>
+<div class="val amber cur cur-usd">~$163.6K</div><div class="val amber cur cur-sek">1.7M SEK</div><div class="val amber cur cur-eur">~€151.5K</div><div class="sub">Incl. CR corp + Cubeia 3rd-party · excl. legal</div>
 </div>
 <div class="metric-card rose">
 <div class="label">Operating shortfall at M12</div>
-<div class="val rose">−$42K</div>
-<div class="sub">budget tops out ~M8–M9 if no revenue</div>
+<div class="val rose cur cur-usd">−$41.6K</div><div class="val rose cur cur-sek">−437K SEK</div><div class="val rose cur cur-eur">−€38.6K</div><div class="sub">Budget tops out ~M8–M9 if no revenue</div>
 </div>
 </div>
 <!-- ONE-TIME COSTS -->

@@ -65,8 +65,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
 .fx-switch-btn:hover { color: var(--text); }
 .fx-switch-btn.active { color: var(--bg); background: var(--accent); }
-.cur-usd, .cur-sek, .cur-eur { display: none; }
-body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: inline; }
+.cur-usd, .cur-sek, .cur-eur { display: none !important; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: revert !important; }
 body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
 body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
 body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
@@ -254,23 +254,19 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="metrics-strip">
 <div class="metric-card total">
 <div class="label">Total Budget</div>
-<div class="val accent">3.0M SEK</div>
-<div class="sub">~$286K · ~€265K</div>
+<div class="val accent cur cur-usd">~$285.7K</div><div class="val accent cur cur-sek">3M SEK</div><div class="val accent cur cur-eur">~€264.6K</div><div class="sub cur cur-usd">3M SEK · ~€264.6K</div><div class="sub cur cur-sek">~$285.7K · ~€264.6K</div><div class="sub cur cur-eur">3M SEK · ~$285.7K</div>
 </div>
 <div class="metric-card reserve">
 <div class="label">Bankroll Reserve</div>
-<div class="val cyan">1.5M SEK</div>
-<div class="sub">~$143K · locked, not spent</div>
+<div class="val cyan cur cur-usd">~$142.9K</div><div class="val cyan cur cur-sek">1.5M SEK</div><div class="val cyan cur cur-eur">~€132.3K</div><div class="sub">Locked, not spent</div>
 </div>
 <div class="metric-card operating">
 <div class="label">Operating Budget</div>
-<div class="val green">1.5M SEK</div>
-<div class="sub">~$143K · everything else</div>
+<div class="val green cur cur-usd">~$142.9K</div><div class="val green cur cur-sek">1.5M SEK</div><div class="val green cur cur-eur">~€132.3K</div><div class="sub">Everything else</div>
 </div>
 <div class="metric-card spent">
 <div class="label">Spent To Date</div>
-<div class="val amber">220K SEK</div>
-<div class="sub">~$21K · 15% of operating</div>
+<div class="val amber cur cur-usd">~$21K</div><div class="val amber cur cur-sek">220K SEK</div><div class="val amber cur cur-eur">~€19.4K</div><div class="sub">15% of operating</div>
 </div>
 </div>
 <!-- Runway hero -->
@@ -285,25 +281,22 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="runway-grid">
 <div class="runway-mini">
 <div class="mini-label">Operating remaining</div>
-<div class="mini-val">1.28M SEK</div>
-<div class="mini-sub">~$122K after spent-to-date</div>
+<div class="mini-val cur cur-usd">~$121.9K</div><div class="mini-val cur cur-sek">1.3M SEK</div><div class="mini-val cur cur-eur">~€112.9K</div><div class="mini-sub">After spent-to-date</div>
 </div>
 <div class="runway-mini">
 <div class="mini-label">Marketing budget (6 mo)</div>
-<div class="mini-val" style="color:var(--green);">~655K SEK</div>
-<div class="mini-sub">~$62.4K · ~€57.7K · ex-salaries, fixed, CR corp &amp; app. b</div>
+<div class="mini-val cur cur-usd" style="color:var(--green);">~$62.4K</div><div class="mini-val cur cur-sek" style="color:var(--green);">~655K SEK</div><div class="mini-val cur cur-eur" style="color:var(--green);">~€57.8K</div><div class="mini-sub">Ex-salaries, fixed costs, CR corp &amp; app. b</div>
 </div>
 <div class="runway-mini">
 <div class="mini-label">Marketing buffer after clipping</div>
-<div class="mini-val">~393K SEK</div>
-<div class="mini-sub">~$37.4K · unallocated, post clipping 250K</div>
+<div class="mini-val cur cur-usd">~$37.4K</div><div class="mini-val cur cur-sek">~393K SEK</div><div class="mini-val cur cur-eur">~€34.6K</div><div class="mini-sub">Unallocated, post-clipping</div>
 </div>
 </div>
 </div>
 <!-- 6-month allocation breakdown -->
 <div class="note-box info" style="margin-bottom:48px;">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-<div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6×$5K = $30K <strong>minus</strong> Cubeia AWS 6×€1,700 = $11K <strong>minus</strong> Customer.io + Freshchat (Cubeia App. B) 6×€350 = $2.3K <strong>minus</strong> security subs 6×€330 = $2.1K <strong>minus</strong> Claude Max 6×$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K <strong>minus</strong> Costa Rica corp maintenance 2026 ~$10.7K = <strong>$62.4K / ~655K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK / $25K) is already committed, leaving ~393K SEK / ~$37.4K of marketing buffer.</div>
+<div><strong>How the marketing budget is calculated:</strong> Operating remaining (<span class="cur cur-usd">$121.9K</span><span class="cur cur-sek">1.3M SEK</span><span class="cur cur-eur">€112.9K</span>) <strong>minus</strong> salaries 6×<span class="cur cur-usd">$5K</span><span class="cur cur-sek">52K SEK</span><span class="cur cur-eur">€4.6K</span> = <span class="cur cur-usd">$30K</span><span class="cur cur-sek">315K SEK</span><span class="cur cur-eur">€27.8K</span> <strong>minus</strong> Cubeia AWS 6×<span class="cur cur-usd">$1.8K</span><span class="cur cur-sek">19K SEK</span><span class="cur cur-eur">€1.7K</span> = <span class="cur cur-usd">$11K</span><span class="cur cur-sek">116K SEK</span><span class="cur cur-eur">€10.2K</span> <strong>minus</strong> Customer.io + Freshchat (Cubeia App. B) 6×<span class="cur cur-usd">$378</span><span class="cur cur-sek">4K SEK</span><span class="cur cur-eur">€350</span> = <span class="cur cur-usd">$2.3K</span><span class="cur cur-sek">24K SEK</span><span class="cur cur-eur">€2.1K</span> <strong>minus</strong> security subs 6×<span class="cur cur-usd">$356</span><span class="cur cur-sek">4K SEK</span><span class="cur cur-eur">€330</span> = <span class="cur cur-usd">$2.1K</span><span class="cur cur-sek">22K SEK</span><span class="cur cur-eur">€2K</span> <strong>minus</strong> Claude Max 6×<span class="cur cur-usd">$200</span><span class="cur cur-sek">2K SEK</span><span class="cur cur-eur">€185</span> = <span class="cur cur-usd">$1.2K</span><span class="cur cur-sek">13K SEK</span><span class="cur cur-eur">€1.1K</span> <strong>minus</strong> security hardware one-time ~<span class="cur cur-usd">$2.3K</span><span class="cur cur-sek">24K SEK</span><span class="cur cur-eur">€2.1K</span> <strong>minus</strong> Costa Rica corp maintenance 2026 ~<span class="cur cur-usd">$10.7K</span><span class="cur cur-sek">113K SEK</span><span class="cur cur-eur">€9.9K</span> = <strong><span class="cur cur-usd">$62.4K</span><span class="cur cur-sek">655K SEK</span><span class="cur cur-eur">€57.8K</span></strong> available for marketing across the 6-month target. Clipping (<span class="cur cur-usd">$25K</span><span class="cur cur-sek">262K SEK</span><span class="cur cur-eur">€23.1K</span>) is already committed, leaving <span class="cur cur-usd">$37.4K</span><span class="cur cur-sek">393K SEK</span><span class="cur cur-eur">€34.6K</span> of marketing buffer.</div>
 </div>
 <!-- 01: SPENT TO DATE -->
 <section class="section" id="spent">
@@ -480,24 +473,22 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="burn-grid">
 <div class="burn-card now">
 <div class="burn-period">Months 1–6 (now)</div>
-<div class="burn-amount green">$7,770 / mo</div>
-<div class="burn-sub">81,585 SEK · €7,194 — Cubeia platform minimum waived</div>
+<div class="burn-amount green cur cur-usd">$7,770 / mo</div><div class="burn-amount green cur cur-sek">81,585 SEK / mo</div><div class="burn-amount green cur cur-eur">€7,194 / mo</div><div class="burn-sub">Cubeia platform minimum waived</div>
 <ul>
-<li>Salaries (G+F+O)<span class="li-num">$5,000</span></li>
-<li>Cubeia hosting<span class="li-num">$1,836</span></li>
-<li>Security subs<span class="li-num">$356</span></li>
-<li>Claude Max<span class="li-num">$200</span></li>
-<li>Customer.io<span class="li-num">$324</span></li>
-<li>Freshchat<span class="li-num">$54</span></li>
+<li>Salaries (G+F+O)<span class="li-num"><span class="cur cur-usd">$5,000</span><span class="cur cur-sek">52,500 SEK</span><span class="cur cur-eur">€4,630</span></span></li>
+<li>Cubeia hosting<span class="li-num"><span class="cur cur-usd">$1,836</span><span class="cur cur-sek">19,278 SEK</span><span class="cur cur-eur">€1,700</span></span></li>
+<li>Security subs<span class="li-num"><span class="cur cur-usd">$356</span><span class="cur cur-sek">3,738 SEK</span><span class="cur cur-eur">€330</span></span></li>
+<li>Claude Max<span class="li-num"><span class="cur cur-usd">$200</span><span class="cur cur-sek">2,100 SEK</span><span class="cur cur-eur">€185</span></span></li>
+<li>Customer.io<span class="li-num"><span class="cur cur-usd">$324</span><span class="cur cur-sek">3,402 SEK</span><span class="cur cur-eur">€300</span></span></li>
+<li>Freshchat<span class="li-num"><span class="cur cur-usd">$54</span><span class="cur cur-sek">567 SEK</span><span class="cur cur-eur">€50</span></span></li>
 </ul>
 </div>
 <div class="burn-card later">
 <div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
-<div class="burn-amount amber">$13,170 / mo</div>
-<div class="burn-sub">138,285 SEK · €12,194 — adds €5K/mo platform min</div>
+<div class="burn-amount amber cur cur-usd">$13,170 / mo</div><div class="burn-amount amber cur cur-sek">138,285 SEK / mo</div><div class="burn-amount amber cur cur-eur">€12,194 / mo</div><div class="burn-sub">Adds €5,000/mo platform min</div>
 <ul>
-<li>Everything in months 1–6<span class="li-num">$7,770</span></li>
-<li>Cubeia platform min<span class="li-num">$5,400</span></li>
+<li>Everything in months 1–6<span class="li-num"><span class="cur cur-usd">$7,770</span><span class="cur cur-sek">81,585 SEK</span><span class="cur cur-eur">€7,194</span></span></li>
+<li>Cubeia platform min<span class="li-num"><span class="cur cur-usd">$5,400</span><span class="cur cur-sek">56,700 SEK</span><span class="cur cur-eur">€5,000</span></span></li>
 <li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
 </ul>
 </div>
