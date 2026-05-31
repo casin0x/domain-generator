@@ -96,13 +96,14 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 .section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--accent-dim); color: var(--accent); }
 .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
 
-.metrics-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+.metrics-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
 .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; position: relative; overflow: hidden; }
 .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
 .metric-card.accent::before { background: var(--accent); }
 .metric-card.green::before { background: var(--green); }
 .metric-card.amber::before { background: var(--amber); }
 .metric-card.rose::before { background: var(--rose); }
+.metric-card.cyan::before { background: var(--cyan); }
 .metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
 .metric-card .val.green { color: var(--green); }
@@ -253,9 +254,13 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <!-- Top metric strip -->
 <div class="metrics-strip">
+<div class="metric-card cyan">
+<div class="label">Bankroll reserve</div>
+<div class="val cur cur-usd" style="color:var(--cyan);">$150K</div><div class="val cur cur-sek" style="color:var(--cyan);">1.58M SEK</div><div class="val cur cur-eur" style="color:var(--cyan);">~€138.9K</div><div class="sub">Locked for player winnings · self-funded liquidity</div>
+</div>
 <div class="metric-card accent">
 <div class="label">Operating budget</div>
-<div class="val accent cur cur-usd">~$142.9K</div><div class="val accent cur cur-sek">1.5M SEK</div><div class="val accent cur cur-eur">~€132.3K</div><div class="sub">After 1.5M SEK bankroll reserve</div>
+<div class="val accent cur cur-usd">~$135.7K</div><div class="val accent cur cur-sek">1.43M SEK</div><div class="val accent cur cur-eur">~€125.7K</div><div class="sub">3M SEK total minus bankroll</div>
 </div>
 <div class="metric-card green">
 <div class="label">Already paid (pre-launch)</div>
@@ -267,7 +272,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <div class="metric-card rose">
 <div class="label">Operating shortfall at M12</div>
-<div class="val rose cur cur-usd">−$41.6K</div><div class="val rose cur cur-sek">−437K SEK</div><div class="val rose cur cur-eur">−€38.6K</div><div class="sub">Budget tops out ~M8–M9 if no revenue</div>
+<div class="val rose cur cur-usd">−$48.9K</div><div class="val rose cur cur-sek">−514K SEK</div><div class="val rose cur cur-eur">−€45.3K</div><div class="sub">Budget tops out ~M8 if no revenue</div>
 </div>
 </div>
 <!-- ONE-TIME COSTS -->
@@ -351,7 +356,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </tr>
 <tr class="total">
 <td><strong>Subtotal planned (in operating budget)</strong></td>
-<td class="cat">Drawdown from 1.5M SEK</td>
+<td class="cat">Drawdown from 1.43M SEK operating</td>
 <td>—</td>
 <td class="num col-usd">~$39,938</td>
 <td class="num col-sek">~406,860</td>
@@ -520,18 +525,18 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </tr>
 <tr>
 <td>Operating budget remaining</td>
-<td>$93K</td>
-<td>$77K</td>
-<td>$61K</td>
-<td>$53K</td>
-<td>$45K</td>
-<td>$37K</td>
-<td>$24K</td>
-<td>$11K</td>
-<td style="color:var(--rose);">−$2K</td>
-<td style="color:var(--rose);">−$15K</td>
-<td style="color:var(--rose);">−$28K</td>
-<td style="color:var(--rose);">−$42K</td>
+<td>$86K</td>
+<td>$70K</td>
+<td>$54K</td>
+<td>$46K</td>
+<td>$38K</td>
+<td>$30K</td>
+<td>$17K</td>
+<td>$4K</td>
+<td style="color:var(--rose);">−$9K</td>
+<td style="color:var(--rose);">−$22K</td>
+<td style="color:var(--rose);">−$35K</td>
+<td style="color:var(--rose);">−$49K</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -548,7 +553,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <div class="note-box warn" style="margin-top:18px;">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
-<div><strong>Reading the table:</strong> with no revenue, the operating budget runs out around <strong>month 9</strong>. The 6-month target runway lines up with the end of Cubeia's grace period — revenue needs to land before M7, otherwise the burn jumps 70% from $7.8K to $13.2K/mo (CR corp + Customer.io + Freshchat now in the base). Marketing buffer sits inside the M1–M12 totals as headroom but is unallocated to specific months.</div>
+<div><strong>Reading the table:</strong> with no revenue, the operating budget runs out around <strong>month 8</strong>. The 6-month target runway lines up with the end of Cubeia's grace period — revenue needs to land before M7, otherwise the burn jumps 70% from $7.8K to $13.2K/mo (CR corp + Customer.io + Freshchat now in the base). Marketing buffer sits inside the M1–M12 totals as headroom but is unallocated to specific months.</div>
 </div>
 </section>
 <!-- CUMULATIVE CHART -->
@@ -559,7 +564,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <div class="cum-chart">
 <div class="cum-bar-wrap">
-<div class="cum-ceiling" style="bottom:74.5%;"><span class="lbl">Operating ceiling · $122K available</span></div>
+<div class="cum-ceiling" style="bottom:70%;"><span class="lbl">Operating ceiling · $115K available</span></div>
 <div class="cum-bar-line">
 <div class="cum-col grace" style="height:18%;" title="M1 cumulative $29,101"></div>
 <div class="cum-col grace" style="height:28%;" title="M2 cumulative $45,204"></div>
@@ -568,11 +573,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="cum-col grace" style="height:47%;" title="M5 cumulative $76,848"></div>
 <div class="cum-col grace" style="height:52%;" title="M6 cumulative $84,618"></div>
 <div class="cum-col post-grace" style="height:60%;" title="M7 cumulative $97,788"></div>
-<div class="cum-col post-grace" style="height:68%;" title="M8 cumulative $110,958 — almost at ceiling"></div>
-<div class="cum-col over" style="height:76%;" title="M9 cumulative $124,128 — over by $2K"></div>
-<div class="cum-col over" style="height:84%;" title="M10 cumulative $137,298 — over by $15K"></div>
-<div class="cum-col over" style="height:92%;" title="M11 cumulative $150,468 — over by $28K"></div>
-<div class="cum-col over" style="height:100%;" title="M12 cumulative $163,638 — over by $42K"></div>
+<div class="cum-col post-grace" style="height:68%;" title="M8 cumulative $110,958 — at ceiling"></div>
+<div class="cum-col over" style="height:76%;" title="M9 cumulative $124,128 — over by $9K"></div>
+<div class="cum-col over" style="height:84%;" title="M10 cumulative $137,298 — over by $22K"></div>
+<div class="cum-col over" style="height:92%;" title="M11 cumulative $150,468 — over by $35K"></div>
+<div class="cum-col over" style="height:100%;" title="M12 cumulative $163,638 — over by $49K"></div>
 </div>
 </div>
 <div class="cum-labels">
@@ -788,7 +793,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </tr>
 <tr>
 <td>Legal counsel moved INTO operating <span class="tag optional">scenario</span></td>
-<td class="cat">If €25K legal is paid from the 1.5M SEK pot</td>
+<td class="cat">If €25K legal is paid from the 1.43M SEK operating pot</td>
 <td class="num">—</td>
 <td class="num">$27,000</td>
 <td class="num" style="color:var(--rose);">−2.1 mo</td>
@@ -808,7 +813,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <table class="lit">
 <thead><tr><th>Excluded</th><th>Why / status</th></tr></thead>
 <tbody>
-<tr><td>Bankroll (1.5M SEK / $143K)</td><td>Reserved separately. Self-funded liquidity for player winnings, not operating spend. Rule-of-thumb 7.5× monthly GGR.</td></tr>
+<tr><td>Bankroll (~1.58M SEK / $150K)</td><td>Reserved separately. Self-funded liquidity for player winnings, not operating spend. Rule-of-thumb 7.5× monthly GGR — at $150K, supports ~$20K/mo GGR comfortably.</td></tr>
 <tr><td>Cubeia revenue share (5% of GGR)</td><td>Variable, only applies once revenue exists. Not a fixed cost.</td></tr>
 <tr><td>Casino game-provider rev share (6–15%)</td><td>Variable. Applies to whichever of QTech / Hub88 / St8 / Slotegrator is plugged in.</td></tr>
 <tr><td>Cubeia Poker rev share (10%)</td><td>Variable. Only if poker vertical launches. Blocks UK/US.</td></tr>
