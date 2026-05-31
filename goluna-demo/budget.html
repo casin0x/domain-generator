@@ -305,7 +305,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <!-- 6-month allocation breakdown -->
 <div class="note-box info" style="margin-bottom:48px;">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-<div><strong>How the marketing budget is calculated:</strong> Operating remaining (<span class="cur cur-usd">$169.5K</span><span class="cur cur-sek">1.78M SEK</span><span class="cur cur-eur">€157.0K</span>) <strong>minus</strong> 6 months of fixed costs ≈ <strong><span class="cur cur-usd">$72K</span><span class="cur cur-sek">756K SEK</span><span class="cur cur-eur">€67K</span></strong> [salaries T+O+G $30K · PH staff ×2 $5.7K · Cubeia AWS $11K · App.B (Customer.io+Freshchat) $2.3K · security subs $1.7K · Claude $1.2K · security HW one-time $1.8K · CR corp 2026 $10.7K · Designer M1 $4.8K · Betby setup M1 $3K] = <strong><span class="cur cur-usd">$97K</span><span class="cur cur-sek">1.02M SEK</span><span class="cur cur-eur">€90K</span></strong> available for marketing across the 6-month target. Of the <span class="cur cur-usd">$97K</span><span class="cur cur-sek">1.02M SEK</span><span class="cur cur-eur">€90K</span>: <strong>Clipping</strong> <span class="cur cur-usd">$25K</span><span class="cur cur-sek">262K SEK</span><span class="cur cur-eur">€23.1K</span> (M1–M3) + <strong>BH Ads</strong> <span class="cur cur-usd">$60K</span><span class="cur cur-sek">630K SEK</span><span class="cur cur-eur">€55.6K</span> ($10K/mo × M1–M6) + <strong>buffer</strong> <span class="cur cur-usd">$12K</span><span class="cur cur-sek">126K SEK</span><span class="cur cur-eur">€11K</span> still unallocated.</div>
+<div><strong>How the marketing budget is calculated:</strong> Operating remaining (<span class="cur cur-usd">$169.5K</span><span class="cur cur-sek">1.78M SEK</span><span class="cur cur-eur">€157.0K</span>) <strong>minus</strong> 6 months of fixed costs ≈ <strong><span class="cur cur-usd">$72K</span><span class="cur cur-sek">756K SEK</span><span class="cur cur-eur">€67K</span></strong> [salaries T+O+G $30K · X VIP Transfer Method $6.9K · Cubeia AWS $11K · App.B (Customer.io+Freshchat) $2.3K · security subs $1.7K · Claude $1.2K · security HW one-time $1.8K · CR corp 2026 $10.7K · Designer M1 $4.8K · Betby setup M1 $3K] = <strong><span class="cur cur-usd">$97K</span><span class="cur cur-sek">1.02M SEK</span><span class="cur cur-eur">€90K</span></strong> available for marketing across the 6-month target. Of the <span class="cur cur-usd">$97K</span><span class="cur cur-sek">1.02M SEK</span><span class="cur cur-eur">€90K</span>: <strong>Clipping</strong> <span class="cur cur-usd">$25K</span><span class="cur cur-sek">262K SEK</span><span class="cur cur-eur">€23.1K</span> (M1–M3) + <strong>BH Ads</strong> <span class="cur cur-usd">$60K</span><span class="cur cur-sek">630K SEK</span><span class="cur cur-eur">€55.6K</span> ($10K/mo × M1–M6) + <strong>buffer</strong> <span class="cur cur-usd">$12K</span><span class="cur cur-sek">126K SEK</span><span class="cur cur-eur">€11K</span> still unallocated.</div>
 </div>
 <!-- 01: SPENT TO DATE -->
 <section class="section" id="spent">
@@ -449,12 +449,26 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <td class="num col-sek">21,000</td>
 <td class="num col-eur">€1,852</td>
 </tr>
-<tr>
-<td>PH staff (×2) <span class="tag recurring">salary</span></td>
-<td class="cat">Philippines contractors · 5K SEK each</td>
+<tr class="row-expandable" data-expand="bg-xvip-table">
+<td>X VIP Transfer Method <span class="caret">▾</span> <span class="tag recurring">method</span></td>
+<td class="cat">Click to see breakdown</td>
+<td class="num col-usd">~$1,143</td>
+<td class="num col-sek">12,000</td>
+<td class="num col-eur">~€1,058</td>
+</tr>
+<tr class="detail-row" data-detail-of="bg-xvip-table" hidden>
+<td style="padding-left:28px;">— Staff (×2 managing)</td>
+<td class="cat">Operations</td>
 <td class="num col-usd">~$952</td>
 <td class="num col-sek">10,000</td>
 <td class="num col-eur">~€882</td>
+</tr>
+<tr class="detail-row" data-detail-of="bg-xvip-table" hidden>
+<td style="padding-left:28px;">— Tool</td>
+<td class="cat">Monthly tool subscription</td>
+<td class="num col-usd">~$191</td>
+<td class="num col-sek">2,000</td>
+<td class="num col-eur">~€176</td>
 </tr>
 <tr>
 <td>Cubeia hosting (AWS) <span class="tag recurring">platform</span></td>
@@ -503,9 +517,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="burn-grid">
 <div class="burn-card now">
 <div class="burn-period">Months 1–6 (now)</div>
-<div class="burn-amount green cur cur-usd">$8,647 / mo</div><div class="burn-amount green cur cur-sek">90,793 SEK / mo</div><div class="burn-amount green cur cur-eur">€8,006 / mo</div><div class="burn-sub">Cubeia platform minimum waived</div>
+<div class="burn-amount green cur cur-usd">$8,838 / mo</div><div class="burn-amount green cur cur-sek">92,793 SEK / mo</div><div class="burn-amount green cur cur-eur">€8,183 / mo</div><div class="burn-sub">Cubeia platform minimum waived</div>
 <ul>
-<li class="row-expandable" data-expand="bg-salaries-m16"><span>Salaries (T+O+G)<span class="caret">▾</span></span><span class="li-num"><span class="cur cur-usd">$5,000</span><span class="cur cur-sek">52,500 SEK</span><span class="cur cur-eur">€4,630</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Toro</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Owl</span><span class="li-num"><span class="cur cur-usd">$1,000</span><span class="cur cur-sek">10,500 SEK</span><span class="cur cur-eur">€926</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Gibbiana</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li><li><span>PH staff (×2)</span><span class="li-num"><span class="cur cur-usd">~$952</span><span class="cur cur-sek">10,000 SEK</span><span class="cur cur-eur">~€882</span></span></li>
+<li class="row-expandable" data-expand="bg-salaries-m16"><span>Salaries (T+O+G)<span class="caret">▾</span></span><span class="li-num"><span class="cur cur-usd">$5,000</span><span class="cur cur-sek">52,500 SEK</span><span class="cur cur-eur">€4,630</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Toro</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Owl</span><span class="li-num"><span class="cur cur-usd">$1,000</span><span class="cur cur-sek">10,500 SEK</span><span class="cur cur-eur">€926</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Gibbiana</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li><li class="row-expandable" data-expand="bg-xvip-burn-m16"><span>X VIP Transfer Method<span class="caret">▾</span></span><span class="li-num"><span class="cur cur-usd">~$1,143</span><span class="cur cur-sek">12,000 SEK</span><span class="cur cur-eur">~€1,058</span></span></li><li class="detail-row" data-detail-of="bg-xvip-burn-m16" hidden><span>· Staff (×2)</span><span class="li-num"><span class="cur cur-usd">~$952</span><span class="cur cur-sek">10,000 SEK</span><span class="cur cur-eur">~€882</span></span></li><li class="detail-row" data-detail-of="bg-xvip-burn-m16" hidden><span>· Tool</span><span class="li-num"><span class="cur cur-usd">~$191</span><span class="cur cur-sek">2,000 SEK</span><span class="cur cur-eur">~€176</span></span></li>
 <li>Cubeia hosting<span class="li-num"><span class="cur cur-usd">$1,836</span><span class="cur cur-sek">19,278 SEK</span><span class="cur cur-eur">€1,700</span></span></li>
 <li>Security subs<span class="li-num"><span class="cur cur-usd">$281</span><span class="cur cur-sek">2,946 SEK</span><span class="cur cur-eur">€260</span></span></li>
 <li>Claude Max<span class="li-num"><span class="cur cur-usd">$200</span><span class="cur cur-sek">2,100 SEK</span><span class="cur cur-eur">€185</span></span></li>
@@ -515,9 +529,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <div class="burn-card later">
 <div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
-<div class="burn-amount amber cur cur-usd">$14,047 / mo</div><div class="burn-amount amber cur cur-sek">147,494 SEK / mo</div><div class="burn-amount amber cur cur-eur">€13,006 / mo</div><div class="burn-sub">Adds €5,000/mo platform min</div>
+<div class="burn-amount amber cur cur-usd">$14,238 / mo</div><div class="burn-amount amber cur cur-sek">149,494 SEK / mo</div><div class="burn-amount amber cur cur-eur">€13,183 / mo</div><div class="burn-sub">Adds €5,000/mo platform min</div>
 <ul>
-<li>Everything in months 1–6<span class="li-num"><span class="cur cur-usd">$8,647</span><span class="cur cur-sek">90,793 SEK</span><span class="cur cur-eur">€8,006</span></span></li>
+<li>Everything in months 1–6<span class="li-num"><span class="cur cur-usd">$8,838</span><span class="cur cur-sek">92,793 SEK</span><span class="cur cur-eur">€8,183</span></span></li>
 <li>Cubeia platform min<span class="li-num"><span class="cur cur-usd">$5,400</span><span class="cur cur-sek">56,700 SEK</span><span class="cur cur-eur">€5,000</span></span></li>
 <li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
 </ul>
