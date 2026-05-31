@@ -266,13 +266,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       </div>
       <div class="runway-mini">
         <div class="mini-label">Marketing budget (6 mo)</div>
-        <div class="mini-val" style="color:var(--green);">~680K SEK</div>
-        <div class="mini-sub">~$64.6K &middot; ~&euro;60K &middot; ex-salaries, fixed &amp; CR corp</div>
+        <div class="mini-val" style="color:var(--green);">~655K SEK</div>
+        <div class="mini-sub">~$62.4K &middot; ~&euro;57.7K &middot; ex-salaries, fixed, CR corp &amp; app. b</div>
       </div>
       <div class="runway-mini">
         <div class="mini-label">Marketing buffer after clipping</div>
-        <div class="mini-val">~415K SEK</div>
-        <div class="mini-sub">~$39.6K &middot; unallocated, post clipping 250K</div>
+        <div class="mini-val">~393K SEK</div>
+        <div class="mini-sub">~$37.4K &middot; unallocated, post clipping 250K</div>
       </div>
     </div>
   </div>
@@ -280,7 +280,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   <!-- 6-month allocation breakdown -->
   <div class="note-box info" style="margin-bottom:48px;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    <div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6&times;$5K = $30K <strong>minus</strong> Cubeia AWS 6&times;&euro;1,700 = $11K <strong>minus</strong> security subs 6&times;&euro;330 = $2.1K <strong>minus</strong> Claude Max 6&times;$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K <strong>minus</strong> Costa Rica corp maintenance 2026 ~$10.7K = <strong>$64.6K / ~680K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK / $25K) is already committed against this, leaving ~415K SEK / ~$39.6K of marketing buffer for anything else (KOL, paid social, additional clipping, agency spend, etc.).</div>
+    <div><strong>How the marketing budget is calculated:</strong> Operating remaining ($121.9K) <strong>minus</strong> salaries 6&times;$5K = $30K <strong>minus</strong> Cubeia AWS 6&times;&euro;1,700 = $11K <strong>minus</strong> Customer.io + Freshchat (Cubeia App. B) 6&times;&euro;350 = $2.3K <strong>minus</strong> security subs 6&times;&euro;330 = $2.1K <strong>minus</strong> Claude Max 6&times;$200 = $1.2K <strong>minus</strong> security hardware one-time ~$2.3K <strong>minus</strong> Costa Rica corp maintenance 2026 ~$10.7K = <strong>$62.4K / ~655K SEK</strong> available for marketing across the 6-month target. Clipping (250K SEK / $25K) is already committed, leaving ~393K SEK / ~$37.4K of marketing buffer.</div>
   </div>
 
   <!-- 01: SPENT TO DATE -->
@@ -442,27 +442,43 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
           <td class="num">2,100</td>
           <td class="num">&euro;185</td>
         </tr>
+        <tr>
+          <td>Customer.io <span class="tag recurring">cubeia app. b</span></td>
+          <td class="cat">Lifecycle email / CRM (committed)</td>
+          <td class="num">$324</td>
+          <td class="num">3,402</td>
+          <td class="num">&euro;300</td>
+        </tr>
+        <tr>
+          <td>Freshchat <span class="tag recurring">cubeia app. b</span></td>
+          <td class="cat">Live support chat (committed)</td>
+          <td class="num">$54</td>
+          <td class="num">567</td>
+          <td class="num">&euro;50</td>
+        </tr>
       </tbody>
     </table>
 
     <div class="burn-grid">
       <div class="burn-card now">
         <div class="burn-period">Months 1–6 (now)</div>
-        <div class="burn-amount green">$7,392 / mo</div>
-        <div class="burn-sub">77,616 SEK &middot; &euro;6,846 — Cubeia platform minimum waived</div>
+        <div class="burn-amount green">$7,770 / mo</div>
+        <div class="burn-sub">81,585 SEK &middot; &euro;7,194 — Cubeia platform minimum waived</div>
         <ul>
           <li>Salaries (G+F+O)<span class="li-num">$5,000</span></li>
           <li>Cubeia hosting<span class="li-num">$1,836</span></li>
           <li>Security subs<span class="li-num">$356</span></li>
           <li>Claude Max<span class="li-num">$200</span></li>
+          <li>Customer.io<span class="li-num">$324</span></li>
+          <li>Freshchat<span class="li-num">$54</span></li>
         </ul>
       </div>
       <div class="burn-card later">
         <div class="burn-period">Months 7+ (Cubeia minimum kicks in)</div>
-        <div class="burn-amount amber">$12,792 / mo</div>
-        <div class="burn-sub">134,316 SEK &middot; &euro;11,845 — adds &euro;5K/mo platform min</div>
+        <div class="burn-amount amber">$13,170 / mo</div>
+        <div class="burn-sub">138,285 SEK &middot; &euro;12,194 — adds &euro;5K/mo platform min</div>
         <ul>
-          <li>Everything in months 1–6<span class="li-num">$7,392</span></li>
+          <li>Everything in months 1–6<span class="li-num">$7,770</span></li>
           <li>Cubeia platform min<span class="li-num">$5,400</span></li>
           <li>(Plus 5% revenue share above min)<span class="li-num">variable</span></li>
         </ul>
@@ -577,18 +593,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     </div>
     <div class="forecast">
       <div class="forecast-bar" id="fcBar">
-        <div class="fc-col" style="height:18%;" title="Month 1 · $28.7K cumulative (incl. CR corp + security HW + clipping start)"></div>
-        <div class="fc-col" style="height:28%;" title="Month 2 · $44.4K"></div>
-        <div class="fc-col" style="height:38%;" title="Month 3 · $60.2K"></div>
-        <div class="fc-col" style="height:42%;" title="Month 4 · $67.6K"></div>
-        <div class="fc-col" style="height:47%;" title="Month 5 · $75.0K"></div>
-        <div class="fc-col" style="height:52%;" title="Month 6 · $82.4K"></div>
-        <div class="fc-col warn" style="height:60%;" title="Month 7 · $95.1K — Cubeia min activates"></div>
-        <div class="fc-col warn" style="height:68%;" title="Month 8 · $107.9K"></div>
-        <div class="fc-col warn" style="height:76%;" title="Month 9 · $120.7K — approaching ceiling"></div>
-        <div class="fc-col crit" style="height:84%;" title="Month 10 · $133.5K — over by $12K"></div>
-        <div class="fc-col crit" style="height:92%;" title="Month 11 · $146.3K — over by $24K"></div>
-        <div class="fc-col crit" style="height:100%;" title="Month 12 · $159.1K — over by $37K"></div>
+        <div class="fc-col" style="height:18%;" title="Month 1 · $29.1K cumulative (incl. CR corp + security HW + clipping start)"></div>
+        <div class="fc-col" style="height:28%;" title="Month 2 · $45.2K"></div>
+        <div class="fc-col" style="height:37%;" title="Month 3 · $61.3K"></div>
+        <div class="fc-col" style="height:42%;" title="Month 4 · $69.1K"></div>
+        <div class="fc-col" style="height:47%;" title="Month 5 · $76.8K"></div>
+        <div class="fc-col" style="height:52%;" title="Month 6 · $84.6K"></div>
+        <div class="fc-col warn" style="height:60%;" title="Month 7 · $97.8K — Cubeia min activates"></div>
+        <div class="fc-col warn" style="height:68%;" title="Month 8 · $111.0K — approaching ceiling"></div>
+        <div class="fc-col crit" style="height:76%;" title="Month 9 · $124.1K — over by $2K"></div>
+        <div class="fc-col crit" style="height:84%;" title="Month 10 · $137.3K — over by $15K"></div>
+        <div class="fc-col crit" style="height:92%;" title="Month 11 · $150.5K — over by $28K"></div>
+        <div class="fc-col crit" style="height:100%;" title="Month 12 · $163.6K — over by $42K"></div>
       </div>
       <div class="fc-labels">
         <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
@@ -600,7 +616,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       </div>
       <div class="note-box rose" style="margin-top:24px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <div><strong>Target = revenue by month 6.</strong> If GGR doesn't ramp before month 7 (when Cubeia's grace ends): after clipping (250K SEK), CR corp maintenance (~$10.7K), and 6 months of grace-period burn, ~$40K is left. At the post-grace burn of $12.8K/mo that's ~3 more months &mdash; cumulative spend hits the operating-budget ceiling around month 9–10. The 12-month chart shows the slip scenario, not the plan. See <a href="forecast.html" style="color:var(--rose);text-decoration:underline;">Forecast</a> for the full month-by-month table.</div>
+        <div><strong>Target = revenue by month 6.</strong> If GGR doesn't ramp before month 7 (when Cubeia's grace ends): after clipping (250K SEK), CR corp maintenance (~$10.7K), Customer.io + Freshchat at &euro;350/mo, and 6 months of grace-period burn, ~$37K is left. At the post-grace burn of $13.2K/mo that's ~2.8 more months &mdash; cumulative spend hits the operating-budget ceiling around month 8–9. The 12-month chart shows the slip scenario, not the plan. See <a href="forecast.html" style="color:var(--rose);text-decoration:underline;">Forecast</a> for the full month-by-month table.</div>
       </div>
     </div>
   </section>
