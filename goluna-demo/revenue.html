@@ -254,7 +254,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     <a href="#rtp" class="subnav-link">RTP</a>
     <a href="#bonuses" class="subnav-link">Bonuses</a>
     <a href="#breakeven" class="subnav-link">Break-even</a>
-    <a href="#vsspend" class="subnav-link">Rev vs Spend</a>
+    <a href="#pnl" class="subnav-link">P&amp;L</a>
+    <a href="#vsspend" class="subnav-link">M1–M6 Profit</a>
     <a href="#open" class="subnav-link">Open Qs</a>
   </div>
 </div>
@@ -267,7 +268,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="hero-date">v0.1 &middot; May 2026</span>
     </div>
     <h1>Revenue Forecast &amp; Margin Model</h1>
-    <p>6-month GGR targets, variable cost waterfall, RTP and bonus configuration, and the break-even point for becoming self-sufficient. Pairs with the <a href="forecast.html" style="color:var(--accent);">spend forecast</a> — when the two lines cross, the casino covers its own burn.</p>
+    <p>6-month GGR targets, full P&amp;L cascade (GGR → bonuses → variable fees → opex → <strong>Net Profit</strong>), RTP and bonus configuration, and break-even thresholds. Pairs with the <a href="forecast.html" style="color:var(--accent);">spend forecast</a> — Net Profit = Gross Margin minus the costs on the Forecast page.</p>
   </section>
 
   <!-- FX note -->
@@ -297,12 +298,19 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div class="val accent">~57%</div>
       <div class="sub">of GGR after fees + bonuses</div>
     </div>
+    <div class="metric-card green">
+      <div class="label">M6 cumulative Net Profit</div>
+      <div class="val green cur cur-usd">+$37K</div>
+      <div class="val green cur cur-sek">+388K SEK</div>
+      <div class="val green cur cur-eur">+€34K</div>
+      <div class="sub">Base case · M1–M6 P&amp;L bottom line</div>
+    </div>
     <div class="metric-card amber">
       <div class="label">Break-even GGR (M7+)</div>
       <div class="val amber cur cur-usd">~$28K /mo</div>
       <div class="val amber cur cur-sek">~294K SEK /mo</div>
       <div class="val amber cur cur-eur">~€26K /mo</div>
-      <div class="sub">Covers $15.7K M7+ fixed burn</div>
+      <div class="sub">Covers $15.7K M7+ fixed burn (zero profit)</div>
     </div>
     <div class="metric-card cyan">
       <div class="label">6-mo cumulative GGR (base)</div>
@@ -449,7 +457,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </div>
     <div class="note-box warn" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>This waterfall is the <strong>variable</strong> stack only. Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) sits on top — net-to-operator must cover those before there's any profit.</div>
+      <div>This waterfall is the <strong>variable</strong> stack only. The 56.5¢ at the right is <strong>gross margin per $1 of GGR — NOT net profit</strong>. Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) AND marketing spend (BH Ads, Paid Social, etc.) come out of that 56.5¢ before anything reaches Net Profit / EBITDA. See §07 for the full P&amp;L.</div>
     </div>
   </section>
 
@@ -645,6 +653,40 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </table>
   </section>
 
+  <!-- §06.5 FULL P&L CASCADE -->
+  <section class="section" id="pnl">
+    <div class="section-label">
+      <span class="section-num">06.5</span>
+      <span class="section-title">Full P&amp;L Cascade — From GGR to Net Profit</span>
+    </div>
+    <table class="lit">
+      <thead>
+        <tr><th>Line</th><th style="text-align:right;">% of GGR</th><th style="text-align:right;">M6 (Base · $125K GGR)</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Gross Gaming Revenue (GGR)</strong></td><td class="num">100%</td><td class="num" style="color:var(--green);">$125,000</td><td class="cat">Total wagers − total winnings paid</td></tr>
+        <tr><td>− Bonuses &amp; promo cost</td><td class="num">25%</td><td class="num" style="color:var(--rose);">−$31,250</td><td class="cat">Welcome + reload + cashback + free spins + VIP</td></tr>
+        <tr><td><strong>= Net Gaming Revenue (NGR)</strong></td><td class="num">75%</td><td class="num">$93,750</td><td class="cat">What 'real' revenue actually is</td></tr>
+        <tr><td>− Cubeia platform rev share</td><td class="num">5% of GGR</td><td class="num" style="color:var(--rose);">−$6,250</td><td class="cat">Contract §4ii.a flat</td></tr>
+        <tr><td>− Game-provider rev share (blended)</td><td class="num">~10.5% of GGR</td><td class="num" style="color:var(--rose);">−$13,125</td><td class="cat">Casino 65% × 10% + Sports 25% × 12% + Other 10% × 10%</td></tr>
+        <tr><td>− Crypto payment processing</td><td class="num">~3% of GGR</td><td class="num" style="color:var(--rose);">−$3,750</td><td class="cat">Deposit + withdrawal + on-chain + FX</td></tr>
+        <tr class="total"><td><strong>= Gross Margin (Net Contribution)</strong></td><td class="num">~56.5%</td><td class="num" style="color:var(--green);">$70,625</td><td class="cat">What §02 waterfall calls "net to operator"</td></tr>
+        <tr><td>− Salaries (Toro + Owl + Gibbiana)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="cat">M7+ unchanged from forecast page</td></tr>
+        <tr><td>− X VIP Transfer Method</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,143</td><td class="cat">Staff $952 + tool $191</td></tr>
+        <tr><td>− Cubeia AWS hosting</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,836</td><td class="cat">€1,700/mo Appendix B</td></tr>
+        <tr><td>− Cubeia platform minimum (M7+)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,400</td><td class="cat">€5,000/mo from M7</td></tr>
+        <tr><td>− Subs (Customer.io + Freshchat + security + Claude + Other)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,235</td><td class="cat">$324 + $54 + $281 + $200 + $476</td></tr>
+        <tr><td>− AI Call outreach</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Continues M7+</td></tr>
+        <tr><td>− Marketing acquisition (M1–M6 only)</td><td class="num">—</td><td class="num" style="color:var(--text-muted);">M7+: $0</td><td class="cat">BH Ads $8K + Paid Social $2K + Clipping = M1–M6 only</td></tr>
+        <tr class="total"><td><strong>= Net Profit / EBITDA</strong></td><td class="num">—</td><td class="num" style="color:var(--green);font-size:16px;">+$55,011</td><td class="cat"><strong>M6 standalone monthly profit at $125K GGR · M7+ run-rate</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="note-box info" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Read this top to bottom.</strong> Each row subtracts a real cost from real GGR. The "Net to operator 56.5%" from §02 is the <em>Gross Margin</em> row here — still six lines short of the actual Net Profit number. At $125K M6 GGR base case the M7+ run-rate is roughly <strong>+$55K/mo Net Profit</strong>, but during M1–M6 the heavy marketing spend (BH Ads $8K + Paid Social $2K + clipping prepay) eats most of that — see §07 month-by-month for the actual M1–M6 P&amp;L.</div>
+    </div>
+  </section>
+
   <!-- §07 REVENUE vs SPEND -->
   <section class="section" id="vsspend">
     <div class="section-label">
@@ -659,7 +701,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
             <th style="text-align:right;">GGR target (base)</th>
             <th style="text-align:right;">Spend</th>
             <th style="text-align:right;">Net contribution<br><span style="font-weight:400;font-size:9px;">(GGR × 56.5%)</span></th>
-            <th style="text-align:right;">Vs spend</th>
+            <th style="text-align:right;">Net Profit / EBITDA</th>
             <th>State</th>
           </tr>
         </thead>
@@ -718,7 +760,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
             <td style="color:var(--rose);">$163K</td>
             <td style="color:var(--green);">$199K</td>
             <td style="color:var(--green);">+$36K</td>
-            <td class="note" style="font-style:normal;">Cumulative contribution > cumulative spend</td>
+            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: +$36K</strong> (contribution − spend)</td>
           </tr>
         </tbody>
       </table>
