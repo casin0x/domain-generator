@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Revenue Forecast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1400px; margin: 0 auto; padding: 0 32px 80px; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo span { color: var(--text-muted); font-weight: 500; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+
+/* Subnav */
+.subnav { position: sticky; top: 56px; z-index: 99; background: rgba(11,13,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.subnav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2px; height: 40px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.subnav-inner::-webkit-scrollbar { height: 4px; }
+.subnav-inner::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
+.subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+/* Currency switcher */
+.fx-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; vertical-align: middle; margin: 0 4px; }
+.fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-switch-btn:hover { color: var(--text); }
+.fx-switch-btn.active { color: var(--bg); background: var(--accent); }
+.cur-usd, .cur-sek, .cur-eur { display: none !important; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: revert !important; }
+body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
+body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
+body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
+
+/* Hero */
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--green-dim); border: 1px solid var(--green-border); font-size: 11px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 820px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+
+/* Sections */
+.section { margin-bottom: 56px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--green-dim); color: var(--green); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+
+/* Metrics strip */
+.metrics-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
+.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; position: relative; overflow: hidden; }
+.metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.metric-card.green::before { background: var(--green); }
+.metric-card.accent::before { background: var(--accent); }
+.metric-card.amber::before { background: var(--amber); }
+.metric-card.cyan::before { background: var(--cyan); }
+.metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
+.metric-card .val.green { color: var(--green); }
+.metric-card .val.accent { color: var(--accent); }
+.metric-card .val.amber { color: var(--amber); }
+.metric-card .val.cyan { color: var(--cyan); }
+.metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+
+/* GGR trajectory table */
+.ggr-table { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; overflow-x: auto; }
+.ggr-table table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 13px; }
+.ggr-table th, .ggr-table td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.ggr-table th { background: var(--surface-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; }
+.ggr-table th:first-child, .ggr-table td:first-child { text-align: left; }
+.ggr-table td.month { font-weight: 700; color: var(--text); }
+.ggr-table td.conservative { color: var(--text-secondary); }
+.ggr-table td.base { color: var(--green); font-weight: 700; }
+.ggr-table td.stretch { color: var(--accent); }
+.ggr-table td.note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: left; max-width: 280px; white-space: normal; line-height: 1.4; font-family: var(--font); }
+.ggr-table tr.total td { background: var(--surface-2); font-weight: 700; border-top: 2px solid var(--border-hover); }
+
+/* Waterfall */
+.waterfall { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; }
+.waterfall-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px; }
+.waterfall-bar { display: flex; height: 56px; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+.waterfall-seg { display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--mono); color: var(--bg); position: relative; transition: all 0.2s; cursor: default; }
+.waterfall-seg:hover { filter: brightness(1.1); }
+.waterfall-seg .pct { font-size: 13px; font-weight: 800; line-height: 1; }
+.waterfall-seg .lbl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 3px; opacity: 0.85; }
+.waterfall-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+.waterfall-row { display: grid; grid-template-columns: 14px 1fr auto auto; gap: 12px; align-items: center; font-size: 13px; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+.waterfall-row:last-child { border-bottom: 0; }
+.waterfall-row .dot { width: 10px; height: 10px; border-radius: 3px; }
+.waterfall-row .nm { color: var(--text); font-weight: 500; }
+.waterfall-row .nm .small { color: var(--text-muted); font-size: 11px; font-weight: 400; margin-left: 4px; }
+.waterfall-row .pct { font-family: var(--mono); color: var(--text-muted); font-size: 12px; min-width: 50px; text-align: right; }
+.waterfall-row .amt { font-family: var(--mono); font-weight: 700; color: var(--text); min-width: 70px; text-align: right; }
+.waterfall-row.total { border-top: 2px solid var(--border-hover); border-bottom: 0; padding-top: 14px; margin-top: 8px; }
+.waterfall-row.total .nm { color: var(--green); font-weight: 700; }
+.waterfall-row.total .amt { color: var(--green); font-size: 15px; }
+
+/* Generic line-item table */
+.lit { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.lit th, .lit td { padding: 12px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.lit th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; background: var(--surface-2); }
+.lit tr:last-child td { border-bottom: none; }
+.lit td.num { font-family: var(--mono); font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+.lit td.cat { color: var(--text-secondary); font-size: 12px; }
+.lit tr.total td { background: var(--surface-2); font-weight: 700; color: var(--text); }
+.lit tr.total td.num { font-size: 14px; color: var(--green); }
+.lit tr.note td { background: rgba(251,191,36,0.04); font-size: 11px; color: var(--text-muted); padding: 8px 18px; font-style: italic; }
+.lit td .tag { font-family: var(--mono); font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+.lit td .tag.confirmed { background: var(--green-dim); color: var(--green); }
+.lit td .tag.estimate { background: var(--amber-dim); color: var(--amber); }
+.lit td .tag.tbd { background: rgba(251,113,133,0.10); color: var(--rose); }
+
+/* Card grid */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.bonus-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; position: relative; }
+.bonus-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.bonus-card.welcome::before { background: var(--accent); }
+.bonus-card.reload::before { background: var(--green); }
+.bonus-card.cashback::before { background: var(--cyan); }
+.bonus-card.fs::before { background: var(--amber); }
+.bonus-card.vip::before { background: var(--purple); }
+.bonus-card.rake::before { background: var(--rose); }
+.bonus-card h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.bonus-card .term { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+.bonus-card .price { font-family: var(--mono); font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+.bonus-card.welcome .price { color: var(--accent); }
+.bonus-card.reload .price { color: var(--green); }
+.bonus-card.cashback .price { color: var(--cyan); }
+.bonus-card.fs .price { color: var(--amber); }
+.bonus-card.vip .price { color: var(--purple); }
+.bonus-card.rake .price { color: var(--rose); }
+.bonus-card .desc { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+/* RTP table */
+.rtp-table th { text-align: right; }
+.rtp-table th:first-child { text-align: left; }
+.rtp-table td { font-family: var(--mono); font-size: 13px; }
+.rtp-table td:first-child { font-family: var(--font); }
+.rtp-table td.num { font-weight: 700; text-align: right; }
+
+/* Side-by-side spend vs revenue */
+.sxs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.sxs-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
+.sxs-card.spend { border-top: 3px solid var(--rose); }
+.sxs-card.rev { border-top: 3px solid var(--green); }
+.sxs-card .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.sxs-card .val { font-family: var(--mono); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+.sxs-card.spend .val { color: var(--rose); }
+.sxs-card.rev .val { color: var(--green); }
+.sxs-card .sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+/* Note */
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.note-box strong { color: var(--text); font-weight: 600; }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .sxs-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .subnav { padding: 0 16px; } .subnav-inner { height: 36px; }
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 28px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+  .waterfall { padding: 20px 18px; }
+  .waterfall-bar { height: 44px; }
+  .waterfall-seg .pct { font-size: 11px; }
+  .waterfall-seg .lbl { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link active">Revenue</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#trajectory" class="subnav-link">GGR Target</a>
+    <a href="#waterfall" class="subnav-link">Waterfall</a>
+    <a href="#providers" class="subnav-link">Providers</a>
+    <a href="#rtp" class="subnav-link">RTP</a>
+    <a href="#bonuses" class="subnav-link">Bonuses</a>
+    <a href="#breakeven" class="subnav-link">Break-even</a>
+    <a href="#vsspend" class="subnav-link">Rev vs Spend</a>
+    <a href="#open" class="subnav-link">Open Qs</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge"><span class="dot"></span> Revenue Targets</div>
+      <span class="hero-date">v0.1 &middot; May 2026</span>
+    </div>
+    <h1>Revenue Forecast &amp; Margin Model</h1>
+    <p>6-month GGR targets, variable cost waterfall, RTP and bonus configuration, and the break-even point for becoming self-sufficient. Pairs with the <a href="forecast.html" style="color:var(--accent);">spend forecast</a> — when the two lines cross, the casino covers its own burn.</p>
+  </section>
+
+  <!-- FX note -->
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>Currency: </strong>
+      <span class="fx-switch">
+        <button class="fx-switch-btn" data-cur="usd">USD</button>
+        <button class="fx-switch-btn" data-cur="sek">SEK</button>
+        <button class="fx-switch-btn" data-cur="eur">EUR</button>
+      </span>
+      Default USD &middot; FX 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08. <strong>GGR</strong> = Gross Gaming Revenue (total wagers − total winnings).
+    </div>
+  </div>
+
+  <!-- Top metric strip -->
+  <div class="metrics-strip">
+    <div class="metric-card green">
+      <div class="label">Base M6 GGR target</div>
+      <div class="val green cur cur-usd">$125K</div>
+      <div class="val green cur cur-sek">1.31M SEK</div>
+      <div class="val green cur cur-eur">~€116K</div>
+      <div class="sub">Self-sufficient threshold</div>
+    </div>
+    <div class="metric-card accent">
+      <div class="label">Net contribution margin</div>
+      <div class="val accent">~57%</div>
+      <div class="sub">of GGR after fees + bonuses</div>
+    </div>
+    <div class="metric-card amber">
+      <div class="label">Break-even GGR (M7+)</div>
+      <div class="val amber cur cur-usd">~$28K /mo</div>
+      <div class="val amber cur cur-sek">~294K SEK /mo</div>
+      <div class="val amber cur cur-eur">~€26K /mo</div>
+      <div class="sub">Covers $15.7K M7+ fixed burn</div>
+    </div>
+    <div class="metric-card cyan">
+      <div class="label">6-mo cumulative GGR (base)</div>
+      <div class="val cyan cur cur-usd">~$352K</div>
+      <div class="val cyan cur cur-sek">~3.70M SEK</div>
+      <div class="val cyan cur cur-eur">~€326K</div>
+      <div class="sub">M1–M6 added up</div>
+    </div>
+  </div>
+
+  <!-- §01 GGR TARGET TRAJECTORY -->
+  <section class="section" id="trajectory">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-title">GGR Target Trajectory (M1–M6)</span>
+    </div>
+    <div class="ggr-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Conservative</th>
+            <th>Base</th>
+            <th>Stretch</th>
+            <th style="text-align:left;">Narrative</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="month">M1</td>
+            <td class="conservative">$5K</td>
+            <td class="base">$7.5K</td>
+            <td class="stretch">$15K</td>
+            <td class="note">Soft launch · platform live · clipping content seeding · KYC/payment plumbing settling</td>
+          </tr>
+          <tr>
+            <td class="month">M2</td>
+            <td class="conservative">$12K</td>
+            <td class="base">$20K</td>
+            <td class="stretch">$35K</td>
+            <td class="note">Clipping campaign starts converting (~3-week lag from content seeding to FTDs) · BH Ads ramps</td>
+          </tr>
+          <tr>
+            <td class="month">M3</td>
+            <td class="conservative">$25K</td>
+            <td class="base">$40K</td>
+            <td class="stretch">$60K</td>
+            <td class="note">Full paid-acquisition stack live · first cohort retention kicks in · Paid Social tuning</td>
+          </tr>
+          <tr>
+            <td class="month">M4</td>
+            <td class="conservative">$40K</td>
+            <td class="base">$65K</td>
+            <td class="stretch">$90K</td>
+            <td class="note">LTV compounding from M1–M3 cohorts · clipping tail effects · BH Ads optimised</td>
+          </tr>
+          <tr>
+            <td class="month">M5</td>
+            <td class="conservative">$60K</td>
+            <td class="base">$95K</td>
+            <td class="stretch">$130K</td>
+            <td class="note">Above break-even on M7+ fixed burn even on conservative case · reinvest signal</td>
+          </tr>
+          <tr>
+            <td class="month">M6</td>
+            <td class="conservative">$80K</td>
+            <td class="base">$125K</td>
+            <td class="stretch">$180K</td>
+            <td class="note">Target self-sufficient / investor-ready. Base case = ~$70K net contribution after variable costs + bonuses</td>
+          </tr>
+          <tr class="total">
+            <td class="month">6-mo total</td>
+            <td class="conservative">$222K</td>
+            <td class="base" style="color:var(--green);">$352K</td>
+            <td class="stretch">$510K</td>
+            <td class="note" style="font-style:normal;">Cumulative GGR target across scenarios</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box info" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Backing assumption:</strong> CAC ~$50 per FTD, LTV ~$100 over 6 months (typical crypto casino with paid acquisition). $60K total acquisition spend M1–M6 = ~1,200 FTDs × $100 LTV = $120K acquired-cohort revenue, mostly realised M3–M9. Existing-cohort revenue plus this is what produces the base-case totals.</div>
+    </div>
+  </section>
+
+  <!-- §02 VARIABLE COST WATERFALL -->
+  <section class="section" id="waterfall">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-title">Variable Cost Waterfall — What Reaches the Operator</span>
+    </div>
+    <div class="waterfall">
+      <div class="waterfall-title">For every $1.00 of GGR</div>
+      <div class="waterfall-bar">
+        <div class="waterfall-seg" style="flex:25;background:var(--rose);" title="Bonus cost ~25¢">
+          <span class="pct">25¢</span><span class="lbl">Bonuses</span>
+        </div>
+        <div class="waterfall-seg" style="flex:5;background:#8b5cf6;" title="Cubeia 5%">
+          <span class="pct">5¢</span><span class="lbl">Cubeia</span>
+        </div>
+        <div class="waterfall-seg" style="flex:10.5;background:var(--cyan);" title="Game providers blended ~10.5%">
+          <span class="pct">10.5¢</span><span class="lbl">Providers</span>
+        </div>
+        <div class="waterfall-seg" style="flex:3;background:var(--amber);" title="Crypto fees ~3%">
+          <span class="pct">3¢</span><span class="lbl">Crypto</span>
+        </div>
+        <div class="waterfall-seg" style="flex:56.5;background:var(--green);" title="Net to operator 56.5%">
+          <span class="pct">56.5¢</span><span class="lbl">Net to operator</span>
+        </div>
+      </div>
+      <div class="waterfall-rows">
+        <div class="waterfall-row">
+          <span class="dot" style="background:var(--rose);"></span>
+          <span class="nm">Bonus &amp; promo reserve <span class="small">(25% target, see §05)</span></span>
+          <span class="pct">25%</span>
+          <span class="amt">−$0.25</span>
+        </div>
+        <div class="waterfall-row">
+          <span class="dot" style="background:#8b5cf6;"></span>
+          <span class="nm">Cubeia platform rev share <span class="small">(§4ii.a, flat)</span></span>
+          <span class="pct">5%</span>
+          <span class="amt">−$0.05</span>
+        </div>
+        <div class="waterfall-row">
+          <span class="dot" style="background:var(--cyan);"></span>
+          <span class="nm">Game-provider rev share <span class="small">(blended across casino / sports / poker)</span></span>
+          <span class="pct">~10.5%</span>
+          <span class="amt">−$0.105</span>
+        </div>
+        <div class="waterfall-row">
+          <span class="dot" style="background:var(--amber);"></span>
+          <span class="nm">Crypto payment processing <span class="small">(deposit + withdrawal + FX)</span></span>
+          <span class="pct">~3%</span>
+          <span class="amt">−$0.03</span>
+        </div>
+        <div class="waterfall-row total">
+          <span class="dot" style="background:var(--green);"></span>
+          <span class="nm">Net contribution to operator</span>
+          <span class="pct">~56.5%</span>
+          <span class="amt">$0.565</span>
+        </div>
+      </div>
+    </div>
+    <div class="note-box warn" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div>This waterfall is the <strong>variable</strong> stack only. Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) sits on top — net-to-operator must cover those before there's any profit.</div>
+    </div>
+  </section>
+
+  <!-- §03 PROVIDER FEES DETAIL -->
+  <section class="section" id="providers">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-title">Provider Fees — Full Detail</span>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Cubeia (Appendix A — confirmed)</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr><th>Vertical</th><th>Provider</th><th style="text-align:right;">Rev share on GGR</th><th style="text-align:right;">Monthly fee</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Casino slots / live</td><td>QTech</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino slots / live</td><td>Hub88</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino slots / live</td><td>St8</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Casino slots / live</td><td>Slotegrator</td><td class="num">6–15%</td><td class="num">—</td><td class="cat">Provider-specific</td></tr>
+        <tr><td>Cubeia Originals <span class="tag confirmed">if used</span></td><td>Cubeia</td><td class="num">6%</td><td class="num">€2,000</td><td class="cat">Optional vertical</td></tr>
+        <tr><td>Poker <span class="tag confirmed">if used</span></td><td>Cubeia</td><td class="num">10%</td><td class="num">—</td><td class="cat">Blocks UK + US</td></tr>
+        <tr><td>Platform <span class="tag confirmed">contract §4</span></td><td>Cubeia</td><td class="num">5% flat</td><td class="num">€0 mo 1–6 · €5K mo 7+</td><td class="cat">On top of game provider fee</td></tr>
+        <tr><td>Hosting <span class="tag confirmed">App. B</span></td><td>AWS via Cubeia</td><td class="num">—</td><td class="num">€1,700</td><td class="cat">Required, in opex</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Betby — Sportsbook</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr><th>Item</th><th style="text-align:right;">Cost</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Setup fee <span class="tag confirmed">paid</span></td><td class="num">$3,000</td><td class="cat">Confirmed earlier · in spent-to-date</td></tr>
+        <tr><td>Rev share on sports GGR <span class="tag estimate">estimate</span></td><td class="num">10–15%</td><td class="cat">Industry norm for sportsbook turnkey · confirm with Betby</td></tr>
+        <tr><td>Monthly platform fee <span class="tag estimate">estimate</span></td><td class="num">$2K–5K /mo</td><td class="cat">Often kicks in after initial grace · ask sales for written terms</td></tr>
+        <tr><td>Odds feed / data <span class="tag estimate">often bundled</span></td><td class="num">$1K–3K /mo or included</td><td class="cat">Varies by tier (Standard vs Premium)</td></tr>
+        <tr><td>Sportsbook hold (margin)</td><td class="num">5–8% of stakes</td><td class="cat">i.e. GGR is 5–8% of total betting volume on sports</td></tr>
+        <tr class="note"><td colspan="3"><strong>Action:</strong> ask Betby contact for written terms on rev share, monthly minimum, and odds-feed cost. Model uses 12% rev share + $3K/mo as conservative placeholder until confirmed.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Crypto payment processing</h3>
+    <table class="lit">
+      <thead>
+        <tr><th>Item</th><th style="text-align:right;">Typical rate</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Payment processor (deposit)</td><td class="num">1–2% per tx</td><td class="cat">BitPay / CoinPayments / direct wallet integration</td></tr>
+        <tr><td>Payment processor (withdrawal)</td><td class="num">1–2% per tx</td><td class="cat">Same side · counts both deposit and withdrawal</td></tr>
+        <tr><td>On-chain network fees</td><td class="num">$0.50–$3 / tx flat</td><td class="cat">BTC > LTC > USDT-TRC20 in cost order · use cheap chains where possible</td></tr>
+        <tr><td>FX / crypto→fiat conversion</td><td class="num">1–2%</td><td class="cat">Only if converting to fiat for payroll / European fees. Cubeia accepts BTC direct (§4).</td></tr>
+        <tr class="total"><td><strong>Effective drag on GGR</strong></td><td class="num" style="color:var(--green);">~2–3%</td><td class="cat">Used in waterfall</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- §04 RTP & MARGIN -->
+  <section class="section" id="rtp">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-title">Optimal RTP &amp; Margin Configuration</span>
+    </div>
+    <table class="lit rtp-table">
+      <thead>
+        <tr>
+          <th>Vertical</th>
+          <th style="text-align:right;">Target RTP / Hold</th>
+          <th style="text-align:right;">GGR yield on wagers</th>
+          <th>Why this level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Casino slots</strong></td>
+          <td class="num">RTP 96%</td>
+          <td class="num">4% of wagers</td>
+          <td class="cat">Slightly above industry avg (95%). Matches Stake.com tier · attracts crypto-native players who check published RTPs.</td>
+        </tr>
+        <tr>
+          <td><strong>Live casino</strong></td>
+          <td class="num">RTP 98%</td>
+          <td class="num">2% of wagers</td>
+          <td class="cat">European blackjack / roulette standard. Lower margin per hand but very high volume + retention.</td>
+        </tr>
+        <tr>
+          <td><strong>Sports (Betby)</strong></td>
+          <td class="num">RTP 93–94%</td>
+          <td class="num">6–7% margin</td>
+          <td class="cat">Sportsbook hold typical 5–8%. Major leagues run leaner (4–5%), niche markets fatter (8–10%). Betby calibrates odds.</td>
+        </tr>
+        <tr>
+          <td><strong>Poker</strong></td>
+          <td class="num">5% rake (cap $3)</td>
+          <td class="num">5% of pot</td>
+          <td class="cat">Industry standard cash-game rake. Tournament fees 5–10% of buy-in. Lower margin but sticky players.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box green" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><strong>Strategic read on RTP:</strong> running slots at 96% instead of 95% costs you ~20% of slot GGR but reads as "fair" to crypto-native audiences (who compare RTPs across casinos). That credibility translates into deposit frequency and retention, more than offsetting the per-spin margin loss. The Stake.com playbook.</div>
+    </div>
+  </section>
+
+  <!-- §05 BONUSES -->
+  <section class="section" id="bonuses">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-title">Bonus Structure — Optimal for Crypto Casino</span>
+    </div>
+    <div class="card-grid" style="margin-bottom:18px;">
+      <div class="bonus-card welcome">
+        <h3>Welcome bonus</h3>
+        <div class="term">First deposit · headline acquisition offer</div>
+        <div class="price">100% / $500</div>
+        <div class="desc">100% match up to $500, 35× wagering on slots, 7-day expiry. Headline offer for clipping creatives and BH Ads landing pages. Cost-to-acquire offset.</div>
+      </div>
+      <div class="bonus-card reload">
+        <h3>Reload bonus</h3>
+        <div class="term">Weekly / monthly · retention</div>
+        <div class="price">25% / $100</div>
+        <div class="desc">25% match on weekly deposits up to $100, 30× wagering. Keeps depositors active without inflating bonus cost.</div>
+      </div>
+      <div class="bonus-card cashback">
+        <h3>Weekly cashback</h3>
+        <div class="term">Losses-based · soft-loss recovery</div>
+        <div class="price">10% net losses</div>
+        <div class="desc">10% of weekly net losses returned as bonus (1× wagering). Crypto-native standard. Reduces churn at the worst psychological moment.</div>
+      </div>
+      <div class="bonus-card fs">
+        <h3>Free spins</h3>
+        <div class="term">Daily login / deposit milestones</div>
+        <div class="price">50–200 FS</div>
+        <div class="desc">Free spins on a featured slot, 30× wagering on winnings. Highly visual for marketing creatives, low actual cost.</div>
+      </div>
+      <div class="bonus-card vip">
+        <h3>VIP cashback ladder</h3>
+        <div class="term">High-roller retention</div>
+        <div class="price">10–20%</div>
+        <div class="desc">Tiered cashback for top depositors (Silver / Gold / Platinum). Personal manager at Platinum. 20% of base concentrates here.</div>
+      </div>
+      <div class="bonus-card rake">
+        <h3>Rakeback (poker)</h3>
+        <div class="term">Cash-game reward</div>
+        <div class="price">30% rake</div>
+        <div class="desc">Returns 30% of rake paid each week. Standard for poker rooms · competitive vs PokerStars / GG Network levels.</div>
+      </div>
+    </div>
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Bonus cost target: ~25% of GGR.</strong> Stake.com runs ~15–20% on the back of strong organic. A new casino with heavy paid acquisition (us) needs to be more generous in early months to convert and retain. After M6 once cohort behaviour stabilises, target ratchets down toward 20%.</div>
+    </div>
+  </section>
+
+  <!-- §06 BREAK-EVEN -->
+  <section class="section" id="breakeven">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-title">Break-even &amp; Self-Sufficiency Math</span>
+    </div>
+    <table class="lit">
+      <thead>
+        <tr><th>Outcome</th><th style="text-align:right;">Required monthly GGR</th><th>What it covers</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cover M7+ fixed burn</strong> <span class="tag confirmed">survive</span></td>
+          <td class="num" style="color:var(--green);">~$28K /mo</td>
+          <td class="cat">$15.7K M7+ fixed burn / 0.565 net margin = $27.8K. The absolute minimum to stop bleeding cash.</td>
+        </tr>
+        <tr>
+          <td><strong>+ continue $8K BH Ads</strong></td>
+          <td class="num" style="color:var(--amber);">~$42K /mo</td>
+          <td class="cat">$23.7K total opex / 0.565 = $41.9K. Keeps the marketing engine running past M6.</td>
+        </tr>
+        <tr>
+          <td><strong>+ all current marketing levels</strong></td>
+          <td class="num" style="color:var(--amber);">~$48K /mo</td>
+          <td class="cat">$27.1K total opex / 0.565 = $48K. Includes BH Ads + Paid Social + Customer.io + AI Call continuation.</td>
+        </tr>
+        <tr>
+          <td><strong>Profitable + reinvest growth</strong> <span class="tag confirmed">target</span></td>
+          <td class="num" style="color:var(--green);">$80K–$100K /mo</td>
+          <td class="cat">Generates $30–40K monthly EBITDA for reinvestment in scale, new verticals, or distribution to founders.</td>
+        </tr>
+        <tr>
+          <td><strong>Investor-ready / Series A signal</strong></td>
+          <td class="num" style="color:var(--accent);">$125K+ /mo by M6</td>
+          <td class="cat">Compelling growth chart, positive contribution margin, repeatable acquisition. Inflects valuation conversations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- §07 REVENUE vs SPEND -->
+  <section class="section" id="vsspend">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-title">Revenue vs Spend — 6-month side-by-side (Base case)</span>
+    </div>
+    <div class="ggr-table" style="margin-bottom:16px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th style="text-align:right;">GGR target (base)</th>
+            <th style="text-align:right;">Spend</th>
+            <th style="text-align:right;">Net contribution<br><span style="font-weight:400;font-size:9px;">(GGR × 56.5%)</span></th>
+            <th style="text-align:right;">Vs spend</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="month">M1</td>
+            <td class="base">$7.5K</td>
+            <td style="color:var(--rose);">$61.5K</td>
+            <td>$4.2K</td>
+            <td style="color:var(--rose);">−$57K</td>
+            <td class="note">Heavy lift month: clipping prepay + CR + designer + Betby + BH Ads + base</td>
+          </tr>
+          <tr>
+            <td class="month">M2</td>
+            <td class="base">$20K</td>
+            <td style="color:var(--rose);">$20.3K</td>
+            <td>$11.3K</td>
+            <td style="color:var(--rose);">−$9K</td>
+            <td class="note">Approaching break-even on monthly contribution basis</td>
+          </tr>
+          <tr>
+            <td class="month">M3</td>
+            <td class="base">$40K</td>
+            <td style="color:var(--rose);">$20.3K</td>
+            <td>$22.6K</td>
+            <td style="color:var(--green);">+$2K</td>
+            <td class="note"><strong>First positive monthly contribution.</strong> Contribution &gt; spend.</td>
+          </tr>
+          <tr>
+            <td class="month">M4</td>
+            <td class="base">$65K</td>
+            <td style="color:var(--rose);">$20.3K</td>
+            <td>$36.7K</td>
+            <td style="color:var(--green);">+$16K</td>
+            <td class="note">Cushion building. Reinvest into BH Ads or save against M7 burn jump.</td>
+          </tr>
+          <tr>
+            <td class="month">M5</td>
+            <td class="base">$95K</td>
+            <td style="color:var(--rose);">$20.3K</td>
+            <td>$53.7K</td>
+            <td style="color:var(--green);">+$33K</td>
+            <td class="note">Comfortable margin. Investor-conversation time.</td>
+          </tr>
+          <tr>
+            <td class="month">M6</td>
+            <td class="base">$125K</td>
+            <td style="color:var(--rose);">$20.3K</td>
+            <td>$70.6K</td>
+            <td style="color:var(--green);">+$50K</td>
+            <td class="note"><strong>Self-sufficient.</strong> Operating budget exhausted on spend side; revenue carries M7+.</td>
+          </tr>
+          <tr class="total">
+            <td class="month">6-mo total</td>
+            <td class="base" style="color:var(--green);">$352K</td>
+            <td style="color:var(--rose);">$163K</td>
+            <td style="color:var(--green);">$199K</td>
+            <td style="color:var(--green);">+$36K</td>
+            <td class="note" style="font-style:normal;">Cumulative contribution > cumulative spend</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sxs-grid">
+      <div class="sxs-card spend">
+        <div class="label">M1–M6 cumulative spend</div>
+        <div class="val cur cur-usd">~$163K</div>
+        <div class="val cur cur-sek">~1.71M SEK</div>
+        <div class="val cur cur-eur">~€151K</div>
+        <div class="sub">Per the forecast page — full burn including one-times</div>
+      </div>
+      <div class="sxs-card rev">
+        <div class="label">M1–M6 cumulative net contribution (base)</div>
+        <div class="val cur cur-usd">~$199K</div>
+        <div class="val cur cur-sek">~2.09M SEK</div>
+        <div class="val cur cur-eur">~€184K</div>
+        <div class="sub">After bonuses + variable fees · before fixed opex</div>
+      </div>
+    </div>
+    <div class="note-box green">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><strong>Base case crosses break-even at M3</strong> on monthly contribution basis. Cumulative contribution overtakes cumulative spend in M6. After M6 the business is self-sustaining without new investment.</div>
+    </div>
+  </section>
+
+  <!-- §08 OPEN QUESTIONS -->
+  <section class="section" id="open">
+    <div class="section-label">
+      <span class="section-num">08</span>
+      <span class="section-title">Open Questions / Confirm Before Locking</span>
+    </div>
+    <table class="lit">
+      <thead><tr><th>Question</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Betby exact rev share + monthly minimum</strong></td>
+          <td>Model uses 12% / $3K placeholder. Real number could be 8–15% rev share and $2–5K monthly. Each 1% on Betby rev share = ~$300/mo on $25K sports GGR.</td>
+        </tr>
+        <tr>
+          <td><strong>Vertical mix assumption (Casino 65% / Sports 25% / Originals or Poker 10%)</strong></td>
+          <td>Drives blended provider-fee rate. Heavy slots (80%+) would push blended fee higher (~12% blended), reducing net margin.</td>
+        </tr>
+        <tr>
+          <td><strong>Welcome bonus economics — is 100% / $500 / 35× the right level?</strong></td>
+          <td>Lower bonus (50% / $250) cuts cost-to-acquire but hurts conversion from clipping/BH Ads creatives. Test in M1–M2.</td>
+        </tr>
+        <tr>
+          <td><strong>Casino RTP — 96% or 97%?</strong></td>
+          <td>97% reads even more "fair" but cuts GGR yield by 25%. Worth testing once organic engagement is measurable.</td>
+        </tr>
+        <tr>
+          <td><strong>Crypto chains supported and split</strong></td>
+          <td>BTC has highest network fees; USDT-TRC20 nearly free. Mix changes the 3% crypto-drag number meaningfully.</td>
+        </tr>
+        <tr>
+          <td><strong>CAC / LTV calibration after M1</strong></td>
+          <td>Base case assumes $50 CAC / $100 LTV. Real numbers from first cohort should re-anchor M3–M6 targets up or down.</td>
+        </tr>
+        <tr>
+          <td><strong>Sports book hold target with Betby</strong></td>
+          <td>Tighter hold (5%) = more competitive odds = bigger audience. Looser hold (8%) = more GGR per dollar bet. Trade-off depends on traffic.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Revenue Forecast &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="forecast.html">Spend Forecast &rarr;</a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  function setCur(c){
+    var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
+    b.classList.add('fx-'+c);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.cur===c);
+    });
+    try{localStorage.setItem('goluna-fx',c)}catch(e){}
+  }
+  function init(){
+    var saved='usd';
+    try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
+    setCur(saved);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){setCur(btn.dataset.cur)});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
+})();
+</script>
+</body>
+</html>
