@@ -70,6 +70,15 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 body.fx-usd th.col-sek, body.fx-usd td.col-sek, body.fx-usd th.col-eur, body.fx-usd td.col-eur,
 body.fx-sek th.col-usd, body.fx-sek td.col-usd, body.fx-sek th.col-eur, body.fx-sek td.col-eur,
 body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-eur td.col-sek { display: none; }
+/* === ROW-EXPANDABLE === */
+.row-expandable { cursor: pointer; transition: color 0.15s; }
+.row-expandable:hover { color: var(--accent); }
+.row-expandable .caret { font-size: 9px; opacity: 0.5; transition: transform 0.15s; display: inline-block; margin-left: 4px; }
+.row-expandable.expanded .caret { transform: rotate(180deg); color: var(--accent); opacity: 1; }
+.fc-table tr.detail-row td { background: rgba(129,140,248,0.04); color: var(--text-muted); font-style: italic; }
+.fc-table tr.detail-row td:first-child { padding-left: 28px !important; background: var(--surface-2); }
+.burn-card li.detail-row { padding-left: 28px !important; opacity: 0.85; font-size: 11px; color: var(--text-muted); }
+.burn-card li.detail-row::before { display: none !important; }
 .header-link.active { color: var(--accent); font-weight: 600; }
 .hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
 
@@ -406,14 +415,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </thead>
 <tbody>
 <tr>
-<td>Gibbiana <span class="tag recurring">salary</span></td>
-<td class="cat">Team</td>
-<td class="num col-usd">$2,000</td>
-<td class="num col-sek">21,000</td>
-<td class="num col-eur">€1,852</td>
-</tr>
-<tr>
-<td>Frog <span class="tag recurring">salary</span></td>
+<td>Toro <span class="tag recurring">salary</span></td>
 <td class="cat">Team</td>
 <td class="num col-usd">$2,000</td>
 <td class="num col-sek">21,000</td>
@@ -425,6 +427,13 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <td class="num col-usd">$1,000</td>
 <td class="num col-sek">10,500</td>
 <td class="num col-eur">€926</td>
+</tr>
+<tr>
+<td>Gibbiana <span class="tag recurring">salary</span></td>
+<td class="cat">Team</td>
+<td class="num col-usd">$2,000</td>
+<td class="num col-sek">21,000</td>
+<td class="num col-eur">€1,852</td>
 </tr>
 <tr>
 <td>Cubeia hosting (AWS) <span class="tag recurring">platform</span></td>
@@ -475,7 +484,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="burn-period">Months 1–6 (now)</div>
 <div class="burn-amount green cur cur-usd">$7,770 / mo</div><div class="burn-amount green cur cur-sek">81,585 SEK / mo</div><div class="burn-amount green cur cur-eur">€7,194 / mo</div><div class="burn-sub">Cubeia platform minimum waived</div>
 <ul>
-<li>Salaries (G+F+O)<span class="li-num"><span class="cur cur-usd">$5,000</span><span class="cur cur-sek">52,500 SEK</span><span class="cur cur-eur">€4,630</span></span></li>
+<li class="row-expandable" data-expand="bg-salaries-m16"><span>Salaries (T+O+G)<span class="caret">▾</span></span><span class="li-num"><span class="cur cur-usd">$5,000</span><span class="cur cur-sek">52,500 SEK</span><span class="cur cur-eur">€4,630</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Toro</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Owl</span><span class="li-num"><span class="cur cur-usd">$1,000</span><span class="cur cur-sek">10,500 SEK</span><span class="cur cur-eur">€926</span></span></li><li class="detail-row" data-detail-of="bg-salaries-m16" hidden><span>· Gibbiana</span><span class="li-num"><span class="cur cur-usd">$2,000</span><span class="cur cur-sek">21,000 SEK</span><span class="cur cur-eur">€1,852</span></span></li>
 <li>Cubeia hosting<span class="li-num"><span class="cur cur-usd">$1,836</span><span class="cur cur-sek">19,278 SEK</span><span class="cur cur-eur">€1,700</span></span></li>
 <li>Security subs<span class="li-num"><span class="cur cur-usd">$356</span><span class="cur cur-sek">3,738 SEK</span><span class="cur cur-eur">€330</span></span></li>
 <li>Claude Max<span class="li-num"><span class="cur cur-usd">$200</span><span class="cur cur-sek">2,100 SEK</span><span class="cur cur-eur">€185</span></span></li>
@@ -671,5 +680,18 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   else{init();}
 })();
 </script>
+<script>
+document.addEventListener('click', function(e) {
+  var trig = e.target.closest('.row-expandable');
+  if (!trig) return;
+  var id = trig.dataset.expand;
+  if (!id) return;
+  var details = document.querySelectorAll('[data-detail-of="' + id + '"]');
+  var was = trig.classList.contains('expanded');
+  trig.classList.toggle('expanded');
+  details.forEach(function(d) { d.hidden = was; });
+});
+</script>
+<!-- salary-expand-script -->
 </body>
 </html>
