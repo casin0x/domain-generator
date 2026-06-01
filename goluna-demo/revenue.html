@@ -298,22 +298,22 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </div>
     <div class="metric-card accent">
       <div class="label">Net contribution margin</div>
-      <div class="val accent">~57%</div>
-      <div class="sub">of GGR after fees + bonuses</div>
+      <div class="val accent">~47.5%</div>
+      <div class="sub">of GGR after fees + bonuses + 30% affiliate</div>
     </div>
-    <div class="metric-card green">
-      <div class="label">M6 cumulative Net Profit</div>
-      <div class="val green cur cur-usd">+$37K</div>
-      <div class="val green cur cur-sek">+388K SEK</div>
-      <div class="val green cur cur-eur">+€34K</div>
-      <div class="sub">Base case · M1–M6 P&amp;L bottom line</div>
+    <div class="metric-card amber">
+      <div class="label">M1–M6 cumulative NP</div>
+      <div class="val amber cur cur-usd">−$62K</div>
+      <div class="val amber cur cur-sek">−653K SEK</div>
+      <div class="val amber cur cur-eur">−€57K</div>
+      <div class="sub">Base case · M6 standalone +$29K · trend flips at M4</div>
     </div>
     <div class="metric-card amber">
       <div class="label">Break-even GGR (M7+)</div>
-      <div class="val amber cur cur-usd">~$28K /mo</div>
-      <div class="val amber cur cur-sek">~294K SEK /mo</div>
-      <div class="val amber cur cur-eur">~€26K /mo</div>
-      <div class="sub">Covers $15.7K M7+ fixed burn (zero profit)</div>
+      <div class="val amber cur cur-usd">~$33K /mo</div>
+      <div class="val amber cur cur-sek">~347K SEK /mo</div>
+      <div class="val amber cur cur-eur">~€30.5K /mo</div>
+      <div class="sub">Covers $15.7K M7+ fixed burn (with affiliate)</div>
     </div>
     <div class="metric-card cyan">
       <div class="label">6-mo cumulative GGR (base)</div>
@@ -421,8 +421,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <div class="waterfall-seg" style="flex:3;background:var(--amber);" title="Crypto fees ~3%">
           <span class="pct">3¢</span><span class="lbl">Crypto</span>
         </div>
-        <div class="waterfall-seg" style="flex:56.5;background:var(--green);" title="Net to operator 56.5%">
-          <span class="pct">56.5¢</span><span class="lbl">Net to operator</span>
+        <div class="waterfall-seg" style="flex:9;background:var(--purple);" title="Affiliate commission ~9% (40% mix × 30%)">
+          <span class="pct">9¢</span><span class="lbl">Affiliate</span>
+        </div>
+        <div class="waterfall-seg" style="flex:47.5;background:var(--green);" title="Net to operator 47.5%">
+          <span class="pct">47.5¢</span><span class="lbl">Net to operator</span>
         </div>
       </div>
       <div class="waterfall-rows">
@@ -450,17 +453,23 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
           <span class="pct">~3%</span>
           <span class="amt">−$0.03</span>
         </div>
+        <div class="waterfall-row">
+          <span class="dot" style="background:var(--purple);"></span>
+          <span class="nm">Affiliate commission <span class="small">(40% mix × 30% of NGR)</span></span>
+          <span class="pct">~9%</span>
+          <span class="amt">−$0.09</span>
+        </div>
         <div class="waterfall-row total">
           <span class="dot" style="background:var(--green);"></span>
           <span class="nm">Net contribution to operator</span>
-          <span class="pct">~56.5%</span>
-          <span class="amt">$0.565</span>
+          <span class="pct">~47.5%</span>
+          <span class="amt">$0.475</span>
         </div>
       </div>
     </div>
     <div class="note-box warn" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>This waterfall is the <strong>variable</strong> stack only. The 56.5¢ at the right is <strong>gross margin per $1 of GGR — NOT net profit</strong>. Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) AND marketing spend (BH Ads, Paid Social, etc.) come out of that 56.5¢ before anything reaches Net Profit / EBITDA. See §07 for the full P&amp;L.</div>
+      <div>This waterfall is the <strong>variable</strong> stack only. The 47.5¢ at the right is <strong>gross margin per $1 of GGR — NOT net profit</strong>. Affiliate cost is modelled as 40% of traffic at 30% commission on NGR (validation-realistic by M6; mature programs can hit 60%+ mix). Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) AND marketing spend (BH Ads, Paid Social, Streamers, etc.) come out of that 47.5¢ before anything reaches Net Profit / EBITDA. See §07 for the full P&amp;L.</div>
     </div>
   </section>
 
@@ -629,7 +638,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <tbody>
         <tr>
           <td><strong>Cover M7+ fixed burn</strong> <span class="tag confirmed">survive</span></td>
-          <td class="num" style="color:var(--green);">~$28K /mo</td>
+          <td class="num" style="color:var(--green);">~$33K /mo</td>
           <td class="cat">$15.7K M7+ fixed burn / 0.565 net margin = $27.8K. The absolute minimum to stop bleeding cash.</td>
         </tr>
         <tr>
@@ -673,20 +682,21 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr><td>− Cubeia platform rev share</td><td class="num">5% of GGR</td><td class="num" style="color:var(--rose);">−$6,250</td><td class="cat">Contract §4ii.a flat</td></tr>
         <tr><td>− Game-provider rev share (blended)</td><td class="num">~10.5% of GGR</td><td class="num" style="color:var(--rose);">−$13,125</td><td class="cat">Casino 65% × 10% + Sports 25% × 12% + Other 10% × 10%</td></tr>
         <tr><td>− Crypto payment processing</td><td class="num">~3% of GGR</td><td class="num" style="color:var(--rose);">−$3,750</td><td class="cat">Deposit + withdrawal + on-chain + FX</td></tr>
-        <tr class="total"><td><strong>= Gross Margin (Net Contribution)</strong></td><td class="num">~56.5%</td><td class="num" style="color:var(--green);">$70,625</td><td class="cat">What §02 waterfall calls "net to operator"</td></tr>
+        <tr><td>− Affiliate commissions (40% mix &times; 30% on NGR)</td><td class="num">~9% of GGR</td><td class="num" style="color:var(--rose);">−$11,250</td><td class="cat">40% of traffic from affiliates &middot; 30% commission on their NGR</td></tr>
+        <tr class="total"><td><strong>= Gross Margin (Net Contribution)</strong></td><td class="num">~47.5%</td><td class="num" style="color:var(--green);">$59,375</td><td class="cat">What §02 waterfall calls "net to operator"</td></tr>
         <tr><td>− Salaries (Toro + Owl + Gibbiana)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="cat">M7+ unchanged from forecast page</td></tr>
         <tr><td>− X VIP Transfer Method</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,143</td><td class="cat">Staff $952 + tool $191</td></tr>
         <tr><td>− Cubeia AWS hosting</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,836</td><td class="cat">€1,700/mo Appendix B</td></tr>
         <tr><td>− Cubeia platform minimum (M7+)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,400</td><td class="cat">€5,000/mo from M7</td></tr>
         <tr><td>− Subs (Customer.io + Freshchat + security + Claude + Other)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,235</td><td class="cat">$324 + $54 + $281 + $200 + $476</td></tr>
         <tr><td>− AI Call outreach</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Continues M7+</td></tr>
-        <tr><td>− Marketing acquisition (M1–M6 only)</td><td class="num">—</td><td class="num" style="color:var(--text-muted);">M7+: $0</td><td class="cat">BH Ads $8K + Paid Social $2K + Clipping = M1–M6 only</td></tr>
-        <tr class="total"><td><strong>= Net Profit / EBITDA</strong></td><td class="num">—</td><td class="num" style="color:var(--green);font-size:16px;">+$55,011</td><td class="cat"><strong>M6 standalone monthly profit at $125K GGR · M7+ run-rate</strong></td></tr>
+        <tr><td>− Marketing acquisition (M1–M6 only)</td><td class="num">—</td><td class="num" style="color:var(--text-muted);">M7+: $0</td><td class="cat">BH Ads $13K + Paid Social $4K + Streamers $3K + Clipping $31K M1 — M1–M6 only</td></tr>
+        <tr class="total"><td><strong>= Net Profit / EBITDA</strong></td><td class="num">—</td><td class="num" style="color:var(--green);font-size:16px;">+$43,761</td><td class="cat"><strong>M6 standalone monthly profit at $125K GGR · M7+ run-rate · with 40% affiliate mix</strong></td></tr>
       </tbody>
     </table>
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Read this top to bottom.</strong> Each row subtracts a real cost from real GGR. The "Net to operator 56.5%" from §02 is the <em>Gross Margin</em> row here — still six lines short of the actual Net Profit number. At $125K M6 GGR base case the M7+ run-rate is roughly <strong>+$55K/mo Net Profit</strong>, but during M1–M6 the heavy marketing spend (BH Ads $8K + Paid Social $2K + clipping prepay) eats most of that — see §07 month-by-month for the actual M1–M6 P&amp;L.</div>
+      <div><strong>Read this top to bottom.</strong> Each row subtracts a real cost from real GGR. The "Net to operator 47.5%" from §02 is the <em>Gross Margin</em> row here — still seven lines short of the actual Net Profit number. At $125K M6 GGR base case the M7+ run-rate is roughly <strong>+$44K/mo Net Profit</strong> (was $55K before the affiliate model was added). During M1–M6 the heavy marketing spend (BH $13K + Paid Social $4K + Streamers $3K + clipping prepay) eats most of that — see §07 month-by-month for the actual M1–M6 P&amp;L. <strong>Affiliate sensitivity:</strong> at 0% mix NP = $55K; at 40% mix NP = $44K; at 60% mix NP = ~$38K.</div>
     </div>
   </section>
 
@@ -703,7 +713,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
             <th>Month</th>
             <th style="text-align:right;">GGR target (base)</th>
             <th style="text-align:right;">Spend</th>
-            <th style="text-align:right;">Net contribution<br><span style="font-weight:400;font-size:9px;">(GGR × 56.5%)</span></th>
+            <th style="text-align:right;">Net contribution<br><span style="font-weight:400;font-size:9px;">(GGR × 47.5%)</span></th>
             <th style="text-align:right;">Net Profit / EBITDA</th>
             <th>State</th>
           </tr>
@@ -712,58 +722,58 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
           <tr>
             <td class="month">M1</td>
             <td class="base">$7.5K</td>
-            <td style="color:var(--rose);">$61.5K</td>
-            <td>$4.2K</td>
-            <td style="color:var(--rose);">−$57K</td>
-            <td class="note">Heavy lift month: clipping prepay + CR + designer + Betby + BH Ads + base</td>
+            <td style="color:var(--rose);">$77.8K</td>
+            <td>$3.6K</td>
+            <td style="color:var(--rose);">−$74K</td>
+            <td class="note">Heavy lift month: clipping prepay $31K + CR + designer + Betby + BH Ads $13K + Streamers $3K + base</td>
           </tr>
           <tr>
             <td class="month">M2</td>
             <td class="base">$20K</td>
-            <td style="color:var(--rose);">$20.3K</td>
-            <td>$11.3K</td>
-            <td style="color:var(--rose);">−$9K</td>
-            <td class="note">Approaching break-even on monthly contribution basis</td>
+            <td style="color:var(--rose);">$30.3K</td>
+            <td>$9.5K</td>
+            <td style="color:var(--rose);">−$21K</td>
+            <td class="note">Affiliate cost engaging; still well short of contribution break-even</td>
           </tr>
           <tr>
             <td class="month">M3</td>
             <td class="base">$40K</td>
-            <td style="color:var(--rose);">$20.3K</td>
-            <td>$22.6K</td>
-            <td style="color:var(--green);">+$2K</td>
-            <td class="note"><strong>First positive monthly contribution.</strong> Contribution &gt; spend.</td>
+            <td style="color:var(--rose);">$30.3K</td>
+            <td>$19.0K</td>
+            <td style="color:var(--rose);">−$11K</td>
+            <td class="note">Contribution closing on spend, not yet over</td>
           </tr>
           <tr>
             <td class="month">M4</td>
             <td class="base">$65K</td>
-            <td style="color:var(--rose);">$20.3K</td>
-            <td>$36.7K</td>
-            <td style="color:var(--green);">+$16K</td>
-            <td class="note">Cushion building. Reinvest into BH Ads or save against M7 burn jump.</td>
+            <td style="color:var(--rose);">$30.3K</td>
+            <td>$30.9K</td>
+            <td style="color:var(--green);">+$1K</td>
+            <td class="note"><strong>First positive monthly NP.</strong> Contribution barely exceeds spend.</td>
           </tr>
           <tr>
             <td class="month">M5</td>
             <td class="base">$95K</td>
-            <td style="color:var(--rose);">$20.3K</td>
-            <td>$53.7K</td>
-            <td style="color:var(--green);">+$33K</td>
-            <td class="note">Comfortable margin. Investor-conversation time.</td>
+            <td style="color:var(--rose);">$30.3K</td>
+            <td>$45.1K</td>
+            <td style="color:var(--green);">+$15K</td>
+            <td class="note">Profitable month. Cushion building.</td>
           </tr>
           <tr>
             <td class="month">M6</td>
             <td class="base">$125K</td>
-            <td style="color:var(--rose);">$20.3K</td>
-            <td>$70.6K</td>
-            <td style="color:var(--green);">+$50K</td>
-            <td class="note"><strong>Self-sufficient.</strong> Operating budget exhausted on spend side; revenue carries M7+.</td>
+            <td style="color:var(--rose);">$30.3K</td>
+            <td>$59.4K</td>
+            <td style="color:var(--green);">+$29K</td>
+            <td class="note"><strong>Self-sufficient on M6 standalone.</strong> Cumulative still in the hole (see total below).</td>
           </tr>
           <tr class="total">
             <td class="month">6-mo total</td>
             <td class="base" style="color:var(--green);">$352K</td>
-            <td style="color:var(--rose);">$163K</td>
-            <td style="color:var(--green);">$199K</td>
-            <td style="color:var(--green);">+$36K</td>
-            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: +$36K</strong> (contribution − spend)</td>
+            <td style="color:var(--rose);">$229K</td>
+            <td style="color:var(--green);">$167K</td>
+            <td style="color:var(--rose);">−$62K</td>
+            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: −$62K</strong> · M6 standalone +$29K · trend flips positive M4 onward</td>
           </tr>
         </tbody>
       </table>
@@ -771,17 +781,17 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     <div class="sxs-grid">
       <div class="sxs-card spend">
         <div class="label">M1–M6 cumulative spend</div>
-        <div class="val cur cur-usd">~$163K</div>
-        <div class="val cur cur-sek">~1.71M SEK</div>
-        <div class="val cur cur-eur">~€151K</div>
+        <div class="val cur cur-usd">~$229K</div>
+        <div class="val cur cur-sek">~2.41M SEK</div>
+        <div class="val cur cur-eur">~€212K</div>
         <div class="sub">Per the forecast page — full burn including one-times</div>
       </div>
       <div class="sxs-card rev">
         <div class="label">M1–M6 cumulative net contribution (base)</div>
-        <div class="val cur cur-usd">~$199K</div>
-        <div class="val cur cur-sek">~2.09M SEK</div>
-        <div class="val cur cur-eur">~€184K</div>
-        <div class="sub">After bonuses + variable fees · before fixed opex</div>
+        <div class="val cur cur-usd">~$167K</div>
+        <div class="val cur cur-sek">~1.76M SEK</div>
+        <div class="val cur cur-eur">~€155K</div>
+        <div class="sub">After bonuses + variable fees + affiliate · before fixed opex</div>
       </div>
     </div>
     <div class="note-box green">
@@ -937,7 +947,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Implementation note:</strong> the envelope comes out of operating Net Profit before founder distribution. At <strong>$55K M7+ base-case NP</strong> (per §06.5), envelope = 10% × $55K = $5.5K. Paid out: Owl $1.1K, Toro and Gibbiana $825 each ($2.75K total). Reserve accrual: +$2.75K to the Reserve Pool balance. Owl's paid cap binds at <strong>$1.25M monthly NP</strong>, Toro and Gibbiana's at <strong>$1.67M monthly NP</strong>. Reserve accrual continues until the $500K soft cap. Envelope stays at 0% until $25K NP — so M1–M6 has no envelope impact even if some months are net-positive on contribution.</div>
+      <div><strong>Implementation note:</strong> the envelope comes out of operating Net Profit before founder distribution. At <strong>$44K M7+ base-case NP</strong> (per §06.5, with 40% affiliate mix), envelope = 10% × $44K = $4.4K. Paid out: Owl $880, Toro and Gibbiana $660 each ($2.2K total). Reserve accrual: +$2.2K to the Reserve Pool balance. Note: at $44K NP the Owl base bump ($50K NP threshold) has not yet triggered, so Owl base stays at $1K and total comp is Owl $1,880 / T/G $2,660 each. Owl's paid cap binds at <strong>$1.25M monthly NP</strong>, Toro and Gibbiana's at <strong>$1.67M monthly NP</strong>. Reserve accrual continues until the $500K soft cap.</div>
     </div>
 
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Operating Rules</h3>

@@ -207,6 +207,18 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   .header-link { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Collapsible M7–M12 columns */
+.fc-toggle-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.fc-toggle-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); padding: 7px 14px; border-radius: 8px; font-family: var(--mono); font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.15s; letter-spacing: 0.04em; text-transform: uppercase; }
+.fc-toggle-btn:hover { background: var(--surface-3); color: var(--text); border-color: var(--border-hover); }
+.fc-toggle-btn .caret-x { font-size: 10px; transition: transform 0.2s; display: inline-block; }
+.fc-toggle-btn.expanded .caret-x { transform: rotate(90deg); }
+.fc-toggle-hint { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.fc-table.m712-collapsed th:nth-child(n+8):nth-child(-n+13),
+.fc-table.m712-collapsed td:nth-child(n+8):nth-child(-n+13) { display: none; }
+.fc-table.m712-collapsed td.col-m712-phase { display: none; }
+.fc-table.m712-collapsed { min-width: auto; }
 </style>
 </head>
 <body>
@@ -284,8 +296,15 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <span class="section-num">01</span>
 <span class="section-title">Month-by-Month Forecast (USD)</span>
 </div>
+<div class="fc-toggle-wrap">
+<button class="fc-toggle-btn" type="button" onclick="toggleM712(this)">
+<span class="caret-x">▸</span>
+<span class="fc-toggle-label">Show M7–M12</span>
+</button>
+<span class="fc-toggle-hint">M7–M12 hidden by default — 6-month validation window in focus. Click to expand the full 12-month view.</span>
+</div>
 <div class="fc-table-wrap">
-<table class="fc-table">
+<table class="fc-table m712-collapsed">
 <thead>
 <tr>
 <th>Line</th>
@@ -515,7 +534,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <td>Phase</td>
 <td colspan="5" style="text-align:center;background:var(--green-dim);color:var(--green);">M1–M5 · Cubeia grace period · 6-month validation window</td>
 <td colspan="1" style="text-align:center;background:var(--amber-dim);color:var(--amber);">M6 · over ceiling mid-month</td>
-<td colspan="6" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M7–M12 · Over (base burn no revenue)</td>
+<td colspan="6" class="col-m712-phase" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M7–M12 · Over (base burn no revenue)</td>
 <td>—</td>
 </tr>
 </tfoot>
@@ -952,6 +971,16 @@ document.addEventListener('click', function(e) {
   trig.classList.toggle('expanded');
   details.forEach(function(d) { d.hidden = was; });
 });
+</script>
+<script>
+function toggleM712(btn) {
+  var table = document.querySelector('.fc-table');
+  if (!table) return;
+  var collapsed = table.classList.toggle('m712-collapsed');
+  btn.classList.toggle('expanded', !collapsed);
+  btn.querySelector('.caret-x').textContent = collapsed ? '▸' : '▾';
+  btn.querySelector('.fc-toggle-label').textContent = collapsed ? 'Show M7–M12' : 'Hide M7–M12';
+}
 </script>
 <!-- salary-expand-script -->
 </body>
