@@ -850,26 +850,28 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="note-box green">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <div><strong>Pool trigger ($25K NP):</strong> the pool activates when monthly Net Profit ≥ $25K. Pool is 10% of NP, split equally between the 3.
+      <div><strong>Pool trigger ($25K NP):</strong> the pool activates when monthly Net Profit ≥ $25K. Total pool is <strong>5% of NP</strong>, allocated as <strong>2% to Owl, 1.5% each to Toro and Gibbiana</strong>. Each share independently capped at $25K/mo.
       <br><br>
       <strong>Owl base correction ($50K NP):</strong> Owl's base salary moves from $1K → $2K (parity with Toro and Gibbiana) when monthly NP first reaches $50K. Between $25K and $50K NP, Owl receives the same pool share as the others but base stays at $1K. The +$1K bump is company-funded, <em>not</em> from the pool. Permanent thereafter.</div>
     </div>
 
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 12px;">Pool Structure (flat 10% with cap)</h3>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 12px;">Pool Structure (5% total · differentiated shares · capped)</h3>
     <table class="lit" style="margin-bottom:24px;">
       <thead>
         <tr>
           <th>Monthly Net Profit</th>
-          <th style="text-align:right;">Pool % of NP</th>
-          <th style="text-align:right;">Pool size</th>
-          <th style="text-align:right;">Per person (÷3)</th>
+          <th style="text-align:right;">Owl (2%)</th>
+          <th style="text-align:right;">Toro (1.5%)</th>
+          <th style="text-align:right;">Gibbiana (1.5%)</th>
+          <th style="text-align:right;">Total pool</th>
           <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>&lt; $25K</td><td class="num" style="color:var(--text-muted);">0%</td><td class="num" style="color:var(--text-muted);">$0</td><td class="num" style="color:var(--text-muted);">$0</td><td class="cat">Pool dormant · focus on getting profitable first</td></tr>
-        <tr><td><strong>$25K – $750K</strong></td><td class="num" style="color:var(--green);">10% flat</td><td class="num">$2.5K – $75K</td><td class="num">$833 – $25,000</td><td class="cat">Linear · scales with NP up to the per-person cap</td></tr>
-        <tr><td><strong>$750K +</strong></td><td class="num" style="color:var(--amber);">capped</td><td class="num">$75K max</td><td class="num">$25,000 max</td><td class="cat">Per-person hits $25K/mo cap · excess NP stays with company</td></tr>
+        <tr><td>&lt; $25K</td><td class="num" style="color:var(--text-muted);">$0</td><td class="num" style="color:var(--text-muted);">$0</td><td class="num" style="color:var(--text-muted);">$0</td><td class="num" style="color:var(--text-muted);">$0</td><td class="cat">Pool dormant · focus on getting profitable first</td></tr>
+        <tr><td><strong>$25K – $1.25M</strong></td><td class="num" style="color:var(--green);">2% × NP</td><td class="num" style="color:var(--green);">1.5% × NP</td><td class="num" style="color:var(--green);">1.5% × NP</td><td class="num">5% of NP</td><td class="cat">Linear · all shares scaling with NP</td></tr>
+        <tr><td><strong>$1.25M – $1.67M</strong></td><td class="num" style="color:var(--amber);">$25K capped</td><td class="num" style="color:var(--green);">1.5% × NP</td><td class="num" style="color:var(--green);">1.5% × NP</td><td class="num">~4.5–5% of NP</td><td class="cat">Owl at cap · Toro/Gibbiana still scaling</td></tr>
+        <tr><td><strong>$1.67M +</strong></td><td class="num" style="color:var(--amber);">$25K capped</td><td class="num" style="color:var(--amber);">$25K capped</td><td class="num" style="color:var(--amber);">$25K capped</td><td class="num">$75K max</td><td class="cat">All at cap · excess NP stays with company</td></tr>
       </tbody>
     </table>
 
@@ -878,23 +880,24 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <thead>
         <tr>
           <th>Monthly Net Profit</th>
-          <th style="text-align:right;">Pool (10%)</th>
-          <th style="text-align:right;">Per person</th>
+          <th style="text-align:right;">Total pool</th>
+          <th style="text-align:right;">Owl pool</th>
+          <th style="text-align:right;">T/G pool</th>
           <th style="text-align:right;">Toro total</th>
           <th style="text-align:right;">Owl total</th>
           <th style="text-align:right;">Gibbiana total</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="cat">Below threshold</td><td class="num">$0</td><td class="num">$0</td><td class="num">$2,000</td><td class="num">$1,000</td><td class="num">$2,000</td></tr>
-        <tr><td><strong>$25K</strong> <span class="tag confirmed">pool activates</span></td><td class="num">$2,500</td><td class="num">$833</td><td class="num" style="color:var(--green);">$2,833</td><td class="num" style="color:var(--amber);">$1,833</td><td class="num" style="color:var(--green);">$2,833</td></tr>
-        <tr><td><strong>$50K</strong> <span class="tag confirmed">Owl base parity</span></td><td class="num">$5,000</td><td class="num">$1,667</td><td class="num" style="color:var(--green);">$3,667</td><td class="num" style="color:var(--green);">$3,667</td><td class="num" style="color:var(--green);">$3,667</td></tr>
-        <tr><td><strong>$100K</strong></td><td class="num">$10,000</td><td class="num">$3,333</td><td class="num" style="color:var(--green);">$5,333</td><td class="num" style="color:var(--green);">$5,333</td><td class="num" style="color:var(--green);">$5,333</td></tr>
-        <tr><td><strong>$150K</strong></td><td class="num">$15,000</td><td class="num">$5,000</td><td class="num" style="color:var(--green);">$7,000</td><td class="num" style="color:var(--green);">$7,000</td><td class="num" style="color:var(--green);">$7,000</td></tr>
-        <tr><td><strong>$250K</strong></td><td class="num">$25,000</td><td class="num">$8,333</td><td class="num" style="color:var(--green);">$10,333</td><td class="num" style="color:var(--green);">$10,333</td><td class="num" style="color:var(--green);">$10,333</td></tr>
-        <tr><td><strong>$500K</strong></td><td class="num">$50,000</td><td class="num">$16,667</td><td class="num" style="color:var(--green);">$18,667</td><td class="num" style="color:var(--green);">$18,667</td><td class="num" style="color:var(--green);">$18,667</td></tr>
-        <tr><td><strong>$750K</strong> <span class="tag confirmed">cap binds</span></td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td></tr>
-        <tr><td><strong>$1M</strong></td><td class="num">$75,000 <span style="color:var(--amber);font-size:10px;">(capped from $100K)</span></td><td class="num">$25,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td></tr>
+        <tr><td class="cat">Below threshold</td><td class="num">$0</td><td class="num">$0</td><td class="num">$0</td><td class="num">$2,000</td><td class="num">$1,000</td><td class="num">$2,000</td></tr>
+        <tr><td><strong>$25K</strong> <span class="tag confirmed">pool activates</span></td><td class="num">$1,250</td><td class="num">$500</td><td class="num">$375</td><td class="num" style="color:var(--green);">$2,375</td><td class="num" style="color:var(--amber);">$1,500</td><td class="num" style="color:var(--green);">$2,375</td></tr>
+        <tr><td><strong>$50K</strong> <span class="tag confirmed">Owl base parity</span></td><td class="num">$2,500</td><td class="num">$1,000</td><td class="num">$750</td><td class="num" style="color:var(--green);">$2,750</td><td class="num" style="color:var(--green);">$3,000</td><td class="num" style="color:var(--green);">$2,750</td></tr>
+        <tr><td><strong>$100K</strong></td><td class="num">$5,000</td><td class="num">$2,000</td><td class="num">$1,500</td><td class="num" style="color:var(--green);">$3,500</td><td class="num" style="color:var(--green);">$4,000</td><td class="num" style="color:var(--green);">$3,500</td></tr>
+        <tr><td><strong>$250K</strong></td><td class="num">$12,500</td><td class="num">$5,000</td><td class="num">$3,750</td><td class="num" style="color:var(--green);">$5,750</td><td class="num" style="color:var(--green);">$7,000</td><td class="num" style="color:var(--green);">$5,750</td></tr>
+        <tr><td><strong>$500K</strong></td><td class="num">$25,000</td><td class="num">$10,000</td><td class="num">$7,500</td><td class="num" style="color:var(--green);">$9,500</td><td class="num" style="color:var(--green);">$12,000</td><td class="num" style="color:var(--green);">$9,500</td></tr>
+        <tr><td><strong>$1M</strong></td><td class="num">$50,000</td><td class="num">$20,000</td><td class="num">$15,000</td><td class="num" style="color:var(--green);">$17,000</td><td class="num" style="color:var(--green);">$22,000</td><td class="num" style="color:var(--green);">$17,000</td></tr>
+        <tr><td><strong>$1.25M</strong> <span class="tag confirmed">Owl cap</span></td><td class="num">$62,500</td><td class="num">$25,000</td><td class="num">$18,750</td><td class="num" style="color:var(--green);">$20,750</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$20,750</td></tr>
+        <tr><td><strong>$1.67M</strong> <span class="tag confirmed">T/G cap</span></td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num">$25,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td><td class="num" style="color:var(--green);">$27,000</td></tr>
       </tbody>
     </table>
 
@@ -913,7 +916,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div class="bonus-card cashback">
         <h3>$25K per-person cap</h3>
         <div class="term">Predictable upside</div>
-        <div class="desc">Each member capped at $25K/mo from the pool ($75K total pool). Cap binds at $750K NP. Above that, excess profit stays with the company for reinvestment / shareholders.</div>
+        <div class="desc">Each member capped at $25K/mo individually ($75K total at full cap). Owl's cap binds at $1.25M NP; Toro and Gibbiana at $1.67M NP. Above those, excess profit stays with the company.</div>
       </div>
       <div class="bonus-card fs">
         <h3>Aligned with shareholders</h3>
@@ -921,9 +924,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <div class="desc">Team paid when the business actually makes money. Doesn't reward gross-revenue growth that loses money on bonuses + provider fees.</div>
       </div>
       <div class="bonus-card vip">
-        <h3>Equal third split</h3>
-        <div class="term">No politics at 3-person scale</div>
-        <div class="desc">Weighting by individual contribution becomes contentious at this scale. Equal split keeps things simple. Re-evaluate at headcount 6+.</div>
+        <h3>Differentiated by scope</h3>
+        <div class="term">2% Owl · 1.5% Toro & Gibbiana</div>
+        <div class="desc">Owl's cross-cutting scope (finance + investor reporting + ops PM) earns a 0.5% premium. Toro and Gibbiana on focused functional roles. Small differential keeps the structure non-political while acknowledging the difference.</div>
       </div>
       <div class="bonus-card rake">
         <h3>Monthly settlement</h3>
@@ -934,7 +937,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Implementation note:</strong> the pool comes out of operating Net Profit before founder distribution. At <strong>$55K M7+ base-case NP</strong> (per §06.5), 10% × $55K = $5.5K pool = <strong>~$1.8K/person uplift</strong>. Per-person cap binds at <strong>$750K monthly NP</strong> — above that, every $1 of extra NP stays with the company. Pool stays at 0% until $25K NP — so M1–M6 has no pool impact even if some months are net-positive on contribution.</div>
+      <div><strong>Implementation note:</strong> the pool comes out of operating Net Profit before founder distribution. At <strong>$55K M7+ base-case NP</strong> (per §06.5), 5% × $55K = $2.75K total pool — Owl receives $1.1K, Toro and Gibbiana $825 each. Owl's cap binds at <strong>$1.25M monthly NP</strong>, Toro and Gibbiana's at <strong>$1.67M monthly NP</strong>. Pool stays at 0% until $25K NP — so M1–M6 has no pool impact even if some months are net-positive on contribution.</div>
     </div>
 
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Operating Rules</h3>
@@ -964,7 +967,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         </tr>
         <tr>
           <td><strong>Re-evaluation trigger</strong></td>
-          <td class="cat">Structure is re-evaluated when (a) headcount exceeds 6, (b) any member's role materially expands beyond current scope, or (c) the cap binds for 3+ consecutive months at $750K+ NP. Until then, the structure stays as written.</td>
+          <td class="cat">Structure is re-evaluated when (a) headcount exceeds 6, (b) any member's role materially expands beyond current scope, or (c) any individual cap binds for 3+ consecutive months ($1.25M+ NP for Owl, $1.67M+ NP for Toro/Gibbiana). Until then, the structure stays as written.</td>
         </tr>
         <tr>
           <td><strong>Documentation</strong></td>
@@ -979,11 +982,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr><th>Structure</th><th>Trigger</th><th>Pool</th><th>Cap</th><th>When this fits</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Flat 10% + $25K cap</strong> <span class="tag confirmed">picked</span></td><td>$25K NP</td><td>10% flat</td><td>$25K/person/mo</td><td class="cat">SaaS-standard % · predictable upside ceiling · binds at $750K NP</td></tr>
+        <tr><td><strong>5% differentiated + $25K cap</strong> <span class="tag confirmed">picked</span></td><td>$25K NP</td><td>2% Owl · 1.5% T/G</td><td>$25K/person/mo</td><td class="cat">Conservative · scope-weighted · Owl cap binds $1.25M NP, T/G $1.67M NP</td></tr>
+        <tr><td>Flat 10% equal split</td><td>$25K NP</td><td>10% flat ÷ 3</td><td>$25K/person/mo</td><td class="cat">SaaS-standard % · simpler but doubles team comp at every NP level</td></tr>
         <tr><td>Escalating tiers</td><td>$25K NP</td><td>12% → 22.5%</td><td>Uncapped</td><td class="cat">Crypto-aggressive · attractive at very large NP but harder to budget</td></tr>
         <tr><td>Step-function</td><td>$25K NP</td><td>Fixed $5K → $10K → $25K tiers</td><td>$25K pool</td><td class="cat">Cleanest budgeting · less aligned at the tier boundaries</td></tr>
         <tr><td>Equity in lieu</td><td>—</td><td>5% equity each</td><td>—</td><td class="cat">No cash burn · founder dilution instead · only works with real exit story</td></tr>
-        <tr><td>Hybrid</td><td>$25K NP</td><td>8% cash pool + 3% equity</td><td>$20K cash cap</td><td class="cat">Aligns long + short term · most complex to administer</td></tr>
       </tbody>
     </table>
   </section>

@@ -260,8 +260,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   <div class="metrics-strip">
     <div class="metric-card accent">
       <div class="label">Pool Rate</div>
-      <div class="val accent">10%</div>
-      <div class="sub">of monthly Net Profit</div>
+      <div class="val accent">5%</div>
+      <div class="sub">of monthly Net Profit (total)</div>
     </div>
     <div class="metric-card amber">
       <div class="label">Activation Threshold</div>
@@ -275,7 +275,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div class="val green cur cur-usd">$25K/mo</div>
       <div class="val green cur cur-sek">~263K SEK/mo</div>
       <div class="val green cur cur-eur">~&euro;23K/mo</div>
-      <div class="sub">binds at $750K monthly NP</div>
+      <div class="sub">binds: Owl $1.25M NP &middot; T/G $1.67M NP</div>
     </div>
     <div class="metric-card cyan">
       <div class="label">Operating Team</div>
@@ -283,9 +283,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div class="sub">Toro &middot; Owl &middot; Gibbiana</div>
     </div>
     <div class="metric-card purple">
-      <div class="label">Distribution</div>
-      <div class="val purple">Equal third</div>
-      <div class="sub">settled monthly</div>
+      <div class="label">Allocation</div>
+      <div class="val purple">2 &middot; 1.5 &middot; 1.5</div>
+      <div class="sub">Owl &middot; Toro &middot; Gibbiana (% of NP)</div>
     </div>
   </div>
 
@@ -295,7 +295,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">01</span>
       <span class="section-title">Plan Summary</span>
     </div>
-    <p class="section-intro">In a single paragraph: when GoLuna&rsquo;s monthly Net Profit exceeds $25,000, ten percent of that month&rsquo;s Net Profit is allocated to a profit-share pool, which is split equally among the three founding members of the operating team. Each member&rsquo;s share is capped at $25,000 per month. Settlement occurs each month, based on that month&rsquo;s realised Net Profit. The plan applies exclusively to the three named members; it does not extend to future hires, advisors, or contractors, and it does not alter investor distributions, which continue to be governed by the company&rsquo;s equity arrangements.</p>
+    <p class="section-intro">In a single paragraph: when GoLuna&rsquo;s monthly Net Profit exceeds $25,000, five percent of that month&rsquo;s Net Profit is allocated as profit-share, split between the three operating-team members as <strong>2% to Owl</strong> and <strong>1.5% each to Toro and Gibbiana</strong>. Each member&rsquo;s share is capped at $25,000 per month. Settlement occurs each month, based on that month&rsquo;s realised Net Profit. The plan applies exclusively to the three named members; it does not extend to future hires, advisors, or contractors, and it does not alter investor distributions, which continue to be governed by the company&rsquo;s equity arrangements.</p>
 
     <div class="note-box green">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -375,15 +375,15 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         </tr>
         <tr>
           <td><strong>Pool size</strong></td>
-          <td class="cat"><strong>10%</strong> of that month&rsquo;s Net Profit, calculated on the full Net Profit figure (not the amount above the threshold). For example, at $100,000 monthly Net Profit, the pool is $10,000.</td>
+          <td class="cat"><strong>5% of that month&rsquo;s Net Profit</strong> in total, calculated on the full Net Profit figure (not the amount above the threshold). For example, at $100,000 monthly Net Profit, the pool is $5,000.</td>
         </tr>
         <tr>
-          <td><strong>Distribution</strong></td>
-          <td class="cat">The pool is divided into <strong>three equal shares</strong>, one for each member. There is no weighting by individual contribution, performance score, or seniority. Each member receives the same amount each month.</td>
+          <td><strong>Allocation</strong></td>
+          <td class="cat">The pool is allocated as <strong>2% of NP to Owl</strong> and <strong>1.5% of NP to each of Toro and Gibbiana</strong>. Owl&rsquo;s slightly higher share reflects his cross-cutting scope (finance, investor reporting, and operations PM). The total is 5% (2% + 1.5% + 1.5%).</td>
         </tr>
         <tr>
           <td><strong>Per-person cap</strong></td>
-          <td class="cat">Each member&rsquo;s monthly share is capped at <strong>$25,000</strong>. The cap binds when monthly Net Profit reaches $750,000 (10% &times; $750K = $75K total pool = $25K per person). Above this Net Profit level, the additional profit is retained by the company.</td>
+          <td class="cat">Each member&rsquo;s monthly share is capped at <strong>$25,000</strong>. Because the rates differ, the cap binds at different Net Profit levels: Owl&rsquo;s cap binds at <strong>$1.25M monthly NP</strong> (2% &times; $1.25M = $25K), Toro&rsquo;s and Gibbiana&rsquo;s caps each bind at <strong>$1.67M monthly NP</strong> (1.5% &times; $1.67M = $25K). Above these levels, the additional profit is retained by the company.</td>
         </tr>
         <tr>
           <td><strong>Settlement</strong></td>
@@ -402,9 +402,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr><th>Step</th><th>Formula</th><th>Example (at $100K monthly NP)</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>1. Calculate pool</strong></td><td class="cat">Pool = 10% &times; monthly Net Profit (if NP &ge; $25K)</td><td class="num">10% &times; $100,000 = $10,000</td></tr>
-        <tr><td><strong>2. Divide by three</strong></td><td class="cat">Per-person = Pool &divide; 3 (capped at $25,000)</td><td class="num">$10,000 &divide; 3 = $3,333</td></tr>
-        <tr><td><strong>3. Add to base</strong></td><td class="cat">Total comp = base salary + per-person share</td><td class="num">$2,000 + $3,333 = $5,333</td></tr>
+        <tr><td><strong>1. Calculate each share</strong></td><td class="cat">Owl: 2% &times; NP &middot; Toro: 1.5% &times; NP &middot; Gibbiana: 1.5% &times; NP (if NP &ge; $25K, each share capped at $25K)</td><td class="num">Owl $2,000 &middot; Toro $1,500 &middot; Gibbiana $1,500</td></tr>
+        <tr><td><strong>2. Add to base salary</strong></td><td class="cat">Total comp = base salary + individual share</td><td class="num">All three on $2K base: Owl $4,000 &middot; T/G $3,500 each</td></tr>
+        <tr><td><strong>3. Total pool cost</strong></td><td class="cat">Combined pool = 5% &times; NP (capped at $75K combined when all three at $25K cap)</td><td class="num">$2,000 + $1,500 + $1,500 = $5,000 (5% of NP)</td></tr>
       </tbody>
     </table>
   </section>
@@ -442,34 +442,35 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr>
           <th>Monthly NP</th>
           <th style="text-align:right;">GGR required<br><span style="font-weight:400;text-transform:none;font-size:9px;">(approx)</span></th>
-          <th style="text-align:right;">Pool</th>
-          <th style="text-align:right;">Per person</th>
+          <th style="text-align:right;">Owl share<br><span style="font-weight:400;text-transform:none;font-size:9px;">(2%)</span></th>
+          <th style="text-align:right;">T/G share<br><span style="font-weight:400;text-transform:none;font-size:9px;">(1.5% each)</span></th>
           <th style="text-align:right;">Toro / mo</th>
           <th style="text-align:right;">Owl / mo</th>
           <th style="text-align:right;">Gibbiana / mo</th>
-          <th style="text-align:right;">Each / year</th>
+          <th style="text-align:right;">Owl / yr</th>
+          <th style="text-align:right;">T/G / yr</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td class="cat">Below $25K (current)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">$2,000</td><td class="num">$1,000</td><td class="num">$2,000</td><td class="num cat">$12K&ndash;$24K</td></tr>
-        <tr class="highlight"><td><strong>$25,000</strong> <span class="tag confirmed">pool activates</span></td><td class="num">~$72K</td><td class="num">$2,500</td><td class="num">$833</td><td class="num">$2,833</td><td class="num">$1,833</td><td class="num">$2,833</td><td class="num cat" style="font-size:11px;">$34K T/G &middot; $22K Owl</td></tr>
-        <tr class="highlight"><td><strong>$50,000</strong> <span class="tag confirmed">Owl base parity</span></td><td class="num">~$118K</td><td class="num">$5,000</td><td class="num">$1,667</td><td class="num">$3,667</td><td class="num">$3,667</td><td class="num">$3,667</td><td class="num">$44,000</td></tr>
-        <tr><td><strong>$75,000</strong></td><td class="num">~$162K</td><td class="num">$7,500</td><td class="num">$2,500</td><td class="num">$4,500</td><td class="num">$4,500</td><td class="num">$4,500</td><td class="num">$54,000</td></tr>
-        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$10,000</td><td class="num">$3,333</td><td class="num">$5,333</td><td class="num">$5,333</td><td class="num">$5,333</td><td class="num">$64,000</td></tr>
-        <tr><td><strong>$150,000</strong></td><td class="num">~$295K</td><td class="num">$15,000</td><td class="num">$5,000</td><td class="num">$7,000</td><td class="num">$7,000</td><td class="num">$7,000</td><td class="num">$84,000</td></tr>
-        <tr><td><strong>$200,000</strong></td><td class="num">~$383K</td><td class="num">$20,000</td><td class="num">$6,667</td><td class="num">$8,667</td><td class="num">$8,667</td><td class="num">$8,667</td><td class="num">$104,000</td></tr>
-        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$25,000</td><td class="num">$8,333</td><td class="num">$10,333</td><td class="num">$10,333</td><td class="num">$10,333</td><td class="num">$124,000</td></tr>
-        <tr><td><strong>$300,000</strong></td><td class="num">~$560K</td><td class="num">$30,000</td><td class="num">$10,000</td><td class="num">$12,000</td><td class="num">$12,000</td><td class="num">$12,000</td><td class="num">$144,000</td></tr>
-        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$50,000</td><td class="num">$16,667</td><td class="num">$18,667</td><td class="num">$18,667</td><td class="num">$18,667</td><td class="num">$224,000</td></tr>
-        <tr class="highlight"><td><strong>$750,000</strong> <span class="tag cap">cap binds</span></td><td class="num">~$1.36M</td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324,000</td></tr>
-        <tr><td><strong>$1,000,000</strong></td><td class="num">~$1.80M</td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324,000</td></tr>
-        <tr><td><strong>$2,000,000</strong></td><td class="num">~$3.57M</td><td class="num">$75,000</td><td class="num">$25,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324,000</td></tr>
+        <tr><td class="cat">Below $25K (current)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">$2,000</td><td class="num">$1,000</td><td class="num">$2,000</td><td class="num cat">$12K</td><td class="num cat">$24K</td></tr>
+        <tr class="highlight"><td><strong>$25,000</strong> <span class="tag confirmed">pool activates</span></td><td class="num">~$72K</td><td class="num">$500</td><td class="num">$375</td><td class="num">$2,375</td><td class="num">$1,500</td><td class="num">$2,375</td><td class="num">$18K</td><td class="num">$29K</td></tr>
+        <tr class="highlight"><td><strong>$50,000</strong> <span class="tag confirmed">Owl base parity</span></td><td class="num">~$118K</td><td class="num">$1,000</td><td class="num">$750</td><td class="num">$2,750</td><td class="num">$3,000</td><td class="num">$2,750</td><td class="num">$36K</td><td class="num">$33K</td></tr>
+        <tr><td><strong>$75,000</strong></td><td class="num">~$162K</td><td class="num">$1,500</td><td class="num">$1,125</td><td class="num">$3,125</td><td class="num">$3,500</td><td class="num">$3,125</td><td class="num">$42K</td><td class="num">$38K</td></tr>
+        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$2,000</td><td class="num">$1,500</td><td class="num">$3,500</td><td class="num">$4,000</td><td class="num">$3,500</td><td class="num">$48K</td><td class="num">$42K</td></tr>
+        <tr><td><strong>$150,000</strong></td><td class="num">~$295K</td><td class="num">$3,000</td><td class="num">$2,250</td><td class="num">$4,250</td><td class="num">$5,000</td><td class="num">$4,250</td><td class="num">$60K</td><td class="num">$51K</td></tr>
+        <tr><td><strong>$200,000</strong></td><td class="num">~$383K</td><td class="num">$4,000</td><td class="num">$3,000</td><td class="num">$5,000</td><td class="num">$6,000</td><td class="num">$5,000</td><td class="num">$72K</td><td class="num">$60K</td></tr>
+        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$5,000</td><td class="num">$3,750</td><td class="num">$5,750</td><td class="num">$7,000</td><td class="num">$5,750</td><td class="num">$84K</td><td class="num">$69K</td></tr>
+        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$10,000</td><td class="num">$7,500</td><td class="num">$9,500</td><td class="num">$12,000</td><td class="num">$9,500</td><td class="num">$144K</td><td class="num">$114K</td></tr>
+        <tr><td><strong>$1,000,000</strong></td><td class="num">~$1.80M</td><td class="num">$20,000</td><td class="num">$15,000</td><td class="num">$17,000</td><td class="num">$22,000</td><td class="num">$17,000</td><td class="num">$264K</td><td class="num">$204K</td></tr>
+        <tr class="highlight"><td><strong>$1,250,000</strong> <span class="tag cap">Owl cap binds</span></td><td class="num">~$2.24M</td><td class="num">$25,000</td><td class="num">$18,750</td><td class="num">$20,750</td><td class="num">$27,000</td><td class="num">$20,750</td><td class="num">$324K</td><td class="num">$249K</td></tr>
+        <tr class="highlight"><td><strong>$1,670,000</strong> <span class="tag cap">T/G cap binds</span></td><td class="num">~$2.99M</td><td class="num">$25,000</td><td class="num">$25,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324K</td><td class="num">$324K</td></tr>
+        <tr><td><strong>$2,000,000+</strong></td><td class="num">~$3.57M+</td><td class="num">$25,000</td><td class="num">$25,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324K</td><td class="num">$324K</td></tr>
       </tbody>
     </table>
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Reading the table.</strong>&nbsp; Each row is an independent monthly scenario. The pool activates at $25K Net Profit; Owl&rsquo;s base moves to parity at $50K NP and is identical thereafter. Annualised figures assume the Net Profit level holds for twelve consecutive months; actual monthly results will vary, and the compensation moves with them.</div>
+      <div><strong>Reading the table.</strong>&nbsp; Each row is an independent monthly scenario. The pool activates at $25K Net Profit (Owl 2% of NP, Toro and Gibbiana 1.5% each). Owl&rsquo;s base salary moves to parity with Toro and Gibbiana at the $50K NP threshold. Because the percentages differ, Owl&rsquo;s $25K cap binds first at $1.25M NP, while Toro&rsquo;s and Gibbiana&rsquo;s bind at $1.67M NP. Above $1.67M NP, all three are at the cap and total comp is identical. Annualised figures assume the Net Profit level holds for twelve consecutive months.</div>
     </div>
   </section>
 
@@ -488,8 +489,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <ul>
           <li><strong>No cost during the build phase.</strong> The pool activates only above $25K monthly Net Profit, so it contributes nothing to burn during the runway-spend period when capital efficiency matters most.</li>
           <li><strong>Paid only on real profit.</strong> The pool is calculated on Net Profit, not GGR &mdash; preventing any scenario where the team is rewarded for top-line growth that loses money on bonuses, provider fees, or marketing.</li>
-          <li><strong>Effective rate tightens at scale.</strong> Up to $750K monthly NP, the pool sits at 10% of NP. Above that, the per-person cap binds and the effective rate declines: 7.5% at $1M NP, 3.75% at $2M NP.</li>
-          <li><strong>Bounded total exposure.</strong> Combined annual cost, at the cap, is $900K &mdash; reached only when the business is generating $9M+ in annual Net Profit. The plan cannot exceed this figure regardless of upside.</li>
+          <li><strong>Effective rate tightens at scale.</strong> Up to $1.25M monthly NP, the pool sits at 5% of NP total. Above that, individual caps begin to bind and the effective rate declines: 4.5% at $1.67M NP, 3.75% at $2M NP, 1.5% at $5M NP.</li>
+          <li><strong>Bounded total exposure.</strong> Combined annual cost, at the cap, is $900K &mdash; reached only when the business is generating ~$20M in annual Net Profit. The plan cannot exceed this figure regardless of upside.</li>
           <li><strong>Investor distributions are unaffected.</strong> Equity-based distributions remain governed by the cap table and shareholders&rsquo; agreement. The pool is an operating-expense line above the distribution waterfall, applying equally to all equity holders.</li>
         </ul>
       </div>
@@ -498,9 +499,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <div class="audience">For the Operating Team</div>
         <h3>Why this plan recognises your contribution</h3>
         <ul>
-          <li><strong>Your share grows with the company&rsquo;s success.</strong> The pool scales linearly with Net Profit through the entire band where most of the work happens, with no flat ceiling on the pool itself until per-person comp reaches $25K/mo.</li>
-          <li><strong>Predictable and transparent.</strong> The calculation is one line of arithmetic: ten percent of last month&rsquo;s Net Profit, divided by three. No performance review, no political weighting, no behind-the-scenes decision.</li>
-          <li><strong>Equal partnership across the three of you.</strong> Each member receives the same share. The structure treats the three roles &mdash; back-office, finance/PM, affiliate/PR &mdash; as equally essential.</li>
+          <li><strong>Your share grows with the company&rsquo;s success.</strong> Each share scales linearly with Net Profit through the entire band where most of the work happens, with no ceiling until the individual cap is reached.</li>
+          <li><strong>Predictable and transparent.</strong> Each member&rsquo;s share is a fixed percentage of last month&rsquo;s Net Profit (2% Owl, 1.5% Toro, 1.5% Gibbiana). No performance review, no political weighting, no behind-the-scenes decision.</li>
+          <li><strong>Differentiated shares reflect scope.</strong> Owl&rsquo;s 2% acknowledges his cross-cutting scope &mdash; finance, investor reporting, and operations PM. Toro and Gibbiana&rsquo;s 1.5% each reflects their more focused functional roles. The differential is small enough not to create friction and aligned with the responsibilities each person carries.</li>
           <li><strong>Owl&rsquo;s base correction is built in.</strong> Pool share applies to all three from $25K NP; Owl&rsquo;s base then moves to parity at the $50K NP mark, funded by the company &mdash; not from the pool.</li>
           <li><strong>Settled monthly, no clawback.</strong> Each month stands on its own. Strong months are paid in full at month-end. No annual reconciliation, no clawback on softer months, no carryforward to argue over.</li>
           <li><strong>Re-evaluation is rule-based.</strong> The plan is reviewed only when the specific written triggers in &sect;07 occur. Between those triggers, the structure stays as written.</li>
@@ -523,7 +524,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr>
           <th>Monthly NP</th>
           <th style="text-align:right;">GGR required<br><span style="font-weight:400;text-transform:none;font-size:9px;">(approx)</span></th>
-          <th style="text-align:right;">Pool paid</th>
+          <th style="text-align:right;">Pool paid<br><span style="font-weight:400;text-transform:none;font-size:9px;">(total)</span></th>
           <th style="text-align:right;">% of NP</th>
           <th style="text-align:right;">% of GGR</th>
           <th style="text-align:right;">Retained by company</th>
@@ -531,14 +532,15 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>$25,000</strong></td><td class="num">~$72K</td><td class="num">$2,500</td><td class="num">10.0%</td><td class="num">~3.5%</td><td class="num">$22,500</td><td class="cat">Activation point; modest pool cost</td></tr>
-        <tr><td><strong>$50,000</strong></td><td class="num">~$118K</td><td class="num">$5,000</td><td class="num">10.0%</td><td class="num">~4.2%</td><td class="num">$45,000</td><td class="cat">Owl base parity engages; linear scaling</td></tr>
-        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$10,000</td><td class="num">10.0%</td><td class="num">~4.9%</td><td class="num">$90,000</td><td class="cat">Mid-range profitable month</td></tr>
-        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$25,000</td><td class="num">10.0%</td><td class="num">~5.3%</td><td class="num">$225,000</td><td class="cat">Strong-success territory</td></tr>
-        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$50,000</td><td class="num">10.0%</td><td class="num">~5.5%</td><td class="num">$450,000</td><td class="cat">Steady 10% of NP &middot; cap not yet binding</td></tr>
-        <tr><td><strong>$750,000</strong> <span class="tag cap">cap binds</span></td><td class="num">~$1.36M</td><td class="num">$75,000</td><td class="num">10.0%</td><td class="num">~5.5%</td><td class="num">$675,000</td><td class="cat">Maximum pool reached</td></tr>
-        <tr><td><strong>$1,000,000</strong></td><td class="num">~$1.80M</td><td class="num">$75,000</td><td class="num">7.5%</td><td class="num">~4.2%</td><td class="num">$925,000</td><td class="cat">Pool flat; effective rate declines</td></tr>
-        <tr><td><strong>$2,000,000</strong></td><td class="num">~$3.57M</td><td class="num">$75,000</td><td class="num">3.75%</td><td class="num">~2.1%</td><td class="num">$1,925,000</td><td class="cat">Cap heavily favourable to company at scale</td></tr>
+        <tr><td><strong>$25,000</strong></td><td class="num">~$72K</td><td class="num">$1,250</td><td class="num">5.0%</td><td class="num">~1.7%</td><td class="num">$23,750</td><td class="cat">Activation; very modest pool cost</td></tr>
+        <tr><td><strong>$50,000</strong></td><td class="num">~$118K</td><td class="num">$2,500</td><td class="num">5.0%</td><td class="num">~2.1%</td><td class="num">$47,500</td><td class="cat">Owl base parity engages; linear scaling</td></tr>
+        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$5,000</td><td class="num">5.0%</td><td class="num">~2.4%</td><td class="num">$95,000</td><td class="cat">Mid-range profitable month</td></tr>
+        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$12,500</td><td class="num">5.0%</td><td class="num">~2.6%</td><td class="num">$237,500</td><td class="cat">Strong-success territory</td></tr>
+        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$25,000</td><td class="num">5.0%</td><td class="num">~2.7%</td><td class="num">$475,000</td><td class="cat">Steady 5% of NP &middot; no caps binding yet</td></tr>
+        <tr><td><strong>$1,000,000</strong></td><td class="num">~$1.80M</td><td class="num">$50,000</td><td class="num">5.0%</td><td class="num">~2.8%</td><td class="num">$950,000</td><td class="cat">Approaching first cap-binding threshold</td></tr>
+        <tr><td><strong>$1,250,000</strong> <span class="tag cap">Owl cap binds</span></td><td class="num">~$2.24M</td><td class="num">$62,500</td><td class="num">5.0%</td><td class="num">~2.8%</td><td class="num">$1,187,500</td><td class="cat">Owl at $25K cap; T/G still scaling</td></tr>
+        <tr><td><strong>$1,670,000</strong> <span class="tag cap">T/G cap binds</span></td><td class="num">~$2.99M</td><td class="num">$75,000</td><td class="num">~4.5%</td><td class="num">~2.5%</td><td class="num">$1,595,000</td><td class="cat">Maximum pool reached; all at cap</td></tr>
+        <tr><td><strong>$2,000,000</strong></td><td class="num">~$3.57M</td><td class="num">$75,000</td><td class="num">3.75%</td><td class="num">~2.1%</td><td class="num">$1,925,000</td><td class="cat">Pool flat; effective rate declines</td></tr>
         <tr><td><strong>$5,000,000</strong></td><td class="num">~$8.88M</td><td class="num">$75,000</td><td class="num">1.50%</td><td class="num">~0.8%</td><td class="num">$4,925,000</td><td class="cat">Pool becomes a small fixed cost</td></tr>
       </tbody>
     </table>
@@ -549,27 +551,29 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr>
           <th>Sustained monthly NP</th>
           <th style="text-align:right;">GGR required<br><span style="font-weight:400;text-transform:none;font-size:9px;">(approx)</span></th>
-          <th style="text-align:right;">Per-person / month</th>
-          <th style="text-align:right;">Per-person / year</th>
-          <th style="text-align:right;">All three / year</th>
+          <th style="text-align:right;">Owl / month</th>
+          <th style="text-align:right;">T/G / month</th>
+          <th style="text-align:right;">Owl / year</th>
+          <th style="text-align:right;">T/G / year</th>
           <th>Notes</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Below threshold</td><td class="num">&mdash;</td><td class="num">$2,000 / $1,000</td><td class="num">$12K&ndash;$24K</td><td class="num">$60,000</td><td class="cat">Current base only; runway-spend period</td></tr>
-        <tr><td><strong>$25,000</strong></td><td class="num">~$72K</td><td class="num">$2,833 T/G &middot; $1,833 Owl</td><td class="num">$34K T/G &middot; $22K Owl</td><td class="num">$90,000</td><td class="cat">Pool activates; Owl base correction pending until $50K NP</td></tr>
-        <tr><td><strong>$50,000</strong></td><td class="num">~$118K</td><td class="num">$3,667</td><td class="num">$44,000</td><td class="num">$132,000</td><td class="cat">Owl base parity; comfortable early-success comp</td></tr>
-        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$5,333</td><td class="num">$64,000</td><td class="num">$192,000</td><td class="cat">Solid mid-range total compensation</td></tr>
-        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$10,333</td><td class="num">$124,000</td><td class="num">$372,000</td><td class="cat">Strong success scenario</td></tr>
-        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$18,667</td><td class="num">$224,000</td><td class="num">$672,000</td><td class="cat">Major-success scenario</td></tr>
-        <tr><td><strong>$750,000</strong> <span class="tag cap">cap binds</span></td><td class="num">~$1.36M</td><td class="num">$27,000</td><td class="num">$324,000</td><td class="num">$972,000</td><td class="cat">Plan upper bound for each member</td></tr>
-        <tr><td><strong>$1,000,000+</strong></td><td class="num">~$1.80M+</td><td class="num">$27,000</td><td class="num">$324,000</td><td class="num">$972,000</td><td class="cat">No further increase; plan re-evaluation due</td></tr>
+        <tr><td>Below threshold</td><td class="num">&mdash;</td><td class="num">$1,000</td><td class="num">$2,000</td><td class="num">$12,000</td><td class="num">$24,000</td><td class="cat">Current base only; runway-spend period</td></tr>
+        <tr><td><strong>$25,000</strong></td><td class="num">~$72K</td><td class="num">$1,500</td><td class="num">$2,375</td><td class="num">$18,000</td><td class="num">$28,500</td><td class="cat">Pool activates; Owl base correction pending</td></tr>
+        <tr><td><strong>$50,000</strong></td><td class="num">~$118K</td><td class="num">$3,000</td><td class="num">$2,750</td><td class="num">$36,000</td><td class="num">$33,000</td><td class="cat">Owl base parity; comfortable early-success comp</td></tr>
+        <tr><td><strong>$100,000</strong></td><td class="num">~$206K</td><td class="num">$4,000</td><td class="num">$3,500</td><td class="num">$48,000</td><td class="num">$42,000</td><td class="cat">Solid mid-range total compensation</td></tr>
+        <tr><td><strong>$250,000</strong></td><td class="num">~$472K</td><td class="num">$7,000</td><td class="num">$5,750</td><td class="num">$84,000</td><td class="num">$69,000</td><td class="cat">Strong success scenario</td></tr>
+        <tr><td><strong>$500,000</strong></td><td class="num">~$914K</td><td class="num">$12,000</td><td class="num">$9,500</td><td class="num">$144,000</td><td class="num">$114,000</td><td class="cat">Major-success scenario</td></tr>
+        <tr><td><strong>$1,000,000</strong></td><td class="num">~$1.80M</td><td class="num">$22,000</td><td class="num">$17,000</td><td class="num">$264,000</td><td class="num">$204,000</td><td class="cat">Approaching Owl cap</td></tr>
+        <tr><td><strong>$1,250,000</strong> <span class="tag cap">Owl cap binds</span></td><td class="num">~$2.24M</td><td class="num">$27,000</td><td class="num">$20,750</td><td class="num">$324,000</td><td class="num">$249,000</td><td class="cat">Owl at plan upper bound; T/G still scaling</td></tr>
+        <tr><td><strong>$1,670,000+</strong> <span class="tag cap">T/G cap binds</span></td><td class="num">~$2.99M+</td><td class="num">$27,000</td><td class="num">$27,000</td><td class="num">$324,000</td><td class="num">$324,000</td><td class="cat">All three at plan upper bound; review due</td></tr>
       </tbody>
     </table>
 
     <div class="note-box green">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <div><strong>What the two views show together.</strong>&nbsp; Across the entire profitable band, the company retains at least 89.9% of each month&rsquo;s Net Profit, while the operating team&rsquo;s compensation grows in lock-step with that profit. The cap binds at $750,000 monthly Net Profit &mdash; an annualised pace of $9M in Net Profit &mdash; at which point each member is at $324,000 per year total compensation. This is the point at which the plan is scheduled for review (see &sect;07).</div>
+      <div><strong>What the two views show together.</strong>&nbsp; Across the entire profitable band up to $1.25M monthly NP, the company retains exactly 95% of each month&rsquo;s Net Profit. Above that, individual caps begin to bind and the retained percentage rises further. The plan&rsquo;s upper bound is reached at $1.67M monthly Net Profit &mdash; an annualised pace of ~$20M in Net Profit &mdash; at which point each member is at $324,000 per year total compensation. This is the point at which the plan is scheduled for review (see &sect;07).</div>
     </div>
   </section>
 
@@ -673,12 +677,12 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="qa">
       <div class="qa-item">
-        <div class="q"><span class="tag-aud inv">Investor</span> Why ten percent rather than a smaller figure?</div>
-        <div class="a">Ten percent is the standard pool size for profit-share arrangements at early operating teams in technology and digital businesses. It is also the level at which the team reaches comparable open-market compensation only when the company is generating substantial Net Profit (roughly $100K/mo or more). A smaller figure delays parity to the point where retention becomes the practical risk; a larger figure reads as aggressive without producing additional alignment benefit.</div>
+        <div class="q"><span class="tag-aud inv">Investor</span> Why five percent in total, and why are the individual shares different?</div>
+        <div class="a">Five percent is a conservative pool size for an early operating team in a digital business &mdash; below the SaaS-norm range of 10&ndash;15%, reflecting that the operating team is mid-level functional rather than executive. The split (2% to Owl, 1.5% each to Toro and Gibbiana) reflects the differing scope of the roles: Owl carries cross-cutting responsibility for finance, investor reporting, and operations PM, while Toro and Gibbiana each carry a focused functional role. The differential is small enough to be non-divisive and large enough to be meaningful.</div>
       </div>
       <div class="qa-item">
         <div class="q"><span class="tag-aud inv">Investor</span> What stops this from growing without limit?</div>
-        <div class="a">Two structural limits. First, the per-person cap of $25,000 per month places an absolute ceiling on individual compensation. Second, the pool is fixed to three named individuals; new hires do not enter the pool, regardless of seniority or role. The total exposure under the plan cannot exceed $900,000 per year.</div>
+        <div class="a">Two structural limits. First, each member&rsquo;s monthly share is capped at $25,000, placing an absolute ceiling on individual compensation. Second, the allocation is fixed to three named individuals; new hires do not enter the plan, regardless of seniority or role. The total exposure cannot exceed $900,000 per year, reached only when the business is generating ~$20M in annual Net Profit.</div>
       </div>
       <div class="qa-item">
         <div class="q"><span class="tag-aud inv">Investor</span> Does this affect my equity returns?</div>
@@ -701,8 +705,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <div class="a">Only by mutual consent, and only when one of the three review triggers in &sect;07 occurs. The triggers are written in advance precisely so that neither side has to argue for a review based on a subjective judgement; the trigger either applies or it does not. Between triggers, the plan remains as written.</div>
       </div>
       <div class="qa-item">
-        <div class="q"><span class="tag-aud team">Team</span> Why is the pool divided equally rather than weighted by individual contribution?</div>
-        <div class="a">At three members, weighting introduces more contention than it resolves. The three roles &mdash; back-office, finance and PM, affiliate and PR &mdash; are distinct enough that no fair common scale exists. Equal division keeps the arithmetic clean and the culture collaborative. If the team grows, the question can be revisited.</div>
+        <div class="q"><span class="tag-aud team">Team</span> Why is Owl&rsquo;s share higher than Toro&rsquo;s and Gibbiana&rsquo;s?</div>
+        <div class="a">Owl&rsquo;s role spans finance, investor reporting, and operations PM &mdash; functions that touch every other part of the business and require coordination work that the other two roles don&rsquo;t. The 0.5% differential is the smallest meaningful step we could give while acknowledging that scope. Toro&rsquo;s and Gibbiana&rsquo;s 1.5% reflects their focused functional roles, which are equally essential but narrower in scope. If the scope of any role changes materially, the percentages can be revisited under the review triggers in &sect;07.</div>
       </div>
       <div class="qa-item">
         <div class="q"><span class="tag-aud inv">Investor</span> Why is the activation threshold set at $25,000 monthly Net Profit?</div>
@@ -714,7 +718,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       </div>
       <div class="qa-item">
         <div class="q"><span class="tag-aud both">Both</span> Where do the &ldquo;GGR required&rdquo; figures come from, and what costs are included?</div>
-        <div class="a">From the variable-cost stack and M7+ fixed-cost run-rate in &sect;04. They include the full bonus structure (~25% of GGR &mdash; welcome, reload, cashback, free spins, VIP combined), Cubeia platform share (5%), blended game-provider share (~10.5%), crypto payment processing (~3%), and ~$16.6K monthly fixed opex after the Owl correction. The figures are approximations &mdash; actual results move with product mix, bonus uptake, and provider terms &mdash; and are intended to make the scale of the business visible, not to serve as exact forecasts.</div>
+        <div class="a">From the variable-cost stack and M7+ fixed-cost run-rate in &sect;04. They include the full bonus structure (~25% of GGR &mdash; welcome, reload, cashback, free spins, VIP combined), Cubeia platform share (5%), blended game-provider share (~10.5%), crypto payment processing (~3%), and ~$16.6K monthly fixed opex after the Owl base correction. The figures are approximations &mdash; actual results move with product mix, bonus uptake, and provider terms &mdash; and are intended to make the scale of the business visible, not to serve as exact forecasts.</div>
       </div>
       <div class="qa-item">
         <div class="q"><span class="tag-aud inv">Investor</span> Has the bonus structure been factored into these figures, or is there a hidden cost waiting to surface?</div>
