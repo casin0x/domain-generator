@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Growth Paths · A vs B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1400px; margin: 0 auto; padding: 0 32px 80px; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+.subnav { position: sticky; top: 56px; z-index: 99; background: rgba(11,13,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.subnav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2px; height: 40px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
+.subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.fx-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; vertical-align: middle; margin: 0 4px; }
+.fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-switch-btn:hover { color: var(--text); }
+.fx-switch-btn.active { color: var(--bg); background: var(--accent); }
+.cur-usd, .cur-sek, .cur-eur { display: none !important; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: revert !important; }
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--cyan-dim); border: 1px solid var(--cyan-border); font-size: 11px; font-weight: 600; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 880px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+.section { margin-bottom: 56px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--cyan-dim); color: var(--cyan); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+.section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
+.subtitle { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+
+/* Path summary cards */
+.path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+.path-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; position: relative; overflow: hidden; }
+.path-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.path-card.a::before { background: var(--amber); }
+.path-card.b::before { background: var(--cyan); }
+.path-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
+.path-card.a .label { color: var(--amber); }
+.path-card.b .label { color: var(--cyan); }
+.path-card h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 6px; }
+.path-card .tagline { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 18px; }
+.path-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-bottom: 16px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.path-card .m-key { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; font-weight: 600; }
+.path-card .m-val { font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--text); }
+.path-card .m-val.green { color: var(--green); }
+.path-card .m-val.amber { color: var(--amber); }
+.path-card .m-val.cyan { color: var(--cyan); }
+.path-card .footer-tag { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+/* Generic line-item table */
+.lit { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.lit th, .lit td { padding: 12px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.lit th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; background: var(--surface-2); }
+.lit tr:last-child td { border-bottom: none; }
+.lit td.num { font-family: var(--mono); font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+.lit td.cat { color: var(--text-secondary); font-size: 12px; }
+.lit tr.total td { background: var(--surface-2); font-weight: 700; color: var(--text); }
+.lit tr.total td.num.delta-pos { color: var(--rose); }
+.lit tr.total td.num.delta-neg { color: var(--green); }
+.lit td.delta-pos { color: var(--rose); }
+.lit td.delta-neg { color: var(--green); }
+.lit td.delta-zero { color: var(--text-muted); }
+.lit td .tag { font-family: var(--mono); font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+.lit td .tag.a { background: var(--amber-dim); color: var(--amber); }
+.lit td .tag.b { background: var(--cyan-dim); color: var(--cyan); }
+.lit td .tag.new { background: var(--green-dim); color: var(--green); }
+
+/* Pros/cons two-col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.side-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; position: relative; }
+.side-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+.side-card.a::before { background: var(--amber); }
+.side-card.b::before { background: var(--cyan); }
+.side-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; font-family: var(--mono); }
+.side-card.a .label { color: var(--amber); }
+.side-card.b .label { color: var(--cyan); }
+.side-card h3 { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin-bottom: 12px; }
+.side-card .subhead { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; font-weight: 700; }
+.side-card .subhead.pros { color: var(--green); }
+.side-card .subhead.cons { color: var(--rose); }
+.side-card ul { list-style: none; padding: 0; margin: 0; }
+.side-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 6px 0 6px 16px; position: relative; }
+.side-card li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 2px; }
+.side-card .subhead.pros + ul li::before { background: var(--green); }
+.side-card .subhead.cons + ul li::before { background: var(--rose); }
+.side-card li strong { color: var(--text); font-weight: 600; }
+
+/* Note */
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.note-box.cyan { background: var(--cyan-dim); border: 1px solid var(--cyan-border); color: var(--cyan); }
+.note-box strong { color: var(--text); font-weight: 600; }
+
+/* Quote callout */
+.quote { background: var(--surface); border-left: 3px solid var(--cyan); border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; font-style: italic; color: var(--text-secondary); line-height: 1.7; font-size: 14px; }
+.quote .who { display: block; margin-top: 14px; font-style: normal; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .path-grid, .two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .subnav { padding: 0 16px; } .subnav-inner { height: 36px; }
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 26px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link">Revenue</a>
+      <a href="paths.html" class="header-link active">Paths A/B</a>
+      <a href="partnership.html" class="header-link">Partnership</a>
+      <a href="capital.html" class="header-link">Capital</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#question" class="subnav-link">The Question</a>
+    <a href="#snapshot" class="subnav-link">Snapshot A/B</a>
+    <a href="#marketing" class="subnav-link">Marketing Reshuffle</a>
+    <a href="#structural" class="subnav-link">Structural Changes</a>
+    <a href="#proscons" class="subnav-link">Pros &amp; Cons</a>
+    <a href="#outcomes" class="subnav-link">Expected Outcomes</a>
+    <a href="#decision" class="subnav-link">Decision Criteria</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge">Strategic Choice · Path A vs Path B</div>
+      <span class="hero-date">v0.1 &middot; May 2026</span>
+    </div>
+    <h1>Growth Paths — A vs B</h1>
+    <p>Two budgets for the same 6-month validation window. <strong>Path A</strong> is what the rest of the dashboard currently models — acquisition-volume optimised, standard crypto-casino playbook. <strong>Path B</strong> is the retention-first alternative, reshuffled around the insight that bonus-hunters acquired cheaply cost more than retained players acquired expensively. Same total spend, very different shape, very different M7+ run-rate.</p>
+  </section>
+
+  <!-- Currency note -->
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>Currency: </strong>
+      <span class="fx-switch">
+        <button class="fx-switch-btn" data-cur="usd">USD</button>
+        <button class="fx-switch-btn" data-cur="sek">SEK</button>
+        <button class="fx-switch-btn" data-cur="eur">EUR</button>
+      </span>
+      Default USD &middot; FX 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08.
+    </div>
+  </div>
+
+  <!-- §01 THE QUESTION -->
+  <section class="section" id="question">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-title">The Strategic Question</span>
+    </div>
+    <p class="section-intro">The mentor&rsquo;s lesson behind Path B, condensed:</p>
+
+    <div class="quote">
+      &ldquo;For a year we were obsessed with one number: cost per acquisition. Lower it, win the quarter. So we widened the funnel. Bigger bonuses, broader targeting, fewer signup steps. Signups doubled. The dashboard looked beautiful. Then I pulled the 30-day retention curve. Almost everyone we&rsquo;d &lsquo;won&rsquo; had vanished before a second deposit. We hadn&rsquo;t acquired players. We&rsquo;d rented bonus hunters.&rdquo;
+      <span class="who">Casino operator mentor &middot; LinkedIn excerpt</span>
+    </div>
+
+    <p class="section-intro">Applied to GoLuna: the current marketing stack is weighted toward BH Ads (43% of M1&ndash;M6 marketing), which is structurally the bonus-hunter channel. The Revenue P&amp;L assumes <strong>LTV ~$130 per FTD over 6 months</strong>, but that implicitly requires a 2nd-deposit rate around 35&ndash;40%. Industry default for a poorly-engineered onboarding flow is 22&ndash;25%. If the model is wrong by that gap, M1&ndash;M6 cumulative NP comes in $80&ndash;120K below the +$7K base case. Path B is the structural alternative that earns the assumed LTV instead of hoping for it.</p>
+  </section>
+
+  <!-- §02 SNAPSHOT A/B -->
+  <section class="section" id="snapshot">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-title">Snapshot — Side-by-Side</span>
+    </div>
+
+    <div class="path-grid">
+      <div class="path-card a">
+        <div class="label">Path A · Current Dashboard</div>
+        <h2>Acquisition-Volume Optimised</h2>
+        <p class="tagline">High-volume paid acquisition, standard crypto-casino playbook. Wide funnel, big welcome offer, optimised for FTD count in M1&ndash;M6. What the rest of the dashboard currently models.</p>
+        <div class="metrics">
+          <div>
+            <div class="m-key">Marketing spend M1–M6</div>
+            <div class="m-val">$138K</div>
+          </div>
+          <div>
+            <div class="m-key">BH Ads share</div>
+            <div class="m-val amber">43% ($60K)</div>
+          </div>
+          <div>
+            <div class="m-key">Target FTDs M1–M6</div>
+            <div class="m-val">~3,800</div>
+          </div>
+          <div>
+            <div class="m-key">Assumed 2nd-dep rate</div>
+            <div class="m-val amber">~25% (default)</div>
+          </div>
+          <div>
+            <div class="m-key">M6 cumulative NP</div>
+            <div class="m-val green">+$7K</div>
+          </div>
+          <div>
+            <div class="m-key">M7+ run-rate NP</div>
+            <div class="m-val green">~$63K/mo</div>
+          </div>
+        </div>
+        <div class="footer-tag">Risk: if 2nd-dep rate undershoots, the +$7K cumulative goes silently negative.</div>
+      </div>
+
+      <div class="path-card b">
+        <div class="label">Path B · Retention-Engineered</div>
+        <h2>Community + Onboarding First</h2>
+        <p class="tagline">Reshuffle marketing toward community/streamer channels. Cut BH Ads in half. Build the 48-hour onboarding flow on day one. Lower welcome bonus, stronger reload structure. Same total spend, very different player quality.</p>
+        <div class="metrics">
+          <div>
+            <div class="m-key">Marketing spend M1–M6</div>
+            <div class="m-val">$144K</div>
+          </div>
+          <div>
+            <div class="m-key">BH Ads share</div>
+            <div class="m-val cyan">21% ($30K)</div>
+          </div>
+          <div>
+            <div class="m-key">Target FTDs M1–M6</div>
+            <div class="m-val">~3,000–3,400</div>
+          </div>
+          <div>
+            <div class="m-key">Target 2nd-dep rate</div>
+            <div class="m-val cyan">~38–42%</div>
+          </div>
+          <div>
+            <div class="m-key">M6 cumulative NP</div>
+            <div class="m-val amber">~$0 to +$5K</div>
+          </div>
+          <div>
+            <div class="m-key">M7+ run-rate NP</div>
+            <div class="m-val green">~$80K+/mo</div>
+          </div>
+        </div>
+        <div class="footer-tag">Risk: depends on actually executing the 48h flow + community work in M1. If they slip, you get Path A&rsquo;s costs without Path A&rsquo;s volume.</div>
+      </div>
+    </div>
+
+    <div class="note-box cyan">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>The honest tension.</strong>&nbsp; Path A looks better on every M1&ndash;M3 dashboard metric: more FTDs, lower CPA, higher GGR ramp. Path B looks better on every M5&ndash;M6 dashboard metric: better cohort retention, lower churn, higher LTV, stronger M7+ run-rate. The choice is whether you optimise for the first half of the runway (looks great in investor updates) or the second half (compounds into a real business).</div>
+    </div>
+  </section>
+
+  <!-- §03 MARKETING RESHUFFLE -->
+  <section class="section" id="marketing">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-title">Marketing Budget — Line-by-Line Reshuffle</span>
+    </div>
+    <p class="section-intro">Path B reshuffles the same marketing pot, with one small addition (a community manager retainer) and a one-time CRM/onboarding consultant in M1. Net delta: <strong>+$6K total</strong> over M1&ndash;M6. The reshuffle is structural &mdash; less budget on the channel that produces bonus hunters, more on the channels that produce community members.</p>
+
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th style="text-align:right;">Path A (current)</th>
+          <th style="text-align:right;">Path B (proposed)</th>
+          <th style="text-align:right;">Delta</th>
+          <th>Reason for change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BH Ads</strong> <span class="tag a">A</span></td>
+          <td class="num">$60K <span style="color:var(--text-muted);font-size:11px;">($10K/mo)</span></td>
+          <td class="num">$30K <span style="color:var(--text-muted);font-size:11px;">($5K/mo)</span></td>
+          <td class="num delta-neg">&minus;$30K</td>
+          <td class="cat">Pop/push/redirect traffic = textbook bonus-hunter source. Keep a small lever for volume top-up, but stop relying on it as the largest channel.</td>
+        </tr>
+        <tr>
+          <td><strong>Clipping campaign</strong></td>
+          <td class="num">$48K <span style="color:var(--text-muted);font-size:11px;">($8K/mo)</span></td>
+          <td class="num">$48K <span style="color:var(--text-muted);font-size:11px;">($8K/mo)</span></td>
+          <td class="num delta-zero">$0</td>
+          <td class="cat">Content-led, builds awareness and community lift. Keep at current level &mdash; this is one of the better-aligned channels for Path B.</td>
+        </tr>
+        <tr>
+          <td><strong>Paid Social</strong></td>
+          <td class="num">$18K <span style="color:var(--text-muted);font-size:11px;">($3K/mo)</span></td>
+          <td class="num">$24K <span style="color:var(--text-muted);font-size:11px;">($4K/mo)</span></td>
+          <td class="num delta-pos">+$6K</td>
+          <td class="cat">Modest bump for better creative budget &mdash; community-tone organic-style ads convert better than direct-response. Same channel, different content brief.</td>
+        </tr>
+        <tr>
+          <td><strong>Streamer partnerships</strong></td>
+          <td class="num">$12K <span style="color:var(--text-muted);font-size:11px;">($2K/mo)</span></td>
+          <td class="num">$30K <span style="color:var(--text-muted);font-size:11px;">($5K/mo)</span></td>
+          <td class="num delta-pos">+$18K</td>
+          <td class="cat">Biggest single bump. Streamer audiences attach to the streamer&rsquo;s community, not to the bonus &mdash; highest-retention paid channel for crypto casino. $5K/mo funds 1 mid-tier + 2&ndash;3 micros in rotation.</td>
+        </tr>
+        <tr>
+          <td><strong>Community manager</strong> <span class="tag new">new</span></td>
+          <td class="num">&mdash;</td>
+          <td class="num">$9K <span style="color:var(--text-muted);font-size:11px;">($1.5K/mo)</span></td>
+          <td class="num delta-pos">+$9K</td>
+          <td class="cat">Offshore part-time Telegram + Discord manager. Daily posting cadence, player Q&amp;A, race promotion, retention chat. Cheap but critical &mdash; community is where crypto casinos retain.</td>
+        </tr>
+        <tr>
+          <td><strong>Onboarding flow consultant</strong> <span class="tag new">new</span></td>
+          <td class="num">&mdash;</td>
+          <td class="num">$3K <span style="color:var(--text-muted);font-size:11px;">(M1 one-off)</span></td>
+          <td class="num delta-pos">+$3K</td>
+          <td class="cat">One-off M1 cost to design the 48h CRM flow in Customer.io (already paid for). Could be carved out of Designer budget if preferred &mdash; not strictly net-new spend.</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Marketing total M1&ndash;M6</strong></td>
+          <td class="num">$138K</td>
+          <td class="num">$144K</td>
+          <td class="num delta-pos">+$6K</td>
+          <td class="cat">Effectively budget-neutral &mdash; the reshuffle does the work, not the addition.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Cash-flow impact on the broader forecast.</strong>&nbsp; The +$6K total flows through to the M1&ndash;M6 cumulative spend ($222K &rarr; $228K), the M6 operating budget remaining (&minus;$8K &rarr; &minus;$14K), and the 12-month committed metric ($322.5K &rarr; $328.5K). The runway calendar is essentially unchanged &mdash; the cliff still lands mid-M6, just slightly deeper.</div>
+    </div>
+  </section>
+
+  <!-- §04 STRUCTURAL CHANGES -->
+  <section class="section" id="structural">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-title">Structural Changes (No Direct Cash Cost)</span>
+    </div>
+    <p class="section-intro">Path B isn&rsquo;t just a marketing reshuffle &mdash; it changes how bonuses, affiliates, and onboarding work. These structural changes have no direct cash cost but materially affect player quality. They&rsquo;re the leverage that earns the LTV the Revenue model is already assuming.</p>
+
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th style="width:200px;">Lever</th>
+          <th>Path A (current)</th>
+          <th>Path B (proposed)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Welcome bonus</strong></td>
+          <td class="cat">Standard 100%+ match-deposit cap, low wagering. Maximises signup &mdash; and signal to bonus hunters.</td>
+          <td class="cat">50% match cap, normal wagering (~25&ndash;30x). Filters out bonus hunters at the door. Players who deposit through this offer want the casino, not the freebie.</td>
+        </tr>
+        <tr>
+          <td><strong>Reload structure</strong></td>
+          <td class="cat">Light reload bonuses, standard schedule.</td>
+          <td class="cat">Aggressive weekly reload (e.g. 30% match every Monday) + rakeback program. Rewards stickiness. Money saved on welcome funds this.</td>
+        </tr>
+        <tr>
+          <td><strong>Onboarding flow</strong></td>
+          <td class="cat">Implicit. Customer.io is paid for but no documented trigger flow. Most operators learn about new players days after signup.</td>
+          <td class="cat">Designed and deployed in M1: welcome message immediately &middot; 24h check-in &middot; 48h personalised offer by game type if no 2nd deposit &middot; 7-day reactivation if dormant. Built once, runs forever.</td>
+        </tr>
+        <tr>
+          <td><strong>Affiliate commission</strong></td>
+          <td class="cat">Flat 30% on NGR for all affiliates. Rewards volume regardless of player quality.</td>
+          <td class="cat">Tiered: <strong>20% baseline + 5&ndash;10% retention bonus</strong> on D60+ NGR. Bonus-aggregator affiliates earn less; SEO/community affiliates earn more. Same blended cost when player quality is mixed, much lower cost when affiliate sends bonus hunters.</td>
+        </tr>
+        <tr>
+          <td><strong>Tracked KPIs</strong></td>
+          <td class="cat">CAC, FTD count, GGR, NGR.</td>
+          <td class="cat">All Path A KPIs <strong>plus</strong>: 2nd-deposit rate (target &ge;35%), D30 retention (target &ge;15%), LTV by channel, cohort revenue at week 2 / week 4 / week 8. Surfaces retention failure within 30 days, not 90.</td>
+        </tr>
+        <tr>
+          <td><strong>Acquisition / retention org</strong></td>
+          <td class="cat">Acquisition (Gibbiana) and retention (Owl/Toro via Customer.io) are separate concerns, talking after campaigns run.</td>
+          <td class="cat">Joint weekly review of cohort retention by channel. Acquisition channel decisions get made based on 2nd-deposit rate, not CPA. Forces channels with bad retention to either improve or close.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- §05 PROS & CONS -->
+  <section class="section" id="proscons">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-title">Pros &amp; Cons</span>
+    </div>
+    <p class="section-intro">Honest framing: neither path is the right answer in the abstract. Path A is the established playbook with known dynamics. Path B is the better long-run shape if execution lands &mdash; but the execution risk is real, especially the M1 onboarding-flow build.</p>
+
+    <div class="two-col">
+      <div class="side-card a">
+        <div class="label">Path A</div>
+        <h3>Acquisition-Volume Optimised</h3>
+
+        <div class="subhead pros">Pros</div>
+        <ul>
+          <li><strong>Predictable.</strong> BH Ads / clipping / paid social are well-understood channels with known unit economics. Lower execution risk in M1&ndash;M3.</li>
+          <li><strong>Faster top-line ramp.</strong> Bigger welcome bonus + broader funnel produces more FTDs in M1&ndash;M3 &mdash; the metric most easily shown in early investor updates.</li>
+          <li><strong>Standard playbook.</strong> Affiliates, processors, and bonus aggregators all expect this structure. Less friction in vendor relationships.</li>
+          <li><strong>Acquisition team can execute alone.</strong> Doesn&rsquo;t require building the onboarding flow on day one &mdash; CRM work can be deferred without immediate cost.</li>
+          <li><strong>Lower coordination cost.</strong> No need to align acquisition + retention before launch. Each function runs independently.</li>
+        </ul>
+
+        <div class="subhead cons">Cons</div>
+        <ul>
+          <li><strong>Bonus-hunter exposure.</strong> 43% of marketing spend goes to BH Ads &mdash; the channel most likely to produce single-deposit players.</li>
+          <li><strong>Implicit LTV assumption may not hold.</strong> Model assumes ~$130 LTV; industry default for non-engineered onboarding is closer to $50&ndash;100.</li>
+          <li><strong>M7+ run-rate weaker.</strong> Cohorts don&rsquo;t compound &mdash; you keep paying CPA for replacement players because retention bleeds.</li>
+          <li><strong>Affiliate program rewards volume not quality.</strong> Bonus-aggregator affiliates earn the same as community-driven affiliates.</li>
+          <li><strong>Retention failure is invisible until M4&ndash;M5.</strong> By the time the cohort curve breaks, you&rsquo;ve already spent $80K on bonus hunters.</li>
+        </ul>
+      </div>
+
+      <div class="side-card b">
+        <div class="label">Path B</div>
+        <h3>Retention-Engineered</h3>
+
+        <div class="subhead pros">Pros</div>
+        <ul>
+          <li><strong>Earns the LTV the model assumes.</strong> Lower welcome + community channels filter for committed players. The $130 LTV becomes plausible, not aspirational.</li>
+          <li><strong>M7+ run-rate compounds.</strong> Higher 2nd-deposit and D30 retention mean M1&ndash;M6 cohorts stack on top of each other instead of bleeding out.</li>
+          <li><strong>Stronger brand defensibility.</strong> Community-driven players are stickier and less price-sensitive when competitor bonuses come along.</li>
+          <li><strong>Surfaces problems faster.</strong> Cohort retention metrics expose channel failure within 30 days, not 90. Faster reallocation.</li>
+          <li><strong>Better M7+ unit economics.</strong> Acquisition cost per retained player drops because retention is engineered, not hoped for.</li>
+        </ul>
+
+        <div class="subhead cons">Cons</div>
+        <ul>
+          <li><strong>Slower M1&ndash;M3 ramp.</strong> Fewer FTDs in early months &mdash; if investors are tracking that specific metric, the dashboard looks worse for the first quarter.</li>
+          <li><strong>Execution risk on the 48h CRM flow.</strong> If the flow isn&rsquo;t deployed in M1, you get Path A&rsquo;s spend with Path B&rsquo;s lower volume &mdash; worst of both.</li>
+          <li><strong>Community manager hire risk.</strong> Telegram/Discord work needs someone who actually understands crypto-casino culture. A bad hire wastes the $9K and delays the channel.</li>
+          <li><strong>Streamer pipeline depends on partnerships.</strong> $5K/mo only buys mid-tier streamers; if those slots are taken or partnerships fall through, the budget under-delivers.</li>
+          <li><strong>Affiliate-commission restructure is contractually heavier.</strong> Tiered commissions are harder to sell to affiliates than flat ones. Some volume affiliates will just decline.</li>
+          <li><strong>Slightly higher cumulative spend.</strong> +$6K M1&ndash;M6 makes the already-tight M6 budget remaining ~$6K deeper into the red.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- §06 EXPECTED OUTCOMES -->
+  <section class="section" id="outcomes">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-title">Expected Outcomes &mdash; Honest Projection Range</span>
+    </div>
+    <p class="section-intro">These are scenarios, not forecasts. Path B&rsquo;s lower FTD count is offset by higher LTV per FTD; the question is how much. The numbers below assume the LTV uplift actually materialises &mdash; if Path B&rsquo;s structural changes don&rsquo;t execute, it converges back toward Path A.</p>
+
+    <table class="lit">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th style="text-align:right;">Path A</th>
+          <th style="text-align:right;">Path B</th>
+          <th>Read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>M1&ndash;M6 FTDs (target)</strong></td>
+          <td class="num">~3,800</td>
+          <td class="num">~3,000&ndash;3,400</td>
+          <td class="cat">Path A wins on volume by ~10&ndash;20%. Mostly from BH-driven signups.</td>
+        </tr>
+        <tr>
+          <td><strong>2nd-deposit rate</strong></td>
+          <td class="num">~22&ndash;25%</td>
+          <td class="num">~38&ndash;42%</td>
+          <td class="cat">The structural difference. Path B aims for industry-leading; Path A coasts at industry-default.</td>
+        </tr>
+        <tr>
+          <td><strong>D30 retention</strong></td>
+          <td class="num">~10&ndash;14%</td>
+          <td class="num">~18&ndash;22%</td>
+          <td class="cat">Path B&rsquo;s community + onboarding flow compounds here.</td>
+        </tr>
+        <tr>
+          <td><strong>LTV per FTD (6 months)</strong></td>
+          <td class="num">$80&ndash;100</td>
+          <td class="num">$130&ndash;170</td>
+          <td class="cat">Path A&rsquo;s realistic LTV is below the $130 the dashboard currently assumes; Path B earns the assumption.</td>
+        </tr>
+        <tr>
+          <td><strong>M1&ndash;M6 cumulative GGR</strong></td>
+          <td class="num">~$485K</td>
+          <td class="num">~$450&ndash;500K</td>
+          <td class="cat">Similar range &mdash; lower volume offset by better LTV. Wide overlap depending on execution.</td>
+        </tr>
+        <tr>
+          <td><strong>M6 cumulative NP (base case)</strong></td>
+          <td class="num" style="color:var(--green);">+$7K</td>
+          <td class="num" style="color:var(--amber);">~$0 to +$5K</td>
+          <td class="cat">Path B is slightly lower on M1&ndash;M6 cumulative because Path A&rsquo;s LTV assumption is generous. If LTV is realistic, Path A may actually be negative cumulative.</td>
+        </tr>
+        <tr>
+          <td><strong>M7+ run-rate NP at base case</strong></td>
+          <td class="num" style="color:var(--green);">~$63K/mo</td>
+          <td class="num" style="color:var(--green);">~$80K+/mo</td>
+          <td class="cat"><strong>The headline difference.</strong> Path B&rsquo;s M7+ cohort base is healthier, producing higher monthly NP from the same M6 acquisition base.</td>
+        </tr>
+        <tr>
+          <td><strong>12-month forward NP (M7&ndash;M18)</strong></td>
+          <td class="num" style="color:var(--green);">~$760K</td>
+          <td class="num" style="color:var(--green);">~$960K+</td>
+          <td class="cat">The compounding shows up over the next year, not in M1&ndash;M6.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box warn" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>The Path B execution risk in one sentence.</strong>&nbsp; If the 48h onboarding flow isn&rsquo;t actually built and deployed in M1 (or M2 at latest), Path B becomes Path A with worse spend &mdash; lower FTDs without the retention uplift. The whole thesis rests on the structural changes landing, not just the spend reshuffle. If the team can&rsquo;t commit to that build, default to Path A.</div>
+    </div>
+  </section>
+
+  <!-- §07 DECISION CRITERIA -->
+  <section class="section" id="decision">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-title">Decision Criteria &amp; Open Questions</span>
+    </div>
+    <p class="section-intro">The choice between Path A and Path B is a philosophy question first and a numbers question second. The criteria below help frame the conversation; the questions below it should be answered before committing.</p>
+
+    <h3 class="subtitle">When to pick which</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr><th>If this is true &hellip;</th><th>Pick</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>You expect to raise on M3&ndash;M4 traction metrics</td><td><span class="tag a" style="padding:3px 8px;">Path A</span></td><td class="cat">FTD count is the metric most investors look at first. Path A&rsquo;s M1&ndash;M3 dashboard looks better even if the underlying business is weaker.</td></tr>
+        <tr><td>You expect to build to exit on M9&ndash;M12 revenue run-rate</td><td><span class="tag b" style="padding:3px 8px;">Path B</span></td><td class="cat">M7&ndash;M12 NP run-rate is materially higher under Path B if retention executes. Better headline number for an acquirer.</td></tr>
+        <tr><td>The team can commit to deploying the 48h CRM flow in M1</td><td><span class="tag b" style="padding:3px 8px;">Path B</span></td><td class="cat">This is the load-bearing structural change. With it, Path B&rsquo;s numbers come through.</td></tr>
+        <tr><td>The team has zero CRM/onboarding bandwidth in M1</td><td><span class="tag a" style="padding:3px 8px;">Path A</span></td><td class="cat">Don&rsquo;t pick Path B you can&rsquo;t execute &mdash; you&rsquo;ll get worse acquisition without the retention payoff.</td></tr>
+        <tr><td>You can hire / contract a competent community manager in M1</td><td><span class="tag b" style="padding:3px 8px;">Path B</span></td><td class="cat">Community channel only works with consistent posting / engagement. No CM = $9K wasted.</td></tr>
+        <tr><td>The streamer-partnership pipeline is uncertain</td><td><span class="tag a" style="padding:3px 8px;">Path A</span></td><td class="cat">Path B&rsquo;s $30K streamer budget assumes you can actually book 1 mid-tier + 2&ndash;3 micro streamers. If those slots aren&rsquo;t available, the channel under-delivers.</td></tr>
+        <tr><td>You believe LTV $130 is realistic without intervention</td><td><span class="tag a" style="padding:3px 8px;">Path A</span></td><td class="cat">If Path A&rsquo;s assumed LTV holds naturally, the reshuffle isn&rsquo;t worth the execution risk.</td></tr>
+        <tr><td>You believe LTV $130 needs to be engineered</td><td><span class="tag b" style="padding:3px 8px;">Path B</span></td><td class="cat">If retention won&rsquo;t happen by itself, Path B is the work that earns it.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subtitle">Open questions to answer before committing</h3>
+    <table class="lit">
+      <thead>
+        <tr><th>Question</th><th>Why it matters</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Can the team commit to the 48h CRM flow build as an M1 deliverable?</strong></td><td class="cat">If yes, Path B becomes viable. If no, default to Path A and revisit in M3 when ops bandwidth opens.</td></tr>
+        <tr><td><strong>Do investors care more about M1&ndash;M3 FTD count or M7+ NP run-rate?</strong></td><td class="cat">Path A wins M1&ndash;M3 dashboards; Path B wins M7+ business. The right answer depends on what conversation you&rsquo;ll be having in M5&ndash;M6.</td></tr>
+        <tr><td><strong>Is there a viable community manager candidate available?</strong></td><td class="cat">$1.5K/mo for offshore CM is realistic, but the candidate needs crypto-casino fluency. A bad hire wastes the spend.</td></tr>
+        <tr><td><strong>Are 1 mid-tier + 2&ndash;3 micro streamer partnerships available at $5K/mo?</strong></td><td class="cat">If the pipeline isn&rsquo;t there, the +$18K streamer bump can&rsquo;t deploy &mdash; Path B&rsquo;s biggest single channel bet under-delivers.</td></tr>
+        <tr><td><strong>Are existing affiliates willing to accept tiered commission structure?</strong></td><td class="cat">Tiered 20% + 5&ndash;10% retention bonus is harder to sell than flat 30%. Some volume affiliates will decline. Worth asking 2&ndash;3 prospective partners first.</td></tr>
+        <tr><td><strong>What&rsquo;s the M6 minimum viable 2nd-deposit rate the model needs to hold?</strong></td><td class="cat">Path A implicitly needs ~35% to hit its NP numbers. If retention comes in at default 22&ndash;25%, the +$7K cumulative becomes &minus;$60&ndash;100K. Worth knowing the threshold.</td></tr>
+        <tr><td><strong>Is there a hybrid worth exploring?</strong></td><td class="cat">e.g. keep Path A&rsquo;s marketing mix but deploy Path B&rsquo;s structural changes (lower welcome, 48h CRM, tiered affiliate). Gets some of the retention uplift without the marketing-mix risk.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Growth Paths A vs B &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="forecast.html">Forecast</a> &middot; <a href="revenue.html">Revenue</a> &middot; <a href="index.html">Hub</a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  function setCur(c){
+    var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
+    b.classList.add('fx-'+c);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.cur===c);
+    });
+    try{localStorage.setItem('goluna-fx',c)}catch(e){}
+  }
+  function init(){
+    var saved='usd';
+    try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
+    setCur(saved);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){setCur(btn.dataset.cur)});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
+})();
+</script>
+</body>
+</html>
