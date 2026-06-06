@@ -244,6 +244,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <a href="paths.html" class="header-link">Paths A/B</a>
       <a href="partnership.html" class="header-link">Partnership</a>
       <a href="capital.html" class="header-link">Capital</a>
+      <a href="tc.html" class="header-link">T&amp;Cs</a>
       <a href="index.html" class="header-link header-link-hub">Hub</a>
     </nav>
   </div>
@@ -603,34 +604,40 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <div><strong>Higher RTP doesn&#39;t cost more bankroll directly &mdash; it costs more <em>variance</em>.</strong> Choosing 97% slots over 96% means lower house edge (less GGR per wager) AND more swings (bigger bankroll need). The bankroll multiplier reflects what&#39;s required to absorb a bad month without insolvency risk.</div>
     </div>
 
-    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">GoLuna bankroll vs projected GGR &mdash; the honest gap</h3>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">GoLuna bankroll vs projected GGR &mdash; multipliers by T&amp;C protection level</h3>
     <table class="lit" style="margin-bottom:24px;">
       <thead>
         <tr>
           <th>Month</th>
           <th style="text-align:right;">GGR target (base)</th>
-          <th style="text-align:right;">Min bankroll @ 7.5&times;</th>
-          <th style="text-align:right;">With deferred-payout T&amp;C @ 4&times;</th>
-          <th>Status vs. current $48K bankroll</th>
+          <th style="text-align:right;">Basic T&amp;Cs @ 7.5&times;</th>
+          <th style="text-align:right;">+ deferred-payout @ 4&times;</th>
+          <th style="text-align:right;">Full T&amp;C arsenal @ 3&times; <span class="tag confirmed">recommended</span></th>
+          <th>Gap vs current $48K bankroll</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>M2</td><td class="num">$30K</td><td class="num">$225K</td><td class="num">$120K</td><td class="cat" style="color:var(--rose);">Under-bankrolled by ~$72K even with T&amp;C protection</td></tr>
-        <tr><td>M3</td><td class="num">$55K</td><td class="num">$413K</td><td class="num">$220K</td><td class="cat" style="color:var(--rose);">Bottleneck &mdash; need bankroll growth or external line</td></tr>
-        <tr><td>M4</td><td class="num">$90K</td><td class="num">$675K</td><td class="num">$360K</td><td class="cat" style="color:var(--rose);">Critical &mdash; ~7&times; current bankroll required</td></tr>
-        <tr><td>M5</td><td class="num">$130K</td><td class="num">$975K</td><td class="num">$520K</td><td class="cat" style="color:var(--rose);">Mature crypto-casino bankroll required</td></tr>
-        <tr><td>M6</td><td class="num">$170K</td><td class="num">$1.27M</td><td class="num">$680K</td><td class="cat" style="color:var(--rose);">14&times; current bankroll &mdash; not achievable without external scaling</td></tr>
+        <tr><td>M2</td><td class="num">$30K</td><td class="num">$225K</td><td class="num">$120K</td><td class="num" style="color:var(--green);">$90K</td><td class="cat" style="color:var(--amber);">Under by $42K (full arsenal)</td></tr>
+        <tr><td>M3</td><td class="num">$55K</td><td class="num">$413K</td><td class="num">$220K</td><td class="num" style="color:var(--green);">$165K</td><td class="cat" style="color:var(--amber);">Under by $117K &mdash; manageable</td></tr>
+        <tr><td>M4</td><td class="num">$90K</td><td class="num">$675K</td><td class="num">$360K</td><td class="num" style="color:var(--green);">$270K</td><td class="cat" style="color:var(--rose);">Under by $222K</td></tr>
+        <tr><td>M5</td><td class="num">$130K</td><td class="num">$975K</td><td class="num">$520K</td><td class="num" style="color:var(--green);">$390K</td><td class="cat" style="color:var(--rose);">Under by $342K</td></tr>
+        <tr><td>M6</td><td class="num">$170K</td><td class="num">$1.27M</td><td class="num">$680K</td><td class="num" style="color:var(--green);">$510K</td><td class="cat" style="color:var(--rose);">Under by $462K</td></tr>
       </tbody>
     </table>
 
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>The &ldquo;Full T&amp;C arsenal&rdquo; column</strong> reflects bankroll requirement when the operator has the full Betplay/Betpanda whitelabel-style protections in place &mdash; daily/weekly/monthly withdrawal caps, single-round win caps, crypto-shortage delay clause, KYC-gated withdrawals, bonus forfeiture, and bet-size caps. Each clause compounds. See the <a href="tc.html" style="color:var(--accent);font-weight:600;">T&amp;C Clause Library &rarr;</a> for the specific clauses to adopt.</div>
+    </div>
+
     <div class="note-box warn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>The bankroll is the real bottleneck beyond M2.</strong>&nbsp; The deferred-payout T&amp;C policy reduces the required bankroll meaningfully (rough halving), but even at 4&times; monthly GGR coverage, GoLuna&#39;s $48K bankroll only safely supports ~$12K monthly GGR &mdash; well under the M3 target. Options to address:
+      <div><strong>Bankroll is still the bottleneck even with full T&amp;C protection.</strong>&nbsp; Adopting the full Betplay/Betpanda arsenal cuts the M6 requirement from $680K (at 4&times;) to $510K (at 3&times;) &mdash; a $170K reduction. But the gap from current $48K is still ~$460K. Combined approach:
       <br><br>
-      &bull; <strong>Bankroll scaling plan</strong> &mdash; reinvest a portion of M2&ndash;M3 GGR into bankroll growth (slows operator distribution but funds capacity).
-      <br>&bull; <strong>Investor capital-call right</strong> &mdash; formalise the existing &ldquo;under exploration&rdquo; backstop with a specific trigger (e.g. bankroll &lt; 250K SEK &rarr; 500K SEK call within 72h).
-      <br>&bull; <strong>External bankroll line</strong> &mdash; some platforms / specialist providers offer bankroll-as-a-service for crypto operators; 0.5&ndash;2% of GGR or fixed fee. Worth pricing.
-      <br>&bull; <strong>Stricter max-bet caps</strong> &mdash; cap max bet at 0.5&ndash;1% of bankroll. With $48K bankroll = $240&ndash;480 max bet. Limits whale exposure but preserves bankroll.
+      &bull; <strong>Step 1 &mdash; adopt full T&amp;C arsenal at launch.</strong> Single biggest lever, zero direct cost. Drop bankroll multiplier from 7.5&times; to 3&times;.
+      <br>&bull; <strong>Step 2 &mdash; reinvest M2&ndash;M3 GGR into bankroll growth.</strong> Per the reinvestment split (40% marketing / 40% bankroll / 10% reserve / 10% distributions), bankroll grows ~$25K/mo from M7.
+      <br>&bull; <strong>Step 3 &mdash; investor capital-call right.</strong> Formalise with trigger: bankroll &lt; 250K SEK &rarr; 500K SEK call within 72h. Closes residual gap.
+      <br>&bull; <strong>Step 4 &mdash; max-bet caps as last-resort throttle.</strong> 0.5&ndash;1% of bankroll = $240&ndash;480 max bet on launch, scaling with bankroll. Limits worst-case exposure.
       </div>
     </div>
   </section>

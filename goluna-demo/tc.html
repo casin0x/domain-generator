@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — T&amp;C Clause Library (Draft for Legal Review)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1400px; margin: 0 auto; padding: 0 32px 80px; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+.subnav { position: sticky; top: 56px; z-index: 99; background: rgba(11,13,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.subnav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2px; height: 40px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
+.subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--amber-dim); border: 1px solid var(--amber-border); font-size: 11px; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 920px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+.section { margin-bottom: 48px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--amber-dim); color: var(--amber); }
+.section-num.bankroll { background: var(--rose-dim); color: var(--rose); }
+.section-num.standard { background: var(--cyan-dim); color: var(--cyan); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+.section-intro { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px; max-width: 920px; }
+
+/* Clause list */
+.clause-list { display: flex; flex-direction: column; gap: 12px; }
+.clause { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; display: grid; grid-template-columns: 28px 1fr; gap: 14px; }
+.clause::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); margin-top: 6px; align-self: start; }
+.clause.bankroll::before { background: var(--rose); }
+.clause.standard::before { background: var(--cyan); }
+.clause.bonus::before { background: var(--amber); }
+.clause.fraud::before { background: var(--purple); }
+.clause-body { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+.clause-body strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 4px; font-size: 13px; }
+.clause-body .src { display: inline-block; margin-top: 6px; font-family: var(--mono); font-size: 10px; color: var(--text-muted); background: var(--surface-2); padding: 2px 6px; border-radius: 3px; letter-spacing: 0.04em; }
+.clause-body em { font-style: italic; color: var(--text); }
+
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.note-box.rose { background: var(--rose-dim); border: 1px solid var(--rose-border); color: var(--rose); }
+.note-box strong { color: var(--text); font-weight: 600; }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); margin-top: 40px; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 640px) {
+  .subnav { padding: 0 16px; } .subnav-inner { height: 36px; }
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 26px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link">Revenue</a>
+      <a href="paths.html" class="header-link">Paths A/B</a>
+      <a href="partnership.html" class="header-link">Partnership</a>
+      <a href="capital.html" class="header-link">Capital</a>
+      <a href="tc.html" class="header-link active">T&amp;Cs</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#withdrawals" class="subnav-link">Withdrawals</a>
+    <a href="#wincaps" class="subnav-link">Win Caps</a>
+    <a href="#wagering" class="subnav-link">Wagering</a>
+    <a href="#fraud" class="subnav-link">Anti-Fraud</a>
+    <a href="#kyc" class="subnav-link">KYC</a>
+    <a href="#bonuses" class="subnav-link">Bonuses</a>
+    <a href="#originals" class="subnav-link">Originals</a>
+    <a href="#closure" class="subnav-link">Closure</a>
+    <a href="#affiliate" class="subnav-link">Affiliate</a>
+    <a href="#termination" class="subnav-link">Termination</a>
+    <a href="#general" class="subnav-link">General</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge">Draft for Legal Review</div>
+      <span class="hero-date">v0.1 &middot; May 2026</span>
+    </div>
+    <h1>T&amp;C Clause Library — GoLuna</h1>
+    <p>Bullet-pointed library of T&amp;C clauses sourced from the <strong>Betplay.io</strong> and <strong>Betpanda.io</strong> whitelabels (same chassis as GoLuna). Each clause is annotated with its bankroll-protection role and source attribution. <strong>This is NOT a finalised T&amp;C document</strong> — it is a working library for a lawyer to assemble into GoLuna&rsquo;s official T&amp;Cs. Adopt the clauses that fit, modify amounts, drop what doesn&rsquo;t apply.</p>
+  </section>
+
+  <div class="note-box warn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div><strong>How to read this page.</strong>&nbsp; Each section corresponds to a category of T&amp;C clause. Clauses marked <span style="color:var(--rose);font-weight:600;">bankroll-critical</span> are the ones that directly reduce the bankroll multiplier required (see <a href="revenue.html#poolsexplainer" style="color:var(--accent);">Revenue §03.5</a>). Standard operational clauses are marked <span style="color:var(--cyan);font-weight:600;">standard</span>. Adopting the bankroll-critical clauses cuts the M6 bankroll requirement from $680K (at 4&times;) to ~$510K (at 3&times;).</div>
+  </div>
+
+  <!-- §01 WITHDRAWALS & VELOCITY CAPS -->
+  <section class="section" id="withdrawals">
+    <div class="section-label">
+      <span class="section-num bankroll">01</span>
+      <span class="section-title">Withdrawals &amp; Velocity Caps — Bankroll-Critical</span>
+    </div>
+    <p class="section-intro">The single biggest bankroll-multiplier reducer. By capping how fast a player can extract winnings, the bankroll only needs to cover daily withdrawal flow rather than the full winnings balance.</p>
+    <div class="clause-list">
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Daily withdrawal cap — $5,000 USD per 24 hours</strong>
+          To maximise security in the event of an account being breached, users can withdraw cryptocurrency up to the value of $5,000 USD every 24 hours. A user's VIP level may increase the maximum withdrawal per day.
+          <span class="src">Source: Betplay §4 ($8,000) — GoLuna adjusted to $5,000 given smaller bankroll</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Weekly withdrawal cap — €15,000 per 7 days</strong>
+          Cumulative withdrawals capped at €15,000 per rolling 7-day window. Limit can be adjusted by contacting support; VIP tiers may unlock higher limits.
+          <span class="src">Source: Betpanda §4</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Monthly withdrawal cap — €45,000 per calendar month</strong>
+          Cumulative withdrawals capped at €45,000 per calendar month. Combined with daily and weekly caps, creates a layered velocity throttle.
+          <span class="src">Source: Betpanda §4</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Crypto-shortage delay clause — explicit operator safety valve</strong>
+          We reserve the right to delay withdrawals in case of cryptocurrency shortages. This grants legal authority to defer payouts when bankroll is short. <em>This is the single most powerful bankroll-protection clause in the playbook.</em>
+          <span class="src">Source: Betpanda §4 — direct lift recommended</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>1&times; deposit wagering before withdrawal</strong>
+          All deposits are subject to a minimum wagering requirement of at least one time before any withdrawal requests can be processed. Players must place bets equivalent to the deposited amount at least once before initiating a withdrawal.
+          <span class="src">Source: Betplay §3 + Betpanda §3</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Withdrawals via the same method as deposit</strong>
+          Withdrawals from the gaming account are made using the same method as was used for the deposit. We reserve the right to transfer funds in a way different from the payment method specified by the player.
+          <span class="src">Source: Betpanda §4</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Security check delays at our discretion</strong>
+          Any withdrawal may be subjected to additional security checks at our discretion. This may cause delays in the transaction being processed and GoLuna cannot be held liable for any financial losses caused by this.
+          <span class="src">Source: Betpanda §4</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>No recovery for misdirected crypto withdrawals</strong>
+          In the unlikely event of a player withdrawing cryptocurrency funds to another cryptocurrency network address, GoLuna will not be responsible to recover the amount. Users are responsible for confirming and checking they are withdrawing to the right wallet address.
+          <span class="src">Source: Betpanda §4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 MAXIMUM WIN & BET CAPS -->
+  <section class="section" id="wincaps">
+    <div class="section-label">
+      <span class="section-num bankroll">02</span>
+      <span class="section-title">Maximum Win &amp; Bet Caps — Worst-Case Exposure Limits</span>
+    </div>
+    <p class="section-intro">Hard caps on individual wins and bet sizes limit worst-case bankroll exposure on any single game outcome.</p>
+    <div class="clause-list">
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max single-round win — €50,000 in equivalent crypto</strong>
+          Winnings on any single round are capped at €50,000 in equivalent cryptocurrency. Any potential outcome that would exceed this limit cannot be achieved — the game engine enforces the cap regardless of theoretical pay multiplier.
+          <span class="src">Source: Betplay §17.5 (€100,000) — GoLuna conservative at €50,000</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max 24-hour win — 3 BTC equivalent</strong>
+          The maximum amount a player can win in a 24-hour period is 3 BTC or an equivalent amount in other cryptocurrencies.
+          <span class="src">Source: Betpanda §5 (3,000,000 uBTC = 3 BTC)</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max single-betting-round win — 5 BTC equivalent</strong>
+          The maximum amount a player can win in a single betting round is 5 BTC or an equivalent amount in other cryptocurrencies. Sportsbook bets that would pay more are capped at this maximum.
+          <span class="src">Source: Betpanda §5 (10 BTC) — GoLuna at 5 BTC</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max bet on GoLuna Originals — €1,000 per spin/round</strong>
+          The standard maximum bet limit across GoLuna Originals games is €1,000 in equivalent cryptocurrency. Bet-size cap directly limits worst-case single-bet exposure.
+          <span class="src">Source: Betplay §17.4 (€5,000) — GoLuna conservative at €1,000</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max weekly cashback — €15,000</strong>
+          The maximum amount a player can receive in weekly cashback is the cryptocurrency equivalent of €15,000. Cashback is not applicable to sports betting, esports betting, or virtual sports betting.
+          <span class="src">Source: Betpanda §5 (€20,000) — GoLuna at €15,000</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Payouts rounded down to nearest whole cent</strong>
+          All payouts are rounded down to the nearest whole cent in the selected currency. Small but adds up over volume.
+          <span class="src">Source: Betplay §17.6</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>All bets final once initiated</strong>
+          All bets are final once initiated and cannot be cancelled or refunded. You maintain sole responsibility for every wager placed through your account.
+          <span class="src">Source: Betplay §17.11</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §03 WAGERING REQUIREMENTS -->
+  <section class="section" id="wagering">
+    <div class="section-label">
+      <span class="section-num standard">03</span>
+      <span class="section-title">Wagering Requirements</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Deposit wagering — 1&times; before any withdrawal</strong>
+          All deposits must be wagered one time (1&times;) before you can withdraw any deposited funds. Withdrawals of funds that have not been wagered will not be accepted.
+          <span class="src">Source: Betpanda §3 + Betplay §3</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Welcome bonus wagering — 30&times;</strong>
+          Welcome bonus money must be wagered 30 times before any associated winnings can be withdrawn. Wagering contributions: slots 100%, table games 10%, live casino 10%, sportsbook 0%.
+          <span class="src">GoLuna recommended (industry standard 25–40&times;)</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Reload bonus wagering — 25&times;</strong>
+          Reload bonus money must be wagered 25 times before associated winnings can be withdrawn. Slightly lower than welcome bonus to reward repeat depositors.
+          <span class="src">GoLuna recommended</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Free spin winnings — 25&times; wagering</strong>
+          Winnings from free spins are credited as bonus money and must be wagered 25 times before withdrawal.
+          <span class="src">GoLuna recommended</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Free-contest / giveaway winnings — 1&times; rollover + valid deposit history</strong>
+          All winnings from free GoLuna contests are subject to a 1&times; rollover requirement before funds can be withdrawn. All winners must have a valid GoLuna account and must have made at least one ($10 minimum) deposit. Contest winnings expire after 30 days.
+          <span class="src">Source: Betplay §14 (Promo/Free Contests)</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Bonus expiry — 30 days from credit</strong>
+          All bonus credits expire 30 days from issue if wagering requirements are not met. Forfeited bonus money plus any associated winnings revert to the house.
+          <span class="src">GoLuna recommended</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §04 ANTI-FRAUD & ABUSE -->
+  <section class="section" id="fraud">
+    <div class="section-label">
+      <span class="section-num bankroll">04</span>
+      <span class="section-title">Anti-Fraud, Anti-Abuse &amp; Forfeiture</span>
+    </div>
+    <p class="section-intro">Bankroll-relevant: industry practice 5&ndash;15% of would-be winnings get clawed back via these clauses. Material bankroll relief.</p>
+    <div class="clause-list">
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>One account per person/household/IP/device</strong>
+          Only one account per person, household, IP address and computer device is allowed. Creating multiple user accounts may result in termination of the accounts and suspending of all payouts.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>Multi-account winnings reclaimable</strong>
+          Any returns, winnings, or bonuses gained or accrued during such time as the duplicate account was active may be reclaimed by us. Should we decide to leave one account open, it will be the first account opened.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>No bots, scripts, or automation</strong>
+          You agree not to make use of any third-party programs, tools, or bots that automate and/or hack gameplay in any way. In the event of suspected use of third-party actions, GoLuna reserves the right to hold player withdrawal for further investigation, and may confiscate any winnings derived from usage.
+          <span class="src">Source: Betpanda §1 + Betplay §1</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>Zero tolerance for advantage play</strong>
+          GoLuna has zero tolerance for advantage play. Any player who tries to gain advantage of casino offers or promotions agrees that the company has the right to void bonuses and any winnings from such bonuses. Includes: creating multiple accounts, providing incorrect registration data, or any actions which may damage the casino.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>No betting-technique circumvention</strong>
+          It is not permitted to utilise or deploy any novel or recognised betting techniques while using our services which are designed to circumvent the standard house edge in our casino games nor the sportsbook. We may immediately suspend, terminate, or restrict access to your account and retain any funds.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>Suspicion of fraud — payout suspension</strong>
+          If a player is suspected of fraudulent actions (collusion, unfaithful winnings strategies, fraud against other casinos or payment providers, cheating, or known bankruptcy), the company reserves the right to terminate the account and suspend all payouts. Decision at sole discretion of the company.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>Violation of terms — full balance forfeit</strong>
+          In case of violation of these terms, GoLuna reserves the right to block and/or immediately close the account, and you lose all winnings/balance.
+          <span class="src">Source: Betplay §1 + Betpanda §1</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>System manipulation — retention rights + criminal referral</strong>
+          The casino reserves the right to retain payments if suspicion or evidence exists of manipulation of the casino system. Criminal charges will be brought against any user who has manipulated the casino system or attempted to do so.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause fraud">
+        <div></div>
+        <div class="clause-body">
+          <strong>Bypass attempts void all wagering</strong>
+          In the event that you make use of any means intended to bypass any fraud, security controls, or any restrictions, all wagering activity (including bonuses, if any) will be considered null and void.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §05 KYC & VERIFICATION -->
+  <section class="section" id="kyc">
+    <div class="section-label">
+      <span class="section-num bankroll">05</span>
+      <span class="section-title">KYC &amp; Identity Verification</span>
+    </div>
+    <p class="section-intro">Bankroll tool: large withdrawals trigger KYC, which legally permits delays.</p>
+    <div class="clause-list">
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Right to verify at any time, lock account if needed</strong>
+          We reserve the right to verify your identity at any time at our discretion for any reason should this be deemed necessary by us. We reserve the right to lock your account or prevent withdrawals, if deemed appropriate, until such time as your identity has been verified.
+          <span class="src">Source: Betpanda §6</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Withhold payments pending verification</strong>
+          We reserve the right to withhold any payment to/from your account until we are satisfied that the identity, age, and place of residence of the player has been suitably verified.
+          <span class="src">Source: Betpanda §6</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Player warranties — age, ownership, jurisdiction, legality of funds</strong>
+          You warrant that: you are at least 18 years of age (or higher age required by applicable laws); you are the rightful owner of the money in your account; you reside in a jurisdiction which allows gambling; and the money deposited is not derived from any illegal activity.
+          <span class="src">Source: Betpanda §6</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>AML compliance — suspicious transaction reporting</strong>
+          The company complies with laws, regulations, and guidelines for the prevention of money laundering and the funding of terrorism. Suspicious transactions shall be investigated and reported to the competent FIU. In any such event, the company is prohibited from informing players or third parties involved.
+          <span class="src">Source: Betpanda §6</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Identity mismatch — forfeit winnings, return deposit</strong>
+          If after verifying your identity it results that your account details do not match, we reserve the right to immediately close or suspend your account. Any winnings and bonuses will be confiscated; depending on circumstances, any remaining balance of the deposit returned.
+          <span class="src">Source: Betpanda §6</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §06 BONUSES -->
+  <section class="section" id="bonuses">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-title">Bonus Terms &amp; Promotional Rules</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Welcome bonus — 50% match cap, 30&times; wagering</strong>
+          Welcome bonus matches first deposit up to a maximum bonus amount. Subject to 30&times; wagering on the bonus before any winnings can be withdrawn. <em>50% match (rather than 100%+) is a deliberate retention filter — see Paths A/B for rationale.</em>
+          <span class="src">GoLuna recommended (Path B-aligned)</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Excluded games for wagering contribution</strong>
+          The following games either do not contribute or contribute partially to bonus wagering: live casino (10%), table games (10%), sportsbook (0%), poker (0%). Slots contribute 100%.
+          <span class="src">GoLuna recommended (industry standard)</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max bet while bonus active — €5</strong>
+          While a bonus and/or bonus winnings are active, the maximum bet per spin/hand/round is €5 equivalent. Bets exceeding this may result in forfeiture of the bonus and associated winnings.
+          <span class="src">GoLuna recommended (anti-abuse standard)</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Bonus stacking prohibited</strong>
+          Only one bonus may be active on an account at any time. Players must complete or forfeit an active bonus before claiming a new one.
+          <span class="src">GoLuna recommended</span>
+        </div>
+      </div>
+      <div class="clause bonus">
+        <div></div>
+        <div class="clause-body">
+          <strong>Account-closure forfeits cashback/rakeback/bonus pending</strong>
+          An account that is closed forfeits the remaining account balance and any cashback, rakeback, or bonus payments that have been added to the account balance. It is the players' responsibility to ensure all transactions and bonuses are fully completed before closure.
+          <span class="src">Source: Betpanda §9</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §07 ORIGINALS GAMES -->
+  <section class="section" id="originals">
+    <div class="section-label">
+      <span class="section-num bankroll">07</span>
+      <span class="section-title">GoLuna Originals Games (House Games)</span>
+    </div>
+    <p class="section-intro">Hard caps for in-house games where GoLuna takes 100% of the GGR (no provider rev share). Lower limits because exposure is uncovered.</p>
+    <div class="clause-list">
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max bet — €1,000 per spin/round</strong>
+          The standard maximum bet limit across GoLuna Originals games is €1,000 in equivalent cryptocurrency.
+          <span class="src">Source: Betplay §17.4 (€5,000) — GoLuna conservative</span>
+        </div>
+      </div>
+      <div class="clause bankroll">
+        <div></div>
+        <div class="clause-body">
+          <strong>Max win per round — €50,000</strong>
+          Winnings on all GoLuna Originals games are capped at €50,000 in equivalent cryptocurrency. Any potential outcome that would exceed these specified limits cannot be achieved (engine-enforced).
+          <span class="src">Source: Betplay §17.5 (€100,000) — GoLuna conservative</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Autobet / Autoplay player responsibility</strong>
+          Our Autobet and Autoplay features enable automatic wagering on all GoLuna Originals games. By using these functions, you accept full responsibility for all wagers placed. GoLuna and our partners will not assume liability for any losses incurred during automated betting sessions.
+          <span class="src">Source: Betplay §17.8 + 17.9</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Payouts rounded down to nearest cent</strong>
+          Players acknowledge that all payouts are rounded down to the nearest whole cent in the selected currency.
+          <span class="src">Source: Betplay §17.6</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §08 CLOSURE & FORFEITURE -->
+  <section class="section" id="closure">
+    <div class="section-label">
+      <span class="section-num">08</span>
+      <span class="section-title">Account Closure &amp; Forfeiture</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Closure forfeits remaining balance + accrued bonuses</strong>
+          An account that is permanently closed forfeits the remaining account balance and any future cashback, rakeback, or bonus payments added to the account balance. It is the players' responsibility to ensure all transactions and bonuses are fully completed before closure.
+          <span class="src">Source: Betplay §7 + Betpanda §9</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Closure requests — 24-hour processing</strong>
+          Closure requests may take up to 24 hours to be processed. Your account will remain open until you have received written confirmation by our agents. All wagers lost before the closure is confirmed in writing will be handled as legitimate losses.
+          <span class="src">Source: Betpanda §9</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Username violations — termination + balance freeze</strong>
+          You may not use as a username the name of another person or entity, or a name that is otherwise offensive, racist, vulgar, or obscene. If a username violates our T&amp;Cs, we may terminate your account without notice. All balance/winnings on such an account will be frozen.
+          <span class="src">Source: Betplay §2</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Threats/harassment — permanent block + potential confiscation</strong>
+          Threats and harassment towards any employee or member of staff may lead to immediate permanent block and potentially confiscation of funds. If any behaviour disrespects or insults other users or our staff, we may terminate your account without notice.
+          <span class="src">Source: Betplay §2 + Betpanda §16</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Inactive account dormancy — monthly deduction after 6 months</strong>
+          Accounts with no activity for 6 months are flagged as dormant. A monthly inactivity fee may be deducted thereafter. Reactivation: make a deposit, place a wager, or initiate a withdrawal. Any reactivating deposit must be wagered a minimum of 1&times;.
+          <span class="src">Source: Betplay §10</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §09 AFFILIATE PROGRAMME -->
+  <section class="section" id="affiliate">
+    <div class="section-label">
+      <span class="section-num">09</span>
+      <span class="section-title">Affiliate Programme Rules</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>No brand impersonation</strong>
+          Any account attempting to impersonate GoLuna or found to be using deceptive marketing tactics is subject to termination and forfeiture of all affiliate earnings.
+          <span class="src">Source: Betplay §15 + Betpanda §17</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>No paid bidding on brand keywords</strong>
+          Affiliates may not buy paid media that serves on any search term containing "GoLuna" or close variants, nor use the term in their own paid advertising or social media handles.
+          <span class="src">Source: Betpanda §17</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>No marketing in restricted geographies</strong>
+          Affiliates may not market GoLuna in restricted geographies (full list in the affiliate dashboard). Any traffic from such geographies forfeits associated affiliate earnings.
+          <span class="src">Source: Betpanda §17</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>No third-party "welcome bonus" offers</strong>
+          Affiliates may not offer their own "welcome bonuses" on behalf of GoLuna. All bonuses are issued by GoLuna directly.
+          <span class="src">Source: Betpanda §17</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Tiered commission tied to player retention</strong>
+          Affiliate commission is paid as a base rate of 20% of NGR, plus an additional 5–10% retention bonus on NGR from referred players still active at D60+. <em>Rewards player quality, not just signup volume — see Paths A/B for rationale.</em>
+          <span class="src">GoLuna recommended (Path B-aligned)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §10 TERMINATION -->
+  <section class="section" id="termination">
+    <div class="section-label">
+      <span class="section-num">10</span>
+      <span class="section-title">Termination</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Termination at sole discretion, no reason required</strong>
+          The casino reserves the right to close your player account at the casino's absolute discretion and without any obligation to state a reason or give prior notice. We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever.
+          <span class="src">Source: Betpanda §5 + §16</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Right to retain payments on suspicion</strong>
+          The casino reserves the right to retain payments if suspicion or evidence exists of manipulation of the casino system. Criminal charges will be brought against any user who has manipulated the casino system or attempted to do so.
+          <span class="src">Source: Betpanda §5</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>On termination, service rights cease immediately</strong>
+          Upon termination, your right to use the service will cease immediately.
+          <span class="src">Source: Betpanda §16</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §11 GENERAL PROVISIONS -->
+  <section class="section" id="general">
+    <div class="section-label">
+      <span class="section-num">11</span>
+      <span class="section-title">General Provisions</span>
+    </div>
+    <div class="clause-list">
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Jurisdiction — Costa Rica</strong>
+          The laws of Costa Rica, excluding its conflicts-of-law rules, govern these T&amp;Cs and your use of the service. Its courts shall have exclusive jurisdiction.
+          <span class="src">Source: Betpanda §12 — matches GoLuna corp registration</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Disputes — informal resolution first</strong>
+          If you have any concerns or disputes about the service, you agree to first try to resolve the dispute informally by contacting GoLuna support.
+          <span class="src">Source: Betpanda §12.1</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>English text prevails on translations</strong>
+          These T&amp;Cs may be translated and made available on the website. You agree that the original English text shall prevail in case of any dispute.
+          <span class="src">Source: Betpanda §10.1</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Changes — 14-day notice for material revisions</strong>
+          We reserve the right, at our sole discretion, to modify or replace these terms at any time. If a revision is material, we will make reasonable efforts to provide at least 14 days' notice. By continuing to use the service after revisions take effect, you agree to be bound by the revised terms.
+          <span class="src">Source: Betpanda §11</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>18+ only — no service to minors</strong>
+          Our service does not address anyone under the age of 18. You must be at least 18 years or older to use our services. We do not knowingly collect personally identifiable information from anyone under the age of 18.
+          <span class="src">Source: Betplay §3</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Service "as is" — limitation of liability</strong>
+          The service is provided "as is" and "as available" with all faults and defects without warranty of any kind. GoLuna does not guarantee the continuous availability and functionality of all products. GoLuna cannot be held liable for any damages, gambling losses, or lost winnings caused by the unavailability of products. GoLuna is not responsible for lost winnings.
+          <span class="src">Source: Betplay §5 + Betpanda §8</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Personal-use, non-professional capacity only</strong>
+          You will use this website and your GoLuna account solely and exclusively for the purpose of your genuine participation in the games and not for any financial or other operations. Your participation in the games will be strictly in your personal non-professional capacity for recreational and entertainment reasons only.
+          <span class="src">Source: Betpanda §1 + Betplay §1</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Tax responsibility — player's own</strong>
+          You are solely responsible for reporting and accounting for any taxes applicable to you under relevant laws for any winnings that you receive from GoLuna.
+          <span class="src">Source: Betpanda §1 + Betplay §1</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Refund — 14 days, unwagered balance only</strong>
+          To be eligible for a return, the GoLuna balance must have been purchased in the last 14 days and not used in wagers of any kind. We reserve the right to refuse returns of any kind that do not meet these conditions in our sole discretion.
+          <span class="src">Source: Betpanda §14.1</span>
+        </div>
+      </div>
+      <div class="clause standard">
+        <div></div>
+        <div class="clause-body">
+          <strong>Technical-fault refund — 100% of bet amount</strong>
+          If there is a technical issue from our site, website, or services during a bet which was not caused by a third party or anything beyond our control, and our team can verify the fault, you will be refunded for 100% of the bet amount.
+          <span class="src">Source: Betpanda §14.3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>Next steps.</strong>&nbsp; (1) Have a Costa Rica / gambling-law attorney review this library and convert into formal GoLuna T&amp;Cs. (2) Calibrate specific numeric thresholds (withdrawal caps, max wins) against actual bankroll and target market. (3) Translate into 2&ndash;3 priority languages for target geographies. (4) Add a clear timestamped version log on the public T&amp;Cs page so material changes are auditable. (5) Set up Customer.io triggers to notify users 14 days before material changes (required by the &ldquo;Changes&rdquo; clause).</div>
+  </div>
+
+  <footer class="footer">
+    GoLuna &mdash; T&amp;C Clause Library (Draft for Legal Review) &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="revenue.html#poolsexplainer">Bankroll context &rarr;</a> &middot; <a href="paths.html">Paths A/B</a> &middot; <a href="index.html">Hub</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
