@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoLuna — Retention Benchmark (Real Operator Data)</title>
+<title>GoLuna — Model Assumptions (Brazil + Retention)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -66,6 +66,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .section { margin-bottom: 56px; }
 .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--green-dim); color: var(--green); }
+.section-num.market { background: var(--cyan-dim); color: var(--cyan); }
 .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
 .section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
 .subtitle { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
@@ -78,13 +79,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .metric-card.rose::before { background: var(--rose); }
 .metric-card.amber::before { background: var(--amber); }
 .metric-card.cyan::before { background: var(--cyan); }
+.metric-card.purple::before { background: var(--purple); }
 .metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-.metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
+.metric-card .val { font-family: var(--mono); font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
 .metric-card .val.green { color: var(--green); }
 .metric-card .val.rose { color: var(--rose); }
 .metric-card .val.amber { color: var(--amber); }
 .metric-card .val.cyan { color: var(--cyan); }
+.metric-card .val.purple { color: var(--purple); }
 .metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+.metric-card .tag { display:inline-block; margin-top:7px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; padding:2px 7px; border-radius:10px; }
+.metric-card .tag.doc { background: var(--amber-dim); color: var(--amber); }
+.metric-card .tag.br { background: var(--cyan-dim); color: var(--cyan); }
 
 /* Tables */
 .lit { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -96,6 +102,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .lit tr.total td { background: var(--surface-2); font-weight: 700; color: var(--text); }
 .pos { color: var(--green); }
 .neg { color: var(--rose); }
+.amberc { color: var(--amber); }
 
 /* Cohort bar chart */
 .cohort-chart { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 26px; margin-bottom: 16px; }
@@ -114,6 +121,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
 .note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
 .note-box.rose { background: var(--rose-dim); border: 1px solid var(--rose-border); color: var(--rose); }
+.note-box.cyan { background: var(--cyan-dim); border: 1px solid var(--cyan-border); color: var(--cyan); }
 .note-box strong { color: var(--text); font-weight: 600; }
 .note-box a { color: var(--accent); font-weight: 600; }
 
@@ -125,7 +133,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .list-card li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 2px; background: var(--green); }
 .list-card li strong { color: var(--text); font-weight: 600; }
 
-.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); margin-top: 40px; }
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); margin-top: 40px; line-height: 1.7; }
 .footer a { color: var(--text-secondary); text-decoration: none; }
 .footer a:hover { color: var(--text); }
 
@@ -169,7 +177,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       <a href="forecast.html" class="header-link">Forecast</a>
       <a href="revenue.html" class="header-link">Revenue</a>
       <a href="paths.html" class="header-link">Paths A/B</a>
-      <a href="retention.html" class="header-link active">Retention</a>
+      <a href="retention.html" class="header-link active">Assumptions</a>
       <a href="partnership.html" class="header-link">Partnership</a>
       <a href="capital.html" class="header-link">Capital</a>
       <a href="tc.html" class="header-link">T&amp;Cs</a>
@@ -180,13 +188,12 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 
 <div class="subnav">
   <div class="subnav-inner">
-    <a href="#headline" class="subnav-link">Headline</a>
-    <a href="#cohort" class="subnav-link">Cohort Curve</a>
-    <a href="#monthly" class="subnav-link">Monthly Churn</a>
-    <a href="#ggr" class="subnav-link">GGR by Segment</a>
-    <a href="#ltv" class="subnav-link">LTV Reconciliation</a>
-    <a href="#goluna" class="subnav-link">What It Means</a>
-    <a href="#caveats" class="subnav-link">Caveats</a>
+    <a href="#glance" class="subnav-link">At a Glance</a>
+    <a href="#retention" class="subnav-link">Retention %</a>
+    <a href="#brazil" class="subnav-link">Brazil Market</a>
+    <a href="#economics" class="subnav-link">Unit Economics</a>
+    <a href="#model" class="subnav-link">Into the Model</a>
+    <a href="#sources" class="subnav-link">Sources &amp; Caveats</a>
   </div>
 </div>
 
@@ -194,185 +201,191 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 
   <section class="hero">
     <div class="hero-top">
-      <div class="hero-badge"><span class="dot"></span>Real Operator Data · Retention Benchmark</div>
-      <span class="hero-date">v0.1 &middot; data Sep 2025&ndash;Mar 2026</span>
+      <div class="hero-badge"><span class="dot"></span>Model Inputs · Brazil-Targeted</div>
+      <span class="hero-date">v0.2 &middot; Jun 2026</span>
     </div>
-    <h1>Retention Benchmark — Real Operator Data</h1>
-    <p>Actual cohort and churn data from the <strong>retention lead&rsquo;s prior crypto casino</strong> (a comparable whitelabel book) &mdash; <strong>630 first-time depositors</strong> over 7 months. Used here to pressure-test the retention and LTV assumptions baked into the GoLuna forecast. The short version: the assumptions are optimistic against this benchmark, and the gap is the entire reason the retention hire matters.</p>
+    <h1>Model Assumptions — Brazil &amp; Retention</h1>
+    <p>The input assumptions behind the GoLuna forecast, from two sources. <strong>Retention rates (%)</strong> are taken from the retention lead&rsquo;s real operating history. <strong>Everything else &mdash; ARPU, CPA, revenue share, deposit behaviour</strong> &mdash; is benchmarked to the <strong>Brazilian market</strong>, since Brazil is GoLuna&rsquo;s primary target. No player-count, FTD, or revenue figures from the operator document are used here &mdash; only the retention percentages.</p>
   </section>
 
-  <div class="note-box rose">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <div><strong>Headline finding.</strong>&nbsp; On this benchmark, blended <strong>6-month GGR per FTD landed around $10&ndash;30</strong> &mdash; the GoLuna <a href="forecast.html">forecast</a> and <a href="revenue.html">revenue P&amp;L</a> assume <strong>~$130</strong>. The driver: only ~8% of depositors are still active 30 days in, and freshly-acquired players were <em>net GGR-negative</em> in aggregate (they extract the welcome bonus and leave). The money lives entirely in the small retained tail. This is the bonus-hunter dynamic from <a href="paths.html">Paths A/B</a> &mdash; now with hard numbers behind it.</div>
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>FX:</strong> figures shown in BRL with USD in brackets at <strong>R$5.4 &asymp; $1</strong> (mid-2026). Tags mark each input&rsquo;s origin: <span style="color:var(--amber);font-weight:600;">operator data</span> for retention %, <span style="color:var(--cyan);font-weight:600;">Brazil market</span> for everything else.</div>
   </div>
 
-  <!-- §01 HEADLINE METRICS -->
-  <section class="section" id="headline">
+  <!-- §01 AT A GLANCE -->
+  <section class="section" id="glance">
     <div class="section-label">
       <span class="section-num">01</span>
-      <span class="section-title">The Numbers at a Glance</span>
+      <span class="section-title">Assumptions at a Glance</span>
     </div>
     <div class="metrics-strip">
-      <div class="metric-card rose">
-        <div class="label">Active at ~D30 (week 4)</div>
-        <div class="val rose">7.7%</div>
-        <div class="sub">of first-time depositors</div>
+      <div class="metric-card amber">
+        <div class="label">Monthly retention</div>
+        <div class="val amber">19%</div>
+        <div class="sub">mean (range 11–30%)</div>
+        <span class="tag doc">operator data</span>
       </div>
       <div class="metric-card amber">
-        <div class="label">Monthly player retention</div>
-        <div class="val amber">19.4%</div>
-        <div class="sub">mean (range 11–30%)</div>
-      </div>
-      <div class="metric-card green">
-        <div class="label">Avg GGR · retained / mo</div>
-        <div class="val green">$118</div>
-        <div class="sub">the core that pays</div>
-      </div>
-      <div class="metric-card rose">
-        <div class="label">Avg GGR · new / mo</div>
-        <div class="val rose">–$24</div>
-        <div class="sub">net-negative in aggregate</div>
+        <div class="label">~D30 cohort retention</div>
+        <div class="val amber">7.7%</div>
+        <div class="sub">active at week 4</div>
+        <span class="tag doc">operator data</span>
       </div>
       <div class="metric-card cyan">
-        <div class="label">Implied LTV / FTD (6mo)</div>
-        <div class="val cyan">~$10–30</div>
-        <div class="sub">vs $130 in the model</div>
+        <div class="label">Blended ARPU / mo</div>
+        <div class="val cyan">~R$160</div>
+        <div class="sub">≈ $30 · GGR per active</div>
+        <span class="tag br">Brazil market</span>
       </div>
-    </div>
-    <div class="note-box info">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div>GGR figures are in source-currency units (mixed crypto/fiat, treat as &asymp;USD). They are a <strong>benchmark</strong> from a different operator, not a GoLuna projection &mdash; the point is the <em>shape</em> of the curve and the relative economics, which transfer across similar whitelabels.</div>
+      <div class="metric-card cyan">
+        <div class="label">CPA (casino)</div>
+        <div class="val cyan">~R$200</div>
+        <div class="sub">≈ $38 · range R$130–300</div>
+        <span class="tag br">Brazil market</span>
+      </div>
+      <div class="metric-card cyan">
+        <div class="label">Affiliate rev-share</div>
+        <div class="val cyan">30%</div>
+        <div class="sub">range 25–40%</div>
+        <span class="tag br">Brazil market</span>
+      </div>
     </div>
   </section>
 
-  <!-- §02 COHORT CURVE -->
-  <section class="section" id="cohort">
+  <!-- §02 RETENTION % -->
+  <section class="section" id="retention">
     <div class="section-label">
       <span class="section-num">02</span>
-      <span class="section-title">Weekly First-Deposit Cohort Curve</span>
+      <span class="section-title">Retention Rates — From Operator Data (% only)</span>
     </div>
-    <p class="section-intro">Of every 100 players who make a first deposit, how many are still active N weeks later (size-weighted across all 28 weekly cohorts, n = 630). The cliff is in <strong>week 1</strong>: 70% are gone before they place a meaningful second session.</p>
+    <p class="section-intro">The only thing carried over from the retention lead&rsquo;s prior book: the <strong>retention percentages</strong>. Two views &mdash; a weekly cohort curve and a monthly retention rate. (No player counts, deposits, or revenue from that document are used anywhere in this model.)</p>
 
+    <p class="subtitle">Weekly cohort retention curve</p>
+    <p class="section-intro">Share of a deposit cohort still active N weeks later (size-weighted). The cliff is week 1 &mdash; ~70% lapse before a second meaningful session.</p>
     <div class="cohort-chart">
       <div class="cohort-row w0"><span class="wk">Wk 0</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="pct">100%</span></div>
       <div class="cohort-row"><span class="wk">Wk 1</span><div class="bar-track"><div class="bar-fill" style="width:29.7%"></div></div><span class="pct">29.7%</span></div>
       <div class="cohort-row"><span class="wk">Wk 2</span><div class="bar-track"><div class="bar-fill" style="width:15.6%"></div></div><span class="pct">15.6%</span></div>
       <div class="cohort-row"><span class="wk">Wk 3</span><div class="bar-track"><div class="bar-fill" style="width:11.9%"></div></div><span class="pct">11.9%</span></div>
       <div class="cohort-row"><span class="wk">Wk 4</span><div class="bar-track"><div class="bar-fill" style="width:7.7%"></div></div><span class="pct lo">7.7%</span></div>
-      <div class="cohort-row"><span class="wk">Wk 5</span><div class="bar-track"><div class="bar-fill" style="width:5.7%"></div></div><span class="pct lo">5.7%</span></div>
       <div class="cohort-row"><span class="wk">Wk 6</span><div class="bar-track"><div class="bar-fill" style="width:3.9%"></div></div><span class="pct lo">3.9%</span></div>
       <div class="cohort-row"><span class="wk">Wk 8</span><div class="bar-track"><div class="bar-fill" style="width:2.8%"></div></div><span class="pct lo">2.8%</span></div>
       <div class="cohort-row"><span class="wk">Wk 12</span><div class="bar-track"><div class="bar-fill" style="width:2.0%"></div></div><span class="pct lo">2.0%</span></div>
     </div>
-    <p class="section-intro" style="margin-bottom:0;">Read it as: <strong>week-1 retention 29.7%</strong> &rarr; <strong>~D30 (wk 4) 7.7%</strong> &rarr; <strong>~D90 (wk 12) 2.0%</strong>. The Paths A/B page sets a Path-B <em>target</em> of D30 &ge; 15% &mdash; this benchmark comes in at roughly <strong>half</strong> that. Closing that gap is the retention lead&rsquo;s core mandate.</p>
-  </section>
 
-  <!-- §03 MONTHLY CHURN -->
-  <section class="section" id="monthly">
-    <div class="section-label">
-      <span class="section-num">03</span>
-      <span class="section-title">Monthly Retention &amp; Churn</span>
-    </div>
-    <p class="section-intro">Player-level month-over-month. Note Dec: a 471-player acquisition spike that then churned 462 the next month &mdash; the classic &ldquo;volume that doesn&rsquo;t stick&rdquo; pattern. Average monthly retention is <strong>19.4%</strong>, i.e. ~4 in 5 players gone each month.</p>
+    <p class="subtitle" style="margin-top:28px;">Monthly retention rate</p>
+    <p class="section-intro">Player-level month-over-month retention. Average <strong>~19%</strong> &mdash; i.e. roughly 1 in 5 active players carry into the next month.</p>
     <table class="lit">
       <thead>
-        <tr><th>Month</th><th style="text-align:right;">Total</th><th style="text-align:right;">New</th><th style="text-align:right;">Reactiv.</th><th style="text-align:right;">Retained</th><th style="text-align:right;">Churned</th><th style="text-align:right;">Retention %</th></tr>
+        <tr><th>Month</th><th style="text-align:right;">Retention %</th><th style="text-align:right;">Churn %</th></tr>
       </thead>
       <tbody>
-        <tr><td class="cat">Sep 2025</td><td class="num">246</td><td class="num">246</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num cat">launch</td></tr>
-        <tr><td class="cat">Oct 2025</td><td class="num">123</td><td class="num">77</td><td class="num">0</td><td class="num">46</td><td class="num">200</td><td class="num">18.7%</td></tr>
-        <tr><td class="cat">Nov 2025</td><td class="num">108</td><td class="num">75</td><td class="num">6</td><td class="num">27</td><td class="num">96</td><td class="num">22.0%</td></tr>
-        <tr><td class="cat">Dec 2025</td><td class="num">520</td><td class="num">471</td><td class="num">17</td><td class="num">32</td><td class="num">76</td><td class="num pos">29.6%</td></tr>
-        <tr><td class="cat">Jan 2026</td><td class="num">193</td><td class="num">133</td><td class="num">2</td><td class="num">58</td><td class="num">462</td><td class="num neg">11.2%</td></tr>
-        <tr><td class="cat">Feb 2026</td><td class="num">78</td><td class="num">37</td><td class="num">13</td><td class="num">28</td><td class="num">165</td><td class="num">14.5%</td></tr>
-        <tr><td class="cat">Mar 2026</td><td class="num">43</td><td class="num">10</td><td class="num">17</td><td class="num">16</td><td class="num">62</td><td class="num">20.5%</td></tr>
-        <tr class="total"><td>Mean</td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">19.4%</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- §04 GGR BY SEGMENT -->
-  <section class="section" id="ggr">
-    <div class="section-label">
-      <span class="section-num">04</span>
-      <span class="section-title">GGR by Player Segment — The Real Story</span>
-    </div>
-    <p class="section-intro">Average GGR per player per month, weighted by segment population. This is the single most important table on the page: <strong>newly-acquired players were net GGR-negative</strong>, retained players generated ~$118/mo, and reactivated (won-back) players ~$55/mo. The implication is blunt &mdash; acquisition volume alone destroys value; the book only works if players are retained and reactivated.</p>
-    <table class="lit">
-      <thead>
-        <tr><th>Segment</th><th style="text-align:right;">Avg GGR / player·month</th><th>What it means</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="cat"><strong>Retained</strong> (carried over)</td><td class="num pos">+$118</td><td class="cat">The profit core. Worth ~5× a new player before bonus cost.</td></tr>
-        <tr><td class="cat"><strong>Reactivated</strong> (won back)</td><td class="num pos">+$55</td><td class="cat">High ROI — no fresh CPA, just a reactivation touch.</td></tr>
-        <tr><td class="cat"><strong>New</strong> (first month)</td><td class="num neg">–$24</td><td class="cat">Net-negative in aggregate after welcome bonus. You pay to acquire <em>and</em> lose money month 0.</td></tr>
+        <tr><td class="cat">Month 1 (launch)</td><td class="num cat">baseline</td><td class="num cat">—</td></tr>
+        <tr><td class="cat">Month 2</td><td class="num">18.7%</td><td class="num">81.3%</td></tr>
+        <tr><td class="cat">Month 3</td><td class="num">22.0%</td><td class="num">78.0%</td></tr>
+        <tr><td class="cat">Month 4</td><td class="num pos">29.6%</td><td class="num">70.4%</td></tr>
+        <tr><td class="cat">Month 5</td><td class="num neg">11.2%</td><td class="num">88.8%</td></tr>
+        <tr><td class="cat">Month 6</td><td class="num">14.5%</td><td class="num">85.5%</td></tr>
+        <tr><td class="cat">Month 7</td><td class="num">20.5%</td><td class="num">79.5%</td></tr>
+        <tr class="total"><td>Mean</td><td class="num">19.4%</td><td class="num">80.6%</td></tr>
       </tbody>
     </table>
     <div class="note-box warn" style="margin-top:16px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>The –$24 new-player figure is exactly what the <a href="tc.html">T&amp;C arsenal</a> is designed to fix: wagering requirements, withdrawal velocity caps, and bonus-forfeiture clauses turn the month-0 extraction into a smaller (or positive) number. <strong>Retention and bonus-gating are the same problem viewed from two sides.</strong></div>
+      <div><strong>Use 19% as base, 30% as the engineered target.</strong>&nbsp; The whole point of the retention hire is to push the monthly rate up and lift the week-4 cohort number from ~8% toward 15%+. The <a href="paths.html">Path B</a> retention flows and the <a href="tc.html">T&amp;C bonus-gating</a> are the levers that move this number.</div>
     </div>
   </section>
 
-  <!-- §05 LTV RECONCILIATION -->
-  <section class="section" id="ltv">
+  <!-- §03 BRAZIL MARKET -->
+  <section class="section" id="brazil">
     <div class="section-label">
-      <span class="section-num">05</span>
-      <span class="section-title">LTV Reconciliation — Benchmark vs Model</span>
+      <span class="section-num market">03</span>
+      <span class="section-title">Brazil Market Benchmarks — Everything Else</span>
     </div>
-    <p class="section-intro">Rebuilding 6-month LTV per FTD from the actual survival curve and segment GGR (month-0 new GGR + retained tail decaying at the observed monthly rate). Three retention scenarios:</p>
+    <p class="section-intro">Brazil regulated its market in Jan 2025 (Lei 14.790) and posted ~$7B GGR in year one. It is a <strong>high-volume, low-ARPU, PIX-driven, bonus-sensitive</strong> market &mdash; the opposite profile to Europe. These are the figures the model should use for a Brazil-first launch.</p>
     <table class="lit">
       <thead>
-        <tr><th>Scenario</th><th style="text-align:right;">Monthly retention</th><th style="text-align:right;">6-mo GGR / FTD</th><th>vs model ($130)</th></tr>
+        <tr><th>Metric</th><th style="text-align:right;">Brazil benchmark</th><th>Notes</th></tr>
       </thead>
       <tbody>
-        <tr><td class="cat">Benchmark mean</td><td class="num">19.4%</td><td class="num neg">~$5</td><td class="cat neg">~26× optimistic</td></tr>
-        <tr><td class="cat">Best observed month</td><td class="num">29.6%</td><td class="num">~$25</td><td class="cat neg">~5× optimistic</td></tr>
-        <tr><td class="cat">Path-B target (engineered)</td><td class="num">~30%+ &amp; D30 15%</td><td class="num amber">~$50–80</td><td class="cat amber">still below $130</td></tr>
-        <tr class="total"><td>GoLuna model assumes</td><td class="num"></td><td class="num">$130</td><td class="cat">requires beating this benchmark ~2–3×</td></tr>
+        <tr><td class="cat"><strong>ARPU</strong> (blended GGR / active player·mo)</td><td class="num">R$150–180<br><span style="color:var(--text-muted)">≈ $28–33</span></td><td class="cat">Statista ARPU ~$348/yr (end-2025); whales skew it — 6% of players bet &gt;R$1,000/mo.</td></tr>
+        <tr><td class="cat"><strong>ARPPU</strong> (per paying player)</td><td class="num">R$250–400<br><span style="color:var(--text-muted)">≈ $46–74</span></td><td class="cat">Higher than blended ARPU; use for whale/VIP cohort modelling.</td></tr>
+        <tr><td class="cat"><strong>CPA</strong> (casino, paid/affiliate)</td><td class="num">R$130–300<br><span style="color:var(--text-muted)">≈ $25–55</span></td><td class="cat">Tier-2 market — far below Europe ($100–250). Brazil CPAs cited up to ~R$141; base ~R$200.</td></tr>
+        <tr><td class="cat"><strong>Affiliate revenue share</strong></td><td class="num">25–40%</td><td class="cat">Industry 20–50%; Brazil common 25–35%. Hybrid deals ~$60 CPA + 20% rev-share.</td></tr>
+        <tr><td class="cat"><strong>Payment rail</strong></td><td class="num">PIX 96%</td><td class="cat">PIX handles ~96% of legal-market transactions; betting = 15% of all P2B PIX (H1 2025).</td></tr>
+        <tr><td class="cat"><strong>Min / typical deposit</strong></td><td class="num">R$5–50<br><span style="color:var(--text-muted)">≈ $1–9</span></td><td class="cat">Micro-deposits via PIX (R$1–5 minimums). Frequency &gt; size; many small top-ups.</td></tr>
+        <tr><td class="cat"><strong>Welcome bonus norm</strong></td><td class="num">100% to R$100–500</td><td class="cat">Bonus-heavy market; low-stake high-match cash offers convert best. Gate hard (see T&amp;Cs).</td></tr>
+        <tr><td class="cat"><strong>Demographic skew</strong></td><td class="num">53% young adults</td><td class="cat">18–34 dominate demand; mobile-first; football/Originals-led.</td></tr>
       </tbody>
     </table>
-    <p class="section-intro" style="margin:16px 0 0;">Even the most generous engineered case (which assumes the retention work fully succeeds) lands <strong>below the $130 the forecast currently uses</strong>. The forecast&rsquo;s base case is not impossible &mdash; but on this evidence it should be treated as the <em>bull</em> case, with $50&ndash;80 as base and $20&ndash;30 as bear.</p>
+    <div class="note-box cyan" style="margin-top:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      <div><strong>The Brazil shape:</strong> low CPA <em>and</em> low ARPU. Acquisition is cheap, but each player is worth little per month &mdash; so the model lives or dies on <strong>retention and whale concentration</strong>, not on acquisition cost. That is why the retention % above is the single most leveraged input.</div>
+    </div>
   </section>
 
-  <!-- §06 WHAT IT MEANS FOR GOLUNA -->
-  <section class="section" id="goluna">
+  <!-- §04 UNIT ECONOMICS -->
+  <section class="section" id="economics">
     <div class="section-label">
-      <span class="section-num">06</span>
-      <span class="section-title">What It Means for GoLuna</span>
+      <span class="section-num market">04</span>
+      <span class="section-title">Unit Economics — Brazil ARPU × Retention %</span>
+    </div>
+    <p class="section-intro">Combining the two grounded inputs &mdash; Brazil ARPU and the operator retention curve &mdash; gives an illustrative GGR-per-acquired-player and CPA payback. Expected active-months = 1 / (1 − monthly retention); lifetime GGR = ARPU × active-months; net contribution ≈ 45% of GGR (after ~30% rev-share, ~12% provider/platform, ~10% bonus).</p>
+    <table class="lit">
+      <thead>
+        <tr><th>Monthly retention</th><th style="text-align:right;">Active-months</th><th style="text-align:right;">Lifetime GGR</th><th style="text-align:right;">Net contribution</th><th style="text-align:right;">vs CPA ~R$200</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="cat">19% (base, operator data)</td><td class="num">1.23</td><td class="num">~R$197</td><td class="num neg">~R$89</td><td class="num neg">−R$111</td></tr>
+        <tr><td class="cat">30% (engineered target)</td><td class="num">1.43</td><td class="num">~R$229</td><td class="num neg">~R$103</td><td class="num neg">−R$97</td></tr>
+        <tr><td class="cat">40% (best-case retention)</td><td class="num">1.67</td><td class="num">~R$267</td><td class="num amberc">~R$120</td><td class="num neg">−R$80</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box rose" style="margin-top:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>Paid CPA acquisition at blended ARPU does not pay back</strong> within 6 months at any realistic retention level. That is normal for Brazil &mdash; operators make money via (1) <strong>whale concentration</strong> (ARPPU R$250–400 on the top ~6%), (2) <strong>rev-share affiliates</strong> instead of fixed CPA (pay only on real revenue), and (3) <strong>low-cost organic/community channels</strong>. The model should lean on these three, not on paid CPA volume.</div>
+    </div>
+  </section>
+
+  <!-- §05 INTO THE MODEL -->
+  <section class="section" id="model">
+    <div class="section-label">
+      <span class="section-num market">05</span>
+      <span class="section-title">What to Put Into the Forecast</span>
     </div>
     <div class="list-card">
       <ul>
-        <li><strong>Re-anchor the LTV assumption.</strong> Carry three cases in the forecast: bear $20–30, base $50–80, bull $130. The current single-point $130 overstates M1–M6 cumulative NP — by the ~$80–120K already flagged on the Paths page.</li>
-        <li><strong>Instrument D30 from day one.</strong> The one number that decides everything is week-4 cohort retention. Benchmark 7.7%; target ≥15%. If GoLuna&rsquo;s first two cohorts sit near 8%, the model is the bear case and spend should slow.</li>
-        <li><strong>Spend on reactivation, not just acquisition.</strong> Won-back players are +$55/mo at near-zero CPA. A reactivation flow (the Path-B 7-day dormant trigger) is the highest-ROI lever in the data.</li>
-        <li><strong>Gate the welcome bonus harder.</strong> The –$24 month-0 figure is a bonus-design problem. The <a href="tc.html">T&amp;C arsenal</a> (1× deposit wagering, withdrawal caps, forfeiture) directly attacks it.</li>
-        <li><strong>This validates Path B.</strong> The benchmark is the evidence the bonus-hunter thesis was right. Path B&rsquo;s retention-first reshuffle is the correct structural response, not a stylistic preference.</li>
-        <li><strong>The retention hire is the bet.</strong> Their mandate, in one line: move D30 from ~8% toward 15%+ and turn month-0 new GGR from –$24 toward break-even. That delta <em>is</em> the difference between the bear and base cases.</li>
+        <li><strong>ARPU:</strong> model a blended <strong>R$160 (~$30)/active player·mo</strong>, plus a separate whale/VIP cohort at <strong>R$250–400</strong> ARPPU. Don&rsquo;t use a single flat number — Brazil revenue is whale-concentrated.</li>
+        <li><strong>CPA:</strong> <strong>R$200 (~$38)</strong> base for paid/affiliate; assume a large share of volume comes from <strong>rev-share</strong> (25–40%) and organic rather than fixed CPA.</li>
+        <li><strong>Retention:</strong> <strong>19% monthly base</strong> / 30% engineered target; week-4 cohort 8% → 15% target. This is the lever the retention hire owns.</li>
+        <li><strong>Payments:</strong> build PIX-first (96% of the market); support R$5 micro-deposits; expect frequent small top-ups, not large single deposits.</li>
+        <li><strong>Bonus:</strong> 100%-to-R$100–500 welcome is the norm, but gate it hard with the <a href="tc.html">T&amp;C arsenal</a> (1× wagering, withdrawal velocity caps) — Brazil is bonus-sensitive and abuse-prone.</li>
+        <li><strong>Don&rsquo;t import EU economics.</strong> Brazil is low-CPA / low-ARPU / high-volume. A model tuned to European ARPU will overstate revenue badly.</li>
       </ul>
     </div>
   </section>
 
-  <!-- §07 CAVEATS -->
-  <section class="section" id="caveats">
+  <!-- §06 SOURCES & CAVEATS -->
+  <section class="section" id="sources">
     <div class="section-label">
-      <span class="section-num">07</span>
-      <span class="section-title">Caveats — Read Before Quoting These Numbers</span>
+      <span class="section-num market">06</span>
+      <span class="section-title">Sources &amp; Caveats</span>
     </div>
     <div class="list-card">
       <ul>
-        <li><strong>Small, single-operator sample.</strong> 630 FTDs, 7 months, one casino. Directionally strong, statistically thin in the late-2025 / early-2026 weekly cohorts (some &lt;10 players).</li>
-        <li><strong>This is the &ldquo;before&rdquo; book.</strong> If these are the numbers the retention lead <em>inherited or improved on</em>, GoLuna&rsquo;s engineered curve could beat them. If they&rsquo;re the lead&rsquo;s best achieved result, treat them as the realistic ceiling. Worth clarifying with them directly.</li>
-        <li><strong>GGR ≠ NGR ≠ profit.</strong> These are gross-gaming-revenue figures before affiliate, provider, and bonus-liability deductions. Net contribution per FTD is lower still.</li>
-        <li><strong>Currency is mixed.</strong> Source reported in crypto/fiat units; treated as ≈USD. Don&rsquo;t over-index on the exact dollar figures — the curve shape and segment ratios are the signal.</li>
-        <li><strong>Different brand, market, and bonus structure.</strong> GoLuna&rsquo;s offer, geos, and T&amp;C stack differ. The benchmark transfers as a <em>prior</em>, not a forecast.</li>
+        <li><strong>Retention % source:</strong> the retention lead&rsquo;s prior crypto casino (anonymised), Sep 2025–Mar 2026. Only the retention percentages are used — no counts, deposits, or revenue.</li>
+        <li><strong>Brazil benchmarks</strong> are market estimates (2025–2026) from Statista, Scaleo, GameOn, iGamingToday and SBC reporting — treat as directional ranges, not GoLuna actuals. Validate against GoLuna&rsquo;s own first cohorts once live.</li>
+        <li><strong>ARPU is definition-sensitive:</strong> per-registered-user ARPU is lower; per-paying-user (ARPPU) is higher. Brazil revenue is heavily whale-skewed, so a single average is misleading — model a head and a tail.</li>
+        <li><strong>Unit-economics table is illustrative,</strong> built from Brazil ARPU × the observed retention curve with assumed margin splits. It shows the <em>shape</em> (paid CPA is hard; retention/whales/rev-share carry it), not a precise GoLuna P&amp;L.</li>
+        <li><strong>FX</strong> at R$5.4 ≈ $1; BRL/USD moves, so dollar figures are approximate.</li>
       </ul>
     </div>
   </section>
 
   <div class="footer">
-    GoLuna — Retention Benchmark &middot; sourced from the retention lead&rsquo;s prior crypto casino (Sep 2025–Mar 2026, 630 FTDs) &middot;
-    <a href="paths.html">Paths A/B</a> &middot; <a href="forecast.html">Forecast</a> &middot; <a href="index.html">Hub</a>
+    GoLuna — Model Assumptions &middot; retention % from operator data, market figures benchmarked to Brazil<br>
+    <a href="paths.html">Paths A/B</a> &middot; <a href="forecast.html">Forecast</a> &middot; <a href="revenue.html">Revenue</a> &middot; <a href="index.html">Hub</a>
   </div>
 
 </div>
