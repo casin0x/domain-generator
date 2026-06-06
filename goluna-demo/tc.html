@@ -107,6 +107,48 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   .header-link { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* === tc.html collapsible sections === */
+details.section { margin-bottom: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color 0.15s; }
+details.section[open] { border-color: var(--border-hover); }
+details.section > summary { list-style: none; cursor: pointer; padding: 18px 22px; display: grid; grid-template-columns: auto 1fr auto auto; gap: 12px; align-items: center; user-select: none; border-bottom: 1px solid transparent; transition: background 0.15s; }
+details.section > summary::-webkit-details-marker { display: none; }
+details.section > summary:hover { background: var(--surface-2); }
+details.section[open] > summary { border-bottom-color: var(--border); }
+details.section .summary-meta { display: flex; align-items: center; gap: 10px; font-size: 11px; color: var(--text-muted); font-family: var(--mono); }
+details.section .clause-count { background: var(--surface-3); color: var(--text-secondary); padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; }
+details.section.bankroll-critical .clause-count { background: var(--rose-dim); color: var(--rose); }
+details.section .chev { width: 12px; height: 12px; opacity: 0.5; transition: transform 0.2s; flex-shrink: 0; }
+details.section[open] .chev { transform: rotate(180deg); }
+details.section > summary > .section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--amber-dim); color: var(--amber); border: 0; }
+details.section > summary > .section-num.bankroll { background: var(--rose-dim); color: var(--rose); }
+details.section > summary > .section-num.standard { background: var(--cyan-dim); color: var(--cyan); }
+details.section > summary > .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text); }
+details.section > .section-body { padding: 20px 22px 24px; }
+details.section > .section-body > .section-intro { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin: 0 0 16px; max-width: 920px; }
+.expand-all { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+.expand-all:hover { background: var(--surface-3); color: var(--text); }
+.expand-controls { display: flex; gap: 8px; margin: 0 0 24px; flex-wrap: wrap; }
+@media (max-width: 640px) {
+  details.section > summary { padding: 14px 16px; grid-template-columns: auto 1fr auto; }
+  details.section > summary > .section-title { font-size: 12px; }
+  details.section .summary-meta { display: none; }
+  details.section > .section-body { padding: 16px 16px 20px; }
+}
+
+
+/* === Design-pass v2: table scroll + subnav fade === */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; background: var(--surface); }
+.table-scroll::-webkit-scrollbar { height: 6px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--border-hover, rgba(255,255,255,0.12)); border-radius: 3px; }
+.table-scroll > table { border: 0 !important; border-radius: 0 !important; margin-bottom: 0 !important; min-width: 100%; }
+@media (max-width: 900px) { .table-scroll > table { min-width: 640px; } }
+.subnav { position: relative; }
+.subnav::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 32px; pointer-events: none; background: linear-gradient(to right, transparent, rgba(11,13,20,0.94)); opacity: 0; transition: opacity 0.15s; }
+.subnav.has-scroll::after { opacity: 1; }
+.subnav-inner::-webkit-scrollbar { height: 0; }
+
 </style>
 </head>
 <body>
@@ -164,12 +206,25 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     <div><strong>How to read this page.</strong>&nbsp; Each section corresponds to a category of T&amp;C clause. Clauses marked <span style="color:var(--rose);font-weight:600;">bankroll-critical</span> are the ones that directly reduce the bankroll multiplier required (see <a href="revenue.html#poolsexplainer" style="color:var(--accent);">Revenue §03.5</a>). Standard operational clauses are marked <span style="color:var(--cyan);font-weight:600;">standard</span>. Adopting the bankroll-critical clauses cuts the M6 bankroll requirement from $680K (at 4&times;) to ~$510K (at 3&times;).</div>
   </div>
 
+  <div class="expand-controls">
+    <button class="expand-all" data-action="expand">Expand all sections</button>
+    <button class="expand-all" data-action="collapse">Collapse all</button>
+    <button class="expand-all" data-action="bankroll">Show bankroll-critical only</button>
+  </div>
+
+
   <!-- §01 WITHDRAWALS & VELOCITY CAPS -->
-  <section class="section" id="withdrawals">
-    <div class="section-label">
-      <span class="section-num bankroll">01</span>
-      <span class="section-title">Withdrawals &amp; Velocity Caps — Bankroll-Critical</span>
-    </div>
+  <details class="section bankroll-critical" id="withdrawals" open>
+  <summary>
+    <span class="section-numbankroll">01</span>
+    <span class="section-title">Withdrawals &amp; Velocity Caps — Bankroll-Critical</span>
+    <span class="summary-meta">
+      <span class="clause-count">17 clauses</span>
+      <span>Bankroll-critical</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
     <p class="section-intro">The single biggest bankroll-multiplier reducer. By capping how fast a player can extract winnings, the bankroll only needs to cover daily withdrawal flow rather than the full winnings balance.</p>
     <div class="clause-list">
       <div class="clause bankroll">
@@ -237,14 +292,21 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §02 MAXIMUM WIN & BET CAPS -->
-  <section class="section" id="wincaps">
-    <div class="section-label">
-      <span class="section-num bankroll">02</span>
-      <span class="section-title">Maximum Win &amp; Bet Caps — Worst-Case Exposure Limits</span>
-    </div>
+  <details class="section bankroll-critical" id="wincaps" open>
+  <summary>
+    <span class="section-numbankroll">02</span>
+    <span class="section-title">Maximum Win &amp; Bet Caps — Worst-Case Exposure Limits</span>
+    <span class="summary-meta">
+      <span class="clause-count">15 clauses</span>
+      <span>Bankroll-critical</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
     <p class="section-intro">Hard caps on individual wins and bet sizes limit worst-case bankroll exposure on any single game outcome.</p>
     <div class="clause-list">
       <div class="clause bankroll">
@@ -304,14 +366,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §03 WAGERING REQUIREMENTS -->
-  <section class="section" id="wagering">
-    <div class="section-label">
-      <span class="section-num standard">03</span>
-      <span class="section-title">Wagering Requirements</span>
-    </div>
+  <details class="section" id="wagering">
+  <summary>
+    <span class="section-numstandard">03</span>
+    <span class="section-title">Wagering Requirements</span>
+    <span class="summary-meta">
+      <span class="clause-count">13 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause standard">
         <div></div>
@@ -362,14 +432,21 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §04 ANTI-FRAUD & ABUSE -->
-  <section class="section" id="fraud">
-    <div class="section-label">
-      <span class="section-num bankroll">04</span>
-      <span class="section-title">Anti-Fraud, Anti-Abuse &amp; Forfeiture</span>
-    </div>
+  <details class="section bankroll-critical" id="fraud" open>
+  <summary>
+    <span class="section-numbankroll">04</span>
+    <span class="section-title">Anti-Fraud, Anti-Abuse &amp; Forfeiture</span>
+    <span class="summary-meta">
+      <span class="clause-count">19 clauses</span>
+      <span>Bankroll-critical</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
     <p class="section-intro">Bankroll-relevant: industry practice 5&ndash;15% of would-be winnings get clawed back via these clauses. Material bankroll relief.</p>
     <div class="clause-list">
       <div class="clause fraud">
@@ -445,14 +522,21 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §05 KYC & VERIFICATION -->
-  <section class="section" id="kyc">
-    <div class="section-label">
-      <span class="section-num bankroll">05</span>
-      <span class="section-title">KYC &amp; Identity Verification</span>
-    </div>
+  <details class="section bankroll-critical" id="kyc" open>
+  <summary>
+    <span class="section-numbankroll">05</span>
+    <span class="section-title">KYC &amp; Identity Verification</span>
+    <span class="summary-meta">
+      <span class="clause-count">11 clauses</span>
+      <span>Bankroll-critical</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
     <p class="section-intro">Bankroll tool: large withdrawals trigger KYC, which legally permits delays.</p>
     <div class="clause-list">
       <div class="clause bankroll">
@@ -496,14 +580,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §06 BONUSES -->
-  <section class="section" id="bonuses">
-    <div class="section-label">
-      <span class="section-num">06</span>
-      <span class="section-title">Bonus Terms &amp; Promotional Rules</span>
-    </div>
+  <details class="section" id="bonuses">
+  <summary>
+    <span class="section-num">06</span>
+    <span class="section-title">Bonus Terms &amp; Promotional Rules</span>
+    <span class="summary-meta">
+      <span class="clause-count">11 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause bonus">
         <div></div>
@@ -546,14 +638,21 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §07 ORIGINALS GAMES -->
-  <section class="section" id="originals">
-    <div class="section-label">
-      <span class="section-num bankroll">07</span>
-      <span class="section-title">GoLuna Originals Games (House Games)</span>
-    </div>
+  <details class="section bankroll-critical" id="originals" open>
+  <summary>
+    <span class="section-numbankroll">07</span>
+    <span class="section-title">GoLuna Originals Games (House Games)</span>
+    <span class="summary-meta">
+      <span class="clause-count">9 clauses</span>
+      <span>Bankroll-critical</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
     <p class="section-intro">Hard caps for in-house games where GoLuna takes 100% of the GGR (no provider rev share). Lower limits because exposure is uncovered.</p>
     <div class="clause-list">
       <div class="clause bankroll">
@@ -589,14 +688,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §08 CLOSURE & FORFEITURE -->
-  <section class="section" id="closure">
-    <div class="section-label">
-      <span class="section-num">08</span>
-      <span class="section-title">Account Closure &amp; Forfeiture</span>
-    </div>
+  <details class="section" id="closure">
+  <summary>
+    <span class="section-num">08</span>
+    <span class="section-title">Account Closure &amp; Forfeiture</span>
+    <span class="summary-meta">
+      <span class="clause-count">11 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause standard">
         <div></div>
@@ -639,14 +746,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §09 AFFILIATE PROGRAMME -->
-  <section class="section" id="affiliate">
-    <div class="section-label">
-      <span class="section-num">09</span>
-      <span class="section-title">Affiliate Programme Rules</span>
-    </div>
+  <details class="section" id="affiliate">
+  <summary>
+    <span class="section-num">09</span>
+    <span class="section-title">Affiliate Programme Rules</span>
+    <span class="summary-meta">
+      <span class="clause-count">11 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause standard">
         <div></div>
@@ -689,14 +804,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §10 TERMINATION -->
-  <section class="section" id="termination">
-    <div class="section-label">
-      <span class="section-num">10</span>
-      <span class="section-title">Termination</span>
-    </div>
+  <details class="section" id="termination">
+  <summary>
+    <span class="section-num">10</span>
+    <span class="section-title">Termination</span>
+    <span class="summary-meta">
+      <span class="clause-count">7 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause standard">
         <div></div>
@@ -723,14 +846,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <!-- §11 GENERAL PROVISIONS -->
-  <section class="section" id="general">
-    <div class="section-label">
-      <span class="section-num">11</span>
-      <span class="section-title">General Provisions</span>
-    </div>
+  <details class="section" id="general">
+  <summary>
+    <span class="section-num">11</span>
+    <span class="section-title">General Provisions</span>
+    <span class="summary-meta">
+      <span class="clause-count">21 clauses</span>
+      <span>Operational</span>
+    </span>
+    <svg class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5l3 3 3-3"/></svg>
+  </summary>
+  <div class="section-body">
+    
     <div class="clause-list">
       <div class="clause standard">
         <div></div>
@@ -813,7 +944,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</details>
 
   <div class="note-box info">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -825,6 +957,67 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   </footer>
 
 </div>
+
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.expand-all');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var sections = document.querySelectorAll('details.section');
+      var act = b.dataset.action;
+      sections.forEach(function(s){
+        if(act === 'expand') s.open = true;
+        else if(act === 'collapse') s.open = false;
+        else if(act === 'bankroll') s.open = s.classList.contains('bankroll-critical');
+      });
+    });
+  });
+  // Auto-open the section targeted by hash on load + on hash change
+  function openHash(){
+    var h = location.hash.slice(1);
+    if(!h) return;
+    var s = document.getElementById(h);
+    if(s && s.tagName === 'DETAILS'){ s.open = true; setTimeout(function(){ s.scrollIntoView({behavior:'smooth', block:'start'}); }, 50); }
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+})();
+</script>
+
+
+<script>
+(function(){
+  function wrap(){
+    document.querySelectorAll('.page table, .page-content table').forEach(function(t){
+      if(t.closest('.table-scroll')) return;
+      // Skip tables already inside a div with overflow handling
+      var p = t.parentElement;
+      if(p && getComputedStyle(p).overflowX === 'auto') return;
+      var w = document.createElement('div');
+      w.className = 'table-scroll';
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
+    var sn = document.querySelector('.subnav');
+    var si = document.querySelector('.subnav-inner');
+    if(sn && si){
+      function check(){
+        if(si.scrollWidth - si.clientWidth > 4 && si.scrollLeft + si.clientWidth < si.scrollWidth - 4){
+          sn.classList.add('has-scroll');
+        } else {
+          sn.classList.remove('has-scroll');
+        }
+      }
+      check();
+      si.addEventListener('scroll', check, { passive: true });
+      window.addEventListener('resize', check, { passive: true });
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wrap);
+  else wrap();
+})();
+</script>
 
 </body>
 </html>

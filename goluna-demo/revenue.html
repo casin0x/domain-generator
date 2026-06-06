@@ -225,6 +225,19 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   .waterfall-seg .lbl { font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* === Design-pass v2: table scroll + subnav fade === */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; background: var(--surface); }
+.table-scroll::-webkit-scrollbar { height: 6px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--border-hover, rgba(255,255,255,0.12)); border-radius: 3px; }
+.table-scroll > table { border: 0 !important; border-radius: 0 !important; margin-bottom: 0 !important; min-width: 100%; }
+@media (max-width: 900px) { .table-scroll > table { min-width: 640px; } }
+.subnav { position: relative; }
+.subnav::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 32px; pointer-events: none; background: linear-gradient(to right, transparent, rgba(11,13,20,0.94)); opacity: 0; transition: opacity 0.15s; }
+.subnav.has-scroll::after { opacity: 1; }
+.subnav-inner::-webkit-scrollbar { height: 0; }
+
 </style>
 </head>
 <body>
@@ -1145,5 +1158,39 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   else{init();}
 })();
 </script>
+
+<script>
+(function(){
+  function wrap(){
+    document.querySelectorAll('.page table, .page-content table').forEach(function(t){
+      if(t.closest('.table-scroll')) return;
+      // Skip tables already inside a div with overflow handling
+      var p = t.parentElement;
+      if(p && getComputedStyle(p).overflowX === 'auto') return;
+      var w = document.createElement('div');
+      w.className = 'table-scroll';
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
+    var sn = document.querySelector('.subnav');
+    var si = document.querySelector('.subnav-inner');
+    if(sn && si){
+      function check(){
+        if(si.scrollWidth - si.clientWidth > 4 && si.scrollLeft + si.clientWidth < si.scrollWidth - 4){
+          sn.classList.add('has-scroll');
+        } else {
+          sn.classList.remove('has-scroll');
+        }
+      }
+      check();
+      si.addEventListener('scroll', check, { passive: true });
+      window.addEventListener('resize', check, { passive: true });
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wrap);
+  else wrap();
+})();
+</script>
+
 </body>
 </html>
