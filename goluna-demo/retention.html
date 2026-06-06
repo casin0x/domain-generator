@@ -233,15 +233,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
         <span class="tag doc">operator data</span>
       </div>
       <div class="metric-card cyan">
-        <div class="label">Blended ARPU / mo</div>
-        <div class="val cyan">~R$160</div>
-        <div class="sub">≈ $30 · GGR per active</div>
+        <div class="label">Crypto ARPU / mo</div>
+        <div class="val cyan">~R$300</div>
+        <div class="sub">≈ $56 · crypto-only band</div>
         <span class="tag br">Brazil market</span>
       </div>
       <div class="metric-card cyan">
         <div class="label">CPA (casino)</div>
-        <div class="val cyan">~R$200</div>
-        <div class="sub">≈ $38 · range R$130–300</div>
+        <div class="val cyan">~R$250</div>
+        <div class="sub">≈ $46 · crypto upper end</div>
         <span class="tag br">Brazil market</span>
       </div>
       <div class="metric-card cyan">
@@ -303,25 +303,30 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       <span class="section-num market">03</span>
       <span class="section-title">Brazil Market Benchmarks — Everything Else</span>
     </div>
-    <p class="section-intro">Brazil regulated its market in Jan 2025 (Lei 14.790) and posted ~$7B GGR in year one. It is a <strong>high-volume, low-ARPU, PIX-driven, bonus-sensitive</strong> market &mdash; the opposite profile to Europe. These are the figures the model should use for a Brazil-first launch.</p>
+    <p class="section-intro">Brazil regulated its market in Jan 2025 (Lei 14.790) and posted ~$7B GGR in year one. It is a <strong>high-volume, low-ARPU, bonus-sensitive</strong> market. Onshore betting is PIX-only and <strong>crypto betting is outlawed onshore</strong> &mdash; so GoLuna runs as an <strong>offshore crypto-only casino</strong> (short term), addressing the crypto-comfortable slice of Brazilian players (~30% crypto adoption), not the full PIX-using base. The figures below are the market backdrop; crypto-only adjustments are flagged per row.</p>
+
+    <div class="note-box amber" style="margin-bottom:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>Crypto-only is a TAM filter, not just a payment choice.</strong>&nbsp; ~96% of regulated Brazilian betting runs on PIX. By taking crypto only, GoLuna self-selects to the crypto-literate minority &mdash; <em>fewer</em> players, but typically <em>higher-value and more sophisticated</em> (which also means more arbitrage/bonus-savvy, so the <a href="tc.html">T&amp;C gating</a> matters more). PIX&rsquo;s role here is purely a fiat&rarr;crypto <strong>on-ramp bridge</strong>, an extra step in the funnel. Adding native PIX/fiat later would unlock the mass market &mdash; that is the single biggest TAM lever once licensing allows it.</div>
+    </div>
     <table class="lit">
       <thead>
         <tr><th>Metric</th><th style="text-align:right;">Brazil benchmark</th><th>Notes</th></tr>
       </thead>
       <tbody>
-        <tr><td class="cat"><strong>ARPU</strong> (blended GGR / active player·mo)</td><td class="num">R$150–180<br><span style="color:var(--text-muted)">≈ $28–33</span></td><td class="cat">Statista ARPU ~$348/yr (end-2025); whales skew it — 6% of players bet &gt;R$1,000/mo.</td></tr>
-        <tr><td class="cat"><strong>ARPPU</strong> (per paying player)</td><td class="num">R$250–400<br><span style="color:var(--text-muted)">≈ $46–74</span></td><td class="cat">Higher than blended ARPU; use for whale/VIP cohort modelling.</td></tr>
-        <tr><td class="cat"><strong>CPA</strong> (casino, paid/affiliate)</td><td class="num">R$130–300<br><span style="color:var(--text-muted)">≈ $25–55</span></td><td class="cat">Tier-2 market — far below Europe ($100–250). Brazil CPAs cited up to ~R$141; base ~R$200.</td></tr>
-        <tr><td class="cat"><strong>Affiliate revenue share</strong></td><td class="num">25–40%</td><td class="cat">Industry 20–50%; Brazil common 25–35%. Hybrid deals ~$60 CPA + 20% rev-share.</td></tr>
-        <tr><td class="cat"><strong>Payment rail</strong></td><td class="num">PIX 96%</td><td class="cat">PIX handles ~96% of legal-market transactions; betting = 15% of all P2B PIX (H1 2025).</td></tr>
-        <tr><td class="cat"><strong>Min / typical deposit</strong></td><td class="num">R$5–50<br><span style="color:var(--text-muted)">≈ $1–9</span></td><td class="cat">Micro-deposits via PIX (R$1–5 minimums). Frequency &gt; size; many small top-ups.</td></tr>
-        <tr><td class="cat"><strong>Welcome bonus norm</strong></td><td class="num">100% to R$100–500</td><td class="cat">Bonus-heavy market; low-stake high-match cash offers convert best. Gate hard (see T&amp;Cs).</td></tr>
-        <tr><td class="cat"><strong>Demographic skew</strong></td><td class="num">53% young adults</td><td class="cat">18–34 dominate demand; mobile-first; football/Originals-led.</td></tr>
+        <tr><td class="cat"><strong>ARPU</strong> (blended GGR / active player·mo)</td><td class="num">R$150–180<br><span style="color:var(--text-muted)">≈ $28–33</span></td><td class="cat">Market-wide (Statista ~$348/yr end-2025). <strong>Crypto-only skews higher</strong> — micro-bettors are filtered out, so GoLuna&rsquo;s effective ARPU sits nearer the ARPPU band.</td></tr>
+        <tr><td class="cat"><strong>ARPPU</strong> (per paying / crypto player)</td><td class="num">R$250–400<br><span style="color:var(--text-muted)">≈ $46–74</span></td><td class="cat">Better proxy for a crypto-only book — fewer, higher-value players. Use for whale/VIP modelling.</td></tr>
+        <tr><td class="cat"><strong>CPA</strong> (casino, paid/affiliate)</td><td class="num">R$130–300<br><span style="color:var(--text-muted)">≈ $25–55</span></td><td class="cat">Tier-2 market — far below Europe ($100–250). Crypto-only narrows the pool, so expect the <strong>upper end</strong> (~R$250) on paid channels.</td></tr>
+        <tr><td class="cat"><strong>Affiliate revenue share</strong></td><td class="num">25–40%</td><td class="cat">Industry 20–50%; Brazil common 25–35%. Hybrid deals ~$60 CPA + 20% rev-share. Crypto-affiliate networks well-developed.</td></tr>
+        <tr><td class="cat"><strong>Payments (GoLuna)</strong></td><td class="num">Crypto only</td><td class="cat"><strong>USDT-led</strong> (USDT-on-Tron is the cheapest rail and the dashboard default), plus BTC / ETH / LTC. No fiat short term. PIX = 96% of the onshore market but crypto is outlawed onshore → GoLuna is offshore; PIX only as a fiat&rarr;crypto on-ramp.</td></tr>
+        <tr><td class="cat"><strong>Typical first deposit (crypto)</strong></td><td class="num">~$20–100+</td><td class="cat">No R$5 PIX micro-deposits — crypto entry filters those out. USDT-denominated; larger, less frequent than fiat top-ups.</td></tr>
+        <tr><td class="cat"><strong>Welcome bonus norm</strong></td><td class="num">100% to ~$50–200</td><td class="cat">Bonus-heavy market; crypto-denominated match offers. Gate hard (see <a href="tc.html">T&amp;Cs</a>) — crypto audience is more abuse-savvy.</td></tr>
+        <tr><td class="cat"><strong>Demographic skew</strong></td><td class="num">53% young adults</td><td class="cat">18–34 dominate demand; mobile-first; football/Originals-led. Crypto-comfortable subset skews even younger/male.</td></tr>
       </tbody>
     </table>
     <div class="note-box cyan" style="margin-top:16px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-      <div><strong>The Brazil shape:</strong> low CPA <em>and</em> low ARPU. Acquisition is cheap, but each player is worth little per month &mdash; so the model lives or dies on <strong>retention and whale concentration</strong>, not on acquisition cost. That is why the retention % above is the single most leveraged input.</div>
+      <div><strong>The Brazil crypto shape:</strong> a narrower but higher-value pool. Acquisition is still relatively cheap, but volume is capped by the crypto-only filter &mdash; so the model lives or dies on <strong>retention and whale concentration</strong>, not on raw acquisition volume. That is why the retention % above is the single most leveraged input, and why a future fiat/PIX on-ramp is the biggest growth unlock.</div>
     </div>
   </section>
 
@@ -331,20 +336,20 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       <span class="section-num market">04</span>
       <span class="section-title">Unit Economics — Brazil ARPU × Retention %</span>
     </div>
-    <p class="section-intro">Combining the two grounded inputs &mdash; Brazil ARPU and the operator retention curve &mdash; gives an illustrative GGR-per-acquired-player and CPA payback. Expected active-months = 1 / (1 − monthly retention); lifetime GGR = ARPU × active-months; net contribution ≈ 45% of GGR (after ~30% rev-share, ~12% provider/platform, ~10% bonus).</p>
+    <p class="section-intro">Combining the two grounded inputs &mdash; <strong>crypto-only ARPU (~R$300/mo)</strong> and the operator retention curve &mdash; gives an illustrative GGR-per-acquired-player and CPA payback. Expected active-months = 1 / (1 − monthly retention); lifetime GGR = ARPU × active-months; net contribution ≈ 45% of GGR (after ~30% rev-share, ~12% provider/platform, ~10% bonus). CPA at the crypto upper end (~R$250).</p>
     <table class="lit">
       <thead>
-        <tr><th>Monthly retention</th><th style="text-align:right;">Active-months</th><th style="text-align:right;">Lifetime GGR</th><th style="text-align:right;">Net contribution</th><th style="text-align:right;">vs CPA ~R$200</th></tr>
+        <tr><th>Monthly retention</th><th style="text-align:right;">Active-months</th><th style="text-align:right;">Lifetime GGR</th><th style="text-align:right;">Net contribution</th><th style="text-align:right;">vs CPA ~R$250</th></tr>
       </thead>
       <tbody>
-        <tr><td class="cat">19% (base, operator data)</td><td class="num">1.23</td><td class="num">~R$197</td><td class="num neg">~R$89</td><td class="num neg">−R$111</td></tr>
-        <tr><td class="cat">30% (engineered target)</td><td class="num">1.43</td><td class="num">~R$229</td><td class="num neg">~R$103</td><td class="num neg">−R$97</td></tr>
-        <tr><td class="cat">40% (best-case retention)</td><td class="num">1.67</td><td class="num">~R$267</td><td class="num amberc">~R$120</td><td class="num neg">−R$80</td></tr>
+        <tr><td class="cat">19% (base, operator data)</td><td class="num">1.23</td><td class="num">~R$370</td><td class="num">~R$167</td><td class="num neg">−R$83</td></tr>
+        <tr><td class="cat">30% (engineered target)</td><td class="num">1.43</td><td class="num">~R$429</td><td class="num">~R$193</td><td class="num neg">−R$57</td></tr>
+        <tr><td class="cat">40% (best-case retention)</td><td class="num">1.67</td><td class="num">~R$500</td><td class="num amberc">~R$225</td><td class="num neg">−R$25</td></tr>
       </tbody>
     </table>
     <div class="note-box rose" style="margin-top:16px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Paid CPA acquisition at blended ARPU does not pay back</strong> within 6 months at any realistic retention level. That is normal for Brazil &mdash; operators make money via (1) <strong>whale concentration</strong> (ARPPU R$250–400 on the top ~6%), (2) <strong>rev-share affiliates</strong> instead of fixed CPA (pay only on real revenue), and (3) <strong>low-cost organic/community channels</strong>. The model should lean on these three, not on paid CPA volume.</div>
+      <div><strong>Even at crypto-only ARPU, paid CPA only approaches break-even at high retention</strong> within 6 months &mdash; it never fully pays back at the 19% base. The crypto filter helps (higher ARPU than the mass market) but doesn&rsquo;t rescue paid volume on its own. Operators make the money via (1) <strong>whale concentration</strong> (ARPPU R$250–400 on the top players), (2) <strong>rev-share affiliates</strong> instead of fixed CPA, and (3) <strong>low-cost organic/community channels</strong>. Lean on these three plus retention, not on paid CPA volume.</div>
     </div>
   </section>
 
@@ -356,12 +361,12 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     </div>
     <div class="list-card">
       <ul>
-        <li><strong>ARPU:</strong> model a blended <strong>R$160 (~$30)/active player·mo</strong>, plus a separate whale/VIP cohort at <strong>R$250–400</strong> ARPPU. Don&rsquo;t use a single flat number — Brazil revenue is whale-concentrated.</li>
-        <li><strong>CPA:</strong> <strong>R$200 (~$38)</strong> base for paid/affiliate; assume a large share of volume comes from <strong>rev-share</strong> (25–40%) and organic rather than fixed CPA.</li>
+        <li><strong>ARPU:</strong> for a crypto-only book, model nearer the <strong>ARPPU band R$250–400 (~$46–74)</strong> rather than the market-wide blended R$160 — the crypto filter removes the micro-bettor tail. Still split a whale/VIP cohort out; revenue is whale-concentrated.</li>
+        <li><strong>CPA:</strong> <strong>~R$250 (~$46)</strong> for paid/affiliate (upper end — crypto pool is narrower); assume a large share of volume comes from <strong>rev-share</strong> (25–40%) and organic rather than fixed CPA.</li>
         <li><strong>Retention:</strong> <strong>19% monthly base</strong> / 30% engineered target; week-4 cohort 8% → 15% target. This is the lever the retention hire owns.</li>
-        <li><strong>Payments:</strong> build PIX-first (96% of the market); support R$5 micro-deposits; expect frequent small top-ups, not large single deposits.</li>
-        <li><strong>Bonus:</strong> 100%-to-R$100–500 welcome is the norm, but gate it hard with the <a href="tc.html">T&amp;C arsenal</a> (1× wagering, withdrawal velocity caps) — Brazil is bonus-sensitive and abuse-prone.</li>
-        <li><strong>Don&rsquo;t import EU economics.</strong> Brazil is low-CPA / low-ARPU / high-volume. A model tuned to European ARPU will overstate revenue badly.</li>
+        <li><strong>Payments:</strong> <strong>crypto only short term</strong> — USDT-on-Tron default, plus BTC/ETH/LTC. No fiat. Treat PIX as a fiat→crypto on-ramp the player handles off-platform; budget for the funnel drop it causes. Model native PIX/fiat as a later TAM-expansion phase, not the launch.</li>
+        <li><strong>Bonus:</strong> 100%-to-~$50–200 crypto welcome is the norm, but gate it hard with the <a href="tc.html">T&amp;C arsenal</a> (1× wagering, withdrawal velocity caps) — the crypto audience is bonus-sensitive and abuse-savvy.</li>
+        <li><strong>Don&rsquo;t import EU economics.</strong> Brazil is low-CPA / lower-ARPU than Europe; a model tuned to European ARPU will overstate revenue. But crypto-only lifts per-player value above the broad Brazil average — model the crypto segment, not the mass market.</li>
       </ul>
     </div>
   </section>
