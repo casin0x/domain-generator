@@ -304,10 +304,10 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </div>
     <div class="metric-card green">
       <div class="label">M1–M6 cumulative NP</div>
-      <div class="val green cur cur-usd">+$35K</div>
-      <div class="val green cur cur-sek">+368K SEK</div>
-      <div class="val green cur cur-eur">+€32K</div>
-      <div class="sub">Clipping prepay model · M6 retention test +$69K · ~$24K M6 buffer</div>
+      <div class="val green cur cur-usd">+$17K</div>
+      <div class="val green cur cur-sek">+179K SEK</div>
+      <div class="val green cur cur-eur">+€16K</div>
+      <div class="sub">Salaries M1 + promo pool · M6 standalone +$69K · ~$7K M6 buffer</div>
     </div>
     <div class="metric-card amber">
       <div class="label">Break-even GGR (M7+)</div>
@@ -528,6 +528,113 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </table>
   </section>
 
+  <!-- §03.5 BONUS / RTP / BANKROLL DYNAMICS -->
+  <section class="section" id="poolsexplainer">
+    <div class="section-label">
+      <span class="section-num">03.5</span>
+      <span class="section-title">Bonus Liability, RTP &amp; Bankroll — How They Interact</span>
+    </div>
+    <p class="section-intro">Three separate cash pools are involved in running a crypto casino, and they get confused easily. This section sets out what each one is, where it comes from, and what eats into what. Calibrated against current GoLuna configuration.</p>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">Pool separation — what comes from where</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Pool / liability</th>
+          <th>What it covers</th>
+          <th>How it&#39;s modelled</th>
+          <th style="text-align:right;">Amount / rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Performance bonuses</strong></td>
+          <td class="cat">Welcome match, reload, cashback, free spins, VIP rewards &mdash; tied to player wagering activity</td>
+          <td class="cat">Variable cost line in §06.5 P&amp;L cascade (flows from GGR, not pre-funded)</td>
+          <td class="num">25% of GGR</td>
+        </tr>
+        <tr>
+          <td><strong>Promotional pool</strong> <span class="tag confirmed">new</span></td>
+          <td class="cat">Community giveaways (Telegram/Discord contests), race/tournament prize boosts, streamer-exclusive codes, whale courtesy bonuses &mdash; NOT tied to player wagering</td>
+          <td class="cat">Explicit budget line on Forecast page (M2&ndash;M5 at $3K/mo)</td>
+          <td class="num">$12K total M2&ndash;M5</td>
+        </tr>
+        <tr>
+          <td><strong>Bankroll</strong></td>
+          <td class="cat">Variance buffer for real-money player wins &mdash; the cash that pays out when players win big on real wagers</td>
+          <td class="cat">Reserved separately from operating budget (500K SEK locked + deferred-payout T&amp;Cs on big wins)</td>
+          <td class="num">500K SEK / ~$48K</td>
+        </tr>
+        <tr>
+          <td><strong>Operating buffer</strong></td>
+          <td class="cat">Unforeseen ops costs &mdash; what&#39;s left at M6 after planned spend</td>
+          <td class="cat">M6 cumulative budget remaining (post Promotional pool: ~$7K)</td>
+          <td class="num">~$7K M6</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Bonus payouts and RTP do NOT eat from bankroll directly.</strong> Bonus credits are funded by operating cash (modelled at 25% of GGR), and RTP is a mathematical property of games, not a cash draw. What DOES eat from bankroll is <em>variance on real-money wagers</em> &mdash; players winning big runs on slots, sportsbook, or poker.</div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">RTP, house edge, and bankroll multiplier</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Vertical</th>
+          <th style="text-align:right;">RTP</th>
+          <th style="text-align:right;">House edge</th>
+          <th style="text-align:right;">Bankroll multiplier needed</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Crypto slots (standard)</td><td class="num">96%</td><td class="num">4%</td><td class="num">5&ndash;10&times; monthly GGR</td><td class="cat">For every $100 wagered, casino keeps ~$4 long-run</td></tr>
+        <tr><td>Crypto slots (whale tier)</td><td class="num">97&ndash;98%</td><td class="num">2&ndash;3%</td><td class="num">7&ndash;12&times; monthly GGR</td><td class="cat">Lower margin but attracts higher stakes; more variance &rarr; bigger bankroll need</td></tr>
+        <tr><td>Sportsbook</td><td class="num">~92&ndash;95% (hold)</td><td class="num">5&ndash;8%</td><td class="num">10&ndash;15&times; monthly hold</td><td class="cat">Single big bets can swing bankroll heavily &mdash; highest variance</td></tr>
+        <tr><td>Cubeia poker</td><td class="num">N/A (rake)</td><td class="num">10% rake</td><td class="num">0&times; (P2P)</td><td class="cat">No bankroll variance &mdash; players play each other &middot; only liquidity needed</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box info">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>Higher RTP doesn&#39;t cost more bankroll directly &mdash; it costs more <em>variance</em>.</strong> Choosing 97% slots over 96% means lower house edge (less GGR per wager) AND more swings (bigger bankroll need). The bankroll multiplier reflects what&#39;s required to absorb a bad month without insolvency risk.</div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 12px;">GoLuna bankroll vs projected GGR &mdash; the honest gap</h3>
+    <table class="lit" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th style="text-align:right;">GGR target (base)</th>
+          <th style="text-align:right;">Min bankroll @ 7.5&times;</th>
+          <th style="text-align:right;">With deferred-payout T&amp;C @ 4&times;</th>
+          <th>Status vs. current $48K bankroll</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>M2</td><td class="num">$30K</td><td class="num">$225K</td><td class="num">$120K</td><td class="cat" style="color:var(--rose);">Under-bankrolled by ~$72K even with T&amp;C protection</td></tr>
+        <tr><td>M3</td><td class="num">$55K</td><td class="num">$413K</td><td class="num">$220K</td><td class="cat" style="color:var(--rose);">Bottleneck &mdash; need bankroll growth or external line</td></tr>
+        <tr><td>M4</td><td class="num">$90K</td><td class="num">$675K</td><td class="num">$360K</td><td class="cat" style="color:var(--rose);">Critical &mdash; ~7&times; current bankroll required</td></tr>
+        <tr><td>M5</td><td class="num">$130K</td><td class="num">$975K</td><td class="num">$520K</td><td class="cat" style="color:var(--rose);">Mature crypto-casino bankroll required</td></tr>
+        <tr><td>M6</td><td class="num">$170K</td><td class="num">$1.27M</td><td class="num">$680K</td><td class="cat" style="color:var(--rose);">14&times; current bankroll &mdash; not achievable without external scaling</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>The bankroll is the real bottleneck beyond M2.</strong>&nbsp; The deferred-payout T&amp;C policy reduces the required bankroll meaningfully (rough halving), but even at 4&times; monthly GGR coverage, GoLuna&#39;s $48K bankroll only safely supports ~$12K monthly GGR &mdash; well under the M3 target. Options to address:
+      <br><br>
+      &bull; <strong>Bankroll scaling plan</strong> &mdash; reinvest a portion of M2&ndash;M3 GGR into bankroll growth (slows operator distribution but funds capacity).
+      <br>&bull; <strong>Investor capital-call right</strong> &mdash; formalise the existing &ldquo;under exploration&rdquo; backstop with a specific trigger (e.g. bankroll &lt; 250K SEK &rarr; 500K SEK call within 72h).
+      <br>&bull; <strong>External bankroll line</strong> &mdash; some platforms / specialist providers offer bankroll-as-a-service for crypto operators; 0.5&ndash;2% of GGR or fixed fee. Worth pricing.
+      <br>&bull; <strong>Stricter max-bet caps</strong> &mdash; cap max bet at 0.5&ndash;1% of bankroll. With $48K bankroll = $240&ndash;480 max bet. Limits whale exposure but preserves bankroll.
+      </div>
+    </div>
+  </section>
+
   <!-- §04 RTP & MARGIN -->
   <section class="section" id="rtp">
     <div class="section-label">
@@ -724,41 +831,41 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
           <tr>
             <td class="month">M1</td>
             <td class="base">$0K</td>
-            <td style="color:var(--rose);">$34.2K</td>
+            <td style="color:var(--rose);">$39.2K</td>
             <td>$0K</td>
-            <td style="color:var(--rose);">−$34K</td>
-            <td class="note"><strong>Onboarding + clipping prepay.</strong> Cubeia AWS + security hardware + CR corp + 250K SEK clipping prepay ($23.8K). No players yet, but the clipping content production starts producing during M1.</td>
+            <td style="color:var(--rose);">−$39K</td>
+            <td class="note"><strong>Onboarding active.</strong> Cubeia AWS + security HW + CR corp + salaries $5K (team active) + 250K SEK clipping prepay ($23.8K). No players yet, but content production starts.</td>
           </tr>
           <tr>
             <td class="month">M2</td>
             <td class="base">$30K</td>
-            <td style="color:var(--rose);">$42.1K</td>
+            <td style="color:var(--rose);">$45.1K</td>
             <td>$14.25K</td>
-            <td style="color:var(--rose);">−$28K</td>
-            <td class="note"><strong>First marketing month.</strong> Recurring kicks in + Designer/Betby one-times + paid marketing $23K/mo (BH + PS + Streamer). Clipping already paid M1.</td>
+            <td style="color:var(--rose);">−$31K</td>
+            <td class="note"><strong>First marketing month.</strong> Recurring + Designer/Betby one-times + paid marketing $23K + promo pool $3K. Clipping already paid M1.</td>
           </tr>
           <tr>
             <td class="month">M3</td>
             <td class="base">$55K</td>
-            <td style="color:var(--rose);">$34.3K</td>
+            <td style="color:var(--rose);">$37.3K</td>
             <td>$26.1K</td>
-            <td style="color:var(--rose);">−$8K</td>
-            <td class="note">Marketing continues at $23K/mo · first cohort retention from M2 closing the gap</td>
+            <td style="color:var(--rose);">−$11K</td>
+            <td class="note">Marketing $23K/mo + promo pool $3K · first cohort retention from M2 closing the gap</td>
           </tr>
           <tr>
             <td class="month">M4</td>
             <td class="base">$90K</td>
-            <td style="color:var(--rose);">$34.3K</td>
+            <td style="color:var(--rose);">$37.3K</td>
             <td>$42.75K</td>
-            <td style="color:var(--green);">+$8K</td>
-            <td class="note"><strong>First positive NP month.</strong> Cohorts stacking · contribution exceeds spend.</td>
+            <td style="color:var(--green);">+$5K</td>
+            <td class="note"><strong>First positive NP month.</strong> Cohorts stacking · contribution exceeds spend (incl. promo pool).</td>
           </tr>
           <tr>
             <td class="month">M5</td>
             <td class="base">$130K</td>
-            <td style="color:var(--rose);">$34.3K</td>
+            <td style="color:var(--rose);">$37.3K</td>
             <td>$61.75K</td>
-            <td style="color:var(--green);">+$27K</td>
+            <td style="color:var(--green);">+$24K</td>
             <td class="note">Final marketing month · cohorts compounding · investor-conversation time.</td>
           </tr>
           <tr>
@@ -772,10 +879,10 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
           <tr class="total">
             <td class="month">6-mo total</td>
             <td class="base" style="color:var(--green);">$475K</td>
-            <td style="color:var(--rose);">$190K</td>
+            <td style="color:var(--rose);">$207K</td>
             <td style="color:var(--green);">$225K</td>
-            <td style="color:var(--green);">+$35K</td>
-            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: +$35K</strong> · M6 standalone +$69K (retention test) · trend flips positive M4 · clipping prepay model naturally creates ~$24K M6 cushion</td>
+            <td style="color:var(--green);">+$17K</td>
+            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: +$17K</strong> · M6 standalone +$69K (retention test) · trend flips positive M4 · includes promo pool $12K + M1 salaries</td>
           </tr>
         </tbody>
       </table>
@@ -783,10 +890,10 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     <div class="sxs-grid">
       <div class="sxs-card spend">
         <div class="label">M1–M6 cumulative spend</div>
-        <div class="val cur cur-usd">~$190K</div>
-        <div class="val cur cur-sek">~2.00M SEK</div>
-        <div class="val cur cur-eur">~€176K</div>
-        <div class="sub">M1 onboarding + clipping prepay · M2–M5 marketing · M6 recurring</div>
+        <div class="val cur cur-usd">~$207K</div>
+        <div class="val cur cur-sek">~2.18M SEK</div>
+        <div class="val cur cur-eur">~€192K</div>
+        <div class="sub">M1 onboarding (salaries on) + clipping prepay · M2–M5 marketing + promo pool · M6 recurring</div>
       </div>
       <div class="sxs-card rev">
         <div class="label">M1–M6 cumulative net contribution (base)</div>
