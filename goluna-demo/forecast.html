@@ -215,6 +215,33 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 .fc-toggle-btn .caret-x { font-size: 10px; transition: transform 0.2s; display: inline-block; }
 .fc-toggle-btn.expanded .caret-x { transform: rotate(90deg); }
 .fc-toggle-hint { font-size: 11px; color: var(--text-muted); font-style: italic; }
+/* === Path A / Path B toggle === */
+.path-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 3px; gap: 3px; }
+.path-btn { padding: 8px 16px; border-radius: 6px; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; }
+.path-btn:hover { color: var(--text); }
+body.path-a .path-btn[data-path="a"] { background: var(--amber); color: #1a1205; }
+body.path-b .path-btn[data-path="b"] { background: var(--cyan); color: #04181c; }
+.path-switch-wrap { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 4px 0 14px; }
+.path-switch-hint { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.path-banner { display: flex; align-items: flex-start; gap: 11px; padding: 13px 16px; border-radius: 10px; margin: 0 0 20px; font-size: 13px; line-height: 1.55; border: 1px solid; color: var(--text-secondary); }
+body.path-a .path-banner { background: var(--amber-dim); border-color: var(--amber-border); }
+body.path-b .path-banner { background: var(--cyan-dim); border-color: var(--cyan-border); }
+.path-banner .pill { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+body.path-a .path-banner .pill { background: var(--amber); color: #1a1205; }
+body.path-b .path-banner .pill { background: var(--cyan); color: #04181c; }
+.path-banner strong { color: var(--text); }
+/* A vs B value visibility */
+.pb { display: none; }
+body.path-b .pb { display: inline; }
+body.path-b .pa { display: none; }
+tr.pb-row { display: none; }
+body.path-b tr.pb-row { display: table-row; }
+/* slight design difference: accent shifts amber (A) -> cyan (B) */
+body.path-a .fc-table { box-shadow: inset 3px 0 0 var(--amber); }
+body.path-b .fc-table { box-shadow: inset 3px 0 0 var(--cyan); }
+body.path-b .fc-table tbody td.cum { color: var(--cyan); }
+body.path-b .fc-table tbody td.month-tot { background: rgba(34,211,238,0.06); }
+.path-note { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 8px; }
 .fc-table.m712-collapsed th:nth-child(n+8):nth-child(-n+13),
 .fc-table.m712-collapsed td:nth-child(n+8):nth-child(-n+13) { display: none; }
 .fc-table.m712-collapsed td.col-m712-phase { display: none; }
@@ -242,7 +269,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
 </style>
 </head>
-<body>
+<body class="path-a">
 <header class="site-header">
 <div class="header-inner">
 <a class="logo" href="index.html">GoLuna</a>
@@ -319,6 +346,21 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="section-label">
 <span class="section-num">01</span>
 <span class="section-title">Month-by-Month Forecast (USD)</span>
+</div>
+<div class="path-switch-wrap">
+<div class="path-switch" role="group" aria-label="Choose growth path">
+<button class="path-btn" type="button" data-path="a" onclick="setPath('a')">Path A · Acquisition</button>
+<button class="path-btn" type="button" data-path="b" onclick="setPath('b')">Path B · Retention</button>
+</div>
+<span class="path-switch-hint">Flip to recost the entire forecast under the retention-first plan.</span>
+</div>
+<div class="path-banner">
+<span class="pa"><span class="pill">Path A</span></span>
+<span class="pb"><span class="pill">Path B</span></span>
+<span>
+<span class="pa"><strong>Acquisition-volume plan.</strong> The standard crypto-casino playbook the dashboard models by default — BH Ads as the largest channel, wide funnel, big welcome offer. 12-month committed: <strong>$307,810</strong>.</span>
+<span class="pb"><strong>Retention-engineered plan.</strong> BH Ads cut in half; budget shifted to streamer + paid-social community channels; adds a community manager and a one-off onboarding-flow consultant. Same shape, +$2.5K/yr. 12-month committed: <strong>$310,310</strong>. See <a href="paths.html" style="color:var(--cyan);font-weight:600;">Paths A/B</a> for the full rationale.</span>
+</span>
 </div>
 <div class="fc-toggle-wrap">
 <button class="fc-toggle-btn" type="button" onclick="toggleM712(this)">
@@ -567,25 +609,56 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <td class="cum">3,000</td>
 </tr>
 <tr>
-<td>BH Ads (Black Hat) <span style="font-size:10px;color:var(--text-muted);">marketing M2–M5</span></td>
-<td class="zero">0</td><td>15,000</td><td>15,000</td><td>15,000</td><td>15,000</td><td class="zero">0</td>
+<td>BH Ads (Black Hat) <span style="font-size:10px;color:var(--text-muted);"><span class="pa">marketing M2–M5</span><span class="pb">cut to half · M2–M5</span></span></td>
+<td class="zero">0</td>
+<td><span class="pa">15,000</span><span class="pb">7,500</span></td>
+<td><span class="pa">15,000</span><span class="pb">7,500</span></td>
+<td><span class="pa">15,000</span><span class="pb">7,500</span></td>
+<td><span class="pa">15,000</span><span class="pb">7,500</span></td>
+<td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-<td class="cum">60,000</td>
+<td class="cum"><span class="pa">60,000</span><span class="pb">30,000</span></td>
 </tr>
 <tr>
 <td>Paid Social Promotions <span style="font-size:10px;color:var(--text-muted);">marketing M2–M5</span></td>
-<td class="zero">0</td><td>4,500</td><td>4,500</td><td>4,500</td><td>4,500</td><td class="zero">0</td>
+<td class="zero">0</td>
+<td><span class="pa">4,500</span><span class="pb">6,000</span></td>
+<td><span class="pa">4,500</span><span class="pb">6,000</span></td>
+<td><span class="pa">4,500</span><span class="pb">6,000</span></td>
+<td><span class="pa">4,500</span><span class="pb">6,000</span></td>
+<td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-<td class="cum">18,000</td>
+<td class="cum"><span class="pa">18,000</span><span class="pb">24,000</span></td>
 </tr>
 <tr>
-<td>Streamer partnerships <span style="font-size:10px;color:var(--text-muted);">marketing pilot M2–M5</span></td>
-<td class="zero">0</td><td>3,500</td><td>3,500</td><td>3,500</td><td>3,500</td><td class="zero">0</td>
+<td>Streamer partnerships <span style="font-size:10px;color:var(--text-muted);"><span class="pa">marketing pilot M2–M5</span><span class="pb">scaled up · M2–M5</span></span></td>
+<td class="zero">0</td>
+<td><span class="pa">3,500</span><span class="pb">7,500</span></td>
+<td><span class="pa">3,500</span><span class="pb">7,500</span></td>
+<td><span class="pa">3,500</span><span class="pb">7,500</span></td>
+<td><span class="pa">3,500</span><span class="pb">7,500</span></td>
+<td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
 <td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
-<td class="cum">14,000</td>
+<td class="cum"><span class="pa">14,000</span><span class="pb">30,000</span></td>
+</tr>
+<tr class="pb-row">
+<td>Community manager <span style="font-size:10px;color:var(--text-muted);">Path B · Telegram/Discord · M2–M6</span></td>
+<td class="zero">0</td>
+<td>1,500</td><td>1,500</td><td>1,500</td><td>1,500</td><td>1,500</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="cum">7,500</td>
+</tr>
+<tr class="pb-row">
+<td>Onboarding flow consultant <span style="font-size:10px;color:var(--text-muted);">Path B · 48h CRM flow · M1 one-off</span></td>
+<td>3,000</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="zero">0</td><td class="zero">0</td><td class="zero">0</td>
+<td class="cum">3,000</td>
 </tr>
 <tr>
 <td>AI Call outreach + SMS <span style="font-size:10px;color:var(--text-muted);">outreach</span></td>
@@ -638,50 +711,50 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </tr>
 <tr style="border-top:1px solid var(--border-hover);">
 <td><strong>Monthly total</strong></td>
-<td class="month-tot">39,156</td>
-<td class="month-tot">45,114</td>
-<td class="month-tot">37,314</td>
-<td class="month-tot">37,314</td>
-<td class="month-tot">37,314</td>
-<td class="month-tot">11,314</td>
+<td class="month-tot"><span class="pa">39,156</span><span class="pb">42,156</span></td>
+<td class="month-tot"><span class="pa">45,114</span><span class="pb">44,614</span></td>
+<td class="month-tot"><span class="pa">37,314</span><span class="pb">36,814</span></td>
+<td class="month-tot"><span class="pa">37,314</span><span class="pb">36,814</span></td>
+<td class="month-tot"><span class="pa">37,314</span><span class="pb">36,814</span></td>
+<td class="month-tot"><span class="pa">11,314</span><span class="pb">12,814</span></td>
 <td class="month-tot">16,714</td>
 <td class="month-tot">16,714</td>
 <td class="month-tot">16,714</td>
 <td class="month-tot">16,714</td>
 <td class="month-tot">16,714</td>
 <td class="month-tot">16,714</td>
-<td class="month-tot" style="color:var(--accent);">307,810</td>
+<td class="month-tot" style="color:var(--accent);"><span class="pa">307,810</span><span class="pb">310,310</span></td>
 </tr>
 <tr class="grace-end">
 <td><strong>Cumulative</strong></td>
-<td class="cum">39,156</td>
-<td class="cum">84,270</td>
-<td class="cum">121,584</td>
-<td class="cum">158,898</td>
-<td class="cum">196,212</td>
-<td class="cum">207,526</td>
-<td class="cum" style="color:var(--amber);">224,240</td>
-<td class="cum" style="color:var(--rose);">240,954</td>
-<td class="cum" style="color:var(--rose);">257,668</td>
-<td class="cum" style="color:var(--rose);">274,382</td>
-<td class="cum" style="color:var(--rose);">291,096</td>
-<td class="cum" style="color:var(--rose);">307,810</td>
+<td class="cum"><span class="pa">39,156</span><span class="pb">42,156</span></td>
+<td class="cum"><span class="pa">84,270</span><span class="pb">86,770</span></td>
+<td class="cum"><span class="pa">121,584</span><span class="pb">123,584</span></td>
+<td class="cum"><span class="pa">158,898</span><span class="pb">160,398</span></td>
+<td class="cum"><span class="pa">196,212</span><span class="pb">197,212</span></td>
+<td class="cum"><span class="pa">207,526</span><span class="pb">210,026</span></td>
+<td class="cum" style="color:var(--amber);"><span class="pa">224,240</span><span class="pb">226,740</span></td>
+<td class="cum" style="color:var(--rose);"><span class="pa">240,954</span><span class="pb">243,454</span></td>
+<td class="cum" style="color:var(--rose);"><span class="pa">257,668</span><span class="pb">260,168</span></td>
+<td class="cum" style="color:var(--rose);"><span class="pa">274,382</span><span class="pb">276,882</span></td>
+<td class="cum" style="color:var(--rose);"><span class="pa">291,096</span><span class="pb">293,596</span></td>
+<td class="cum" style="color:var(--rose);"><span class="pa">307,810</span><span class="pb">310,310</span></td>
 <td class="cum">—</td>
 </tr>
 <tr>
 <td>Operating budget remaining</td>
-<td>$175K</td>
-<td>$130K</td>
-<td>$93K</td>
-<td>$55K</td>
-<td>$18K</td>
-<td style="color:var(--green);">+$7K</td>
-<td style="color:var(--rose);">−$10K</td>
-<td style="color:var(--rose);">−$27K</td>
-<td style="color:var(--rose);">−$44K</td>
-<td style="color:var(--rose);">−$60K</td>
-<td style="color:var(--rose);">−$77K</td>
-<td style="color:var(--rose);">−$94K</td>
+<td><span class="pa">$175K</span><span class="pb">$172K</span></td>
+<td><span class="pa">$130K</span><span class="pb">$128K</span></td>
+<td><span class="pa">$93K</span><span class="pb">$91K</span></td>
+<td><span class="pa">$55K</span><span class="pb">$54K</span></td>
+<td><span class="pa">$18K</span><span class="pb">$17K</span></td>
+<td style="color:var(--green);"><span class="pa">+$7K</span><span class="pb">+$4.5K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$10K</span><span class="pb">−$12K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$27K</span><span class="pb">−$29K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$44K</span><span class="pb">−$46K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$60K</span><span class="pb">−$62K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$77K</span><span class="pb">−$79K</span></td>
+<td style="color:var(--rose);"><span class="pa">−$94K</span><span class="pb">−$96K</span></td>
 <td>—</td>
 </tr>
 </tbody>
@@ -699,8 +772,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 <div class="note-box warn" style="margin-top:18px;">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
-<div><strong>Reading the table (M1 includes salaries + clipping prepay):</strong> <strong>M1 = onboarding active</strong> &mdash; Cubeia AWS + security hardware + CR corp + <strong>salaries $5K (team active from day 1)</strong> + <strong>Clipping 250K SEK prepay ($23.8K)</strong> = $39.2K total. Recurring base + Designer + Betby one-times start M2. M2&ndash;M5 marketing $23K/mo (BH + PS + Streamer; clipping already prepaid) + <strong>$3K/mo promotional pool</strong> (community giveaways, race boosts, streamer codes). M6 retention test (no marketing). M6 ends with +$7K cushion, M7 falls to &minus;$10K. Annual: $307.8K total.</div>
+<div><strong>Reading the table (M1 includes salaries + clipping prepay):</strong> <strong>M1 = onboarding active</strong> &mdash; Cubeia AWS + security hardware + CR corp + <strong>salaries $5K (team active from day 1)</strong> + <strong>Clipping 250K SEK prepay ($23.8K)</strong> = <span class="pa">$39.2K</span><span class="pb">$42.2K (incl. $3K onboarding-flow consultant)</span> total. Recurring base + Designer + Betby one-times start M2. <span class="pa">M2&ndash;M5 marketing $23K/mo (BH 15K + PS 4.5K + Streamer 3.5K; clipping already prepaid)</span><span class="pb">M2&ndash;M5 marketing $22.5K/mo (BH 7.5K + PS 6K + Streamer 7.5K + community mgr 1.5K; clipping already prepaid)</span> + <strong>$3K/mo promotional pool</strong> (community giveaways, race boosts, streamer codes). M6 retention test (no acquisition marketing). M6 ends with <span class="pa">+$7K</span><span class="pb">+$4.5K</span> cushion, M7 falls to <span class="pa">&minus;$10K</span><span class="pb">&minus;$12K</span>. Annual: <span class="pa">$307.8K</span><span class="pb">$310.3K</span> total.</div>
 </div>
+<p class="path-note">Charts in §03&ndash;§04 below are illustrative and track the Path&nbsp;A shape; Path&nbsp;B totals differ by ~+$2.5K/yr (&lt;1%), so the curves are visually identical.</p>
 </section>
 <!-- ONE-TIME COSTS -->
 <section class="section" id="onetime">
@@ -1113,6 +1187,24 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
   else{init();}
+})();
+</script>
+<script>
+(function(){
+  function setPath(p){
+    var b=document.body;
+    b.classList.remove('path-a','path-b');
+    b.classList.add('path-'+p);
+    document.querySelectorAll('.path-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.path===p);
+    });
+    try{localStorage.setItem('goluna-path',p)}catch(e){}
+  }
+  window.setPath=setPath;
+  var saved='a';
+  try{saved=localStorage.getItem('goluna-path')||'a'}catch(e){}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setPath(saved)});}
+  else{setPath(saved);}
 })();
 </script>
 <script>
