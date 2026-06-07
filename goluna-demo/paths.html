@@ -74,6 +74,13 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
 .section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
 .subtitle { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+/* Scannable key-point list */
+.kp { list-style: none; margin: 0 0 22px; padding: 0; max-width: 920px; }
+.kp li { position: relative; padding: 8px 0 8px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.55; border-bottom: 1px solid var(--border); }
+.kp li:last-child { border-bottom: none; }
+.kp li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 2px; background: var(--accent); }
+.kp li strong { color: var(--text); font-weight: 600; }
+.lead { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; max-width: 920px; }
 
 /* Path summary cards */
 .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
@@ -231,7 +238,12 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="hero-date">v0.1 &middot; May 2026</span>
     </div>
     <h1>Growth Paths — A vs B</h1>
-    <p>Two budgets for the same 6-month validation window. <strong>Path A</strong> is what the rest of the dashboard currently models — acquisition-volume optimised, standard crypto-casino playbook. <strong>Path B</strong> is the retention-first alternative, reshuffled around the insight that bonus-hunters acquired cheaply cost more than retained players acquired expensively. Same total spend, very different shape, very different M7+ run-rate.</p>
+    <p>Two budgets, same 6-month window, same total spend.</p>
+    <ul class="kp" style="margin-top:14px;">
+      <li><strong>Path A — acquisition volume.</strong> The standard crypto-casino playbook the rest of the dashboard models.</li>
+      <li><strong>Path B — retention first.</strong> Built on one insight: cheap bonus-hunters cost more than expensive retained players.</li>
+      <li><strong>Same spend, very different M7+ run-rate.</strong></li>
+    </ul>
   </section>
 
   <!-- Currency note -->
@@ -260,7 +272,14 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="who">Casino operator mentor &middot; LinkedIn excerpt</span>
     </div>
 
-    <p class="section-intro">Applied to GoLuna: the current marketing stack is weighted toward BH Ads (43% of M1&ndash;M6 marketing), which is structurally the bonus-hunter channel. The Revenue P&amp;L assumes <strong>LTV ~$130 per FTD over 6 months</strong>, but that implicitly requires a 2nd-deposit rate around 35&ndash;40%. Industry default for a poorly-engineered onboarding flow is 22&ndash;25%. If the model is wrong by that gap, M1&ndash;M6 cumulative NP comes in $80&ndash;120K below the +$7K base case. Path B is the structural alternative that earns the assumed LTV instead of hoping for it.</p>
+    <p class="lead">Applied to GoLuna:</p>
+    <ul class="kp">
+      <li><strong>The channel mix leans bonus-hunter.</strong> BH Ads = 43% of M1&ndash;M6 marketing — structurally the bonus-hunter channel.</li>
+      <li><strong>The LTV assumption is load-bearing.</strong> The Revenue P&amp;L assumes ~$130 LTV per FTD (6 mo) — which needs a 2nd-deposit rate of 35&ndash;40%.</li>
+      <li><strong>The realistic default is lower.</strong> Poorly-engineered onboarding runs 22&ndash;25%.</li>
+      <li><strong>The gap is ~$80&ndash;120K.</strong> If LTV is off by that margin, M1&ndash;M6 cumulative NP lands $80&ndash;120K below the +$7K base case.</li>
+      <li><strong>Path B earns the LTV</strong> instead of hoping for it.</li>
+    </ul>
 
     <div class="note-box cyan">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>

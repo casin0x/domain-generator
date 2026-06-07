@@ -78,6 +78,13 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
 .section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
 .subtitle { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+/* Scannable key-point list */
+.kp { list-style: none; margin: 0 0 22px; padding: 0; max-width: 920px; }
+.kp li { position: relative; padding: 8px 0 8px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.55; border-bottom: 1px solid var(--border); }
+.kp li:last-child { border-bottom: none; }
+.kp li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 2px; background: var(--accent); }
+.kp li strong { color: var(--text); font-weight: 600; }
+.lead { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; max-width: 920px; }
 .metrics-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
 .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; position: relative; overflow: hidden; }
 .metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -248,7 +255,13 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="hero-date">v0.1 &middot; May 2026</span>
     </div>
     <h1>Capital Allocation &amp; Distribution Policy</h1>
-    <p>This document is a <strong>proposal for discussion</strong>, not a policy in force. It sets out a recommended framework for how monthly Net Profit should be split between reinvestment and investor distribution, the thresholds that should be met before any cash leaves the company, and the questions that need investor input before this becomes the working policy. Nothing here is final until we have aligned together.</p>
+    <p class="lead">This document is a <strong>proposal for discussion</strong>, not a policy in force. It sets out a recommended framework for:</p>
+    <ul class="kp">
+      <li><strong>The split.</strong> How monthly Net Profit should be divided between reinvestment and investor distribution.</li>
+      <li><strong>The thresholds.</strong> What should be met before any cash leaves the company.</li>
+      <li><strong>The open questions.</strong> What needs investor input before this becomes the working policy.</li>
+      <li><strong>Nothing is final yet.</strong> Nothing here is final until we have aligned together.</li>
+    </ul>
   </section>
 
   <div class="note-box info">
@@ -304,7 +317,13 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">01</span>
       <span class="section-title">The Question We Need to Align On</span>
     </div>
-    <p class="section-intro">From M7 onward, every profitable month produces cash. That cash has two basic destinations: reinvested into the business to grow the next month&rsquo;s profit, or distributed to investors as a return on their capital. The right answer is rarely &ldquo;all of one.&rdquo; What we need to agree on is the <em>split</em>, the <em>milestones</em> at which the split changes, and the <em>conditions</em> that must hold before any cash starts moving out.</p>
+    <p class="lead">From M7 onward, every profitable month produces cash. That cash has two basic destinations:</p>
+    <ul class="kp">
+      <li><strong>Reinvest.</strong> Put cash back into the business to grow the next month&rsquo;s profit.</li>
+      <li><strong>Distribute.</strong> Pay cash to investors as a return on their capital.</li>
+      <li><strong>Rarely all of one.</strong> The right answer is almost never 100% to a single destination.</li>
+      <li><strong>What we must agree.</strong> The <em>split</em>, the <em>milestones</em> at which it changes, and the <em>conditions</em> that must hold before any cash moves out.</li>
+    </ul>
 
     <div class="two-col">
       <div class="side-card reinvest">
@@ -339,7 +358,11 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">02</span>
       <span class="section-title">Proposed Capital Allocation Hierarchy</span>
     </div>
-    <p class="section-intro">Each month&rsquo;s Net Profit, after the 10% loyalty envelope (5% paid to operators + 5% accrued to the Reserve Pool, per the Partnership Plan), is allocated in the priority order below. Each tier is funded to its target before the next tier receives anything. Distributions sit at the bottom of the stack on purpose: they only happen once the operating, growth, and resilience capital is in place.</p>
+    <p class="lead">Each month&rsquo;s Net Profit, after the 10% loyalty envelope (5% paid to operators + 5% accrued to the Reserve Pool, per the Partnership Plan), is allocated in the priority order below.</p>
+    <ul class="kp">
+      <li><strong>Tier by tier.</strong> Each tier is funded to its target before the next tier receives anything.</li>
+      <li><strong>Distributions sit last on purpose.</strong> They only happen once the operating, growth, and resilience capital is in place.</li>
+    </ul>
 
     <div class="priority-list">
       <div class="priority-item p1">
@@ -442,7 +465,13 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">03</span>
       <span class="section-title">Proposed Distribution Activation Threshold</span>
     </div>
-    <p class="section-intro">The four conditions below should all hold before any distribution begins. The intent is to make sure the first cheque to investors is paid from a business with proven repeatability, an insulated bankroll, a real cash buffer, and enough operating history that the result is not a one-month spike.</p>
+    <p class="lead">The four conditions below should all hold before any distribution begins. The intent is to make sure the first cheque to investors is paid from a business with:</p>
+    <ul class="kp">
+      <li><strong>Proven repeatability.</strong> Profit that holds, not a one-off.</li>
+      <li><strong>An insulated bankroll.</strong> Player winnings secured.</li>
+      <li><strong>A real cash buffer.</strong> Downside protection in reserve.</li>
+      <li><strong>Enough operating history.</strong> So the result is not a one-month spike.</li>
+    </ul>
 
     <div class="precondition-grid">
       <div class="pc-card">
@@ -484,7 +513,12 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 
     <div class="note-box warn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>All four conditions must hold simultaneously.</strong> If the bankroll is funded but only two profitable months have occurred, distributions stay at zero. The threshold is conservative on purpose; relaxing any condition individually is a discussion to have with investors, not a unilateral decision.</div>
+      <div><strong>All four conditions must hold simultaneously.</strong>
+        <ul class="kp" style="margin:8px 0 0;">
+          <li><strong>No partial credit.</strong> If the bankroll is funded but only two profitable months have occurred, distributions stay at zero.</li>
+          <li><strong>Conservative on purpose.</strong> Relaxing any condition individually is a discussion to have with investors, not a unilateral decision.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -518,7 +552,15 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>How the percentages work.</strong>&nbsp; Distribution % is calculated on the Net Profit figure <em>after</em> the 10% loyalty envelope has been allocated (5% paid to operators monthly + 5% accrued to the Reserve Pool). At $100K monthly NP, the envelope is $10K, leaving $90K of after-envelope NP. The 10% distribution band would then pay $9K to investors and retain $81K. The retained amount flows through the hierarchy in &sect;02 in priority order. The Reserve Pool cash remains in the operating account until deployed and so is still available for working-capital use; it is not, however, available for investor distribution.</div>
+      <div><strong>How the percentages work.</strong>
+        <ul class="kp" style="margin:8px 0 0;">
+          <li><strong>Calculated after the envelope.</strong> Distribution % applies to the Net Profit figure <em>after</em> the 10% loyalty envelope is allocated (5% paid to operators monthly + 5% accrued to the Reserve Pool).</li>
+          <li><strong>Worked example at $100K NP.</strong> The envelope is $10K, leaving $90K of after-envelope NP.</li>
+          <li><strong>The 10% band pays $9K.</strong> Investors get $9K; $81K is retained.</li>
+          <li><strong>Retained cash flows down the stack.</strong> It moves through the hierarchy in &sect;02 in priority order.</li>
+          <li><strong>Reserve Pool is working capital, not payout.</strong> It stays in the operating account until deployed and remains available for working-capital use; it is not available for investor distribution.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -528,7 +570,11 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">05</span>
       <span class="section-title">What Retained Capital Funds, in Order</span>
     </div>
-    <p class="section-intro">Retained earnings should not sit on the balance sheet without a use. The table below outlines the specific deployment targets and what each one buys the business. Investors should be able to see, in any given quarter, which line items the retained earnings actually went to.</p>
+    <p class="lead">Retained earnings should not sit on the balance sheet without a use.</p>
+    <ul class="kp">
+      <li><strong>The table sets the targets.</strong> It outlines the specific deployment targets and what each one buys the business.</li>
+      <li><strong>Traceable every quarter.</strong> Investors should be able to see which line items the retained earnings actually went to.</li>
+    </ul>
 
     <table class="lit" style="margin-bottom:24px;">
       <thead>
@@ -558,7 +604,11 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">06</span>
       <span class="section-title">The Diminishing Returns Signal</span>
     </div>
-    <p class="section-intro">Reinvesting indefinitely is not the goal. Past a certain point, retained earnings stop earning their cost of capital and become idle balance-sheet cash. When the signals below start to appear, the bias should shift from &ldquo;retain heavily&rdquo; to &ldquo;distribute more aggressively&rdquo; &mdash; even if the NP band would otherwise suggest a lower payout percentage.</p>
+    <p class="lead">Reinvesting indefinitely is not the goal.</p>
+    <ul class="kp">
+      <li><strong>Returns eventually fade.</strong> Past a certain point, retained earnings stop earning their cost of capital and become idle balance-sheet cash.</li>
+      <li><strong>Shift the bias when signals appear.</strong> Move from &ldquo;retain heavily&rdquo; to &ldquo;distribute more aggressively&rdquo; &mdash; even if the NP band would otherwise suggest a lower payout percentage.</li>
+    </ul>
 
     <table class="lit">
       <thead>
@@ -584,7 +634,11 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <span class="section-num">07</span>
       <span class="section-title">Proposed Review Cadence</span>
     </div>
-    <p class="section-intro">This policy should be a living document, not a fire-and-forget contract. Two review cadences are proposed: a regular quarterly check with investors, and a set of mandatory review triggers that bring the policy back to the table outside the regular cadence.</p>
+    <p class="lead">This policy should be a living document, not a fire-and-forget contract. Two review cadences are proposed:</p>
+    <ul class="kp">
+      <li><strong>Regular quarterly check.</strong> A standing review with investors.</li>
+      <li><strong>Mandatory triggers.</strong> A set of events that bring the policy back to the table outside the regular cadence.</li>
+    </ul>
 
     <table class="lit">
       <thead>

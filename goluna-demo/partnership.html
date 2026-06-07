@@ -89,6 +89,13 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 .section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--accent-dim); color: var(--accent); }
 .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
 .section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
+/* Scannable key-point list */
+.kp { list-style: none; margin: 0 0 22px; padding: 0; max-width: 920px; }
+.kp li { position: relative; padding: 8px 0 8px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.55; border-bottom: 1px solid var(--border); }
+.kp li:last-child { border-bottom: none; }
+.kp li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 2px; background: var(--accent); }
+.kp li strong { color: var(--text); font-weight: 600; }
+.lead { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; max-width: 920px; }
 
 /* Metrics strip */
 .metrics-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 32px; }
@@ -264,7 +271,12 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="hero-date">v1.0 &middot; May 2026</span>
     </div>
     <h1>Operating Team Profit-Share Plan</h1>
-    <p>This document sets out the profit-share arrangement between GoLuna and the three founding members of its operating team. It is written to be read by both <strong>investors</strong> and the <strong>operating team</strong>, so that the same figures, mechanics, and reasoning are visible to everyone. Nothing in this document conflicts with the cap table or equity arrangements; this plan addresses operating-team compensation only.</p>
+    <p>The profit-share arrangement between GoLuna and the three founding members of its operating team:</p>
+    <ul class="kp" style="margin-top:14px;">
+      <li><strong>Written for both audiences.</strong> Read by both <strong>investors</strong> and the <strong>operating team</strong>, so the same figures, mechanics, and reasoning are visible to everyone.</li>
+      <li><strong>No conflict with equity.</strong> Nothing here conflicts with the cap table or equity arrangements.</li>
+      <li><strong>Scope: operating-team comp only.</strong> This plan addresses operating-team compensation only.</li>
+    </ul>
   </section>
 
   <!-- Currency note -->
@@ -319,7 +331,15 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">01</span>
       <span class="section-title">Plan Summary</span>
     </div>
-    <p class="section-intro">In a single paragraph: when GoLuna&rsquo;s monthly Net Profit exceeds $25,000, <strong>ten percent of that month&rsquo;s Net Profit is allocated to the operating-team loyalty envelope</strong>. Half of the envelope (5% of NP) is paid out monthly to the three current members &mdash; <strong>2% to Owl, 1.5% each to Toro and Gibbiana</strong>. The other half (5% of NP) accumulates in a <strong>Reserve Pool</strong> earmarked for future loyalty-plan deployment: new hires joining the plan, scope-expansion bumps for existing members, or discretionary milestone bonuses. Each individual paid share is capped at $25,000 per month. Settlement is monthly, based on that month&rsquo;s realised Net Profit. The plan applies exclusively to the named members and the Reserve; investor distributions continue to be governed separately by the company&rsquo;s equity arrangements.</p>
+    <p class="lead">The plan in short:</p>
+    <ul class="kp">
+      <li><strong>Activates above $25,000 monthly NP.</strong> When GoLuna&rsquo;s monthly Net Profit exceeds $25,000, <strong>ten percent of that month&rsquo;s Net Profit is allocated to the operating-team loyalty envelope</strong>.</li>
+      <li><strong>Half paid out (5% of NP).</strong> Paid monthly to the three current members &mdash; <strong>2% to Owl, 1.5% each to Toro and Gibbiana</strong>.</li>
+      <li><strong>Half to a Reserve Pool (5% of NP).</strong> Accumulates in a <strong>Reserve Pool</strong> earmarked for future loyalty-plan deployment: new hires joining the plan, scope-expansion bumps for existing members, or discretionary milestone bonuses.</li>
+      <li><strong>Per-person cap.</strong> Each individual paid share is capped at $25,000 per month.</li>
+      <li><strong>Monthly settlement.</strong> Based on that month&rsquo;s realised Net Profit.</li>
+      <li><strong>Named members and Reserve only.</strong> Investor distributions continue to be governed separately by the company&rsquo;s equity arrangements.</li>
+    </ul>
 
     <div class="note-box green">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -333,7 +353,12 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">02</span>
       <span class="section-title">The Operating Team</span>
     </div>
-    <p class="section-intro">The three members below have been with GoLuna from inception. Each holds a specialised operational scope. Their current base salaries reflect the early-stage nature of the company and were accepted on the understanding that meaningful upside would be delivered through this plan once the business reaches sustained profitability.</p>
+    <p class="lead">The three members below:</p>
+    <ul class="kp">
+      <li><strong>With GoLuna from inception.</strong> Each holds a specialised operational scope.</li>
+      <li><strong>Early-stage base salaries.</strong> Current bases reflect the early-stage nature of the company.</li>
+      <li><strong>Upside via this plan.</strong> Accepted on the understanding that meaningful upside would be delivered through this plan once the business reaches sustained profitability.</li>
+    </ul>
 
     <div class="people-grid">
       <div class="person-card toro">
@@ -383,7 +408,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">03</span>
       <span class="section-title">How the Plan Works</span>
     </div>
-    <p class="section-intro">The mechanics are deliberately simple. There is one rate, one threshold, one cap, and one distribution method. Each operates independently of the others, which keeps the monthly settlement straightforward to calculate and audit.</p>
+    <p class="lead">The mechanics are deliberately simple &mdash; one rate, one threshold, one cap, one distribution method:</p>
+    <ul class="kp">
+      <li><strong>Each operates independently.</strong> None depends on the others.</li>
+      <li><strong>Easy to settle.</strong> Keeps the monthly settlement straightforward to calculate and audit.</li>
+    </ul>
 
     <table class="lit" style="margin-bottom:24px;">
       <thead>
@@ -448,7 +477,12 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">04</span>
       <span class="section-title">Compensation Projections</span>
     </div>
-    <p class="section-intro">The table below shows total monthly compensation for each member across a range of monthly Net Profit scenarios, alongside the approximate monthly Gross Gaming Revenue (GGR) required to produce that level of Net Profit. The GGR column accounts for all variable costs &mdash; including the full bonus structure &mdash; and the M7+ fixed operating costs, so the figures are net of every recurring expense the company is committed to. Real performance will vary month to month; the annualised figure is shown to make the scale intuitive, not as a forecast.</p>
+    <p class="lead">The table below shows total monthly compensation per member across a range of monthly Net Profit scenarios:</p>
+    <ul class="kp">
+      <li><strong>GGR required, shown alongside.</strong> The approximate monthly Gross Gaming Revenue (GGR) required to produce that level of Net Profit.</li>
+      <li><strong>Net of every recurring expense.</strong> The GGR column accounts for all variable costs &mdash; including the full bonus structure &mdash; and the M7+ fixed operating costs.</li>
+      <li><strong>Scenarios, not forecasts.</strong> Real performance will vary month to month; the annualised figure is shown to make the scale intuitive, not as a forecast.</li>
+    </ul>
 
     <h3 class="subtitle">How GGR converts to Net Profit</h3>
     <p style="font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:14px;max-width:920px;">The cascade below uses the standard variable-cost stack and the M7+ fixed-operating-cost run-rate. Both are baked into every &ldquo;GGR required&rdquo; figure in the projection table that follows.</p>
@@ -513,7 +547,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">05</span>
       <span class="section-title">Reasoning &mdash; Why This Structure</span>
     </div>
-    <p class="section-intro">The plan was designed to be defensible from both sides of the table. The two cards below set out the reasoning specifically from each audience&rsquo;s perspective. The same structure underlies both views; the framing is different because the audiences are different.</p>
+    <p class="lead">The plan was designed to be defensible from both sides of the table:</p>
+    <ul class="kp">
+      <li><strong>Reasoning per audience.</strong> The two cards below set out the reasoning specifically from each audience&rsquo;s perspective.</li>
+      <li><strong>One structure, two framings.</strong> The same structure underlies both views; the framing is different because the audiences are different.</li>
+    </ul>
 
     <div class="two-col">
       <div class="side-card invest">
@@ -550,7 +588,12 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">06</span>
       <span class="section-title">Calibration Check</span>
     </div>
-    <p class="section-intro">The two tables below show the same plan from two angles. The first looks at what proportion of company Net Profit flows to the pool versus stays with the company; this is the view investors typically care about. The second looks at the per-person annualised compensation; this is the view that matters to the operating team. Both should reconcile to the same picture: balanced, scaled with success, capped at a reasonable upper bound.</p>
+    <p class="lead">The two tables below show the same plan from two angles:</p>
+    <ul class="kp">
+      <li><strong>View A &mdash; investor angle.</strong> What proportion of company Net Profit flows to the pool versus stays with the company; the view investors typically care about.</li>
+      <li><strong>View B &mdash; team angle.</strong> The per-person annualised compensation; the view that matters to the operating team.</li>
+      <li><strong>Both reconcile to one picture.</strong> Balanced, scaled with success, capped at a reasonable upper bound.</li>
+    </ul>
 
     <h3 class="subtitle">View A &middot; Investor perspective &middot; Envelope, paid out, accrued to Reserve, retained</h3>
     <table class="lit" style="margin-bottom:32px;">
