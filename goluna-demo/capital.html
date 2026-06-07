@@ -193,6 +193,14 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .subnav.has-scroll::after { opacity: 1; }
 .subnav-inner::-webkit-scrollbar { height: 0; }
 
+
+/* === Glossary popover === */
+.gloss { border-bottom: 1px dotted var(--text-muted); cursor: help; transition: color .12s, border-color .12s; }
+.gloss:hover, .gloss:focus { color: var(--text); border-bottom-color: var(--accent); outline: none; }
+#gloss-pop { position: fixed; z-index: 2000; max-width: 300px; background: var(--surface-3); border: 1px solid var(--border-hover); border-radius: 10px; padding: 12px 14px; box-shadow: 0 10px 34px rgba(0,0,0,0.55); font-family: var(--font); font-size: 12.5px; line-height: 1.55; color: var(--text-secondary); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .12s, transform .12s; }
+#gloss-pop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+#gloss-pop .gp-t { display: block; font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 5px; }
+
 </style>
 </head>
 <body>
@@ -730,6 +738,83 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wrap);
   else wrap();
+})();
+</script>
+
+
+<script>
+/* Glossary popover */
+(function(){
+  var G = {"GGR": {"t": "Gross Gaming Revenue", "d": "Total player stakes minus winnings paid out. The casino's raw revenue, before bonuses, fees or taxes.", "m": "a"}, "NGR": {"t": "Net Gaming Revenue", "d": "GGR minus bonuses, payment fees and gaming taxes. What's left before operating costs.", "m": "a"}, "ARPU": {"t": "Average Revenue Per User", "d": "GGR divided by all active players in a period.", "m": "a"}, "ARPPU": {"t": "Average Revenue Per Paying User", "d": "Revenue per depositing player only. Always higher than ARPU.", "m": "a"}, "CPA": {"t": "Cost Per Acquisition", "d": "Marketing spend to acquire one depositing player. Also a flat affiliate payout model.", "m": "a"}, "FTD": {"t": "First-Time Deposit(or)", "d": "A player's first real-money deposit, or a newly-acquired depositing player.", "m": "a"}, "LTV": {"t": "Lifetime Value", "d": "Total net revenue a player generates over their whole lifetime with the casino.", "m": "a"}, "KYC": {"t": "Know Your Customer", "d": "Identity verification (ID, address) required before withdrawals or at set thresholds.", "m": "a"}, "AML": {"t": "Anti-Money-Laundering", "d": "Controls to detect and stop money being laundered through the platform.", "m": "a"}, "SoF": {"t": "Source of Funds", "d": "Proof of where a player's money came from, requested at higher deposit/withdrawal thresholds.", "m": "a"}, "RTP": {"t": "Return To Player", "d": "The % of stakes a game pays back over time (e.g. 96%). The inverse of house edge.", "m": "a"}, "EBITDA": {"t": "Earnings Before Interest, Tax, Depreciation & Amortisation", "d": "A common proxy for operating profit.", "m": "a"}, "P&L": {"t": "Profit & Loss", "d": "The statement showing revenue minus all costs to arrive at profit.", "m": "a"}, "NP": {"t": "Net Profit", "d": "What remains after all costs (variable, fixed, taxes) are deducted from revenue.", "m": "a"}, "TAM": {"t": "Total Addressable Market", "d": "The full revenue opportunity if you reached every possible customer.", "m": "a"}, "ROI": {"t": "Return On Investment", "d": "Profit generated relative to the money put in.", "m": "a"}, "CAC": {"t": "Customer Acquisition Cost", "d": "Total cost to win one new customer; broader than CPA (includes all marketing).", "m": "a"}, "VIP": {"t": "Very Important Player", "d": "High-value players given dedicated management, higher limits and tailored bonuses. Drive a large share of GGR.", "m": "a"}, "PIX": {"t": "Brazil's instant payment system", "d": "Free, instant bank transfers run by Brazil's Central Bank. ~96% of regulated betting uses it. GoLuna is crypto-only, so it serves only as a fiat-to-crypto on-ramp.", "m": "w"}, "USDT": {"t": "Tether (stablecoin)", "d": "A crypto pegged 1:1 to the US dollar. USDT-on-Tron is the cheapest rail and GoLuna's default deposit currency.", "m": "a"}, "BTC": {"t": "Bitcoin", "d": "The primary cryptocurrency. Accepted for deposits/withdrawals; max-win caps are often denominated in BTC.", "m": "a"}, "uBTC": {"t": "Micro-Bitcoin", "d": "One millionth of a BTC (0.000001 BTC). Used for small-balance display on some platforms.", "m": "a"}, "D30": {"t": "Day-30 retention", "d": "The share of players still active 30 days after they joined. A key cohort-health metric.", "m": "a"}, "Originals": {"t": "In-house casino games", "d": "'Provably-fair' games (crash, dice, plinko, mines) built by the operator. Higher margin than 3rd-party slots.", "m": "a"}, "rev-share": {"t": "Revenue Share", "d": "An affiliate is paid an ongoing % of the revenue their referred players generate, instead of a flat CPA.", "m": "w"}, "whitelabel": {"t": "White-label platform", "d": "A ready-made casino platform you brand as your own. GoLuna runs on the Betplay/Betpanda chassis via Cubeia.", "m": "w"}, "bankroll": {"t": "Bankroll", "d": "The cash/crypto reserve held to pay out player winnings. Must cover worst-case payouts, not just the average.", "m": "w"}, "house edge": {"t": "House edge", "d": "The operator's built-in margin on a game = 100% minus RTP. A 4% edge means the house keeps ~4% of stakes long-term.", "m": "w"}, "bonus hunter": {"t": "Bonus hunter", "d": "A player who exploits welcome bonuses and promos for value, then leaves without ever becoming profitable.", "m": "w"}, "churn": {"t": "Churn", "d": "The rate at which players stop playing / leave over a period. The opposite of retention.", "m": "w"}, "cohort": {"t": "Cohort", "d": "A group of players bucketed by when they joined, then tracked over time to measure retention.", "m": "w"}, "on-ramp": {"t": "On-ramp", "d": "A service that converts fiat money (e.g. via PIX) into crypto so a player can deposit. GoLuna players on-ramp off-platform.", "m": "w"}, "wagering": {"t": "Wagering requirement", "d": "How many times a bonus (or deposit) must be bet before winnings can be withdrawn, e.g. 30x.", "m": "w"}};
+  function esc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function reFor(term, mode){
+    var e = esc(term);
+    if(mode === 'a') return new RegExp('(?<![A-Za-z0-9])' + e + '(?![A-Za-z0-9])');
+    return new RegExp('(?<![A-Za-z])' + e + '(?![A-Za-z])', 'i');
+  }
+  function wrapTerms(){
+    var root = document.querySelector('.page'); if(!root) return;
+    var keys = Object.keys(G).sort(function(a,b){ return b.length - a.length; });
+    keys.forEach(function(term){
+      var def = G[term], re = reFor(term, def.m);
+      var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(n){
+          if(!n.nodeValue || n.nodeValue.length < 2) return NodeFilter.FILTER_REJECT;
+          if(!re.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+          var p = n.parentElement;
+          while(p && p !== root.parentElement){
+            var tag = p.tagName;
+            if(tag === 'A' || tag === 'BUTTON' || tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+            if(p.classList && p.classList.contains('gloss')) return NodeFilter.FILTER_REJECT;
+            p = p.parentElement;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var node = tw.nextNode(); if(!node) return;
+      var m = node.nodeValue.match(re); if(!m) return;
+      var rest = node.splitText(m.index);
+      rest.nodeValue = rest.nodeValue.slice(m[0].length);
+      var span = document.createElement('span');
+      span.className = 'gloss'; span.tabIndex = 0; span.setAttribute('role', 'button');
+      span.setAttribute('aria-label', def.t + ': ' + def.d);
+      span.setAttribute('data-t', def.t); span.setAttribute('data-d', def.d);
+      span.textContent = m[0];
+      rest.parentNode.insertBefore(span, rest);
+    });
+  }
+  var pop, ht;
+  function ensurePop(){
+    if(pop) return;
+    pop = document.createElement('div'); pop.id = 'gloss-pop';
+    pop.innerHTML = '<span class="gp-t"></span><span class="gp-d"></span>';
+    document.body.appendChild(pop);
+    pop.addEventListener('mouseenter', function(){ clearTimeout(ht); });
+    pop.addEventListener('mouseleave', function(){ ht = setTimeout(hide, 150); });
+  }
+  function show(el){
+    ensurePop();
+    pop.querySelector('.gp-t').textContent = el.getAttribute('data-t');
+    pop.querySelector('.gp-d').textContent = el.getAttribute('data-d');
+    pop.classList.add('show');
+    var r = el.getBoundingClientRect(), pr = pop.getBoundingClientRect();
+    var left = r.left, top = r.bottom + 8;
+    if(left + pr.width > window.innerWidth - 12) left = window.innerWidth - 12 - pr.width;
+    if(left < 12) left = 12;
+    if(top + pr.height > window.innerHeight - 12) top = r.top - 8 - pr.height;
+    if(top < 12) top = 12;
+    pop.style.left = left + 'px'; pop.style.top = top + 'px';
+  }
+  function hide(){ if(pop) pop.classList.remove('show'); }
+  function init(){
+    try { wrapTerms(); } catch(e){ return; }
+    document.addEventListener('mouseover', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ clearTimeout(ht); show(g); } });
+    document.addEventListener('mouseout', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ ht = setTimeout(hide, 150); } });
+    document.addEventListener('click', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ e.preventDefault(); clearTimeout(ht); show(g); } else if(!(e.target.closest && e.target.closest('#gloss-pop'))){ hide(); } });
+    document.addEventListener('focusin', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g) show(g); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
 
