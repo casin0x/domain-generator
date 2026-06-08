@@ -90,6 +90,23 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .path-card.b::before { background: var(--cyan); }
 .path-card.c::before { background: var(--purple); }
 .path-card.c .label { color: var(--purple); }
+/* Headline metric strip (forecast-style) */
+.metrics-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 8px 0 36px; }
+.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; position: relative; overflow: hidden; }
+.metric-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.metric-card.cyan::before { background: var(--cyan); }
+.metric-card.accent::before { background: var(--accent); }
+.metric-card.purple::before { background: var(--purple); }
+.metric-card.green::before { background: var(--green); }
+.metric-card.amber::before { background: var(--amber); }
+.metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px; }
+.metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 5px; }
+.metric-card .val.cyan { color: var(--cyan); }
+.metric-card .val.accent { color: var(--accent); }
+.metric-card .val.purple { color: var(--purple); }
+.metric-card .val.green { color: var(--green); }
+.metric-card .val.amber { color: var(--amber); }
+.metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); line-height: 1.5; }
 .path-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
 .path-card.a .label { color: var(--amber); }
 .path-card.b .label { color: var(--cyan); }
@@ -246,6 +263,35 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
   <div class="note-box info">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
     <div><strong>Figures in USD</strong> (SEK / EUR where useful), at <strong>1 USD &asymp; 10.5 SEK</strong> &middot; <strong>1 EUR &asymp; $1.08 &asymp; 11.34 SEK</strong>. Anzil&rsquo;s own proposal is in EUR and marked a <em>preliminary working draft</em> &mdash; CACs and volumes are indicative, not guaranteed.</div>
+  </div>
+
+  <!-- HEADLINE METRIC STRIP -->
+  <div class="metrics-strip">
+    <div class="metric-card cyan">
+      <div class="label">Working budget</div>
+      <div class="val cyan">2M SEK</div>
+      <div class="sub">~$190K &middot; bankroll held separately</div>
+    </div>
+    <div class="metric-card accent">
+      <div class="label">GoLuna fixed kept</div>
+      <div class="val accent">~$69.7K</div>
+      <div class="sub">staff &middot; security &middot; Claude &middot; Cubeia fees</div>
+    </div>
+    <div class="metric-card purple">
+      <div class="label">Anzil cap (max)</div>
+      <div class="val purple">$112.5K</div>
+      <div class="sub">5 lines + $18K buffer &middot; your ceiling</div>
+    </div>
+    <div class="metric-card green">
+      <div class="label">Actual media to players</div>
+      <div class="val green">~$91K</div>
+      <div class="sub">81% of cap &middot; after Anzil fees</div>
+    </div>
+    <div class="metric-card amber">
+      <div class="label">Expected FTDs</div>
+      <div class="val amber">~3.6&ndash;7.6K</div>
+      <div class="sub">Brazil CAC &middot; ~39% of Anzil&rsquo;s full eg.</div>
+    </div>
   </div>
 
   <!-- §01 THE MODEL -->
