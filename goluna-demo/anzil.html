@@ -511,52 +511,56 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 
   <!-- §06 FLYWHEEL -->
   <section class="section" id="flywheel">
-    <div class="section-label"><span class="section-num">06</span><span class="section-title">The Reinvestment Flywheel — What Has to Be True</span></div>
-    <p class="lead">If you reinvest every dollar of revenue you can, growth compounds only when a Brazilian player repays their acquisition cost <em>faster than the ~$74K bridge runs down</em>. This is <strong>not a forecast</strong> &mdash; GoLuna has no live CAC or retention data yet. It&rsquo;s the set of thresholds your <strong>real</strong> numbers have to beat. Measure against them at M4.</p>
+    <div class="section-label"><span class="section-num">06</span><span class="section-title">The Reinvestment Flywheel — Conservative Brazil Case</span></div>
+    <p class="lead">Reinvest-all-revenue compounds only if a Brazilian player repays their acquisition cost faster than the ~$74K bridge runs down. Run here on <strong>conservative, market-grounded inputs</strong> &mdash; Anzil&rsquo;s CAC, Brazil&rsquo;s regulated-market ARPU, a deliberately <strong>high</strong> (still-unknown) PIX fee, and a <strong>low</strong> + <strong>medium</strong> retention window. No optimism baked in.</p>
 
     <div class="note-box warn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Read this before trusting any number below.</strong> The two load-bearing inputs are <strong>unmeasured</strong>: <strong>CAC</strong> ($12&ndash;25 is <em>Anzil&rsquo;s own preliminary estimate</em> &mdash; the counterparty&rsquo;s) and <strong>net revenue per player</strong> (no GoLuna data exists &mdash; the figures below are illustrative placeholders). Crypto-only + PIX on-ramp friction likely pushes your <em>real</em> CAC above a PIX-native operator&rsquo;s. Treat every figure here as &ldquo;what to verify,&rdquo; not &ldquo;what will happen.&rdquo;</div>
+      <div><strong>Basis &amp; honesty.</strong> These are <em>market benchmarks, not GoLuna-measured data.</em> ARPU is the <strong>regulated</strong>-market average &mdash; a brand-new unlicensed crypto brand may run under it. <strong>CAC</strong> trusts Anzil&rsquo;s estimate. The <strong>PIX fee is a high guess</strong> (you don&rsquo;t know it yet; unlicensed on-ramps cost more). A model to <em>verify at M4</em>, not a promise.</div>
     </div>
 
-    <p class="subtitle">The mechanism, in three lines</p>
-    <ul class="kp">
-      <li><strong>Reinvestable surplus</strong> = 56.5% net contribution &minus; ~$14.7K/mo fixed run-rate. Early (low GGR) it&rsquo;s thin or negative &mdash; the ~$74K bridge covers the gap (~5 months of runway).</li>
-      <li><strong>Payback period</strong> = CAC &divide; net contribution per active player per month. Under full reinvestment, this <em>is</em> your compounding speed.</li>
-      <li><strong>The test:</strong> payback has to clear before the bridge empties. Sub-2-month payback compounds; 5-month-plus payback drains the bridge before the wheel spins &mdash; that&rsquo;s a kill.</li>
-    </ul>
+    <p class="subtitle">Inputs &mdash; conservative, market-grounded</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <tbody>
+        <tr><td>CAC / FTD <span style="font-size:10px;color:var(--text-muted);">Anzil estimate $12&ndash;25 &middot; we use the cautious end</span></td><td class="num">$20</td></tr>
+        <tr><td>ARPU <span style="font-size:10px;color:var(--text-muted);">GGR / active player / mo &middot; Brazil regulated avg, H1-25 (~BRL 164)</span></td><td class="num">$30/mo</td></tr>
+        <tr><td>Payments incl. PIX on-ramp <span style="font-size:10px;color:var(--text-muted);">3% crypto + ~5% PIX &middot; HIGH est., unlicensed</span></td><td class="num" style="color:var(--rose);">~8%</td></tr>
+        <tr class="total"><td>Net contribution margin <span style="font-size:10px;color:var(--text-muted);">56.5% before PIX &rarr; PIX high-est. drops it</span></td><td class="num">51.5%</td></tr>
+        <tr><td>Net contribution / player / mo <span style="font-size:10px;color:var(--text-muted);">$30 &times; 51.5%</span></td><td class="num" style="color:var(--green);">~$15.5</td></tr>
+      </tbody>
+    </table>
 
-    <p class="subtitle">What payback does to the flywheel &mdash; illustrative scenarios</p>
+    <p class="subtitle">Outcome &mdash; two retention windows (low + medium only)</p>
     <div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border); margin-bottom:18px;">
     <table class="lit" style="border:none; border-radius:0;">
       <thead><tr>
-        <th>Scenario <span style="text-transform:none;letter-spacing:0;color:var(--text-muted);font-weight:400;">(illustrative inputs &mdash; replace w/ M4 data)</span></th>
-        <th style="text-align:right;">CAC / FTD</th>
-        <th style="text-align:right;">Net / player / mo</th>
+        <th>Retention window</th>
+        <th style="text-align:right;">Avg active life</th>
+        <th style="text-align:right;">Net LTV</th>
         <th style="text-align:right;">Payback</th>
-        <th>Flywheel verdict</th>
+        <th style="text-align:right;">LTV : CAC</th>
+        <th>Verdict</th>
       </tr></thead>
       <tbody>
-        <tr><td>Anzil&rsquo;s pitch <span style="font-size:10px;color:var(--text-muted);">their CAC, optimistic</span></td><td class="num">$18</td><td class="num">$30</td><td class="num" style="color:var(--green);">~0.6 mo</td><td class="cat" style="color:var(--green);">Spins fast &mdash; compounds before M4</td></tr>
-        <tr class="total"><td>Cautious base <span style="font-size:10px;color:var(--text-muted);">realistic BR + crypto friction</span></td><td class="num">$35</td><td class="num">$18</td><td class="num" style="color:var(--amber);">~1.9 mo</td><td class="cat" style="color:var(--amber);">Works only if bridge + retention hold</td></tr>
-        <tr><td>Tough Brazil <span style="font-size:10px;color:var(--text-muted);">contested market, weak retention</span></td><td class="num">$65</td><td class="num">$12</td><td class="num" style="color:var(--rose);">~5.4 mo</td><td class="cat" style="color:var(--rose);">Bridge dies first &mdash; kill at M4</td></tr>
+        <tr><td>Conservative-low <span style="font-size:10px;color:var(--text-muted);">D30 ~15% &middot; heavy early churn</span></td><td class="num">~2 mo</td><td class="num">~$31</td><td class="num" style="color:var(--green);">~1.3 mo</td><td class="num" style="color:var(--amber);">~1.5&times;</td><td class="cat" style="color:var(--amber);">Pays back, barely compounds</td></tr>
+        <tr class="total"><td>Medium <span style="font-size:10px;color:var(--text-muted);">D30 ~25% &middot; steadier cohort</span></td><td class="num">~4 mo</td><td class="num">~$62</td><td class="num" style="color:var(--green);">~1.3 mo</td><td class="num" style="color:var(--green);">~3.1&times;</td><td class="cat" style="color:var(--green);">Healthy &mdash; flywheel spins</td></tr>
       </tbody>
     </table>
     </div>
-    <p style="font-size:11px;color:var(--text-muted);margin:-6px 0 18px;">Payback = CAC &divide; net-per-player-per-month. The CAC and net-per-player columns are placeholders, not measured GoLuna data &mdash; the point is the <em>relationship</em>, so you know which thresholds to watch.</p>
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>This makes the M4 gate concrete.</strong> At M4, measure the <em>real</em> CAC and the M2 cohort&rsquo;s actual repaid-CAC&nbsp;%. Payback trending <strong>under ~2 months &rarr; GO</strong> (pour reinvested GGR into Anzil). Payback <strong>3 months-plus &rarr; KILL</strong> &mdash; the flywheel can&rsquo;t outrun the bridge, and more capital won&rsquo;t fix a broken payback.</div>
+      <div><strong>The honest read:</strong> on these conservative numbers the model <em>can</em> work &mdash; payback (~1.3 mo) clears the &lt;2-month bar in both cases. The swing factor is <strong>retention</strong>: low is a thin ~1.5&times; (survives, doesn&rsquo;t compound), medium is a healthy ~3.1&times;. So the M4 question isn&rsquo;t &ldquo;did we acquire players&rdquo; &mdash; it&rsquo;s &ldquo;<strong>are they still here in month&nbsp;2.</strong>&rdquo;</div>
     </div>
 
-    <p class="subtitle">Before you commit the thesis</p>
+    <p class="subtitle">What still has to hold</p>
     <ul class="kp">
-      <li><strong>The CAC is the counterparty&rsquo;s.</strong> $12&ndash;25 is Anzil&rsquo;s preliminary number. Spend the cheapest possible M2 test to get <em>your</em> CAC before betting on the model.</li>
-      <li><strong>Crypto-only is a tax in Brazil.</strong> PIX-native rivals skip the on-ramp step you can&rsquo;t &mdash; the likeliest reason real CAC lands high.</li>
-      <li><strong>Reinvest-all and kill-at-M4 pull against each other.</strong> Compounding needs time; a 4-month gate barely tests it &mdash; consider an M5 read on the M2&ndash;M3 cohorts before the final call.</li>
-      <li><strong>Trim bonuses to speed the wheel.</strong> 25% of GGR is the biggest drag on payback; under reinvestment, every point cut compounds.</li>
+      <li><strong>Real CAC &asymp; Anzil&rsquo;s.</strong> If crypto/PIX friction pushes CAC to ~$40, the low-retention case drops under 1&times; LTV:CAC &mdash; dead. The M2 test settles it.</li>
+      <li><strong>ARPU reaches ~market.</strong> $30 is the <em>regulated</em> average; a new crypto brand may start below it. Track real GGR/player from week 1.</li>
+      <li><strong>PIX fee lands &le; the 5% high guess.</strong> Every point over 5% comes straight off the 51.5% margin and lengthens payback.</li>
+      <li><strong>Retention clears at least the low window.</strong> Below ~2-month average life, even cheap CAC won&rsquo;t compound &mdash; spend the leftover on the retention engine to push toward medium.</li>
     </ul>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px;">Basis: Brazil regulated ARPU ~BRL 164/mo (~$30), H1 2025; D30 retention industry avg ~15&ndash;25%; CAC per Anzil. Market benchmarks &mdash; not GoLuna data. Note: &sect;05 still uses 56.5% (pre-PIX); if the PIX fee confirms, &sect;05 should re-base to ~51.5%.</p>
   </section>
 
   <!-- §07 COMPARE -->
