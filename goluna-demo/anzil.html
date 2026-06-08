@@ -288,17 +288,17 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
     <p>Instead of running acquisition in-house (Paths A &amp; B), GoLuna hands LATAM player acquisition to <strong>Anzil Media</strong> &mdash; one accountable partner running Meta media, WhatsApp, influencers and fiat&harr;crypto payments across <strong>Brazil, Chile &amp; Argentina</strong>. This page maps exactly what Anzil charges, how a <strong>2M SEK</strong> budget flows through it, and whether the marketing allocation is actually enough.</p>
   </section>
 
-  <div class="note-box info">
+  <div class="note-box info" data-nofx>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    <div><strong>Figures in USD</strong> (SEK / EUR where useful), at <strong>1 USD &asymp; 10.5 SEK</strong> &middot; <strong>1 EUR &asymp; $1.08 &asymp; 11.34 SEK</strong>. Anzil&rsquo;s own proposal is in EUR and marked a <em>preliminary working draft</em> &mdash; CACs and volumes are indicative, not guaranteed.</div>
+    <div><strong>Currency</strong> <span class="fx-switch"><button class="fx-switch-btn" data-cur="usd">USD</button><button class="fx-switch-btn" data-cur="sek">SEK</button><button class="fx-switch-btn" data-cur="eur">EUR</button></span> &mdash; flips every figure on the page. <strong>FX:</strong> 1 USD &asymp; 10.5 SEK &middot; 1 EUR &asymp; $1.08 &asymp; 11.34 SEK. Anzil&rsquo;s own proposal is in EUR and marked a <em>preliminary working draft</em> &mdash; CACs and volumes are indicative, not guaranteed.</div>
   </div>
 
   <!-- HEADLINE METRIC STRIP -->
   <div class="metrics-strip">
     <div class="metric-card cyan">
       <div class="label">Working budget</div>
-      <div class="val cyan">2M SEK</div>
-      <div class="sub">~$190K &middot; bankroll held separately</div>
+      <div class="val cyan">$190K</div>
+      <div class="sub">operating &middot; bankroll held separately</div>
     </div>
     <div class="metric-card accent">
       <div class="label">GoLuna fixed kept</div>
@@ -375,31 +375,31 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
   <section class="section" id="flow">
     <div class="section-label"><span class="section-num">03</span><span class="section-title">Month-by-Month Forecast (Path C)</span></div>
     <p class="section-intro">Same month-by-month table as the <a href="forecast.html" style="color:var(--accent);">Forecast</a> page &mdash; GoLuna&rsquo;s fixed stack plus Anzil&rsquo;s lines (in <span style="color:var(--purple);font-weight:600;">purple</span>). <strong>Anzil setup + retainer are fixed</strong>; the media + 15% management are the acquisition spend across the M2&ndash;M4 pilot, with M5 a separate clipping content push. All figures USD. Operating budget = 2M SEK (~$190K) working budget.</p>
-    <div class="fc-toggle-wrap"><button class="fc-toggle-btn" type="button" onclick="toggleAnzilMonths(this)"><span class="cx">&#9656;</span> <span class="lbl">Show M6&ndash;M12</span></button><span class="fc-toggle-hint">M6&ndash;M12 hidden &mdash; the M1&ndash;M5 launch window in focus. Click to expand the full 12 months.</span></div>
+    <div class="fc-toggle-wrap"><button class="fc-toggle-btn" type="button" onclick="toggleAnzilMonths(this)"><span class="cx">&#9656;</span> <span class="lbl">Show M6&ndash;M12</span></button><span class="fc-toggle-hint">M6&ndash;M12 hidden &mdash; the M1&ndash;M5 pilot window in focus. Click to expand the full 12 months.</span></div>
     <div class="fc-table-wrap"><table class="fc-table fold5">
     <thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th class="col-rest">M6</th><th class="col-rest">M7</th><th class="col-rest">M8</th><th class="col-rest">M9</th><th class="col-rest">M10</th><th class="col-rest">M11</th><th class="col-rest">M12</th><th>12-mo</th></tr></thead>
     <tbody>
-    <tr><td>Salaries (T+O+G)</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="col-rest">5,000</td><td class="cum">60,000</td></tr>
-    <tr><td>X VIP Transfer Method</td><td class="zero">0</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="col-rest">1,143</td><td class="cum">12,573</td></tr>
-    <tr><td>Cubeia AWS hosting</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="col-rest">1,836</td><td class="cum">22,032</td></tr>
-    <tr><td>Customer.io (Cubeia App. B)</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="col-rest">324</td><td class="cum">3,888</td></tr>
-    <tr><td>Freshchat (Cubeia App. B)</td><td class="zero">0</td><td>54</td><td>54</td><td>54</td><td>54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="col-rest">54</td><td class="cum">594</td></tr>
-    <tr><td>Cubeia platform min</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="col-rest">5,400</td><td class="col-rest">5,400</td><td class="col-rest">5,400</td><td class="col-rest">5,400</td><td class="col-rest">5,400</td><td class="col-rest">5,400</td><td class="cum">32,400</td></tr>
-    <tr><td>Security stack subs</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="col-rest">281</td><td class="cum">3,372</td></tr>
-    <tr><td>Claude Max</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="col-rest">200</td><td class="cum">2,400</td></tr>
-    <tr><td>Security stack — hardware</td><td>1,652</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">1,652</td></tr>
-    <tr><td>Costa Rica corp (2026)</td><td>6,858</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">6,858</td></tr>
-    <tr><td>Designer (casino design)</td><td>4,800</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">4,800</td></tr>
-    <tr><td>Betby setup (sportsbook)</td><td>3,000</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">3,000</td></tr>
-    <tr><td>Other subscriptions</td><td class="zero">0</td><td>476</td><td>476</td><td>476</td><td>476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="col-rest">476</td><td class="cum">5,236</td></tr>
-    <tr><td>Clipping campaign <span style="font-size:10px;color:var(--text-muted);">M5 content push · 250K SEK</span></td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td>25,000</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">25,000</td></tr>
-    <tr class="anzil"><td>Anzil setup <span style="font-size:10px;color:var(--text-muted);">FIXED · €3K M1</span></td><td>3,240</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">3,240</td></tr>
-    <tr class="anzil"><td>Anzil retainer <span style="font-size:10px;color:var(--text-muted);">FIXED · €1.5K/mo M2–M4</span></td><td class="zero">0</td><td>1,620</td><td>1,620</td><td>1,620</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">4,860</td></tr>
-    <tr class="anzil"><td>Anzil media (Meta+WhatsApp+influencer) <span style="font-size:10px;color:var(--text-muted);">M2–M4 pilot</span></td><td class="zero">0</td><td>15,000</td><td>25,000</td><td>29,000</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">69,000</td></tr>
-    <tr class="anzil"><td>Anzil management <span style="font-size:10px;color:var(--text-muted);">15% of media · flexible</span></td><td class="zero">0</td><td>2,250</td><td>3,750</td><td>4,350</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum">10,350</td></tr>
-    <tr style="border-top:1px solid var(--border-hover);"><td><strong>Monthly total</strong></td><td class="month-tot">27,191</td><td class="month-tot">28,184</td><td class="month-tot">39,684</td><td class="month-tot">44,284</td><td class="month-tot">34,314</td><td class="month-tot col-rest">9,314</td><td class="month-tot col-rest">14,714</td><td class="month-tot col-rest">14,714</td><td class="month-tot col-rest">14,714</td><td class="month-tot col-rest">14,714</td><td class="month-tot col-rest">14,714</td><td class="month-tot col-rest">14,714</td><td class="month-tot" style="color:var(--purple);">271,255</td></tr>
-    <tr class="grace-end"><td><strong>Cumulative</strong></td><td class="cum" style="">27,191</td><td class="cum" style="">55,375</td><td class="cum" style="">95,059</td><td class="cum" style="">139,343</td><td class="cum" style="">173,657</td><td class="cum col-rest" style="color:var(--amber);">182,971</td><td class="cum col-rest" style="color:var(--rose);">197,685</td><td class="cum col-rest" style="color:var(--rose);">212,399</td><td class="cum col-rest" style="color:var(--rose);">227,113</td><td class="cum col-rest" style="color:var(--rose);">241,827</td><td class="cum col-rest" style="color:var(--rose);">256,541</td><td class="cum col-rest" style="color:var(--rose);">271,255</td><td class="cum">&mdash;</td></tr>
-    <tr><td>Operating budget remaining <span style="font-size:10px;color:var(--text-muted);">vs $190K (2M SEK)</span></td><td class="" style="color:var(--text-secondary);">$163K</td><td class="" style="color:var(--text-secondary);">$135K</td><td class="" style="color:var(--text-secondary);">$95K</td><td class="" style="color:var(--text-secondary);">$51K</td><td class="" style="color:var(--green);">$17K</td><td class="col-rest" style="color:var(--green);">+$8K</td><td class="col-rest" style="color:var(--rose);">&minus;$7K</td><td class="col-rest" style="color:var(--rose);">&minus;$22K</td><td class="col-rest" style="color:var(--rose);">&minus;$37K</td><td class="col-rest" style="color:var(--rose);">&minus;$51K</td><td class="col-rest" style="color:var(--rose);">&minus;$66K</td><td class="col-rest" style="color:var(--rose);">&minus;$81K</td><td>&mdash;</td></tr>
+    <tr><td>Salaries (T+O+G)</td><td data-usd="5000" data-fmt="full">5,000</td><td data-usd="5000" data-fmt="full">5,000</td><td data-usd="5000" data-fmt="full">5,000</td><td data-usd="5000" data-fmt="full">5,000</td><td data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="col-rest" data-usd="5000" data-fmt="full">5,000</td><td class="cum" data-usd="60000" data-fmt="full">60,000</td></tr>
+    <tr><td>X VIP Transfer Method</td><td class="zero">0</td><td data-usd="1143" data-fmt="full">1,143</td><td data-usd="1143" data-fmt="full">1,143</td><td data-usd="1143" data-fmt="full">1,143</td><td data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="col-rest" data-usd="1143" data-fmt="full">1,143</td><td class="cum" data-usd="12573" data-fmt="full">12,573</td></tr>
+    <tr><td>Cubeia AWS hosting</td><td data-usd="1836" data-fmt="full">1,836</td><td data-usd="1836" data-fmt="full">1,836</td><td data-usd="1836" data-fmt="full">1,836</td><td data-usd="1836" data-fmt="full">1,836</td><td data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="col-rest" data-usd="1836" data-fmt="full">1,836</td><td class="cum" data-usd="22032" data-fmt="full">22,032</td></tr>
+    <tr><td>Customer.io (Cubeia App. B)</td><td data-usd="324" data-fmt="full">324</td><td data-usd="324" data-fmt="full">324</td><td data-usd="324" data-fmt="full">324</td><td data-usd="324" data-fmt="full">324</td><td data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="col-rest" data-usd="324" data-fmt="full">324</td><td class="cum" data-usd="3888" data-fmt="full">3,888</td></tr>
+    <tr><td>Freshchat (Cubeia App. B)</td><td class="zero">0</td><td data-usd="54" data-fmt="full">54</td><td data-usd="54" data-fmt="full">54</td><td data-usd="54" data-fmt="full">54</td><td data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="col-rest" data-usd="54" data-fmt="full">54</td><td class="cum" data-usd="594" data-fmt="full">594</td></tr>
+    <tr><td>Cubeia platform min</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="col-rest" data-usd="5400" data-fmt="full">5,400</td><td class="cum" data-usd="32400" data-fmt="full">32,400</td></tr>
+    <tr><td>Security stack subs</td><td data-usd="281" data-fmt="full">281</td><td data-usd="281" data-fmt="full">281</td><td data-usd="281" data-fmt="full">281</td><td data-usd="281" data-fmt="full">281</td><td data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="col-rest" data-usd="281" data-fmt="full">281</td><td class="cum" data-usd="3372" data-fmt="full">3,372</td></tr>
+    <tr><td>Claude Max</td><td data-usd="200" data-fmt="full">200</td><td data-usd="200" data-fmt="full">200</td><td data-usd="200" data-fmt="full">200</td><td data-usd="200" data-fmt="full">200</td><td data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="col-rest" data-usd="200" data-fmt="full">200</td><td class="cum" data-usd="2400" data-fmt="full">2,400</td></tr>
+    <tr><td>Security stack — hardware</td><td data-usd="1652" data-fmt="full">1,652</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="1652" data-fmt="full">1,652</td></tr>
+    <tr><td>Costa Rica corp (2026)</td><td data-usd="6858" data-fmt="full">6,858</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="6858" data-fmt="full">6,858</td></tr>
+    <tr><td>Designer (casino design)</td><td data-usd="4800" data-fmt="full">4,800</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="4800" data-fmt="full">4,800</td></tr>
+    <tr><td>Betby setup (sportsbook)</td><td data-usd="3000" data-fmt="full">3,000</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="3000" data-fmt="full">3,000</td></tr>
+    <tr><td>Other subscriptions</td><td class="zero">0</td><td data-usd="476" data-fmt="full">476</td><td data-usd="476" data-fmt="full">476</td><td data-usd="476" data-fmt="full">476</td><td data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="col-rest" data-usd="476" data-fmt="full">476</td><td class="cum" data-usd="5236" data-fmt="full">5,236</td></tr>
+    <tr><td>Clipping campaign <span style="font-size:10px;color:var(--text-muted);">M5 content push · 250K SEK</span></td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td data-usd="25000" data-fmt="full">25,000</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="25000" data-fmt="full">25,000</td></tr>
+    <tr class="anzil"><td>Anzil setup <span style="font-size:10px;color:var(--text-muted);">FIXED · €3K M1</span></td><td data-usd="3240" data-fmt="full">3,240</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="3240" data-fmt="full">3,240</td></tr>
+    <tr class="anzil"><td>Anzil retainer <span style="font-size:10px;color:var(--text-muted);">FIXED · €1.5K/mo M2–M4</span></td><td class="zero">0</td><td data-usd="1620" data-fmt="full">1,620</td><td data-usd="1620" data-fmt="full">1,620</td><td data-usd="1620" data-fmt="full">1,620</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="4860" data-fmt="full">4,860</td></tr>
+    <tr class="anzil"><td>Anzil media (Meta+WhatsApp+influencer) <span style="font-size:10px;color:var(--text-muted);">M2–M4 pilot</span></td><td class="zero">0</td><td data-usd="15000" data-fmt="full">15,000</td><td data-usd="25000" data-fmt="full">25,000</td><td data-usd="29000" data-fmt="full">29,000</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="69000" data-fmt="full">69,000</td></tr>
+    <tr class="anzil"><td>Anzil management <span style="font-size:10px;color:var(--text-muted);">15% of media · flexible</span></td><td class="zero">0</td><td data-usd="2250" data-fmt="full">2,250</td><td data-usd="3750" data-fmt="full">3,750</td><td data-usd="4350" data-fmt="full">4,350</td><td class="zero">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="zero col-rest">0</td><td class="cum" data-usd="10350" data-fmt="full">10,350</td></tr>
+    <tr style="border-top:1px solid var(--border-hover);"><td><strong>Monthly total</strong></td><td class="month-tot" data-usd="27191" data-fmt="full">27,191</td><td class="month-tot" data-usd="28184" data-fmt="full">28,184</td><td class="month-tot" data-usd="39684" data-fmt="full">39,684</td><td class="month-tot" data-usd="44284" data-fmt="full">44,284</td><td class="month-tot" data-usd="34314" data-fmt="full">34,314</td><td class="month-tot col-rest" data-usd="9314" data-fmt="full">9,314</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot col-rest" data-usd="14714" data-fmt="full">14,714</td><td class="month-tot" style="color:var(--purple);" data-usd="271255" data-fmt="full">271,255</td></tr>
+    <tr class="grace-end"><td><strong>Cumulative</strong></td><td class="cum" style="" data-usd="27191" data-fmt="full">27,191</td><td class="cum" style="" data-usd="55375" data-fmt="full">55,375</td><td class="cum" style="" data-usd="95059" data-fmt="full">95,059</td><td class="cum" style="" data-usd="139343" data-fmt="full">139,343</td><td class="cum" style="" data-usd="173657" data-fmt="full">173,657</td><td class="cum col-rest" style="color:var(--amber);" data-usd="182971" data-fmt="full">182,971</td><td class="cum col-rest" style="color:var(--rose);" data-usd="197685" data-fmt="full">197,685</td><td class="cum col-rest" style="color:var(--rose);" data-usd="212399" data-fmt="full">212,399</td><td class="cum col-rest" style="color:var(--rose);" data-usd="227113" data-fmt="full">227,113</td><td class="cum col-rest" style="color:var(--rose);" data-usd="241827" data-fmt="full">241,827</td><td class="cum col-rest" style="color:var(--rose);" data-usd="256541" data-fmt="full">256,541</td><td class="cum col-rest" style="color:var(--rose);" data-usd="271255" data-fmt="full">271,255</td><td class="cum">&mdash;</td></tr>
+    <tr><td>Operating budget remaining <span style="font-size:10px;color:var(--text-muted);">vs $190K (2M SEK)</span></td><td class="" style="color:var(--text-secondary);" data-usd="163285" data-fmt="abbr">$163K</td><td class="" style="color:var(--text-secondary);" data-usd="135101" data-fmt="abbr">$135K</td><td class="" style="color:var(--text-secondary);" data-usd="95417" data-fmt="abbr">$95K</td><td class="" style="color:var(--text-secondary);" data-usd="51133" data-fmt="abbr">$51K</td><td class="" style="color:var(--green);" data-usd="16819" data-fmt="abbr">$17K</td><td class="col-rest" style="color:var(--green);" data-usd="7505" data-fmt="abbr" data-plus="1">+$8K</td><td class="col-rest" style="color:var(--rose);" data-usd="-7209" data-fmt="abbr" data-plus="1">&minus;$7K</td><td class="col-rest" style="color:var(--rose);" data-usd="-21923" data-fmt="abbr" data-plus="1">&minus;$22K</td><td class="col-rest" style="color:var(--rose);" data-usd="-36637" data-fmt="abbr" data-plus="1">&minus;$37K</td><td class="col-rest" style="color:var(--rose);" data-usd="-51351" data-fmt="abbr" data-plus="1">&minus;$51K</td><td class="col-rest" style="color:var(--rose);" data-usd="-66065" data-fmt="abbr" data-plus="1">&minus;$66K</td><td class="col-rest" style="color:var(--rose);" data-usd="-80779" data-fmt="abbr" data-plus="1">&minus;$81K</td><td>&mdash;</td></tr>
     </tbody>
     <tfoot><tr><td>Phase</td><td colspan="1" style="text-align:center;background:var(--cyan-dim);color:var(--cyan);">M1 · onboarding + Anzil setup</td><td colspan="3" style="text-align:center;background:var(--purple-dim);color:var(--purple);">M2–M4 · Anzil pilot (3-mo)</td><td colspan="1" style="text-align:center;background:var(--green-dim);color:var(--green);">M5 · clipping</td><td colspan="1" class="col-rest" style="text-align:center;background:var(--amber-dim);color:var(--amber);">M6 · retention test</td><td colspan="6" class="col-rest" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M7–M12 · fixed run-rate (cliff if no revenue)</td><td>&mdash;</td></tr></tfoot>
     </table></div>
@@ -547,15 +547,87 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 
 <script>
 (function(){
+  var RATES={usd:1, sek:10.5, eur:1/1.08}; // multiply a USD value by this
+  function dz(s){ return s.replace(/\.0$/,''); }
+  function abbr(v){
+    var a=Math.abs(v);
+    if(a>=1e9) return dz((a/1e9).toFixed(1))+'B';
+    if(a>=1e6) return dz((a/1e6).toFixed(1))+'M';
+    if(a>=1e3) return dz((a/1e3).toFixed(1))+'K';
+    return String(Math.round(a));
+  }
+  function grp(v){ return Math.round(Math.abs(v)).toLocaleString('en-US'); }
+  function money(usd, cur, ab){
+    var v=usd*RATES[cur];
+    var neg=v<0?'−':'';
+    var n=ab?abbr(v):grp(v);
+    if(cur==='sek') return neg+n+' kr';
+    return neg+(cur==='eur'?'€':'$')+n;
+  }
+  function rangeFmt(a,b,cur,ab){
+    var va=a*RATES[cur], vb=b*RATES[cur];
+    var na=ab?abbr(va):grp(va), nb=ab?abbr(vb):grp(vb);
+    if(cur==='sek') return na+'–'+nb+' kr';
+    var s=cur==='eur'?'€':'$';
+    return s+na+'–'+nb;
+  }
+  function render(el, cur){
+    var usd=parseFloat(el.getAttribute('data-usd'));
+    if(isNaN(usd)) return;
+    var ab=(el.getAttribute('data-fmt')==='abbr')||(el.getAttribute('data-ab')==='1');
+    var pre=el.getAttribute('data-pre')||'';
+    if(el.hasAttribute('data-range')){ el.textContent=pre+rangeFmt(usd, parseFloat(el.getAttribute('data-range')), cur, ab); return; }
+    var t=money(usd,cur,ab);
+    if(el.getAttribute('data-plus')==='1' && usd>0) t='+'+t;
+    el.textContent=pre+t;
+  }
+  function mult(s){ return s==='K'?1e3:s==='M'?1e6:s==='B'?1e9:1; }
+  var RE=/([+~]?)(−|-)?\$\s?(\d[\d,]*(?:\.\d+)?)\s?([KMB]?)(?:\s*[–—-]\s*(\d[\d,]*(?:\.\d+)?)\s?([KMB]?))?/g;
+  function tagify(node){
+    var t=node.nodeValue; if(!t || t.indexOf('$')<0) return;
+    RE.lastIndex=0; var m, last=0, frag=null;
+    while(m=RE.exec(t)){
+      if(!frag) frag=document.createDocumentFragment();
+      if(m.index>last) frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+      var pre=m[1]||'', neg=m[2]?-1:1;
+      var v1=parseFloat(m[3].replace(/,/g,''))*mult(m[4])*neg;
+      var ab=!!(m[4]||m[6]);
+      var sp=document.createElement('span'); sp.className='fxm';
+      sp.setAttribute('data-usd', v1);
+      if(ab) sp.setAttribute('data-ab','1');
+      if(pre) sp.setAttribute('data-pre', pre);
+      if(m[5]!==undefined) sp.setAttribute('data-range', parseFloat(m[5].replace(/,/g,''))*mult(m[6]||m[4]));
+      sp.textContent=m[0];
+      frag.appendChild(sp);
+      last=m.index+m[0].length;
+    }
+    if(frag){ if(last<t.length) frag.appendChild(document.createTextNode(t.slice(last))); node.parentNode.replaceChild(frag,node); }
+  }
+  function tagAll(){
+    var tw=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {acceptNode:function(n){
+      if(!n.nodeValue || n.nodeValue.indexOf('$')<0) return NodeFilter.FILTER_REJECT;
+      var p=n.parentNode;
+      while(p && p.nodeType===1){
+        var tag=p.tagName;
+        if(tag==='SCRIPT'||tag==='STYLE') return NodeFilter.FILTER_REJECT;
+        if(p.hasAttribute('data-nofx')||p.hasAttribute('data-usd')) return NodeFilter.FILTER_REJECT;
+        if(p.classList && p.classList.contains('fxm')) return NodeFilter.FILTER_REJECT;
+        p=p.parentNode;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }});
+    var nodes=[],n; while(n=tw.nextNode()) nodes.push(n);
+    nodes.forEach(tagify);
+  }
   function setCur(c){
     var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
     b.classList.add('fx-'+c);
-    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
-      btn.classList.toggle('active', btn.dataset.cur===c);
-    });
+    document.querySelectorAll('[data-usd]').forEach(function(el){ render(el,c); });
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){ btn.classList.toggle('active', btn.dataset.cur===c); });
     try{localStorage.setItem('goluna-fx',c)}catch(e){}
   }
   function init(){
+    tagAll();
     var saved='usd';
     try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
     setCur(saved);
