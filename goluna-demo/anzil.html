@@ -107,6 +107,25 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .metric-card .val.green { color: var(--green); }
 .metric-card .val.amber { color: var(--amber); }
 .metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+/* Forecast-style monthly table (1:1 with Forecast page) */
+.fc-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px; }
+.fc-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 12px; min-width: 1100px; }
+.fc-table th, .fc-table td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.fc-table th:first-child, .fc-table td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface-2); z-index: 2; font-weight: 700; color: var(--text); }
+.fc-table thead th { background: var(--surface-3); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; }
+.fc-table thead th:first-child { background: var(--surface-3); }
+.fc-table tbody tr:hover td { background: rgba(129,140,248,0.04); }
+.fc-table tbody tr:hover td:first-child { background: var(--surface-2); }
+.fc-table tbody td { color: var(--text-secondary); }
+.fc-table tbody td.zero { color: var(--text-muted); opacity: 0.4; }
+.fc-table tbody tr.grace-end td { border-bottom: 2px solid var(--amber-border); }
+.fc-table tbody td.month-tot { font-weight: 700; color: var(--text); background: rgba(167,139,250,0.06); }
+.fc-table tbody td.cum { font-weight: 700; color: var(--purple); }
+.fc-table tbody tr.anzil td:first-child { color: var(--purple); }
+.fc-table tfoot td { background: var(--surface-2); font-weight: 700; color: var(--text); border-top: 2px solid var(--border-hover); padding: 14px 12px; }
+.fc-table tfoot td:first-child { background: var(--surface-2); }
+
 .path-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
 .path-card.a .label { color: var(--amber); }
 .path-card.b .label { color: var(--cyan); }
@@ -345,72 +364,80 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 
   <!-- §03 MONEY FLOW -->
   <section class="section" id="flow">
-    <div class="section-label"><span class="section-num">03</span><span class="section-title">How the 2M SEK Is Used</span></div>
-    <p class="lead"><strong>2M SEK (~$190K) working budget.</strong> GoLuna keeps its fixed stack; the acquisition lines go to Anzil, capped at what you&rsquo;re willing to give. A buffer covers the unexpected.</p>
-    <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>Layer</th><th style="text-align:right;">USD</th><th>What it is</th></tr></thead>
-      <tbody>
-        <tr><td><strong>2M SEK working budget</strong></td><td class="num">~$190K</td><td class="cat">Bankroll (500K SEK) held separately, as in the Forecast</td></tr>
-        <tr><td>&minus; GoLuna fixed kept</td><td class="num">~$69.7K</td><td class="cat">Staff, security, Claude, Cubeia fees + core ops</td></tr>
-        <tr><td>&minus; Anzil allocation (your cap)</td><td class="num">~$112.5K</td><td class="cat">The 5 acquisition lines + $18K from buffer</td></tr>
-        <tr class="total"><td>= Buffer remaining</td><td class="num">~$8K</td><td class="cat">$26K buffer &minus; $18K moved to Anzil</td></tr>
-      </tbody>
-    </table>
-    <p class="subtitle">GoLuna keeps (fixed / internal, M1&ndash;M6) &mdash; ~$69.7K</p>
-    <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>Kept cost</th><th style="text-align:right;">M1&ndash;M6 USD</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr><td>Salaries (T+O+G) $5K/mo</td><td class="num">$30,000</td><td class="cat">Team active from day 1</td></tr>
-        <tr><td>Cubeia AWS hosting</td><td class="num">$11,016</td><td class="cat">&euro;1,700/mo &middot; required</td></tr>
-        <tr><td>Cubeia App.B (Customer.io + Freshchat)</td><td class="num">$1,890</td><td class="cat">CRM + support chat</td></tr>
-        <tr><td>Security stack (subs + hardware)</td><td class="num">$3,057</td><td class="cat">VPN, keys, 1Password</td></tr>
-        <tr><td>Claude Max</td><td class="num">$1,000</td><td class="cat">AI tooling</td></tr>
-        <tr><td>X VIP transfer method</td><td class="num">$5,715</td><td class="cat">Payments/ops</td></tr>
-        <tr><td>CR corp maintenance</td><td class="num">$6,858</td><td class="cat">Costa Rica entity (M1)</td></tr>
-        <tr><td>Designer + Betby setup</td><td class="num">$7,800</td><td class="cat">Casino design + sportsbook (M2)</td></tr>
-        <tr><td>Other subs</td><td class="num">$2,380</td><td class="cat">Tooling</td></tr>
-        <tr class="total"><td>= GoLuna fixed kept</td><td class="num">~$69,716</td><td class="cat">~732K SEK</td></tr>
-      </tbody>
-    </table>
-    <p class="subtitle">What gets handed to Anzil &mdash; the exact lines you&rsquo;ll give</p>
-    <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>Line</th><th style="text-align:right;">M1&ndash;M6 USD</th><th>Becomes (Anzil)</th></tr></thead>
-      <tbody>
-        <tr><td>BH Ads <span style="font-size:10px;color:var(--text-muted);">cut to half &middot; M2&ndash;M5 @ $7.5K</span></td><td class="num">$30,000</td><td class="cat">Meta media buying</td></tr>
-        <tr><td>Paid Social Promotions <span style="font-size:10px;color:var(--text-muted);">M2&ndash;M5 @ $6K</span></td><td class="num">$24,000</td><td class="cat">Meta media (community creative)</td></tr>
-        <tr><td>Streamer partnerships <span style="font-size:10px;color:var(--text-muted);">scaled up &middot; M2&ndash;M5 @ $7.5K</span></td><td class="num">$30,000</td><td class="cat">Influencer activation (BR)</td></tr>
-        <tr><td>Community manager <span style="font-size:10px;color:var(--text-muted);">M2&ndash;M6 @ $1.5K</span></td><td class="num">$7,500</td><td class="cat">Community reach</td></tr>
-        <tr><td>Onboarding / CRM-flow setup <span style="font-size:10px;color:var(--text-muted);">M1 one-off</span></td><td class="num">$3,000</td><td class="cat">= Anzil setup (&euro;3K)</td></tr>
-        <tr class="total"><td>= Anzil base allocation</td><td class="num">$94,500</td><td class="cat">the 5 lines</td></tr>
-        <tr><td>+ from buffer <span style="font-size:10px;color:var(--text-muted);">your call</span></td><td class="num" style="color:var(--amber);">+$18,000</td><td class="cat">leaves ~$8&ndash;10K buffer</td></tr>
-        <tr class="total"><td><strong>= Anzil cap (max)</strong></td><td class="num" style="color:var(--purple);">$112,500</td><td class="cat"><strong>nothing beyond this goes to Anzil</strong></td></tr>
-      </tbody>
-    </table>
-    <p class="subtitle">Of the $112.5K cap, who gets what</p>
-    <table class="lit">
-      <thead><tr><th>Slice</th><th style="text-align:right;">USD</th><th style="text-align:right;">% of cap</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Anzil cap</strong></td><td class="num">$112,500</td><td class="num">100%</td><td class="cat">your maximum</td></tr>
-        <tr><td>&minus; Setup (&euro;3K, one-time)</td><td class="num">$3,240</td><td class="num">3%</td><td class="cat">= the onboarding line</td></tr>
-        <tr><td>&minus; Retainer (&euro;1.5K &times; 3 mo)</td><td class="num">$4,860</td><td class="num">4%</td><td class="cat">advisory + reporting</td></tr>
-        <tr><td>&minus; Management 15%</td><td class="num">$13,617</td><td class="num">12%</td><td class="cat">10% account rentals + 5% trading</td></tr>
-        <tr class="total"><td>= Actual MEDIA reaching players</td><td class="num" style="color:var(--green);">~$90,783</td><td class="num">81%</td><td class="cat">the real ad spend driving FTDs</td></tr>
-      </tbody>
-    </table>
-    <div class="note-box info" style="margin-top:14px;">
+    <div class="section-label"><span class="section-num">03</span><span class="section-title">Month-by-Month Forecast (Path C)</span></div>
+    <p class="section-intro">Same month-by-month table as the <a href="forecast.html" style="color:var(--accent);">Forecast</a> page &mdash; GoLuna&rsquo;s fixed stack plus Anzil&rsquo;s lines (in <span style="color:var(--purple);font-weight:600;">purple</span>). <strong>Anzil setup + retainer are fixed</strong>; the media + 15% management are the acquisition spend across the M2&ndash;M5 pilot. All figures USD. Operating budget = 2M SEK (~$190K) working budget.</p>
+    <div class="fc-table-wrap"><table class="fc-table">
+<thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>M7</th><th>M8</th><th>M9</th><th>M10</th><th>M11</th><th>M12</th><th>12-mo</th></tr></thead>
+<tbody>
+<tr><td>Salaries (T+O+G)</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td>5,000</td><td class="cum">60,000</td></tr>
+<tr><td>X VIP Transfer Method</td><td class="zero">0</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td>1,143</td><td class="cum">12,573</td></tr>
+<tr><td>Cubeia AWS hosting</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td>1,836</td><td class="cum">22,032</td></tr>
+<tr><td>Customer.io (Cubeia App. B)</td><td class="zero">0</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td>324</td><td class="cum">3,564</td></tr>
+<tr><td>Freshchat (Cubeia App. B)</td><td class="zero">0</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td>54</td><td class="cum">594</td></tr>
+<tr><td>Cubeia platform min</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td>5,400</td><td class="cum">32,400</td></tr>
+<tr><td>Security stack subs</td><td class="zero">0</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td>281</td><td class="cum">3,091</td></tr>
+<tr><td>Claude Max</td><td class="zero">0</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td>200</td><td class="cum">2,200</td></tr>
+<tr><td>Security stack — hardware</td><td>1,652</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">1,652</td></tr>
+<tr><td>Costa Rica corp (2026)</td><td>6,858</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">6,858</td></tr>
+<tr><td>Designer (casino design)</td><td class="zero">0</td><td>4,800</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">4,800</td></tr>
+<tr><td>Betby setup (sportsbook)</td><td class="zero">0</td><td>3,000</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">3,000</td></tr>
+<tr><td>Other subscriptions</td><td class="zero">0</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td>476</td><td class="cum">5,236</td></tr>
+<tr class="anzil"><td>Anzil setup <span style="font-size:10px;color:var(--text-muted);">FIXED · €3K M1</span></td><td>3,240</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">3,240</td></tr>
+<tr class="anzil"><td>Anzil retainer <span style="font-size:10px;color:var(--text-muted);">FIXED · €1.5K/mo M2–M5</span></td><td class="zero">0</td><td>1,620</td><td>1,620</td><td>1,620</td><td>1,620</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">6,480</td></tr>
+<tr class="anzil"><td>Anzil media (Meta+WhatsApp+influencer) <span style="font-size:10px;color:var(--text-muted);">M2–M5</span></td><td class="zero">0</td><td>14,374</td><td>24,000</td><td>27,000</td><td>24,000</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">89,374</td></tr>
+<tr class="anzil"><td>Anzil management <span style="font-size:10px;color:var(--text-muted);">15% of media · flexible</span></td><td class="zero">0</td><td>2,156</td><td>3,600</td><td>4,050</td><td>3,600</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="cum">13,406</td></tr>
+<tr style="border-top:1px solid var(--border-hover);"><td><strong>Monthly total</strong></td><td class="month-tot">18,586</td><td class="month-tot">35,264</td><td class="month-tot">38,534</td><td class="month-tot">41,984</td><td class="month-tot">38,534</td><td class="month-tot">9,314</td><td class="month-tot">14,714</td><td class="month-tot">14,714</td><td class="month-tot">14,714</td><td class="month-tot">14,714</td><td class="month-tot">14,714</td><td class="month-tot">14,714</td><td class="month-tot" style="color:var(--purple);">270,500</td></tr>
+<tr class="grace-end"><td><strong>Cumulative</strong></td><td class="cum">18,586</td><td class="cum">53,850</td><td class="cum">92,384</td><td class="cum">134,368</td><td class="cum">172,902</td><td class="cum" style="color:var(--amber);">182,216</td><td class="cum" style="color:var(--rose);">196,930</td><td class="cum" style="color:var(--rose);">211,644</td><td class="cum" style="color:var(--rose);">226,358</td><td class="cum" style="color:var(--rose);">241,072</td><td class="cum" style="color:var(--rose);">255,786</td><td class="cum" style="color:var(--rose);">270,500</td><td class="cum">&mdash;</td></tr>
+<tr><td>Operating budget remaining <span style="font-size:10px;color:var(--text-muted);">vs $190K (2M SEK)</span></td><td style="color:var(--text-secondary);">$172K</td><td style="color:var(--text-secondary);">$137K</td><td style="color:var(--text-secondary);">$98K</td><td style="color:var(--text-secondary);">$56K</td><td style="color:var(--green);">$18K</td><td style="color:var(--green);">+$8K</td><td style="color:var(--rose);">&minus;$6K</td><td style="color:var(--rose);">&minus;$21K</td><td style="color:var(--rose);">&minus;$36K</td><td style="color:var(--rose);">&minus;$51K</td><td style="color:var(--rose);">&minus;$65K</td><td style="color:var(--rose);">&minus;$80K</td><td>&mdash;</td></tr>
+</tbody>
+<tfoot><tr><td>Phase</td><td colspan="1" style="text-align:center;background:var(--cyan-dim);color:var(--cyan);">M1 · onboarding + Anzil setup</td><td colspan="4" style="text-align:center;background:var(--purple-dim);color:var(--purple);">M2–M5 · Anzil acquisition pilot</td><td colspan="1" style="text-align:center;background:var(--amber-dim);color:var(--amber);">M6 · retention test</td><td colspan="6" style="text-align:center;background:var(--rose-dim);color:var(--rose);">M7–M12 · fixed run-rate (cliff if no revenue)</td><td>&mdash;</td></tr></tfoot>
+</table></div>
+    <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div>At your cap, Anzil&rsquo;s fee take is <strong>~19% ($21.7K)</strong> and <strong>~81% (~$91K) is real media</strong>. Buffer: $26K total &minus; $18K to Anzil = <strong>~$8K left</strong> (move $16K instead to keep a round $10K). Promotional pool / player giveaways are <em>not</em> in the Anzil line &mdash; run those from the buffer or fold into the 25% bonus reserve.</div>
+      <div><strong>Anzil total = $112,500</strong> (setup $3,240 + retainer $6,480 + media $89,374 + 15% management $13,406) &mdash; your cap. GoLuna fixed = $69.7K (M1&ndash;M6). M1&ndash;M6 spend $182.2K leaves a <strong>~$8K buffer</strong> against the 2M budget; M6 ends <strong>+$8K</strong>, the budget goes negative at <strong>M7</strong> if revenue hasn&rsquo;t taken over. Anzil&rsquo;s <strong>media + management are the only flexible (%-scaling) lines</strong> &mdash; setup &amp; retainer are fixed.</div>
     </div>
   </section>
 
-  <!-- §04 IS IT ENOUGH -->
+  <!-- §04 REVENUE & PROFIT AFTER % -->
+  <section class="section" id="margin">
+    <div class="section-label"><span class="section-num">04</span><span class="section-title">Revenue &amp; Profit — After the Flexible % Fees</span></div>
+    <p class="lead">Beyond the fixed spend above, money flows out as <strong>%-of-something</strong>: Anzil&rsquo;s 15% media management and payments fee, plus the standard variable stack on GGR. The upside: in Phase 1 there&rsquo;s <strong>no 9% affiliate commission</strong> (Anzil is a media-fee partner, not rev-share), so net contribution is <strong>56.5% of GGR</strong> &mdash; 9 points above Paths A/B.</p>
+    <p class="subtitle">Flexible %-based fees</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <thead><tr><th>Fee</th><th style="text-align:right;">Rate</th><th>Base</th></tr></thead>
+      <tbody>
+        <tr><td>Anzil media management</td><td class="num">15%</td><td class="cat">of media spend (10% account rentals + 5% trading) &mdash; ~$13.4K on $89.4K media</td></tr>
+        <tr><td>Anzil payments fee</td><td class="num">% TBD</td><td class="cat">transaction fee on processed deposit/withdrawal volume (PIX&harr;crypto)</td></tr>
+        <tr><td>Bonuses &amp; promo</td><td class="num">25%</td><td class="cat">of GGR</td></tr>
+        <tr><td>Cubeia platform</td><td class="num">5%</td><td class="cat">of GGR</td></tr>
+        <tr><td>Game providers (blended)</td><td class="num">~10.5%</td><td class="cat">of GGR</td></tr>
+        <tr><td>Crypto processing</td><td class="num">~3%</td><td class="cat">of GGR</td></tr>
+        <tr class="total"><td>= Net contribution to operator</td><td class="num" style="color:var(--green);">56.5%</td><td class="cat">vs 47.5% in Paths A/B (no 9% affiliate)</td></tr>
+      </tbody>
+    </table>
+    <p class="subtitle">Revenue example &mdash; monthly profit after all % (post-pilot run-rate)</p>
+    <table class="lit">
+      <thead><tr><th>Monthly GGR</th><th style="text-align:right;">Net contribution (56.5%)</th><th style="text-align:right;">&minus; GoLuna fixed run-rate (~$14.7K)</th><th style="text-align:right;">= Monthly Net Profit</th></tr></thead>
+      <tbody>
+        <tr><td>$30K</td><td class="num">$17.0K</td><td class="num">&minus;$14.7K</td><td class="num" style="color:var(--green);">+$2.3K</td></tr>
+        <tr><td>$50K</td><td class="num">$28.3K</td><td class="num">&minus;$14.7K</td><td class="num" style="color:var(--green);">+$13.6K</td></tr>
+        <tr><td>$100K</td><td class="num">$56.5K</td><td class="num">&minus;$14.7K</td><td class="num" style="color:var(--green);">+$41.8K</td></tr>
+        <tr><td>$170K</td><td class="num">$96.1K</td><td class="num">&minus;$14.7K</td><td class="num" style="color:var(--green);">+$81.4K</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box green" style="margin-top:14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div>Post-pilot run-rate (M7+, incl. Cubeia $5.4K min): <strong>break-even &asymp; $26K GGR/mo</strong> ($14.7K fixed &divide; 56.5%). During the M2&ndash;M5 pilot the ~$91K media is the upfront acquisition investment; profit comes from the <em>retained</em> cohorts after.</div>
+    </div>
+  </section>
+
+  <!-- §05 IS IT ENOUGH -->
   <section class="section" id="enough">
-    <div class="section-label"><span class="section-num">04</span><span class="section-title">Is the Allocation Enough?</span></div>
+    <div class="section-label"><span class="section-num">05</span><span class="section-title">Is the Allocation Enough?</span></div>
     <div class="note-box rose">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>At your cap it&rsquo;s a real pilot &mdash; not the full program, and you&rsquo;ve said you won&rsquo;t add more.</strong> $112.5K &rarr; ~$91K media = <strong>~39% of Anzil&rsquo;s own &euro;215K media example</strong> &rarr; <strong>~3,600&ndash;7,600 FTDs</strong>. That&rsquo;s plenty to validate the partnership. Their full 3-market program (&euro;300K &asymp; 3.4M SEK) is bigger than your whole budget &mdash; so the rest must scale from <strong>revenue</strong>, not more capital.</div>
+      <div><strong>At your cap it&rsquo;s a real pilot &mdash; not the full program, and you&rsquo;ve said you won&rsquo;t add more.</strong> $112.5K &rarr; ~$91K media = <strong>~39% of Anzil&rsquo;s &euro;215K media example</strong> &rarr; <strong>~3,600&ndash;7,600 FTDs</strong>. Their full 3-market program (&euro;300K &asymp; 3.4M SEK) is bigger than your whole budget &mdash; so the rest scales from <strong>revenue</strong>, not more capital.</div>
     </div>
-    <p class="subtitle">What your money buys with Anzil</p>
     <table class="lit">
       <thead><tr><th>Allocation</th><th style="text-align:right;">Actual media</th><th style="text-align:right;">~FTDs (BR CAC $12&ndash;25)</th><th>Verdict</th></tr></thead>
       <tbody>
@@ -421,41 +448,10 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
     </table>
     <p class="lead" style="margin-top:20px;">You&rsquo;ve fixed the cap, so scaling comes from revenue &mdash; not a bigger cheque:</p>
     <ul class="kp">
-      <li><strong>Reinvest revenue into media.</strong> Run the ~$91K pilot, then fund M3+ scale from M2&ndash;M3 GGR &mdash; exactly how Anzil&rsquo;s own ramp works ($30K&rarr;$75K&rarr;$110K).</li>
-      <li><strong>Brazil-only first.</strong> Concentrate the ~$91K on the cheapest, highest-PIX market before testing Chile/Argentina (higher CAC).</li>
-      <li><strong>Hold the line.</strong> $112.5K is the ceiling to Anzil &mdash; the buffer ($8&ndash;10K) stays for genuine surprises, not media top-ups.</li>
+      <li><strong>Reinvest revenue into media.</strong> Run the ~$91K pilot, then fund the scale from M2&ndash;M3 GGR &mdash; how Anzil&rsquo;s own ramp works ($30K&rarr;$75K&rarr;$110K).</li>
+      <li><strong>Brazil-only first.</strong> Concentrate on the cheapest, highest-PIX market before testing Chile/Argentina (higher CAC).</li>
+      <li><strong>Hold the line.</strong> $112.5K is the ceiling to Anzil; the ~$8&ndash;10K buffer stays for genuine surprises, not media top-ups.</li>
     </ul>
-  </section>
-
-  <!-- §05 MARGIN -->
-  <section class="section" id="margin">
-    <div class="section-label"><span class="section-num">05</span><span class="section-title">Profit Margins — All Fees Included</span></div>
-    <p class="lead">One big upside of the Anzil model: in Phase 1 there&rsquo;s <strong>no 9% affiliate commission</strong> (Anzil is a media-fee, not a rev-share partner). So net contribution rises to <strong>56.5% of GGR</strong> &mdash; 9 points above Paths A/B (47.5%).</p>
-    <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>For every $1 of GGR</th><th style="text-align:right;">Path A/B</th><th style="text-align:right;">Path C (Anzil)</th></tr></thead>
-      <tbody>
-        <tr><td>&minus; Bonuses &amp; promo</td><td class="num">25&cent;</td><td class="num">25&cent;</td></tr>
-        <tr><td>&minus; Cubeia platform (5%)</td><td class="num">5&cent;</td><td class="num">5&cent;</td></tr>
-        <tr><td>&minus; Game providers (~10.5%)</td><td class="num">10.5&cent;</td><td class="num">10.5&cent;</td></tr>
-        <tr><td>&minus; Crypto processing (~3%)</td><td class="num">3&cent;</td><td class="num">3&cent;</td></tr>
-        <tr><td>&minus; Affiliate commission (~9%)</td><td class="num">9&cent;</td><td class="num" style="color:var(--green);">0&cent; <span style="font-size:10px;">none in Phase 1</span></td></tr>
-        <tr class="total"><td>= Net contribution to operator</td><td class="num">47.5&cent;</td><td class="num" style="color:var(--green);">56.5&cent;</td></tr>
-      </tbody>
-    </table>
-    <p class="section-intro">Acquisition cost (the Anzil media + fees) sits <em>outside</em> this %-stack &mdash; it&rsquo;s the upfront CAC, front-loaded in the 3-month pilot and then it stops. Post-pilot, the retained cohorts pay out against just the GoLuna fixed base:</p>
-    <table class="lit">
-      <thead><tr><th>Monthly GGR</th><th style="text-align:right;">Net contribution (56.5%)</th><th style="text-align:right;">&minus; GoLuna fixed (~$10K/mo)</th><th style="text-align:right;">= Monthly Net Profit</th></tr></thead>
-      <tbody>
-        <tr><td>$30K</td><td class="num">$17.0K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$7K</td></tr>
-        <tr><td>$50K</td><td class="num">$28.3K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$18K</td></tr>
-        <tr><td>$100K</td><td class="num">$56.5K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$47K</td></tr>
-        <tr><td>$170K</td><td class="num">$96.1K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$86K</td></tr>
-      </tbody>
-    </table>
-    <div class="note-box green" style="margin-top:14px;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <div><strong>Post-pilot monthly break-even &asymp; $18K GGR/mo</strong> ($10K fixed &divide; 56.5%). The real question isn&rsquo;t the margin &mdash; it&rsquo;s whether the ~$54K pilot media buys enough <em>retained</em> players to reach that. With the operator&rsquo;s ~19% monthly retention benchmark (see <a href="retention.html" style="color:var(--green);font-weight:600;">Assumptions</a>), expect the lean pilot to validate, not to fully fund, the scale-up.</div>
-    </div>
   </section>
 
   <!-- §06 COMPARE -->
