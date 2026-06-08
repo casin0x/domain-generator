@@ -300,56 +300,60 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
   <!-- §03 MONEY FLOW -->
   <section class="section" id="flow">
     <div class="section-label"><span class="section-num">03</span><span class="section-title">How the 2M SEK Is Used</span></div>
-    <p class="lead">Total budget <strong>2M SEK (~$190K)</strong> &mdash; bankroll carved out, GoLuna fixed costs kept, the rest handed to Anzil.</p>
+    <p class="lead"><strong>2M SEK (~$190K) working budget.</strong> GoLuna keeps its fixed stack; the acquisition lines go to Anzil, capped at what you&rsquo;re willing to give. A buffer covers the unexpected.</p>
     <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>Layer</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th>What it is</th></tr></thead>
+      <thead><tr><th>Layer</th><th style="text-align:right;">USD</th><th>What it is</th></tr></thead>
       <tbody>
-        <tr><td><strong>Total budget</strong></td><td class="num">2,000,000</td><td class="num">~$190K</td><td class="cat">The example figure (vs 3M in Paths A/B)</td></tr>
-        <tr><td>&minus; Bankroll reserve</td><td class="num">500,000</td><td class="num">~$48K</td><td class="cat">Player-winnings float (kept separate)</td></tr>
-        <tr class="total"><td>= Operating budget</td><td class="num">1,500,000</td><td class="num">~$143K</td><td class="cat">Everything else for 6 months</td></tr>
+        <tr><td><strong>2M SEK working budget</strong></td><td class="num">~$190K</td><td class="cat">Bankroll (500K SEK) held separately, as in the Forecast</td></tr>
+        <tr><td>&minus; GoLuna fixed kept</td><td class="num">~$69.7K</td><td class="cat">Staff, security, Claude, Cubeia fees + core ops</td></tr>
+        <tr><td>&minus; Anzil allocation (your cap)</td><td class="num">~$112.5K</td><td class="cat">The 5 acquisition lines + $18K from buffer</td></tr>
+        <tr class="total"><td>= Buffer remaining</td><td class="num">~$8K</td><td class="cat">$26K buffer &minus; $18K moved to Anzil</td></tr>
       </tbody>
     </table>
-    <p class="subtitle">GoLuna keeps (fixed / internal, M1&ndash;M6) &mdash; ~$72.7K</p>
+    <p class="subtitle">GoLuna keeps (fixed / internal, M1&ndash;M6) &mdash; ~$69.7K</p>
     <table class="lit" style="margin-bottom:18px;">
       <thead><tr><th>Kept cost</th><th style="text-align:right;">M1&ndash;M6 USD</th><th>Note</th></tr></thead>
       <tbody>
         <tr><td>Salaries (T+O+G) $5K/mo</td><td class="num">$30,000</td><td class="cat">Team active from day 1</td></tr>
         <tr><td>Cubeia AWS hosting</td><td class="num">$11,016</td><td class="cat">&euro;1,700/mo &middot; required</td></tr>
         <tr><td>Cubeia App.B (Customer.io + Freshchat)</td><td class="num">$1,890</td><td class="cat">CRM + support chat</td></tr>
-        <tr><td>Security stack (subs + hardware)</td><td class="num">$3,057</td><td class="cat">VPN, keys, 1Password, etc.</td></tr>
+        <tr><td>Security stack (subs + hardware)</td><td class="num">$3,057</td><td class="cat">VPN, keys, 1Password</td></tr>
         <tr><td>Claude Max</td><td class="num">$1,000</td><td class="cat">AI tooling</td></tr>
         <tr><td>X VIP transfer method</td><td class="num">$5,715</td><td class="cat">Payments/ops</td></tr>
         <tr><td>CR corp maintenance</td><td class="num">$6,858</td><td class="cat">Costa Rica entity (M1)</td></tr>
         <tr><td>Designer + Betby setup</td><td class="num">$7,800</td><td class="cat">Casino design + sportsbook (M2)</td></tr>
-        <tr><td>Onboarding consultant + other subs</td><td class="num">$5,380</td><td class="cat">48h flow + tooling</td></tr>
-        <tr class="total"><td>= GoLuna fixed kept</td><td class="num">~$72,716</td><td class="cat">763K SEK</td></tr>
+        <tr><td>Other subs</td><td class="num">$2,380</td><td class="cat">Tooling</td></tr>
+        <tr class="total"><td>= GoLuna fixed kept</td><td class="num">~$69,716</td><td class="cat">~732K SEK</td></tr>
       </tbody>
     </table>
-    <p class="subtitle">What gets handed to Anzil = the old acquisition lines</p>
+    <p class="subtitle">What gets handed to Anzil &mdash; the exact lines you&rsquo;ll give</p>
     <table class="lit" style="margin-bottom:18px;">
-      <thead><tr><th>Path A/B line</th><th>Becomes (Anzil)</th></tr></thead>
+      <thead><tr><th>Line</th><th style="text-align:right;">M1&ndash;M6 USD</th><th>Becomes (Anzil)</th></tr></thead>
       <tbody>
-        <tr><td>BH Ads + Paid Social</td><td class="cat">Meta media buying (segmented, retargeted)</td></tr>
-        <tr><td>Streamer partnerships</td><td class="cat">Influencer activation (Brazil)</td></tr>
-        <tr><td>Community manager</td><td class="cat">Community reach (within influencer/ops)</td></tr>
-        <tr><td>Promotional pool</td><td class="cat">Player incentives / offers (GoLuna-funded bonuses)</td></tr>
-        <tr><td><span style="color:var(--green);">+ new</span></td><td class="cat">WhatsApp acquisition + fiat&harr;crypto payments (PIX)</td></tr>
+        <tr><td>BH Ads <span style="font-size:10px;color:var(--text-muted);">cut to half &middot; M2&ndash;M5 @ $7.5K</span></td><td class="num">$30,000</td><td class="cat">Meta media buying</td></tr>
+        <tr><td>Paid Social Promotions <span style="font-size:10px;color:var(--text-muted);">M2&ndash;M5 @ $6K</span></td><td class="num">$24,000</td><td class="cat">Meta media (community creative)</td></tr>
+        <tr><td>Streamer partnerships <span style="font-size:10px;color:var(--text-muted);">scaled up &middot; M2&ndash;M5 @ $7.5K</span></td><td class="num">$30,000</td><td class="cat">Influencer activation (BR)</td></tr>
+        <tr><td>Community manager <span style="font-size:10px;color:var(--text-muted);">M2&ndash;M6 @ $1.5K</span></td><td class="num">$7,500</td><td class="cat">Community reach</td></tr>
+        <tr><td>Onboarding / CRM-flow setup <span style="font-size:10px;color:var(--text-muted);">M1 one-off</span></td><td class="num">$3,000</td><td class="cat">= Anzil setup (&euro;3K)</td></tr>
+        <tr class="total"><td>= Anzil base allocation</td><td class="num">$94,500</td><td class="cat">the 5 lines</td></tr>
+        <tr><td>+ from buffer <span style="font-size:10px;color:var(--text-muted);">your call</span></td><td class="num" style="color:var(--amber);">+$18,000</td><td class="cat">leaves ~$8&ndash;10K buffer</td></tr>
+        <tr class="total"><td><strong>= Anzil cap (max)</strong></td><td class="num" style="color:var(--purple);">$112,500</td><td class="cat"><strong>nothing beyond this goes to Anzil</strong></td></tr>
       </tbody>
     </table>
-    <p class="subtitle">Of the ~$70K Anzil allocation, who gets what</p>
+    <p class="subtitle">Of the $112.5K cap, who gets what</p>
     <table class="lit">
-      <thead><tr><th>Slice</th><th style="text-align:right;">USD</th><th style="text-align:right;">% of allocation</th><th>Note</th></tr></thead>
+      <thead><tr><th>Slice</th><th style="text-align:right;">USD</th><th style="text-align:right;">% of cap</th><th>Note</th></tr></thead>
       <tbody>
-        <tr><td><strong>Anzil allocation</strong></td><td class="num">~$70,100</td><td class="num">100%</td><td class="cat">Operating $143K &minus; kept $72.7K</td></tr>
-        <tr><td>&minus; Setup (&euro;3K, one-time)</td><td class="num">$3,240</td><td class="num">5%</td><td class="cat">SaaS + implementation</td></tr>
-        <tr><td>&minus; Retainer (&euro;1.5K &times; 3 mo)</td><td class="num">$4,860</td><td class="num">7%</td><td class="cat">Advisory + reporting</td></tr>
-        <tr><td>&minus; Management 15%</td><td class="num">$8,092</td><td class="num">12%</td><td class="cat">10% account rentals + 5% trading</td></tr>
-        <tr class="total"><td>= Actual MEDIA reaching players</td><td class="num" style="color:var(--green);">~$53,949</td><td class="num">77%</td><td class="cat">The real ad spend driving FTDs</td></tr>
+        <tr><td><strong>Anzil cap</strong></td><td class="num">$112,500</td><td class="num">100%</td><td class="cat">your maximum</td></tr>
+        <tr><td>&minus; Setup (&euro;3K, one-time)</td><td class="num">$3,240</td><td class="num">3%</td><td class="cat">= the onboarding line</td></tr>
+        <tr><td>&minus; Retainer (&euro;1.5K &times; 3 mo)</td><td class="num">$4,860</td><td class="num">4%</td><td class="cat">advisory + reporting</td></tr>
+        <tr><td>&minus; Management 15%</td><td class="num">$13,617</td><td class="num">12%</td><td class="cat">10% account rentals + 5% trading</td></tr>
+        <tr class="total"><td>= Actual MEDIA reaching players</td><td class="num" style="color:var(--green);">~$90,783</td><td class="num">81%</td><td class="cat">the real ad spend driving FTDs</td></tr>
       </tbody>
     </table>
     <div class="note-box info" style="margin-top:14px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div>Anzil&rsquo;s fee take is <strong>~23% of the allocation</strong> ($16.2K of $70K); the other <strong>77% (~$54K)</strong> is real media. At Brazil effective CAC (~$12&ndash;25) that buys <strong>~2,200&ndash;4,500 FTDs</strong> over the pilot.</div>
+      <div>At your cap, Anzil&rsquo;s fee take is <strong>~19% ($21.7K)</strong> and <strong>~81% (~$91K) is real media</strong>. Buffer: $26K total &minus; $18K to Anzil = <strong>~$8K left</strong> (move $16K instead to keep a round $10K). Promotional pool / player giveaways are <em>not</em> in the Anzil line &mdash; run those from the buffer or fold into the 25% bonus reserve.</div>
     </div>
   </section>
 
@@ -358,23 +362,22 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
     <div class="section-label"><span class="section-num">04</span><span class="section-title">Is the Allocation Enough?</span></div>
     <div class="note-box rose">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Short answer: enough for a real test pilot, not for Anzil&rsquo;s full program.</strong> The ~$54K media is only <strong>~23% of Anzil&rsquo;s own &euro;215K media example</strong>, and their full &euro;300K program is <strong>~3.4M SEK &mdash; bigger than the entire 2M SEK budget</strong>. On 2M SEK you fund a genuine test-and-learn, then scale winners from revenue.</div>
+      <div><strong>At your cap it&rsquo;s a real pilot &mdash; not the full program, and you&rsquo;ve said you won&rsquo;t add more.</strong> $112.5K &rarr; ~$91K media = <strong>~39% of Anzil&rsquo;s own &euro;215K media example</strong> &rarr; <strong>~3,600&ndash;7,600 FTDs</strong>. That&rsquo;s plenty to validate the partnership. Their full 3-market program (&euro;300K &asymp; 3.4M SEK) is bigger than your whole budget &mdash; so the rest must scale from <strong>revenue</strong>, not more capital.</div>
     </div>
-    <p class="subtitle">What each budget buys with Anzil</p>
+    <p class="subtitle">What your money buys with Anzil</p>
     <table class="lit">
-      <thead><tr><th>Budget</th><th style="text-align:right;">Anzil allocation</th><th style="text-align:right;">Actual media</th><th style="text-align:right;">~FTDs (BR CAC)</th><th>Verdict</th></tr></thead>
+      <thead><tr><th>Allocation</th><th style="text-align:right;">Actual media</th><th style="text-align:right;">~FTDs (BR CAC $12&ndash;25)</th><th>Verdict</th></tr></thead>
       <tbody>
-        <tr><td><strong>2M SEK</strong> (this example)</td><td class="num">~$70K</td><td class="num">~$54K</td><td class="num">~2,200&ndash;4,500</td><td class="cat" style="color:var(--amber);">Test pilot</td></tr>
-        <tr><td><strong>3M SEK</strong></td><td class="num">~$165K</td><td class="num">~$137K</td><td class="num">~5,500&ndash;11,000</td><td class="cat" style="color:var(--green);">Solid pilot</td></tr>
-        <tr><td><strong>Anzil full</strong> (&euro;300K &asymp; 3.4M SEK)</td><td class="num">~$300K</td><td class="num">~$232K</td><td class="num">~9,600&ndash;14,700</td><td class="cat">Full 3-market program</td></tr>
+        <tr><td>Anzil base &mdash; $94.5K <span style="font-size:10px;color:var(--text-muted);">5 lines, no buffer</span></td><td class="num">~$75K</td><td class="num">~3,000&ndash;6,250</td><td class="cat" style="color:var(--amber);">Lean pilot</td></tr>
+        <tr class="total"><td>Anzil cap &mdash; $112.5K <span style="font-size:10px;color:var(--purple);">your decision (+$18K buffer)</span></td><td class="num">~$91K</td><td class="num">~3,600&ndash;7,600</td><td class="cat" style="color:var(--green);">Real pilot</td></tr>
+        <tr><td>Anzil full eg. &mdash; &euro;300K <span style="font-size:10px;color:var(--text-muted);">~3.4M SEK</span></td><td class="num">~$232K</td><td class="num">~9,600&ndash;14,700</td><td class="cat">Full program (over budget)</td></tr>
       </tbody>
     </table>
-    <p class="lead" style="margin-top:20px;">If you want to run Anzil at scale on 2M SEK, the levers are:</p>
+    <p class="lead" style="margin-top:20px;">You&rsquo;ve fixed the cap, so scaling comes from revenue &mdash; not a bigger cheque:</p>
     <ul class="kp">
-      <li><strong>Reinvest revenue into media.</strong> Start lean ($54K), let M2&ndash;M3 GGR fund the M3+ scale (Anzil&rsquo;s own ramp is built this way: $30K&rarr;$75K&rarr;$110K).</li>
-      <li><strong>Brazil-only.</strong> Drop the Chile/Argentina test (higher CAC) and concentrate the $54K on the cheapest, highest-PIX market.</li>
-      <li><strong>Raise the budget toward 3M+ SEK</strong> if you want the full 3-market program from day one.</li>
-      <li><strong>Trim GoLuna fixed.</strong> Defer Betby/Designer ($7.8K) past the pilot to free more media &mdash; but the core ($5K staff, security, Claude, Cubeia fees) stays.</li>
+      <li><strong>Reinvest revenue into media.</strong> Run the ~$91K pilot, then fund M3+ scale from M2&ndash;M3 GGR &mdash; exactly how Anzil&rsquo;s own ramp works ($30K&rarr;$75K&rarr;$110K).</li>
+      <li><strong>Brazil-only first.</strong> Concentrate the ~$91K on the cheapest, highest-PIX market before testing Chile/Argentina (higher CAC).</li>
+      <li><strong>Hold the line.</strong> $112.5K is the ceiling to Anzil &mdash; the buffer ($8&ndash;10K) stays for genuine surprises, not media top-ups.</li>
     </ul>
   </section>
 
