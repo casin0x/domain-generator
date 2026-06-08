@@ -278,6 +278,29 @@ body {
 .subnav-inner::-webkit-scrollbar { height: 0; }
 
 
+/* === Hub upgrade: search + role filter + extra card colours === */
+.section-icon.money { background: var(--accent-dim); color: var(--accent); }
+.section-icon.legal { background: var(--purple-dim, rgba(167,139,250,0.10)); color: var(--purple, #a78bfa); }
+.section-icon.product { background: var(--rose-dim); color: var(--rose); }
+.card.money::before { background: var(--accent); }
+.card.legal::before { background: var(--purple, #a78bfa); }
+.card.product::before { background: var(--rose); }
+.card-tag.money { background: var(--accent-dim); color: var(--accent); }
+.card-tag.legal { background: var(--purple-dim, rgba(167,139,250,0.10)); color: var(--purple, #a78bfa); }
+.card-tag.product { background: var(--rose-dim); color: var(--rose); }
+.hub-search { position: relative; margin: 0 0 14px; }
+.hub-search input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px 14px 46px; color: var(--text); font-family: var(--font); font-size: 15px; outline: none; transition: border-color .15s, background .15s; }
+.hub-search input:focus { border-color: var(--accent-border); background: var(--surface-hover, var(--surface-2)); }
+.hub-search input::placeholder { color: var(--text-muted); }
+.hub-search .si { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; display: flex; }
+.hub-roles { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 40px; align-items: center; }
+.hub-roles .lbl { font-size: 12px; color: var(--text-muted); margin-right: 2px; }
+.role-chip { font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 20px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); cursor: pointer; transition: all .15s; font-family: var(--font); }
+.role-chip:hover { color: var(--text); border-color: var(--border-hover); }
+.role-chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.hub-noresults { display: none; text-align: center; padding: 48px 20px; color: var(--text-muted); font-size: 14px; }
+.section.is-hidden, .card.is-hidden { display: none; }
+
 /* === Glossary popover === */
 .gloss { border-bottom: 1px dotted var(--text-muted); cursor: help; transition: color .12s, border-color .12s; }
 .gloss:hover, .gloss:focus { color: var(--text); border-bottom-color: var(--accent); outline: none; }
@@ -315,7 +338,98 @@ body {
   <section class="hero">
     <div class="hero-badge"><span class="dot"></span> Strategic Command</div>
     <h1>GoLuna Hub</h1>
-    <p>Market intelligence, marketing strategy, platform demos, and brand assets &mdash; all in one place.</p>
+    <p>Everything in one place &mdash; the money model, growth strategy, market research, partner &amp; legal docs, and the product demo. Search or filter by who you are to jump straight to what you need.</p>
+  </section>
+
+  <!-- Search -->
+  <div class="hub-search">
+    <span class="si"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
+    <input type="text" id="hubSearch" placeholder="Search pages… (try “bankroll”, “Brazil”, “Path B”, “T&C”, “CPA”)" autocomplete="off" aria-label="Search pages">
+  </div>
+
+  <!-- Role filter -->
+  <div class="hub-roles">
+    <span class="lbl">I'm a&hellip;</span>
+    <button class="role-chip active" data-role="all">Everything</button>
+    <button class="role-chip" data-role="investor">Investor</button>
+    <button class="role-chip" data-role="operator">Operator / Team</button>
+    <button class="role-chip" data-role="partner">Partner</button>
+  </div>
+
+  <!-- Money & Numbers -->
+  <section class="section" id="money">
+    <div class="section-header">
+      <div class="section-icon money">&#36;</div>
+      <div class="section-title">Money &amp; Numbers</div>
+      <span class="section-count">4 pages</span>
+    </div>
+    <div class="cards cards-3">
+      <a href="budget.html" class="card money" data-roles="investor operator" data-kw="budget runway bankroll operating spend SEK cost money total">
+        <span class="card-arrow">&rarr;</span><span class="card-tag money">Budget</span>
+        <h3>Budget &amp; Runway</h3>
+        <p>The full money picture: total budget, bankroll carve-out, operating budget, what's spent, and how long the runway lasts before revenue must take over.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(129,140,248,0.15);color:var(--accent);">Start here</span><span>3M SEK plan</span></div>
+      </a>
+      <a href="forecast.html" class="card money" data-roles="investor operator" data-kw="forecast monthly burn cliff path a b cumulative cost spend">
+        <span class="card-arrow">&rarr;</span><span class="card-tag money">Forecast</span>
+        <h3>12-Month Forecast</h3>
+        <p>Month-by-month spend with a Path A / Path B toggle, cumulative burn vs the operating ceiling, and the cliff if revenue is late.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(129,140,248,0.15);color:var(--accent);">A/B toggle</span><span>v0.1</span></div>
+      </a>
+      <a href="revenue.html" class="card money" data-roles="investor" data-kw="revenue GGR margin provider fees RTP bonus break-even P&amp;L bankroll waterfall">
+        <span class="card-arrow">&rarr;</span><span class="card-tag money">Revenue</span>
+        <h3>Revenue &amp; Margins</h3>
+        <p>GGR targets, the variable-cost waterfall (Cubeia + game providers + bonuses), provider fees, RTP, bonus structure, and break-even.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(52,211,153,0.15);color:var(--green);">P&amp;L</span><span>v0.1</span></div>
+      </a>
+      <a href="capital.html" class="card money" data-roles="investor" data-kw="capital distribution investors reinvestment dividends payout policy">
+        <span class="card-arrow">&rarr;</span><span class="card-tag money">Capital</span>
+        <h3>Capital &amp; Distributions</h3>
+        <p>When to start paying investors, the reinvestment hierarchy, and the distribution policy &mdash; a discussion doc for the cap table.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(129,140,248,0.15);color:var(--accent);">Discussion</span><span>Investors</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Strategy & Growth -->
+  <section class="section" id="strategy">
+    <div class="section-header">
+      <div class="section-icon strategy">&#9733;</div>
+      <div class="section-title">Strategy &amp; Growth</div>
+      <span class="section-count">5 pages</span>
+    </div>
+    <div class="cards cards-3">
+      <a href="paths.html" class="card strategy" data-roles="investor operator" data-kw="paths path a b retention acquisition bonus hunter strategy growth">
+        <span class="card-arrow">&rarr;</span><span class="card-tag strategy">Paths</span>
+        <h3>Growth Paths A/B</h3>
+        <p>Acquisition-volume vs retention-engineered. Same spend, very different player quality and M7+ run-rate.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">A vs B</span><span>Decision</span></div>
+      </a>
+      <a href="retention.html" class="card strategy" data-roles="investor operator" data-kw="assumptions retention brazil ARPU CPA PIX crypto cohort D30 rev-share model inputs">
+        <span class="card-arrow">&rarr;</span><span class="card-tag strategy">Assumptions</span>
+        <h3>Model Assumptions</h3>
+        <p>The inputs behind the model: real retention % from the retention lead's prior book, plus Brazil-market ARPU, CPA and crypto-only payments.</p>
+        <div class="card-meta"><span class="badge badge-research">Brazil</span><span>Inputs</span></div>
+      </a>
+      <a href="strategy.html" class="card strategy" data-roles="operator" data-kw="marketing plan AADS KOL channels regional rollout strategy">
+        <span class="card-arrow">&rarr;</span><span class="card-tag strategy">Plan</span>
+        <h3>Marketing Plan</h3>
+        <p>The full AADS marketing strategy &mdash; business streams, channel strategy, regional rollout, KOL plan, and action items.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">AADS</span><span>Plan</span></div>
+      </a>
+      <a href="channels.html" class="card strategy" data-roles="operator investor" data-kw="channels spend marketing budget allocation timeline">
+        <span class="card-arrow">&rarr;</span><span class="card-tag strategy">Channels</span>
+        <h3>Channels &amp; Spend</h3>
+        <p>Marketing channel breakdown with budget allocation, timeline, and an investor-ready summary.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">Budget</span><span>Channels</span></div>
+      </a>
+      <a href="marketing.html" class="card strategy" data-roles="operator" data-kw="marketing strategies CAC acquisition compliance channel research">
+        <span class="card-arrow">&rarr;</span><span class="card-tag strategy">Research</span>
+        <h3>Marketing Strategies</h3>
+        <p>Acquisition-channel research, compliance analysis, and CAC projections &mdash; the strategy index with verdicts.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">Confidential</span><span>Team</span></div>
+      </a>
+    </div>
   </section>
 
   <!-- Market Intelligence -->
@@ -323,129 +437,138 @@ body {
     <div class="section-header">
       <div class="section-icon intel">&#9671;</div>
       <div class="section-title">Market Intelligence</div>
-      <span class="section-count">2 reports</span>
+      <span class="section-count">3 pages</span>
     </div>
     <div class="cards cards-3">
-      <a href="marketresearch.html" class="card intel">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag intel">Research</span>
+      <a href="marketresearch.html" class="card intel" data-roles="investor operator" data-kw="market research countries ARPU crypto brazil sizing competition opportunity">
+        <span class="card-arrow">&rarr;</span><span class="card-tag intel">Research</span>
         <h3>Market Research</h3>
-        <p>Crypto casino geographic opportunity analysis. 14 markets analyzed, $81B market sizing, ARPU comparisons, and competitive landscape.</p>
-        <div class="card-meta">
-          <span class="badge badge-research">14 Markets</span>
-          <span>March 2026</span>
-        </div>
+        <p>Crypto-casino geographic opportunity &mdash; markets analysed, sizing, ARPU comparisons, and the competitive landscape.</p>
+        <div class="card-meta"><span class="badge badge-research">14 Markets</span><span>Research</span></div>
       </a>
-      <a href="marketing/country-scan.html" class="card intel">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag intel">Data</span>
+      <a href="marketing/country-scan.html" class="card intel" data-roles="operator" data-kw="country scan tier launch sequence 50 countries data">
+        <span class="card-arrow">&rarr;</span><span class="card-tag intel">Data</span>
         <h3>50-Country Market Scan</h3>
-        <p>Every target country scored across 10 dimensions. Tier rankings from T1 to T4 with full comparison table and launch sequence.</p>
-        <div class="card-meta">
-          <span class="badge badge-research">50 Countries</span>
-          <span>Tier-rated</span>
-        </div>
+        <p>Every target country scored across 10 dimensions, tiered T1&ndash;T4, with a full comparison table and launch sequence.</p>
+        <div class="card-meta"><span class="badge badge-research">50 Countries</span><span>Tier-rated</span></div>
+      </a>
+      <a href="marketing/ai-caller.html" class="card intel" data-roles="operator" data-kw="AI calling compliance CAC cold call viability scan">
+        <span class="card-arrow">&rarr;</span><span class="card-tag intel">Analysis</span>
+        <h3>AI Cold-Calling Scan</h3>
+        <p>Compliance scan across 20 countries &mdash; is AI-assisted calling viable for acquisition, with CAC vs digital channels.</p>
+        <div class="card-meta"><span class="badge badge-verdict">Not Viable</span><span>20 Countries</span></div>
       </a>
     </div>
   </section>
 
-  <!-- Marketing & Strategy -->
-  <section class="section" id="strategy">
+  <!-- Platform, Partners & Legal -->
+  <section class="section" id="legal">
     <div class="section-header">
-      <div class="section-icon strategy">&#9733;</div>
-      <div class="section-title">Marketing &amp; Strategy</div>
-      <span class="section-count">7 items</span>
+      <div class="section-icon legal">&#9878;</div>
+      <div class="section-title">Platform, Partners &amp; Legal</div>
+      <span class="section-count">3 pages</span>
     </div>
     <div class="cards cards-3">
-      <a href="vendors.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Vendors</span>
-        <h3>InClips &amp; MAADS</h3>
-        <p>Clipping, KOL, and streaming vendor evaluation. InClips ($25K-$250K logo campaigns) vs MAADS ($36K/mo managed + $20-50K KOL). Head-to-head and launch plan.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">New</span>
-          <span>April 2026</span>
-        </div>
+      <a href="tc.html" class="card legal" data-roles="partner operator" data-kw="T&amp;C terms conditions KYC withdrawal win cap bonus wagering legal clause bankroll protection">
+        <span class="card-arrow">&rarr;</span><span class="card-tag legal">Legal</span>
+        <h3>T&amp;C Clause Library</h3>
+        <p>Bullet-pointed T&amp;C clauses (withdrawals, win caps, KYC, bonuses, originals) sourced from the whitelabel &mdash; bankroll-protection focus.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(167,139,250,0.12);color:var(--purple,#a78bfa);">Draft</span><span>For legal review</span></div>
       </a>
-      <a href="channels.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Budget</span>
-        <h3>Channels &amp; Spend</h3>
-        <p>Full marketing channel breakdown with budget allocation, timeline, and investor-ready summary. $182.5K across 7 channels over 3 months.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">New</span>
-          <span>April 2026</span>
-        </div>
+      <a href="partnership.html" class="card legal" data-roles="investor partner" data-kw="partnership profit share team equity split cap conditions">
+        <span class="card-arrow">&rarr;</span><span class="card-tag legal">Partnership</span>
+        <h3>Operating-Team Profit-Share</h3>
+        <p>The operating-team profit-share plan &mdash; splits, per-person caps, and the conditions that trigger payouts.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(167,139,250,0.12);color:var(--purple,#a78bfa);">Plan</span><span>Team &amp; Investors</span></div>
       </a>
-      <a href="budget.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Finance</span>
-        <h3>Budget &amp; Runway</h3>
-        <p>Full cost stack: 3M SEK total, 1.5M bankroll reserve, 220K SEK spent, monthly burn $7.4K&rarr;$12.8K after Cubeia minimum activates month 7. 6-month target runway.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(129,140,248,0.15);color:var(--accent);">v0.1</span>
-          <span>May 2026</span>
-        </div>
-      </a>
-      <a href="forecast.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Finance</span>
-        <h3>12-Month Forecast</h3>
-        <p>Month-by-month cost forecast across salaries, Cubeia platform, marketing, security stack, and subscriptions. Cumulative burn chart, cost-share breakdown, scenario add-ons (legal, Customer.io, Originals).</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(129,140,248,0.15);color:var(--accent);">v0.1</span>
-          <span>May 2026</span>
-        </div>
-      </a>
-      <a href="revenue.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Finance</span>
-        <h3>Revenue Targets</h3>
-        <p>6-month GGR targets (conservative/base/stretch), variable cost waterfall (Cubeia 5% + game providers ~10.5% + crypto ~3% + bonuses ~25% = 56.5% net margin), Betby fee research, RTP configuration, bonus structure, break-even analysis.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(52,211,153,0.15);color:var(--green);">v0.1</span>
-          <span>May 2026</span>
-        </div>
-      </a>
-      <a href="strategy.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">AADS</span>
-        <h3>Marketing Plan</h3>
-        <p>Full marketing strategy overview from AADS agency meeting. Three business streams, channel strategy, regional rollout, budget, KOL plan, and action items.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">New</span>
-          <span>April 2026</span>
-        </div>
-      </a>
-      <a href="marketing.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Overview</span>
-        <h3>Marketing Strategies</h3>
-        <p>Acquisition channel research, compliance analysis, and CAC projections for GoLuna platform growth. Strategy index with verdicts.</p>
-        <div class="card-meta">
-          <span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">Confidential</span>
-          <span>Team &amp; Investors</span>
-        </div>
-      </a>
-      <a href="marketing/ai-caller.html" class="card strategy">
-        <span class="card-arrow">&rarr;</span>
-        <span class="card-tag strategy">Analysis</span>
-        <h3>AI Cold Calling Scan</h3>
-        <p>Compliance scan across 20 countries. Legal assessment of AI-assisted calling for iGaming acquisition. CAC projections vs digital channels.</p>
-        <div class="card-meta">
-          <span class="badge badge-verdict">Not Viable</span>
-          <span>20 Countries</span>
-        </div>
+      <a href="vendors.html" class="card legal" data-roles="operator" data-kw="vendors clipping KOL streaming inclips maads marketing suppliers">
+        <span class="card-arrow">&rarr;</span><span class="card-tag legal">Vendors</span>
+        <h3>Vendors &mdash; InClips &amp; MAADS</h3>
+        <p>Clipping / KOL / streaming vendor evaluation &mdash; InClips vs MAADS head-to-head, with a launch plan.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,191,36,0.12);color:var(--amber);">Vendors</span><span>Marketing</span></div>
       </a>
     </div>
   </section>
+
+  <!-- Product & Brand -->
+  <section class="section" id="product">
+    <div class="section-header">
+      <div class="section-icon product">&#9636;</div>
+      <div class="section-title">Product &amp; Brand</div>
+      <span class="section-count">3 pages</span>
+    </div>
+    <div class="cards cards-3">
+      <a href="demo.html" class="card product" data-roles="operator partner investor" data-kw="demo product casino front-end mockup live preview">
+        <span class="card-arrow">&rarr;</span><span class="card-tag product">Demo</span>
+        <h3>Product Demo</h3>
+        <p>Live look at the GoLuna front-end &mdash; the player-facing casino experience.</p>
+        <div class="card-meta"><span class="badge badge-demo">Live demo</span><span>Front-end</span></div>
+      </a>
+      <a href="promotions.html" class="card product" data-roles="operator" data-kw="promotions bonus offers promo page mockup">
+        <span class="card-arrow">&rarr;</span><span class="card-tag product">Promos</span>
+        <h3>Promotions Page</h3>
+        <p>The promo / bonus page mockup &mdash; how offers are presented to players.</p>
+        <div class="card-meta"><span class="badge badge-demo">Mockup</span><span>Front-end</span></div>
+      </a>
+      <a href="goluna-brand.html" class="card product" data-roles="operator partner" data-kw="brand logo colors typography assets identity exploration">
+        <span class="card-arrow">&rarr;</span><span class="card-tag product">Brand</span>
+        <h3>Brand Exploration</h3>
+        <p>Logo, colours, typography, and brand-asset directions for GoLuna.</p>
+        <div class="card-meta"><span class="badge" style="background:rgba(251,113,133,0.12);color:var(--rose);">Brand</span><span>Assets</span></div>
+      </a>
+    </div>
+  </section>
+
+  <div class="hub-noresults" id="hubNoResults">No pages match &mdash; try a different word or clear the filter.</div>
 
   <footer class="footer">
-    GoLuna &mdash; Strategic Hub &mdash; April 2026 &mdash; Confidential &mdash; Team Only
+    GoLuna &mdash; Strategic Hub &mdash; Confidential &mdash; Team Only
   </footer>
 </div>
 
 
+<script>
+/* Hub search + role filter */
+(function(){
+  var search=document.getElementById('hubSearch');
+  var noRes=document.getElementById('hubNoResults');
+  if(!search) return;
+  var chips=[].slice.call(document.querySelectorAll('.role-chip'));
+  var cards=[].slice.call(document.querySelectorAll('.section .card'));
+  var sections=[].slice.call(document.querySelectorAll('.section'));
+  var role='all';
+  function apply(){
+    var q=(search.value||'').trim().toLowerCase();
+    var any=false;
+    cards.forEach(function(c){
+      var roles=c.getAttribute('data-roles')||'';
+      var h3=c.querySelector('h3'), p=c.querySelector('p');
+      var hay=((h3?h3.textContent:'')+' '+(p?p.textContent:'')+' '+(c.getAttribute('data-kw')||'')).toLowerCase();
+      var roleOK = role==='all' || roles.indexOf(role)>=0;
+      var textOK = !q || hay.indexOf(q)>=0;
+      var show = roleOK && textOK;
+      c.classList.toggle('is-hidden', !show);
+      if(show) any=true;
+    });
+    sections.forEach(function(s){
+      var vis=[].slice.call(s.querySelectorAll('.card')).filter(function(c){return !c.classList.contains('is-hidden');});
+      s.classList.toggle('is-hidden', vis.length===0);
+      var cnt=s.querySelector('.section-count');
+      if(cnt) cnt.textContent = vis.length + (vis.length===1?' page':' pages');
+    });
+    noRes.style.display = any?'none':'block';
+  }
+  search.addEventListener('input', apply);
+  chips.forEach(function(ch){
+    ch.addEventListener('click', function(){
+      chips.forEach(function(x){x.classList.remove('active');});
+      ch.classList.add('active');
+      role=ch.getAttribute('data-role');
+      apply();
+    });
+  });
+})();
+</script>
 <script>
 (function(){
   function wrap(){
