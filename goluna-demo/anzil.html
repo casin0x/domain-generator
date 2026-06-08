@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Path C · Anzil Media Collaboration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1400px; margin: 0 auto; padding: 0 32px 80px; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+.subnav { position: sticky; top: 56px; z-index: 99; background: rgba(11,13,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.subnav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2px; height: 40px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
+.subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.fx-switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 2px; gap: 2px; vertical-align: middle; margin: 0 4px; }
+.fx-switch-btn { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--text-muted); background: transparent; border: 0; cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.04em; }
+.fx-switch-btn:hover { color: var(--text); }
+.fx-switch-btn.active { color: var(--bg); background: var(--accent); }
+.cur-usd, .cur-sek, .cur-eur { display: none !important; }
+body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: revert !important; }
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--cyan-dim); border: 1px solid var(--cyan-border); font-size: 11px; font-weight: 600; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 880px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+.section { margin-bottom: 56px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--cyan-dim); color: var(--cyan); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+.section-intro { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; max-width: 920px; }
+.subtitle { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+/* Scannable key-point list */
+.kp { list-style: none; margin: 0 0 22px; padding: 0; max-width: 920px; }
+.kp li { position: relative; padding: 8px 0 8px 20px; font-size: 14px; color: var(--text-secondary); line-height: 1.55; border-bottom: 1px solid var(--border); }
+.kp li:last-child { border-bottom: none; }
+.kp li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 2px; background: var(--accent); }
+.kp li strong { color: var(--text); font-weight: 600; }
+.lead { font-size: 14px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 12px; max-width: 920px; }
+
+/* Path summary cards */
+.path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+.path-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; position: relative; overflow: hidden; }
+.path-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.path-card.a::before { background: var(--amber); }
+.path-card.b::before { background: var(--cyan); }
+.path-card.c::before { background: var(--purple); }
+.path-card.c .label { color: var(--purple); }
+.path-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
+.path-card.a .label { color: var(--amber); }
+.path-card.b .label { color: var(--cyan); }
+.path-card h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 6px; }
+.path-card .tagline { font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 18px; }
+.path-card .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-bottom: 16px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.path-card .m-key { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; font-weight: 600; }
+.path-card .m-val { font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--text); }
+.path-card .m-val.green { color: var(--green); }
+.path-card .m-val.amber { color: var(--amber); }
+.path-card .m-val.cyan { color: var(--cyan); }
+.path-card .footer-tag { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+/* Generic line-item table */
+.lit { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.lit th, .lit td { padding: 12px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.lit th { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 700; background: var(--surface-2); }
+.lit tr:last-child td { border-bottom: none; }
+.lit td.num { font-family: var(--mono); font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+.lit td.cat { color: var(--text-secondary); font-size: 12px; }
+.lit tr.total td { background: var(--surface-2); font-weight: 700; color: var(--text); }
+.lit tr.total td.num.delta-pos { color: var(--rose); }
+.lit tr.total td.num.delta-neg { color: var(--green); }
+.lit td.delta-pos { color: var(--rose); }
+.lit td.delta-neg { color: var(--green); }
+.lit td.delta-zero { color: var(--text-muted); }
+.lit td .tag { font-family: var(--mono); font-size: 9px; padding: 2px 6px; border-radius: 3px; margin-left: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+.lit td .tag.a { background: var(--amber-dim); color: var(--amber); }
+.lit td .tag.b { background: var(--cyan-dim); color: var(--cyan); }
+.lit td .tag.new { background: var(--green-dim); color: var(--green); }
+
+/* Pros/cons two-col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.side-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; position: relative; }
+.side-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+.side-card.a::before { background: var(--amber); }
+.side-card.b::before { background: var(--cyan); }
+.side-card .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; font-family: var(--mono); }
+.side-card.a .label { color: var(--amber); }
+.side-card.b .label { color: var(--cyan); }
+.side-card h3 { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin-bottom: 12px; }
+.side-card .subhead { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; font-weight: 700; }
+.side-card .subhead.pros { color: var(--green); }
+.side-card .subhead.cons { color: var(--rose); }
+.side-card ul { list-style: none; padding: 0; margin: 0; }
+.side-card li { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 6px 0 6px 16px; position: relative; }
+.side-card li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 2px; }
+.side-card .subhead.pros + ul li::before { background: var(--green); }
+.side-card .subhead.cons + ul li::before { background: var(--rose); }
+.side-card li strong { color: var(--text); font-weight: 600; }
+
+/* Note */
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.note-box.cyan { background: var(--cyan-dim); border: 1px solid var(--cyan-border); color: var(--cyan); }
+.note-box strong { color: var(--text); font-weight: 600; }
+
+/* Quote callout */
+.quote { background: var(--surface); border-left: 3px solid var(--cyan); border-radius: 8px; padding: 22px 28px; margin-bottom: 28px; font-style: italic; color: var(--text-secondary); line-height: 1.7; font-size: 14px; }
+.quote .who { display: block; margin-top: 14px; font-style: normal; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 900px) {
+  .path-grid, .two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .subnav { padding: 0 16px; } .subnav-inner { height: 36px; }
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 26px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* === Design-pass v2: table scroll + subnav fade === */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; background: var(--surface); }
+.table-scroll::-webkit-scrollbar { height: 6px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--border-hover, rgba(255,255,255,0.12)); border-radius: 3px; }
+.table-scroll > table { border: 0 !important; border-radius: 0 !important; margin-bottom: 0 !important; min-width: 100%; }
+@media (max-width: 900px) { .table-scroll > table { min-width: 640px; } }
+.subnav { position: relative; }
+.subnav::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 32px; pointer-events: none; background: linear-gradient(to right, transparent, rgba(11,13,20,0.94)); opacity: 0; transition: opacity 0.15s; }
+.subnav.has-scroll::after { opacity: 1; }
+.subnav-inner::-webkit-scrollbar { height: 0; }
+
+
+/* === Glossary popover === */
+.gloss { border-bottom: 1px dotted var(--text-muted); cursor: help; transition: color .12s, border-color .12s; }
+.gloss:hover, .gloss:focus { color: var(--text); border-bottom-color: var(--accent); outline: none; }
+#gloss-pop { position: fixed; z-index: 2000; max-width: 300px; background: var(--surface-3); border: 1px solid var(--border-hover); border-radius: 10px; padding: 12px 14px; box-shadow: 0 10px 34px rgba(0,0,0,0.55); font-family: var(--font); font-size: 12.5px; line-height: 1.55; color: var(--text-secondary); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .12s, transform .12s; }
+#gloss-pop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+#gloss-pop .gp-t { display: block; font-family: var(--mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 5px; }
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link">Revenue</a>
+      <a href="paths.html" class="header-link">Paths A/B</a>
+      <a href="anzil.html" class="header-link active">Anzil Collab</a>
+      <a href="retention.html" class="header-link">Assumptions</a>
+      <a href="partnership.html" class="header-link">Partnership</a>
+      <a href="capital.html" class="header-link">Capital</a>
+      <a href="tc.html" class="header-link">T&amp;Cs</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#model" class="subnav-link">The Model</a>
+    <a href="#contract" class="subnav-link">What They Charge</a>
+    <a href="#flow" class="subnav-link">Money Flow (2M SEK)</a>
+    <a href="#enough" class="subnav-link">Is It Enough?</a>
+    <a href="#margin" class="subnav-link">Profit Margins</a>
+    <a href="#compare" class="subnav-link">A vs B vs C</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge" style="background:var(--purple-dim);border-color:var(--purple-border);color:var(--purple);">Path C · Anzil Media Collaboration</div>
+      <span class="hero-date">v0.1 &middot; Jun 2026 &middot; based on Anzil draft proposal</span>
+    </div>
+    <h1>Path C — Anzil Media Collaboration</h1>
+    <p>Instead of running acquisition in-house (Paths A &amp; B), GoLuna hands LATAM player acquisition to <strong>Anzil Media</strong> &mdash; one accountable partner running Meta media, WhatsApp, influencers and fiat&harr;crypto payments across <strong>Brazil, Chile &amp; Argentina</strong>. This page maps exactly what Anzil charges, how a <strong>2M SEK</strong> budget flows through it, and whether the marketing allocation is actually enough.</p>
+  </section>
+
+  <div class="note-box info">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <div><strong>Figures in USD</strong> (SEK / EUR where useful), at <strong>1 USD &asymp; 10.5 SEK</strong> &middot; <strong>1 EUR &asymp; $1.08 &asymp; 11.34 SEK</strong>. Anzil&rsquo;s own proposal is in EUR and marked a <em>preliminary working draft</em> &mdash; CACs and volumes are indicative, not guaranteed.</div>
+  </div>
+
+  <!-- §01 THE MODEL -->
+  <section class="section" id="model">
+    <div class="section-label"><span class="section-num">01</span><span class="section-title">The Model — What Anzil Does</span></div>
+    <p class="lead">Anzil is a single contracting + reporting partner for the whole acquisition engine. Phase 1 is acquisition-only; retention is GoLuna&rsquo;s (or a later phase).</p>
+    <ul class="kp">
+      <li><strong>Markets.</strong> Brazil (primary) + Chile / Argentina test. Scale all three in Phase 2.</li>
+      <li><strong>Channels.</strong> Meta media (buying, segmentation, retargeting) &middot; WhatsApp acquisition (Brazil&rsquo;s highest-engagement channel) &middot; influencer activation &middot; creative &amp; PT-BR/ES localization &middot; weekly CAC-by-market reporting.</li>
+      <li><strong>Payments enablement.</strong> Anzil bridges <strong>fiat&harr;crypto incl. PIX</strong> into GoLuna&rsquo;s crypto wallet &mdash; the on-ramp that lets Brazilian players fund a crypto-only casino.</li>
+      <li><strong>GoLuna-led allocation.</strong> GoLuna prepays all media and owns the player + LTV data, so GoLuna decides where budget scales based on CAC&harr;LTV.</li>
+      <li><strong>Phase 2 (later).</strong> Full retention/CRM, SMS broadcast (hybrid CPA + rev-share), performance (FTD/NGR) alignment, and content-clipping sourcing.</li>
+    </ul>
+    <div class="note-box cyan">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      <div><strong>This solves the PIX problem.</strong> GoLuna is crypto-only, but ~96% of Brazilian betting runs on PIX. Anzil&rsquo;s payments enablement is the fiat&rarr;crypto on-ramp &mdash; players pay PIX, GoLuna settles crypto. (Transaction fee on processed volume, confirmed at integration.)</div>
+    </div>
+  </section>
+
+  <!-- §02 CONTRACT -->
+  <section class="section" id="contract">
+    <div class="section-label"><span class="section-num">02</span><span class="section-title">What They Charge — The Contract</span></div>
+    <p class="section-intro">Straight from Anzil&rsquo;s commercial model (&sect;9 of their proposal). The big thing to understand: <strong>media spend is the ad budget, not Anzil&rsquo;s margin</strong> &mdash; GoLuna prepays it. Anzil&rsquo;s actual <em>take</em> is the management %, the retainer and setup (plus WhatsApp/payments fees).</p>
+    <table class="lit">
+      <thead><tr><th>Item</th><th>What Anzil charges</th><th style="text-align:right;">In our money</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Setup &amp; onboarding</strong></td><td class="cat">&euro;3,000 one-time (SaaS + implementation)</td><td class="num">~$3,240</td></tr>
+        <tr><td><strong>Media management &amp; trading</strong></td><td class="cat"><strong>15% of media spend</strong> (10% account rentals + 5% trading desk) &middot; floor &euro;1,500/mo &middot; tapers at higher spend tiers</td><td class="num">~$8.1K on $54K media</td></tr>
+        <tr><td><strong>Advisory &amp; reporting retainer</strong></td><td class="cat">&euro;1,500 / month</td><td class="num">~$1,620/mo</td></tr>
+        <tr><td><strong>WhatsApp messaging (BR)</strong></td><td class="cat">Per-message, volume-tiered (incl. platform + Meta fees)</td><td class="num">~$22K (their full eg.)</td></tr>
+        <tr><td><strong>Influencer activation (BR)</strong></td><td class="cat">Streamer/influencer partnerships + community reach</td><td class="num">~$27K (their full eg.)</td></tr>
+        <tr><td><strong>Payments</strong></td><td class="cat">Transaction fee on processed volume (confirmed at integration)</td><td class="num">% TBD</td></tr>
+        <tr><td>SMS <span class="tag" style="background:var(--surface-3);color:var(--text-muted);padding:2px 6px;border-radius:3px;font-size:9px;">Phase 2</span></td><td class="cat">Hybrid CPA + rev-share per country &middot; &euro;1,500 one-time setup</td><td class="num">Phase 2</td></tr>
+        <tr><td>Performance <span class="tag" style="background:var(--surface-3);color:var(--text-muted);padding:2px 6px;border-radius:3px;font-size:9px;">Phase 2</span></td><td class="cat">FTD / NGR component to align long-term</td><td class="num">Phase 2 · TBD</td></tr>
+      </tbody>
+    </table>
+    <p class="subtitle" style="margin-top:24px;">Their CAC targets (per market)</p>
+    <table class="lit">
+      <thead><tr><th>Market</th><th style="text-align:right;">Target media CAC</th><th style="text-align:right;">Effective CAC (incl. 15%)</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Brazil <span style="font-size:10px;color:var(--text-muted);">primary</span></td><td class="num">&euro;10&ndash;20</td><td class="num">&euro;11.50&ndash;23 <span style="font-size:10px;color:var(--text-muted);">(~$12&ndash;25)</span></td><td class="cat">Base player value</td></tr>
+        <tr><td>Chile</td><td class="num">&euro;15&ndash;30</td><td class="num">&euro;17&ndash;34.50</td><td class="cat">Highest player value</td></tr>
+        <tr><td>Argentina</td><td class="num">&euro;15&ndash;20</td><td class="num">&euro;17&ndash;23</td><td class="cat">&asymp; Brazil</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box warn" style="margin-top:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>Effective CAC includes the 15% management.</strong> Early-stage CAC runs higher during the learning phase and improves with optimization. Anzil&rsquo;s own example program spends &euro;215K media over 3 months (M1 &euro;30K test &rarr; M2 &euro;75K &rarr; M3 &euro;110K) for ~9,600&ndash;14,700 FTDs.</div>
+    </div>
+  </section>
+
+  <!-- §03 MONEY FLOW -->
+  <section class="section" id="flow">
+    <div class="section-label"><span class="section-num">03</span><span class="section-title">How the 2M SEK Is Used</span></div>
+    <p class="lead">Total budget <strong>2M SEK (~$190K)</strong> &mdash; bankroll carved out, GoLuna fixed costs kept, the rest handed to Anzil.</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <thead><tr><th>Layer</th><th style="text-align:right;">SEK</th><th style="text-align:right;">USD</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Total budget</strong></td><td class="num">2,000,000</td><td class="num">~$190K</td><td class="cat">The example figure (vs 3M in Paths A/B)</td></tr>
+        <tr><td>&minus; Bankroll reserve</td><td class="num">500,000</td><td class="num">~$48K</td><td class="cat">Player-winnings float (kept separate)</td></tr>
+        <tr class="total"><td>= Operating budget</td><td class="num">1,500,000</td><td class="num">~$143K</td><td class="cat">Everything else for 6 months</td></tr>
+      </tbody>
+    </table>
+    <p class="subtitle">GoLuna keeps (fixed / internal, M1&ndash;M6) &mdash; ~$72.7K</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <thead><tr><th>Kept cost</th><th style="text-align:right;">M1&ndash;M6 USD</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Salaries (T+O+G) $5K/mo</td><td class="num">$30,000</td><td class="cat">Team active from day 1</td></tr>
+        <tr><td>Cubeia AWS hosting</td><td class="num">$11,016</td><td class="cat">&euro;1,700/mo &middot; required</td></tr>
+        <tr><td>Cubeia App.B (Customer.io + Freshchat)</td><td class="num">$1,890</td><td class="cat">CRM + support chat</td></tr>
+        <tr><td>Security stack (subs + hardware)</td><td class="num">$3,057</td><td class="cat">VPN, keys, 1Password, etc.</td></tr>
+        <tr><td>Claude Max</td><td class="num">$1,000</td><td class="cat">AI tooling</td></tr>
+        <tr><td>X VIP transfer method</td><td class="num">$5,715</td><td class="cat">Payments/ops</td></tr>
+        <tr><td>CR corp maintenance</td><td class="num">$6,858</td><td class="cat">Costa Rica entity (M1)</td></tr>
+        <tr><td>Designer + Betby setup</td><td class="num">$7,800</td><td class="cat">Casino design + sportsbook (M2)</td></tr>
+        <tr><td>Onboarding consultant + other subs</td><td class="num">$5,380</td><td class="cat">48h flow + tooling</td></tr>
+        <tr class="total"><td>= GoLuna fixed kept</td><td class="num">~$72,716</td><td class="cat">763K SEK</td></tr>
+      </tbody>
+    </table>
+    <p class="subtitle">What gets handed to Anzil = the old acquisition lines</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <thead><tr><th>Path A/B line</th><th>Becomes (Anzil)</th></tr></thead>
+      <tbody>
+        <tr><td>BH Ads + Paid Social</td><td class="cat">Meta media buying (segmented, retargeted)</td></tr>
+        <tr><td>Streamer partnerships</td><td class="cat">Influencer activation (Brazil)</td></tr>
+        <tr><td>Community manager</td><td class="cat">Community reach (within influencer/ops)</td></tr>
+        <tr><td>Promotional pool</td><td class="cat">Player incentives / offers (GoLuna-funded bonuses)</td></tr>
+        <tr><td><span style="color:var(--green);">+ new</span></td><td class="cat">WhatsApp acquisition + fiat&harr;crypto payments (PIX)</td></tr>
+      </tbody>
+    </table>
+    <p class="subtitle">Of the ~$70K Anzil allocation, who gets what</p>
+    <table class="lit">
+      <thead><tr><th>Slice</th><th style="text-align:right;">USD</th><th style="text-align:right;">% of allocation</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Anzil allocation</strong></td><td class="num">~$70,100</td><td class="num">100%</td><td class="cat">Operating $143K &minus; kept $72.7K</td></tr>
+        <tr><td>&minus; Setup (&euro;3K, one-time)</td><td class="num">$3,240</td><td class="num">5%</td><td class="cat">SaaS + implementation</td></tr>
+        <tr><td>&minus; Retainer (&euro;1.5K &times; 3 mo)</td><td class="num">$4,860</td><td class="num">7%</td><td class="cat">Advisory + reporting</td></tr>
+        <tr><td>&minus; Management 15%</td><td class="num">$8,092</td><td class="num">12%</td><td class="cat">10% account rentals + 5% trading</td></tr>
+        <tr class="total"><td>= Actual MEDIA reaching players</td><td class="num" style="color:var(--green);">~$53,949</td><td class="num">77%</td><td class="cat">The real ad spend driving FTDs</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box info" style="margin-top:14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div>Anzil&rsquo;s fee take is <strong>~23% of the allocation</strong> ($16.2K of $70K); the other <strong>77% (~$54K)</strong> is real media. At Brazil effective CAC (~$12&ndash;25) that buys <strong>~2,200&ndash;4,500 FTDs</strong> over the pilot.</div>
+    </div>
+  </section>
+
+  <!-- §04 IS IT ENOUGH -->
+  <section class="section" id="enough">
+    <div class="section-label"><span class="section-num">04</span><span class="section-title">Is the Allocation Enough?</span></div>
+    <div class="note-box rose">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>Short answer: enough for a real test pilot, not for Anzil&rsquo;s full program.</strong> The ~$54K media is only <strong>~23% of Anzil&rsquo;s own &euro;215K media example</strong>, and their full &euro;300K program is <strong>~3.4M SEK &mdash; bigger than the entire 2M SEK budget</strong>. On 2M SEK you fund a genuine test-and-learn, then scale winners from revenue.</div>
+    </div>
+    <p class="subtitle">What each budget buys with Anzil</p>
+    <table class="lit">
+      <thead><tr><th>Budget</th><th style="text-align:right;">Anzil allocation</th><th style="text-align:right;">Actual media</th><th style="text-align:right;">~FTDs (BR CAC)</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><strong>2M SEK</strong> (this example)</td><td class="num">~$70K</td><td class="num">~$54K</td><td class="num">~2,200&ndash;4,500</td><td class="cat" style="color:var(--amber);">Test pilot</td></tr>
+        <tr><td><strong>3M SEK</strong></td><td class="num">~$165K</td><td class="num">~$137K</td><td class="num">~5,500&ndash;11,000</td><td class="cat" style="color:var(--green);">Solid pilot</td></tr>
+        <tr><td><strong>Anzil full</strong> (&euro;300K &asymp; 3.4M SEK)</td><td class="num">~$300K</td><td class="num">~$232K</td><td class="num">~9,600&ndash;14,700</td><td class="cat">Full 3-market program</td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:20px;">If you want to run Anzil at scale on 2M SEK, the levers are:</p>
+    <ul class="kp">
+      <li><strong>Reinvest revenue into media.</strong> Start lean ($54K), let M2&ndash;M3 GGR fund the M3+ scale (Anzil&rsquo;s own ramp is built this way: $30K&rarr;$75K&rarr;$110K).</li>
+      <li><strong>Brazil-only.</strong> Drop the Chile/Argentina test (higher CAC) and concentrate the $54K on the cheapest, highest-PIX market.</li>
+      <li><strong>Raise the budget toward 3M+ SEK</strong> if you want the full 3-market program from day one.</li>
+      <li><strong>Trim GoLuna fixed.</strong> Defer Betby/Designer ($7.8K) past the pilot to free more media &mdash; but the core ($5K staff, security, Claude, Cubeia fees) stays.</li>
+    </ul>
+  </section>
+
+  <!-- §05 MARGIN -->
+  <section class="section" id="margin">
+    <div class="section-label"><span class="section-num">05</span><span class="section-title">Profit Margins — All Fees Included</span></div>
+    <p class="lead">One big upside of the Anzil model: in Phase 1 there&rsquo;s <strong>no 9% affiliate commission</strong> (Anzil is a media-fee, not a rev-share partner). So net contribution rises to <strong>56.5% of GGR</strong> &mdash; 9 points above Paths A/B (47.5%).</p>
+    <table class="lit" style="margin-bottom:18px;">
+      <thead><tr><th>For every $1 of GGR</th><th style="text-align:right;">Path A/B</th><th style="text-align:right;">Path C (Anzil)</th></tr></thead>
+      <tbody>
+        <tr><td>&minus; Bonuses &amp; promo</td><td class="num">25&cent;</td><td class="num">25&cent;</td></tr>
+        <tr><td>&minus; Cubeia platform (5%)</td><td class="num">5&cent;</td><td class="num">5&cent;</td></tr>
+        <tr><td>&minus; Game providers (~10.5%)</td><td class="num">10.5&cent;</td><td class="num">10.5&cent;</td></tr>
+        <tr><td>&minus; Crypto processing (~3%)</td><td class="num">3&cent;</td><td class="num">3&cent;</td></tr>
+        <tr><td>&minus; Affiliate commission (~9%)</td><td class="num">9&cent;</td><td class="num" style="color:var(--green);">0&cent; <span style="font-size:10px;">none in Phase 1</span></td></tr>
+        <tr class="total"><td>= Net contribution to operator</td><td class="num">47.5&cent;</td><td class="num" style="color:var(--green);">56.5&cent;</td></tr>
+      </tbody>
+    </table>
+    <p class="section-intro">Acquisition cost (the Anzil media + fees) sits <em>outside</em> this %-stack &mdash; it&rsquo;s the upfront CAC, front-loaded in the 3-month pilot and then it stops. Post-pilot, the retained cohorts pay out against just the GoLuna fixed base:</p>
+    <table class="lit">
+      <thead><tr><th>Monthly GGR</th><th style="text-align:right;">Net contribution (56.5%)</th><th style="text-align:right;">&minus; GoLuna fixed (~$10K/mo)</th><th style="text-align:right;">= Monthly Net Profit</th></tr></thead>
+      <tbody>
+        <tr><td>$30K</td><td class="num">$17.0K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$7K</td></tr>
+        <tr><td>$50K</td><td class="num">$28.3K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$18K</td></tr>
+        <tr><td>$100K</td><td class="num">$56.5K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$47K</td></tr>
+        <tr><td>$170K</td><td class="num">$96.1K</td><td class="num">&minus;$10K</td><td class="num" style="color:var(--green);">+$86K</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box green" style="margin-top:14px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><strong>Post-pilot monthly break-even &asymp; $18K GGR/mo</strong> ($10K fixed &divide; 56.5%). The real question isn&rsquo;t the margin &mdash; it&rsquo;s whether the ~$54K pilot media buys enough <em>retained</em> players to reach that. With the operator&rsquo;s ~19% monthly retention benchmark (see <a href="retention.html" style="color:var(--green);font-weight:600;">Assumptions</a>), expect the lean pilot to validate, not to fully fund, the scale-up.</div>
+    </div>
+  </section>
+
+  <!-- §06 COMPARE -->
+  <section class="section" id="compare">
+    <div class="section-label"><span class="section-num">06</span><span class="section-title">Path A vs B vs C</span></div>
+    <table class="lit">
+      <thead><tr><th>&nbsp;</th><th style="text-align:left;">Path A</th><th style="text-align:left;">Path B</th><th style="text-align:left;">Path C &mdash; Anzil</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Approach</strong></td><td class="cat">In-house acquisition volume</td><td class="cat">In-house retention-first</td><td class="cat">Outsource acquisition to one LATAM partner</td></tr>
+        <tr><td><strong>Who runs acquisition</strong></td><td class="cat">GoLuna team</td><td class="cat">GoLuna team</td><td class="cat">Anzil (single accountable partner)</td></tr>
+        <tr><td><strong>Budget basis</strong></td><td class="cat">3M SEK</td><td class="cat">3M SEK</td><td class="cat">2M SEK (example)</td></tr>
+        <tr><td><strong>Markets</strong></td><td class="cat">Brazil-led</td><td class="cat">Brazil-led</td><td class="cat">Brazil + Chile + Argentina</td></tr>
+        <tr><td><strong>Acquisition fee</strong></td><td class="cat">internal time</td><td class="cat">internal time + community mgr</td><td class="cat">15% media + &euro;1.5K/mo + &euro;3K setup</td></tr>
+        <tr><td><strong>Affiliate cost</strong></td><td class="cat">9% of GGR</td><td class="cat">9% (tiered)</td><td class="cat" style="color:var(--green);">none in Phase 1</td></tr>
+        <tr><td><strong>Net contribution</strong></td><td class="cat">47.5%</td><td class="cat">47.5%</td><td class="cat" style="color:var(--green);">56.5%</td></tr>
+        <tr><td><strong>PIX / payments</strong></td><td class="cat">crypto only + off-platform on-ramp</td><td class="cat">same</td><td class="cat" style="color:var(--green);">Anzil payments enablement (PIX&rarr;crypto)</td></tr>
+        <tr><td><strong>Best for</strong></td><td class="cat">fast volume test</td><td class="cat">player quality / LTV</td><td class="cat">fast LATAM launch, less internal ops</td></tr>
+        <tr><td><strong>Main risk</strong></td><td class="cat">bonus hunters</td><td class="cat">execution of retention build</td><td class="cat">partner dependency; 2M budget = small pilot only</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box warn" style="margin-top:16px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>Caveats.</strong> Anzil&rsquo;s numbers are from a <em>preliminary draft</em> &mdash; CACs/volumes indicative. The 15% management tapers at higher spend (not modelled). WhatsApp + payments fees are volume-tiered / TBD. 2M SEK leaves a thin bankroll and funds only a small pilot. Phase 2 (rev-share, SMS, clipping) would change these economics &mdash; confirm scope and commercials before signing.</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Path C &middot; Anzil Media Collaboration &mdash; v0.1 &middot; Jun 2026 &mdash; Confidential &mdash; <a href="paths.html">Paths A/B</a> &middot; <a href="forecast.html">Forecast</a> &middot; <a href="index.html">Hub</a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  function setCur(c){
+    var b=document.body;['usd','sek','eur'].forEach(function(x){b.classList.remove('fx-'+x)});
+    b.classList.add('fx-'+c);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.classList.toggle('active', btn.dataset.cur===c);
+    });
+    try{localStorage.setItem('goluna-fx',c)}catch(e){}
+  }
+  function init(){
+    var saved='usd';
+    try{saved=localStorage.getItem('goluna-fx')||'usd'}catch(e){}
+    setCur(saved);
+    document.querySelectorAll('.fx-switch-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){setCur(btn.dataset.cur)});
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}
+  else{init();}
+})();
+</script>
+
+<script>
+(function(){
+  function wrap(){
+    document.querySelectorAll('.page table, .page-content table').forEach(function(t){
+      if(t.closest('.table-scroll')) return;
+      // Skip tables already inside a div with overflow handling
+      var p = t.parentElement;
+      if(p && getComputedStyle(p).overflowX === 'auto') return;
+      var w = document.createElement('div');
+      w.className = 'table-scroll';
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
+    var sn = document.querySelector('.subnav');
+    var si = document.querySelector('.subnav-inner');
+    if(sn && si){
+      function check(){
+        if(si.scrollWidth - si.clientWidth > 4 && si.scrollLeft + si.clientWidth < si.scrollWidth - 4){
+          sn.classList.add('has-scroll');
+        } else {
+          sn.classList.remove('has-scroll');
+        }
+      }
+      check();
+      si.addEventListener('scroll', check, { passive: true });
+      window.addEventListener('resize', check, { passive: true });
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wrap);
+  else wrap();
+})();
+</script>
+
+
+<script>
+/* Glossary popover */
+(function(){
+  var G = {"GGR": {"t": "Gross Gaming Revenue", "d": "Total player stakes minus winnings paid out. The casino's raw revenue, before bonuses, fees or taxes.", "m": "a"}, "NGR": {"t": "Net Gaming Revenue", "d": "GGR minus bonuses, payment fees and gaming taxes. What's left before operating costs.", "m": "a"}, "ARPU": {"t": "Average Revenue Per User", "d": "GGR divided by all active players in a period.", "m": "a"}, "ARPPU": {"t": "Average Revenue Per Paying User", "d": "Revenue per depositing player only. Always higher than ARPU.", "m": "a"}, "CPA": {"t": "Cost Per Acquisition", "d": "Marketing spend to acquire one depositing player. Also a flat affiliate payout model.", "m": "a"}, "FTD": {"t": "First-Time Deposit(or)", "d": "A player's first real-money deposit, or a newly-acquired depositing player.", "m": "a"}, "LTV": {"t": "Lifetime Value", "d": "Total net revenue a player generates over their whole lifetime with the casino.", "m": "a"}, "KYC": {"t": "Know Your Customer", "d": "Identity verification (ID, address) required before withdrawals or at set thresholds.", "m": "a"}, "AML": {"t": "Anti-Money-Laundering", "d": "Controls to detect and stop money being laundered through the platform.", "m": "a"}, "SoF": {"t": "Source of Funds", "d": "Proof of where a player's money came from, requested at higher deposit/withdrawal thresholds.", "m": "a"}, "RTP": {"t": "Return To Player", "d": "The % of stakes a game pays back over time (e.g. 96%). The inverse of house edge.", "m": "a"}, "EBITDA": {"t": "Earnings Before Interest, Tax, Depreciation & Amortisation", "d": "A common proxy for operating profit.", "m": "a"}, "P&L": {"t": "Profit & Loss", "d": "The statement showing revenue minus all costs to arrive at profit.", "m": "a"}, "NP": {"t": "Net Profit", "d": "What remains after all costs (variable, fixed, taxes) are deducted from revenue.", "m": "a"}, "TAM": {"t": "Total Addressable Market", "d": "The full revenue opportunity if you reached every possible customer.", "m": "a"}, "ROI": {"t": "Return On Investment", "d": "Profit generated relative to the money put in.", "m": "a"}, "CAC": {"t": "Customer Acquisition Cost", "d": "Total cost to win one new customer; broader than CPA (includes all marketing).", "m": "a"}, "VIP": {"t": "Very Important Player", "d": "High-value players given dedicated management, higher limits and tailored bonuses. Drive a large share of GGR.", "m": "a"}, "PIX": {"t": "Brazil's instant payment system", "d": "Free, instant bank transfers run by Brazil's Central Bank. ~96% of regulated betting uses it. GoLuna is crypto-only, so it serves only as a fiat-to-crypto on-ramp.", "m": "w"}, "USDT": {"t": "Tether (stablecoin)", "d": "A crypto pegged 1:1 to the US dollar. USDT-on-Tron is the cheapest rail and GoLuna's default deposit currency.", "m": "a"}, "BTC": {"t": "Bitcoin", "d": "The primary cryptocurrency. Accepted for deposits/withdrawals; max-win caps are often denominated in BTC.", "m": "a"}, "uBTC": {"t": "Micro-Bitcoin", "d": "One millionth of a BTC (0.000001 BTC). Used for small-balance display on some platforms.", "m": "a"}, "D30": {"t": "Day-30 retention", "d": "The share of players still active 30 days after they joined. A key cohort-health metric.", "m": "a"}, "Originals": {"t": "In-house casino games", "d": "'Provably-fair' games (crash, dice, plinko, mines) built by the operator. Higher margin than 3rd-party slots.", "m": "a"}, "rev-share": {"t": "Revenue Share", "d": "An affiliate is paid an ongoing % of the revenue their referred players generate, instead of a flat CPA.", "m": "w"}, "whitelabel": {"t": "White-label platform", "d": "A ready-made casino platform you brand as your own. GoLuna runs on the Betplay/Betpanda chassis via Cubeia.", "m": "w"}, "bankroll": {"t": "Bankroll", "d": "The cash/crypto reserve held to pay out player winnings. Must cover worst-case payouts, not just the average.", "m": "w"}, "house edge": {"t": "House edge", "d": "The operator's built-in margin on a game = 100% minus RTP. A 4% edge means the house keeps ~4% of stakes long-term.", "m": "w"}, "bonus hunter": {"t": "Bonus hunter", "d": "A player who exploits welcome bonuses and promos for value, then leaves without ever becoming profitable.", "m": "w"}, "churn": {"t": "Churn", "d": "The rate at which players stop playing / leave over a period. The opposite of retention.", "m": "w"}, "cohort": {"t": "Cohort", "d": "A group of players bucketed by when they joined, then tracked over time to measure retention.", "m": "w"}, "on-ramp": {"t": "On-ramp", "d": "A service that converts fiat money (e.g. via PIX) into crypto so a player can deposit. GoLuna players on-ramp off-platform.", "m": "w"}, "wagering": {"t": "Wagering requirement", "d": "How many times a bonus (or deposit) must be bet before winnings can be withdrawn, e.g. 30x.", "m": "w"}};
+  function esc(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function reFor(term, mode){
+    var e = esc(term);
+    if(mode === 'a') return new RegExp('(?<![A-Za-z0-9])' + e + '(?![A-Za-z0-9])');
+    return new RegExp('(?<![A-Za-z])' + e + '(?![A-Za-z])', 'i');
+  }
+  function wrapTerms(){
+    var root = document.querySelector('.page'); if(!root) return;
+    var keys = Object.keys(G).sort(function(a,b){ return b.length - a.length; });
+    keys.forEach(function(term){
+      var def = G[term], re = reFor(term, def.m);
+      var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(n){
+          if(!n.nodeValue || n.nodeValue.length < 2) return NodeFilter.FILTER_REJECT;
+          if(!re.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+          var p = n.parentElement;
+          while(p && p !== root.parentElement){
+            var tag = p.tagName;
+            if(tag === 'A' || tag === 'BUTTON' || tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+            if(p.classList && p.classList.contains('gloss')) return NodeFilter.FILTER_REJECT;
+            p = p.parentElement;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var node = tw.nextNode(); if(!node) return;
+      var m = node.nodeValue.match(re); if(!m) return;
+      var rest = node.splitText(m.index);
+      rest.nodeValue = rest.nodeValue.slice(m[0].length);
+      var span = document.createElement('span');
+      span.className = 'gloss'; span.tabIndex = 0; span.setAttribute('role', 'button');
+      span.setAttribute('aria-label', def.t + ': ' + def.d);
+      span.setAttribute('data-t', def.t); span.setAttribute('data-d', def.d);
+      span.textContent = m[0];
+      rest.parentNode.insertBefore(span, rest);
+    });
+  }
+  var pop, ht;
+  function ensurePop(){
+    if(pop) return;
+    pop = document.createElement('div'); pop.id = 'gloss-pop';
+    pop.innerHTML = '<span class="gp-t"></span><span class="gp-d"></span>';
+    document.body.appendChild(pop);
+    pop.addEventListener('mouseenter', function(){ clearTimeout(ht); });
+    pop.addEventListener('mouseleave', function(){ ht = setTimeout(hide, 150); });
+  }
+  function show(el){
+    ensurePop();
+    pop.querySelector('.gp-t').textContent = el.getAttribute('data-t');
+    pop.querySelector('.gp-d').textContent = el.getAttribute('data-d');
+    pop.classList.add('show');
+    var r = el.getBoundingClientRect(), pr = pop.getBoundingClientRect();
+    var left = r.left, top = r.bottom + 8;
+    if(left + pr.width > window.innerWidth - 12) left = window.innerWidth - 12 - pr.width;
+    if(left < 12) left = 12;
+    if(top + pr.height > window.innerHeight - 12) top = r.top - 8 - pr.height;
+    if(top < 12) top = 12;
+    pop.style.left = left + 'px'; pop.style.top = top + 'px';
+  }
+  function hide(){ if(pop) pop.classList.remove('show'); }
+  function init(){
+    try { wrapTerms(); } catch(e){ return; }
+    document.addEventListener('mouseover', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ clearTimeout(ht); show(g); } });
+    document.addEventListener('mouseout', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ ht = setTimeout(hide, 150); } });
+    document.addEventListener('click', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g){ e.preventDefault(); clearTimeout(ht); show(g); } else if(!(e.target.closest && e.target.closest('#gloss-pop'))){ hide(); } });
+    document.addEventListener('focusin', function(e){ var g = e.target.closest && e.target.closest('.gloss'); if(g) show(g); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') hide(); });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+
+</body>
+</html>
