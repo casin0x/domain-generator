@@ -359,9 +359,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <thead>
           <tr>
             <th>Month</th>
+            <th>Minimum</th>
             <th>Conservative</th>
-            <th>Base</th>
-            <th>Stretch</th>
+            <th>High</th>
             <th style="text-align:left;">Narrative</th>
           </tr>
         </thead>
@@ -406,21 +406,21 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
             <td class="conservative">$100K</td>
             <td class="base">$170K</td>
             <td class="stretch">$260K</td>
-            <td class="note"><strong>Target: cumulative break-even by M6.</strong> Base case = ~$81K net contribution after affiliate + variable + bonuses; +$50K monthly NP on M6 standalone.</td>
+            <td class="note"><strong>Target: cumulative break-even by M6.</strong> Conservative case = ~$81K net contribution after affiliate + variable + bonuses; <strong>+$69K monthly NP</strong> on M6 standalone (see &sect;07).</td>
           </tr>
           <tr class="total">
             <td class="month">6-mo total</td>
             <td class="conservative">$278K</td>
             <td class="base" style="color:var(--green);">$485K</td>
             <td class="stretch">$745K</td>
-            <td class="note" style="font-style:normal;"><strong>Cumulative GGR · base case targets cumulative break-even by M6</strong> (after spend + 30% affiliate at 40% mix)</td>
+            <td class="note" style="font-style:normal;"><strong>Cumulative GGR · Conservative case targets cumulative break-even by M6</strong> (after spend + 30% affiliate at 40% mix)</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Backing assumption:</strong> CAC ~$40 per FTD (with affiliate ramp lowering blended cost), LTV ~$130 over 6 months (typical crypto casino with mature affiliate program). $151K total paid + affiliate acquisition spend M1–M6 = ~3,800 FTDs × $130 LTV = ~$494K acquired-cohort revenue, mostly realised M3–M9. Existing-cohort revenue plus this is what produces the base-case $485K cumulative target.</div>
+      <div><strong>Backing assumption:</strong> CAC ~$40 per FTD (with affiliate ramp lowering blended cost), LTV ~$130 over 6 months (typical crypto casino with mature affiliate program). $151K total paid + affiliate acquisition spend M1–M6 = ~3,800 FTDs × $130 LTV = ~$494K acquired-cohort revenue, mostly realised M3–M9. Existing-cohort revenue plus this is what produces the Conservative-case $485K cumulative target.</div>
     </div>
   </section>
 
@@ -838,105 +838,98 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </div>
   </section>
 
-  <!-- §07 REVENUE vs SPEND -->
+  <!-- §07 MONTHLY P&L 3 SCENARIOS -->
+  <style>
+  .scn-switch { display:inline-flex; background:var(--surface-2); border:1px solid var(--border); border-radius:9px; padding:3px; gap:3px; margin-bottom:16px; flex-wrap:wrap; }
+  .scn-btn { padding:8px 18px; border-radius:6px; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-muted); background:transparent; border:0; cursor:pointer; transition:all .15s; }
+  .scn-btn:hover { color:var(--text); }
+  .scn-btn.active[data-scn="min"] { background:var(--rose); color:#1a0a0c; }
+  .scn-btn.active[data-scn="con"] { background:var(--accent); color:var(--bg); }
+  .scn-btn.active[data-scn="high"] { background:var(--green); color:#04140c; }
+  .scn-table { display:none; }
+  .scn-table.active { display:block; }
+  .pl-table td.be { background:rgba(52,211,153,0.16) !important; font-weight:700; }
+  .pl-table tr.sub td { background:var(--surface-2); font-weight:700; color:var(--text); }
+  .pl-table tr.np td { border-top:2px solid var(--border-hover); font-weight:700; }
+  </style>
   <section class="section" id="vsspend">
     <div class="section-label">
       <span class="section-num">07</span>
-      <span class="section-title">Revenue vs Spend — 6-month side-by-side (Base case)</span>
+      <span class="section-title">Monthly P&amp;L — Bet Volume &rarr; GGR &rarr; Net Profit (3 scenarios)</span>
     </div>
-    <div class="ggr-table" style="margin-bottom:16px;">
-      <table>
-        <thead>
-          <tr>
-            <th>Month</th>
-            <th style="text-align:right;">GGR target (base)</th>
-            <th style="text-align:right;">Spend</th>
-            <th style="text-align:right;">Net contribution<br><span style="font-weight:400;font-size:9px;">(GGR × 47.5%)</span></th>
-            <th style="text-align:right;">Net Profit / EBITDA</th>
-            <th>State</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="month">M1</td>
-            <td class="base">$0K</td>
-            <td style="color:var(--rose);">$39.2K</td>
-            <td>$0K</td>
-            <td style="color:var(--rose);">−$39K</td>
-            <td class="note"><strong>Onboarding active.</strong> Cubeia AWS + security HW + CR corp + salaries $5K (team active) + 250K SEK clipping prepay ($23.8K). No players yet, but content production starts.</td>
-          </tr>
-          <tr>
-            <td class="month">M2</td>
-            <td class="base">$30K</td>
-            <td style="color:var(--rose);">$45.1K</td>
-            <td>$14.25K</td>
-            <td style="color:var(--rose);">−$31K</td>
-            <td class="note"><strong>First marketing month.</strong> Recurring + Designer/Betby one-times + paid marketing $23K + promo pool $3K. Clipping already paid M1.</td>
-          </tr>
-          <tr>
-            <td class="month">M3</td>
-            <td class="base">$55K</td>
-            <td style="color:var(--rose);">$37.3K</td>
-            <td>$26.1K</td>
-            <td style="color:var(--rose);">−$11K</td>
-            <td class="note">Marketing $23K/mo + promo pool $3K · first cohort retention from M2 closing the gap</td>
-          </tr>
-          <tr>
-            <td class="month">M4</td>
-            <td class="base">$90K</td>
-            <td style="color:var(--rose);">$37.3K</td>
-            <td>$42.75K</td>
-            <td style="color:var(--green);">+$5K</td>
-            <td class="note"><strong>First positive NP month.</strong> Cohorts stacking · contribution exceeds spend (incl. promo pool).</td>
-          </tr>
-          <tr>
-            <td class="month">M5</td>
-            <td class="base">$130K</td>
-            <td style="color:var(--rose);">$37.3K</td>
-            <td>$61.75K</td>
-            <td style="color:var(--green);">+$24K</td>
-            <td class="note">Final marketing month · cohorts compounding · investor-conversation time.</td>
-          </tr>
-          <tr>
-            <td class="month">M6</td>
-            <td class="base">$170K</td>
-            <td style="color:var(--rose);">$11.3K</td>
-            <td>$80.75K</td>
-            <td style="color:var(--green);">+$69K</td>
-            <td class="note"><strong>Retention test month.</strong> No marketing spend &mdash; just recurring base. Cohort retention from M2&ndash;M5 drives the GGR.</td>
-          </tr>
-          <tr class="total">
-            <td class="month">6-mo total</td>
-            <td class="base" style="color:var(--green);">$475K</td>
-            <td style="color:var(--rose);">$207K</td>
-            <td style="color:var(--green);">$225K</td>
-            <td style="color:var(--green);">+$17K</td>
-            <td class="note" style="font-style:normal;"><strong>Cumulative Net Profit: +$17K</strong> · M6 standalone +$69K (retention test) · trend flips positive M4 · includes promo pool $12K + M1 salaries</td>
-          </tr>
-        </tbody>
-      </table>
+    <p class="section-intro" style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px;max-width:920px;">The full monthly picture for each scenario: how much players wager (bet volume), what that yields as GGR, what's left after bonuses and fees (NGR &rarr; net contribution), and what remains after <strong>all</strong> operating cost &mdash; the Net Profit. The <strong>Cumulative</strong> row is the break-even tracker (green cell = the month you turn cumulatively profitable).</p>
+
+    <div class="note-box warn" style="margin-bottom:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <div><strong>The window:</strong> M1 is onboarding. You then have <strong>4 months (M2&ndash;M5)</strong> to ramp acquisition; <strong>M6 is the retention test</strong>. The target is <strong>cumulative break-even by M6</strong>. &mdash; <span style="color:var(--accent);font-weight:600;">Conservative</span> hits it (+$20K at M6) &middot; <span style="color:var(--green);font-weight:600;">High</span> hits it a month early (M5) &middot; <span style="color:var(--rose);font-weight:600;">Minimum</span> reaches <em>monthly</em> break-even at M6 but needs ~M8 to recover the M1&ndash;M6 investment.</div>
     </div>
-    <div class="sxs-grid">
-      <div class="sxs-card spend">
-        <div class="label">M1–M6 cumulative spend</div>
-        <div class="val cur cur-usd">~$207K</div>
-        <div class="val cur cur-sek">~2.18M SEK</div>
-        <div class="val cur cur-eur">~€192K</div>
-        <div class="sub">M1 onboarding (salaries on) + clipping prepay · M2–M5 marketing + promo pool · M6 recurring</div>
-      </div>
-      <div class="sxs-card rev">
-        <div class="label">M1–M6 cumulative net contribution (base)</div>
-        <div class="val cur cur-usd">~$231K</div>
-        <div class="val cur cur-sek">~2.43M SEK</div>
-        <div class="val cur cur-eur">~€214K</div>
-        <div class="sub">After bonuses + variable fees + affiliate · before fixed opex</div>
-      </div>
+
+    <p class="subtitle" style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 10px;">Scenario summary</p>
+    <table class="lit" style="margin-bottom:18px;">
+<thead><tr><th>Scenario</th><th style="text-align:right;">6-mo GGR</th><th style="text-align:right;">6-mo bet volume</th><th style="text-align:right;">Monthly break-even</th><th style="text-align:right;">Cumulative break-even</th><th style="text-align:right;">M6 net profit</th><th style="text-align:right;">M6 cumulative</th></tr></thead>
+<tbody>
+<tr><td><span style="color:var(--rose);font-weight:700;">Minimum</span></td><td class="num">$278K</td><td class="num">$7.0M</td><td class="num">M6</td><td class="num" style="color:var(--rose);">~M8</td><td class="num" style="color:var(--green);">+$36K</td><td class="num" style="color:var(--rose);">-$78K</td></tr>
+<tr><td><span style="color:var(--accent);font-weight:700;">Conservative</span></td><td class="num">$485K</td><td class="num">$12.1M</td><td class="num">M4</td><td class="num" style="color:var(--green);">M6</td><td class="num" style="color:var(--green);">+$69K</td><td class="num" style="color:var(--green);">+$20K</td></tr>
+<tr><td><span style="color:var(--green);font-weight:700;">High</span></td><td class="num">$745K</td><td class="num">$18.6M</td><td class="num">M3</td><td class="num" style="color:var(--green);">M5</td><td class="num" style="color:var(--green);">+$112K</td><td class="num" style="color:var(--green);">+$143K</td></tr>
+</tbody></table>
+
+    <p class="subtitle" style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:18px 0 10px;">Month-by-month detail &mdash; pick a scenario</p>
+    <div class="scn-switch" role="group" aria-label="Choose scenario">
+      <button class="scn-btn" type="button" data-scn="min" onclick="scnShow('min')">Minimum</button>
+      <button class="scn-btn active" type="button" data-scn="con" onclick="scnShow('con')">Conservative</button>
+      <button class="scn-btn" type="button" data-scn="high" onclick="scnShow('high')">High</button>
     </div>
-    <div class="note-box green">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      <div><strong>Base case crosses break-even at M3</strong> on monthly contribution basis. Cumulative contribution overtakes cumulative spend in M6. After M6 the business is self-sustaining without new investment.</div>
+<div class="scn-table" data-scn="min">
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$175K</td><td class="num">$450K</td><td class="num">$700K</td><td class="num">$1.25M</td><td class="num">$1.88M</td><td class="num">$2.50M</td><td class="num">$7.0M</td>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$7K</td><td class="num ">$18K</td><td class="num ">$28K</td><td class="num ">$50K</td><td class="num ">$75K</td><td class="num ">$100K</td><td class="num ">$278K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$1.8K</td><td class="num ">-$4.5K</td><td class="num ">-$7K</td><td class="num ">-$12.5K</td><td class="num ">-$18.8K</td><td class="num ">-$25K</td><td class="num ">-$69.5K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$5.2K</td><td class="num ">$13.5K</td><td class="num ">$21K</td><td class="num ">$37.5K</td><td class="num ">$56.2K</td><td class="num ">$75K</td><td class="num ">$208K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$1.9K</td><td class="num ">-$5K</td><td class="num ">-$7.7K</td><td class="num ">-$13.8K</td><td class="num ">-$20.6K</td><td class="num ">-$27.5K</td><td class="num ">-$76.5K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$3.3K</td><td class="num ">$8.5K</td><td class="num ">$13.3K</td><td class="num ">$23.8K</td><td class="num ">$35.6K</td><td class="num ">$47.5K</td><td class="num ">$132K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$38.8K</td><td class="num " style="color:var(--rose);">-$36.6K</td><td class="num " style="color:var(--rose);">-$24K</td><td class="num " style="color:var(--rose);">-$13.6K</td><td class="num " style="color:var(--rose);">-$1.7K</td><td class="num  be" style="color:var(--green);">+$36.2K</td><td class="num " style="color:var(--rose);">-$78.5K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$38.8K</td><td class="num " style="color:var(--rose);">-$75.4K</td><td class="num " style="color:var(--rose);">-$99.4K</td><td class="num " style="color:var(--rose);">-$113K</td><td class="num " style="color:var(--rose);">-$115K</td><td class="num " style="color:var(--rose);">-$78.5K</td><td class="num">—</td></tr>
+</tbody></table></div>
+</div>
+<div class="scn-table active" data-scn="con">
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$250K</td><td class="num">$750K</td><td class="num">$1.38M</td><td class="num">$2.25M</td><td class="num">$3.25M</td><td class="num">$4.25M</td><td class="num">$12.1M</td>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$10K</td><td class="num ">$30K</td><td class="num ">$55K</td><td class="num ">$90K</td><td class="num ">$130K</td><td class="num ">$170K</td><td class="num ">$485K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$2.5K</td><td class="num ">-$7.5K</td><td class="num ">-$13.8K</td><td class="num ">-$22.5K</td><td class="num ">-$32.5K</td><td class="num ">-$42.5K</td><td class="num ">-$121K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$7.5K</td><td class="num ">$22.5K</td><td class="num ">$41.2K</td><td class="num ">$67.5K</td><td class="num ">$97.5K</td><td class="num ">$128K</td><td class="num ">$364K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$2.8K</td><td class="num ">-$8.2K</td><td class="num ">-$15.1K</td><td class="num ">-$24.8K</td><td class="num ">-$35.8K</td><td class="num ">-$46.8K</td><td class="num ">-$133K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$4.8K</td><td class="num ">$14.2K</td><td class="num ">$26.1K</td><td class="num ">$42.8K</td><td class="num ">$61.8K</td><td class="num ">$80.8K</td><td class="num ">$230K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$37.4K</td><td class="num " style="color:var(--rose);">-$30.9K</td><td class="num " style="color:var(--rose);">-$11.2K</td><td class="num  be" style="color:var(--green);">+$5.4K</td><td class="num " style="color:var(--green);">+$24.4K</td><td class="num " style="color:var(--green);">+$69.4K</td><td class="num " style="color:var(--green);">+$19.8K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$37.4K</td><td class="num " style="color:var(--rose);">-$68.3K</td><td class="num " style="color:var(--rose);">-$79.5K</td><td class="num " style="color:var(--rose);">-$74K</td><td class="num " style="color:var(--rose);">-$49.6K</td><td class="num  be" style="color:var(--green);">+$19.8K</td><td class="num">—</td></tr>
+</tbody></table></div>
+</div>
+<div class="scn-table" data-scn="high">
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$500K</td><td class="num">$1.25M</td><td class="num">$2.12M</td><td class="num">$3.38M</td><td class="num">$4.88M</td><td class="num">$6.50M</td><td class="num">$18.6M</td>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$20K</td><td class="num ">$50K</td><td class="num ">$85K</td><td class="num ">$135K</td><td class="num ">$195K</td><td class="num ">$260K</td><td class="num ">$745K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$5K</td><td class="num ">-$12.5K</td><td class="num ">-$21.2K</td><td class="num ">-$33.8K</td><td class="num ">-$48.8K</td><td class="num ">-$65K</td><td class="num ">-$186K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$15K</td><td class="num ">$37.5K</td><td class="num ">$63.8K</td><td class="num ">$101K</td><td class="num ">$146K</td><td class="num ">$195K</td><td class="num ">$559K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$5.5K</td><td class="num ">-$13.8K</td><td class="num ">-$23.4K</td><td class="num ">-$37.1K</td><td class="num ">-$53.6K</td><td class="num ">-$71.5K</td><td class="num ">-$205K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$9.5K</td><td class="num ">$23.8K</td><td class="num ">$40.4K</td><td class="num ">$64.1K</td><td class="num ">$92.6K</td><td class="num ">$124K</td><td class="num ">$354K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$32.7K</td><td class="num " style="color:var(--rose);">-$21.4K</td><td class="num  be" style="color:var(--green);">+$3.1K</td><td class="num " style="color:var(--green);">+$26.8K</td><td class="num " style="color:var(--green);">+$55.3K</td><td class="num " style="color:var(--green);">+$112K</td><td class="num " style="color:var(--green);">+$143K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$32.7K</td><td class="num " style="color:var(--rose);">-$54K</td><td class="num " style="color:var(--rose);">-$51K</td><td class="num " style="color:var(--rose);">-$24.1K</td><td class="num  be" style="color:var(--green);">+$31.2K</td><td class="num " style="color:var(--green);">+$143K</td><td class="num">—</td></tr>
+</tbody></table></div>
+</div>
+    <div class="note-box info" style="margin-top:18px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <div><strong>How to read it.</strong> <strong>Bet volume</strong> = GGR &divide; ~4% blended hold (casino-led; sports runs higher). <strong>Net contribution 47.5%</strong> is after bonuses, Cubeia, game providers, crypto fees and affiliate (see &sect;02). <strong>Operating cost</strong> is the all-in monthly spend from the <a href="forecast.html" style="color:var(--accent);">Forecast</a> (salaries, platform, marketing, etc.). So <strong>Net Profit = 47.5% of GGR &minus; that month's spend.</strong> What to strive for each month is the GGR row of the scenario you're targeting.</div>
     </div>
   </section>
+
+  <script>
+  function scnShow(s){
+    document.querySelectorAll('.scn-table').forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-scn')===s); });
+    document.querySelectorAll('.scn-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-scn')===s); });
+  }
+  </script>
 
   <!-- §08 OPEN QUESTIONS -->
   <section class="section" id="open">
