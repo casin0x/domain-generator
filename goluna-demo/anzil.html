@@ -249,6 +249,19 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
 .pl-detail.brazil > td { background: rgba(167,139,250,0.10); }
 .pl-note { font-size: 12px !important; color: var(--text-secondary); line-height: 1.55; padding: 10px 18px 12px 34px !important; }
 .pl-sub { padding-left: 34px !important; color: var(--text-secondary); font-size: 12px; }
+
+/* Bottom-line summary block */
+.summary-block { background: linear-gradient(135deg, rgba(167,139,250,0.11), rgba(167,139,250,0.02) 62%); border: 1px solid var(--purple-border); border-radius: 16px; padding: 30px 28px; margin: 46px 0 10px; box-shadow: 0 0 55px rgba(167,139,250,0.10); }
+.summary-eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 10px; }
+.summary-title { font-size: 26px; font-weight: 800; color: var(--text); margin: 0 0 12px; letter-spacing: -0.01em; line-height: 1.2; }
+.summary-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.65; max-width: 780px; margin: 0 0 22px; }
+.sstat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 12px; margin-bottom: 22px; }
+.sstat { background: var(--surface-2); border: 1px solid var(--purple-border); border-radius: 12px; padding: 18px 14px; text-align: center; }
+.sstat-val { font-family: var(--mono); font-size: 27px; font-weight: 800; color: var(--purple); line-height: 1.05; }
+.sstat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 7px; line-height: 1.35; }
+.summary-verdict { background: var(--surface-2); border-left: 3px solid var(--purple); border-radius: 8px; padding: 14px 18px; font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin-top: 6px; }
+.summary-fine { font-size: 11px; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
+@media (max-width: 640px){ .summary-block{ padding: 22px 16px; } .summary-title{ font-size: 20px; } .sstat-val{ font-size: 22px; } }
 </style>
 </head>
 <body>
@@ -285,6 +298,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
     <a href="#scale" class="subnav-link">Brazil at Scale</a>
     <a href="#flywheel" class="subnav-link">Flywheel</a>
     <a href="#compare" class="subnav-link">A vs B vs C</a>
+    <a href="#summary" class="subnav-link">Bottom Line</a>
   </div>
 </div>
 
@@ -585,6 +599,37 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <div><strong>Caveats.</strong> Anzil&rsquo;s numbers are from a <em>preliminary draft</em> &mdash; CACs/volumes indicative. The 15% management tapers at higher spend (not modelled). WhatsApp + payments fees are volume-tiered / TBD. The 500K SEK (~$48K) bankroll is thin &mdash; it must scale with GGR and max-win exposure; 2.5M working funds the pilot and run-rate to ~M10, not beyond. Phase 2 (rev-share, SMS, performance CPA) would change these economics &mdash; confirm scope and commercials before signing.</div>
     </div>
+  </section>
+
+  <!-- BOTTOM LINE SUMMARY -->
+  <section class="summary-block" id="summary">
+    <div class="summary-eyebrow">&#9733; Decision Summary &mdash; The Bottom Line</div>
+    <h2 class="summary-title">Does Path C Work? It Comes Down to One Number at M4.</h2>
+    <p class="summary-sub">One month onboarding (M1) + a 3-month Anzil pilot (M2&ndash;M4), $112,500 growth spend, reinvest all the revenue you can, kill at M4 if it isn&rsquo;t working. Whether it &ldquo;worked&rdquo; is decided by the monthly GGR run-rate you exit M4 at &mdash; it has to cover the ~$14.7K/mo run-rate.</p>
+
+    <div class="sstat-grid">
+      <div class="sstat"><div class="sstat-val">$28K</div><div class="sstat-lbl">min GGR / mo to survive (the floor)</div></div>
+      <div class="sstat"><div class="sstat-val">$15K</div><div class="sstat-lbl">net / mo &mdash; covers the run-rate</div></div>
+      <div class="sstat"><div class="sstat-val">~28%</div><div class="sstat-lbl">cohort retention that implies</div></div>
+      <div class="sstat"><div class="sstat-val">$40K+</div><div class="sstat-lbl">GGR / mo to actually compound</div></div>
+    </div>
+
+    <div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border); margin-bottom:18px;">
+    <table class="lit" style="border:none;border-radius:0;">
+      <thead><tr><th>After-M4 state</th><th style="text-align:right;">Active deps</th><th style="text-align:right;">GGR / mo</th><th style="text-align:right;">Net / mo</th><th>vs ~$14.7K run-rate</th></tr></thead>
+      <tbody>
+        <tr><td>Low retention <span style="font-size:10px;color:var(--text-muted);">~15% of cohort</span></td><td class="num">~520</td><td class="num">~$15.6K</td><td class="num">~$8.0K</td><td class="cat" style="color:var(--rose);">&minus;$6.7K/mo &rarr; kill</td></tr>
+        <tr><td>Medium retention <span style="font-size:10px;color:var(--text-muted);">~25%</span></td><td class="num">~860</td><td class="num">~$25.8K</td><td class="num">~$13.3K</td><td class="cat" style="color:var(--amber);">&minus;$1.4K/mo &rarr; marginal</td></tr>
+        <tr class="total"><td>Break-even <span style="font-size:10px;color:var(--text-muted);">~28% &mdash; the line</span></td><td class="num">~950</td><td class="num">~$28.5K</td><td class="num">~$14.7K</td><td class="cat">$0 &mdash; covers run-rate</td></tr>
+        <tr><td>Compounding <span style="font-size:10px;color:var(--text-muted);">~39%</span></td><td class="num">~1,350</td><td class="num">~$40K+</td><td class="num">~$20K+</td><td class="cat" style="color:var(--green);">+$5&ndash;6K/mo &rarr; scale</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="summary-verdict">
+      <strong>The call at M4:</strong> exiting under <strong>~$28K/mo GGR and flat &rarr; <span style="color:var(--rose);">KILL</span></strong> &mdash; you&rsquo;re bleeding and more capital won&rsquo;t fix a broken payback. At <strong>$40K+/mo and climbing &rarr; <span style="color:var(--green);">the flywheel funds itself &mdash; scale it.</span></strong> The swing factor is <strong>retention</strong>: break-even sits at ~28% (the top of the medium window), so the casino only clearly works if players stick past month&nbsp;2.
+    </div>
+    <p class="summary-fine">Conservative inputs: CAC $20 (Anzil), ARPU $30/mo (Brazil regulated avg), net margin 51.5% (incl. high PIX est.), run-rate ~$14.7K/mo, ~3,450 pilot FTDs. Market benchmarks &mdash; not GoLuna data; verify at M4.</p>
   </section>
 
   <footer class="footer">
