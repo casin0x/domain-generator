@@ -268,7 +268,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <a class="subnav-link" href="#planned">Planned</a>
 <a class="subnav-link" href="#monthly">Monthly</a>
 <a class="subnav-link" href="#cubeia">Cubeia</a>
-<a class="subnav-link" href="#forecast">12-Mo Chart</a>
+<a class="subnav-link" href="#bypath">By Path</a>
 <a class="subnav-link" href="#open">Open Qs</a>
 </div>
 </div>
@@ -280,7 +280,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <span class="hero-date">v0.1 · May 2026</span>
 </div>
 <h1>Budget &amp; Runway</h1>
-<p>Full cost stack for the GoLuna launch: spent to date, monthly recurring burn, planned marketing, and 12-month runway. All figures shown in SEK and USD with explicit FX assumptions.</p>
+<p>The <strong>shared cost base</strong> common to all three growth paths: spent to date, one-time setup, monthly recurring burn, and the Cubeia contract. Path-specific growth/marketing and burn curves live on the path pages. All figures in SEK and USD with explicit FX assumptions.</p>
 </section>
 <!-- FX assumptions -->
 <div class="note-box info">
@@ -310,9 +310,9 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="runway">
 <div class="runway-top">
 <div>
-<div class="runway-label">Target Runway</div>
-<div class="runway-val">6 months</div>
-<div class="runway-sub">GGR ramp must intercept before month 7 — same window as Cubeia's €0 platform-min grace period. After month 6 the platform min activates regardless of revenue.</div>
+<div class="runway-label">Decision gate (all paths)</div>
+<div class="runway-val">Month 4</div>
+<div class="runway-sub">Every path runs a 3-month pilot (M2–M4) then a GO/KILL gate at M4. The cost base below is shared by all paths; the growth/marketing allocation and burn curve differ by path — see Forecast (A/B) and Anzil Collab (C).</div>
 </div>
 </div>
 <div class="runway-grid">
@@ -321,19 +321,19 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 <div class="mini-val cur cur-usd">~$238K</div><div class="mini-val cur cur-sek">2.5M SEK</div><div class="mini-val cur cur-eur">~€220K</div><div class="mini-sub">Total 3M − 500K bankroll</div>
 </div>
 <div class="runway-mini">
-<div class="mini-label">Marketing committed (M1–M6)</div>
-<div class="mini-val cur cur-usd" style="color:var(--green);">~$127.8K</div><div class="mini-val cur cur-sek" style="color:var(--green);">~1.34M SEK</div><div class="mini-val cur cur-eur" style="color:var(--green);">~€118K</div><div class="mini-sub">BH + Social + Streamer + Clipping + Promo</div>
+<div class="mini-label">Growth budget (M2–M4)</div>
+<div class="mini-val" style="color:var(--green);">$112–130K</div><div class="mini-sub">by path · A ~$130K · B ~$127K · C $112.5K</div>
 </div>
 <div class="runway-mini">
-<div class="mini-label">M6 cushion</div>
-<div class="mini-val cur cur-usd" style="color:var(--green);">+$28K</div><div class="mini-val cur cur-sek" style="color:var(--green);">+290K SEK</div><div class="mini-val cur cur-eur" style="color:var(--green);">+€25.5K</div><div class="mini-sub">vs $238K operating budget · no revenue</div>
+<div class="mini-label">Bankroll (held separate)</div>
+<div class="mini-val cur cur-usd">~$48K</div><div class="mini-val cur cur-sek">500K SEK</div><div class="mini-val cur cur-eur">~€44K</div><div class="mini-sub">covers player withdrawals</div>
 </div>
 </div>
 </div>
 <!-- 6-month allocation breakdown -->
 <div class="note-box info" style="margin-bottom:48px;">
 <svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
-<div><strong>How the budget breaks down:</strong> Total <strong>3M SEK (~$285.7K)</strong> = <strong>500K bankroll</strong> + <strong>2.5M SEK (~$238K) operating</strong>. M1–M6 spend is <strong><span class="cur cur-usd">$210.5K</span><span class="cur cur-sek">2.21M SEK</span><span class="cur cur-eur">€195K</span></strong> — marketing <strong>$127.8K</strong> + fixed/ops <strong>$82.7K</strong> (incl. $3K onboarding consultant) — leaving a <strong style="color:var(--green);">+$28K</strong> cushion at M6. <strong>Marketing M1–M6:</strong> Clipping <span class="cur cur-usd">$23.8K</span><span class="cur cur-sek">250K SEK</span><span class="cur cur-eur">€22.0K</span> (M1 prepay) + BH Ads <span class="cur cur-usd">$60K</span><span class="cur cur-sek">630K SEK</span><span class="cur cur-eur">€55.6K</span> ($20K/mo × M2–M4) + Paid Social <span class="cur cur-usd">$18K</span><span class="cur cur-sek">189K SEK</span><span class="cur cur-eur">€16.7K</span> ($6K/mo × M2–M4) + Streamer <span class="cur cur-usd">$14K</span><span class="cur cur-sek">147K SEK</span><span class="cur cur-eur">€13.0K</span> ($4.67K/mo × M2–M4) + Promo pool <span class="cur cur-usd">$12K</span><span class="cur cur-sek">126K SEK</span><span class="cur cur-eur">€11.1K</span> ($4K/mo × M2–M4) = <strong>$127.8K</strong>.</div>
+<div><strong>How the budget breaks down:</strong> Total <strong>3M SEK (~$285.7K)</strong> = <strong>500K bankroll</strong> + <strong>2.5M SEK (~$238K) operating</strong>. The operating budget funds the <strong>shared fixed cost base</strong> (salaries, Cubeia, hosting, security, tooling, one-time setup — the sections below) <em>plus</em> each path’s growth/marketing. The fixed base is ~the same across paths; the <strong>growth allocation differs</strong> — Path A ~$130K · Path B ~$127K · Path C $112.5K — each a 3-month pilot (M2–M4) with a GO/KILL gate at M4. Per-path month-by-month: <a href="forecast.html" style="color:var(--accent);">Forecast (A/B)</a> · <a href="anzil.html" style="color:var(--accent);">Anzil Collab (C)</a>.</div>
 </div>
 <!-- 01: SPENT TO DATE -->
 <section class="section" id="spent">
@@ -682,38 +682,25 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 </div>
 </section>
 <!-- 05: 12-MONTH FORECAST -->
-<section class="section" id="forecast">
+<section class="section" id="bypath">
 <div class="section-label">
 <span class="section-num">05</span>
-<span class="section-title">12-Month Cumulative Burn Forecast</span>
+<span class="section-title">Growth Budget by Path</span>
 </div>
-<div class="forecast">
-<div class="forecast-bar" id="fcBar">
-<div class="fc-col" style="height:13%;" title="Month 1 · $42,156 cumulative (CR corp + security HW + clipping prepay $23.8K + salaries + AWS + onboarding consultant)"></div>
-<div class="fc-col" style="height:27%;" title="Month 2 · $87,270 (marketing + Designer + Betby one-times start)"></div>
-<div class="fc-col" style="height:39%;" title="Month 3 · $124,584"></div>
-<div class="fc-col" style="height:51%;" title="Month 4 · $161,898"></div>
-<div class="fc-col" style="height:62%;" title="Month 5 · $199,212"></div>
-<div class="fc-col" style="height:66%;" title="Month 6 · $210,526 — +$28K under the $238K ceiling"></div>
-<div class="fc-col warn" style="height:71%;" title="Month 7 · $227,240 — Cubeia min on, +$11K still under ceiling"></div>
-<div class="fc-col crit" style="height:76%;" title="Month 8 · $243,954 — over budget by $6K"></div>
-<div class="fc-col crit" style="height:81%;" title="Month 9 · $260,668 — over by $23K"></div>
-<div class="fc-col crit" style="height:87%;" title="Month 10 · $277,382 — over by $39K"></div>
-<div class="fc-col crit" style="height:92%;" title="Month 11 · $294,096 — over by $56K"></div>
-<div class="fc-col crit" style="height:97%;" title="Month 12 · $310,810 — over by $73K"></div>
+<p class="section-intro">The cost base above is shared by all three paths. What differs is the growth/marketing allocation, the net contribution, and the burn curve. Each path spends its growth budget as a 3-month pilot (M2–M4) with an M4 GO/KILL gate; the month-by-month lives on the path pages.</p>
+<div style="overflow-x:auto; border-radius:12px; border:1px solid var(--border);">
+<table class="lit" style="border:none;border-radius:0;">
+<thead><tr><th>Path</th><th style="text-align:right;">Growth budget</th><th>Acquisition</th><th style="text-align:right;">Net contribution</th><th style="text-align:right;">12-mo run-out</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong> — Acquisition volume</td><td class="num">~$130K</td><td class="cat">In-house · BH-heavy</td><td class="num">47.5%</td><td class="num">$310.8K</td><td class="cat"><a href="forecast.html" style="color:var(--accent);">Forecast →</a></td></tr>
+<tr><td><strong>B</strong> — Retention-first</td><td class="num">~$127K</td><td class="cat">In-house · streamer / community</td><td class="num">47.5%</td><td class="num">$307.3K</td><td class="cat"><a href="paths.html" style="color:var(--accent);">Paths A/B →</a></td></tr>
+<tr><td><strong>C</strong> — Anzil (outsourced)</td><td class="num">$112.5K</td><td class="cat">Anzil media + clipping · LATAM</td><td class="num" style="color:var(--green);">56.5%</td><td class="num">$271.7K</td><td class="cat"><a href="anzil.html" style="color:var(--accent);">Anzil Collab →</a></td></tr>
+</tbody>
+</table>
 </div>
-<div class="fc-labels">
-<span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
-</div>
-<div class="fc-legend">
-<span><span class="ldot" style="background:var(--surface-3);"></span> Within budget · grace (M1–M6)</span>
-<span><span class="ldot" style="background:rgba(251,191,36,0.5);"></span> Within budget · grace ends (M7)</span>
-<span><span class="ldot" style="background:rgba(251,113,133,0.5);"></span> Over $238K operating budget (M8–M12)</span>
-</div>
-<div class="note-box rose" style="margin-top:24px;">
-<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
-<div><strong>Target = revenue by month 6.</strong> M1–M6 spend is <strong>$210.5K</strong> against the <strong>$238K operating budget</strong>, ending M6 with a <strong style="color:var(--green);">+$28K</strong> cushion. Cubeia's €5,400/mo platform minimum activates at M7 (grace ends). With <strong>zero revenue</strong>, the operating budget only goes negative at <strong>M8 (−$6K)</strong>, reaching <strong>−$73K by M12</strong> (full-year spend $310.8K vs $238K budget). BH Ads stops at M6 — revenue must take over by M7 or the runway erodes. The chart shows the no-revenue slip scenario, not the plan. See <a href="forecast.html" style="color:var(--rose);text-decoration:underline;">Forecast</a> for the full month-by-month table.</div>
-</div>
+<div class="note-box info" style="margin-top:18px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+<div>All three exceed the <strong>$238K operating budget</strong> over 12 months with zero revenue — A/B go negative ~<strong>M8</strong>, C ~<strong>M10</strong> (lighter spend + no 9% affiliate). The <strong>M4 GO/KILL gate</strong> is the real control: revenue must be covering the run-rate by then, or the path is killed before the cliff. Burn curves + break-even detail live on the path pages.</div>
 </div>
 </section>
 <!-- 06: OPEN QUESTIONS -->
