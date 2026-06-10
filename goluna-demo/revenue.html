@@ -49,6 +49,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
 .logo span { color: var(--text-muted); font-weight: 500; }
 .header-right { display: flex; align-items: center; gap: 6px; }
+/* 14-link header: tighten + scroll below 1280px instead of overflowing the row */
+@media (min-width: 641px) {
+  .header-inner .logo { flex-shrink: 0; }
+  .header-right { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .header-right::-webkit-scrollbar { display: none; }
+  .header-right .header-link { white-space: nowrap; flex-shrink: 0; }
+}
+@media (min-width: 641px) and (max-width: 1280px) {
+  .header-right .header-link { padding: 6px 8px; font-size: 12.5px; }
+}
 .header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
 .header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 .header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
@@ -99,12 +109,14 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 .metric-card.accent::before { background: var(--accent); }
 .metric-card.amber::before { background: var(--amber); }
 .metric-card.cyan::before { background: var(--cyan); }
+.metric-card.rose::before { background: var(--rose); }
 .metric-card .label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
 .metric-card .val { font-family: var(--mono); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 4px; }
 .metric-card .val.green { color: var(--green); }
 .metric-card .val.accent { color: var(--accent); }
 .metric-card .val.amber { color: var(--amber); }
 .metric-card .val.cyan { color: var(--cyan); }
+.metric-card .val.rose { color: var(--rose); }
 .metric-card .sub { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
 
 /* GGR trajectory table */
@@ -117,6 +129,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 .ggr-table td.conservative { color: var(--text-secondary); }
 .ggr-table td.base { color: var(--green); font-weight: 700; }
 .ggr-table td.stretch { color: var(--accent); }
+.ggr-table td.low { color: var(--rose); font-weight: 700; }
+.ggr-table td.verdict { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; white-space: normal; font-family: var(--font); }
 .ggr-table td.note { font-size: 11px; color: var(--text-muted); font-style: italic; text-align: left; max-width: 280px; white-space: normal; line-height: 1.4; font-family: var(--font); }
 .ggr-table tr.total td { background: var(--surface-2); font-weight: 700; border-top: 2px solid var(--border-hover); }
 
@@ -275,14 +289,14 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
 <div class="subnav">
   <div class="subnav-inner">
-    <a href="#trajectory" class="subnav-link">GGR Target</a>
+    <a href="#trajectory" class="subnav-link">GGR &amp; M4 Gate</a>
     <a href="#waterfall" class="subnav-link">Waterfall</a>
     <a href="#providers" class="subnav-link">Providers</a>
     <a href="#rtp" class="subnav-link">RTP</a>
     <a href="#bonuses" class="subnav-link">Bonuses</a>
     <a href="#breakeven" class="subnav-link">Break-even</a>
     <a href="#pnl" class="subnav-link">P&amp;L</a>
-    <a href="#vsspend" class="subnav-link">M1–M6 Profit</a>
+    <a href="#vsspend" class="subnav-link">Monthly P&amp;L</a>
     <a href="#open" class="subnav-link">Open Qs</a>
     <a href="#pool" class="subnav-link">Loyalty Pool</a>
   </div>
@@ -293,10 +307,10 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   <section class="hero">
     <div class="hero-top">
       <div class="hero-badge"><span class="dot"></span> Revenue Targets</div>
-      <span class="hero-date">v0.1 &middot; May 2026</span>
+      <span class="hero-date">v0.2 &middot; June 2026</span>
     </div>
     <h1>Revenue Forecast &amp; Margin Model</h1>
-    <p>6-month GGR targets, full P&amp;L cascade (GGR → bonuses → variable fees → opex → <strong>Net Profit</strong>), RTP and bonus configuration, and break-even thresholds. Pairs with the <a href="forecast.html" style="color:var(--accent);">spend forecast</a> — Net Profit = Gross Margin minus the costs on the Forecast page.</p>
+    <p>The revenue side of the M4 GO/KILL model: the pilot-window GGR trajectory (M1 onboarding &middot; M2&ndash;M4 marketing pilot &middot; <strong>M4 gate</strong>), the full P&amp;L cascade (GGR → bonuses → variable fees → opex → <strong>Net Profit</strong>), RTP and bonus configuration, and the kill-line math. Pairs with the <a href="forecast.html" style="color:var(--accent);">spend forecast</a> (Paths A/B) — Net Profit = Net Contribution minus the costs on the Forecast page. Path C&rsquo;s version lives on <a href="anzil.html" style="color:var(--accent);">Anzil</a>.</p>
   </section>
 
   <!-- FX note -->
@@ -314,38 +328,34 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
   <!-- Top metric strip -->
   <div class="metrics-strip">
-    <div class="metric-card green">
-      <div class="label">Base M6 GGR target</div>
-      <div class="val green cur cur-usd">$170K</div>
-      <div class="val green cur cur-sek">~1.79M SEK</div>
-      <div class="val green cur cur-eur">~€157K</div>
-      <div class="sub">Cumulative break-even by M6</div>
+    <div class="metric-card amber">
+      <div class="label">M4 gate floor (A/B)</div>
+      <div class="val amber cur cur-usd">~$35K /mo</div>
+      <div class="val amber cur cur-sek">~368K SEK /mo</div>
+      <div class="val amber cur cur-eur">~€32.4K /mo</div>
+      <div class="sub">GGR run-rate that covers the $16.7K M7+ fixed burn at 47.5% &middot; Path C floor ~$28K</div>
     </div>
     <div class="metric-card accent">
       <div class="label">Net contribution margin</div>
       <div class="val accent">~47.5%</div>
-      <div class="sub">of GGR after fees + bonuses + 30% affiliate</div>
-    </div>
-    <div class="metric-card green">
-      <div class="label">M1–M6 cumulative NP</div>
-      <div class="val green cur cur-usd">+$17K</div>
-      <div class="val green cur cur-sek">+179K SEK</div>
-      <div class="val green cur cur-eur">+€16K</div>
-      <div class="sub">Salaries M1 + promo pool · M6 standalone +$69K · ~$7K M6 buffer</div>
-    </div>
-    <div class="metric-card amber">
-      <div class="label">Break-even GGR (M7+)</div>
-      <div class="val amber cur cur-usd">~$35K /mo</div>
-      <div class="val amber cur cur-sek">~368K SEK /mo</div>
-      <div class="val amber cur cur-eur">~€32.4K /mo</div>
-      <div class="sub">Covers $16.7K M7+ fixed burn (incl. affiliate platform)</div>
+      <div class="sub">of GGR after bonuses + fees + 9% affiliate &middot; Path C: 56.5% (no affiliate)</div>
     </div>
     <div class="metric-card cyan">
-      <div class="label">6-mo cumulative GGR (base)</div>
-      <div class="val cyan cur cur-usd">~$485K</div>
-      <div class="val cyan cur cur-sek">~5.09M SEK</div>
-      <div class="val cyan cur cur-eur">~€449K</div>
-      <div class="sub">M1–M6 added up</div>
+      <div class="label">The floor in players</div>
+      <div class="val cyan">~1,170</div>
+      <div class="sub">active depositors @ $30 ARPU = ~$35K GGR &middot; the gate metric is retention &times; pilot FTDs</div>
+    </div>
+    <div class="metric-card rose">
+      <div class="label">Base-case M4 exit (~15% ret.)</div>
+      <div class="val rose cur cur-usd">~$17K /mo</div>
+      <div class="val rose cur cur-sek">~180K SEK /mo</div>
+      <div class="val rose cur cur-eur">~€15.8K /mo</div>
+      <div class="sub">~570 of ~3,800 pilot FTDs retained &rarr; below the floor &rarr; <strong>KILL</strong></div>
+    </div>
+    <div class="metric-card green">
+      <div class="label">GO needs (retention)</div>
+      <div class="val green">~31%</div>
+      <div class="sub">of ~3,800 pilot FTDs (Path A basis &middot; Path B at ~3,200 FTDs needs ~37%)</div>
     </div>
   </div>
 
@@ -353,75 +363,90 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   <section class="section" id="trajectory">
     <div class="section-label">
       <span class="section-num">01</span>
-      <span class="section-title">GGR Target Trajectory (M1–M6)</span>
+      <span class="section-title">GGR Trajectory &amp; the M4 Gate (M1–M6)</span>
     </div>
+    <p class="section-intro" style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px;max-width:920px;">Re-derived for the kill-at-M4 model (Path A basis: ~3,800 pilot FTDs, $30 ARPU). The three columns are <strong>retention scenarios of the same spend plan</strong>, not bigger-spend cases — pilot-month GGR is similar everywhere because it&rsquo;s bought; the scenarios only diverge in what <em>remains</em> when the spend stops. That remainder is what the M4 gate judges.</p>
     <div class="ggr-table">
       <table>
         <thead>
           <tr>
             <th>Month</th>
-            <th>Minimum</th>
-            <th>Conservative</th>
-            <th>High</th>
+            <th>Low ~15% <span style="color:var(--rose);">base case</span></th>
+            <th>Medium ~25%</th>
+            <th>Break-even ~31% <span style="color:var(--green);">GO line</span></th>
             <th style="text-align:left;">Narrative</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="month">M1</td>
-            <td class="conservative">$7K</td>
-            <td class="base">$10K</td>
-            <td class="stretch">$20K</td>
-            <td class="note">Soft launch · platform live · clipping content seeding · KYC/payment plumbing settling</td>
+            <td class="low">$2K</td>
+            <td class="conservative">$2K</td>
+            <td class="base">$2K</td>
+            <td class="note">Onboarding · soft launch · clipping prepaid ($23.8K) seeds content, conversions land M2+ · no paid media yet</td>
           </tr>
           <tr>
             <td class="month">M2</td>
-            <td class="conservative">$18K</td>
-            <td class="base">$30K</td>
-            <td class="stretch">$50K</td>
-            <td class="note">Clipping converting (~3-week lag from content seeding to FTDs) · BH Ads ramps · streamer pilot live</td>
+            <td class="low">$39K</td>
+            <td class="conservative">$39K</td>
+            <td class="base">$39K</td>
+            <td class="note">Pilot month 1 — BH Ads + paid social + streamers live, clipping converting · ~1,300 FTDs land · pilot GGR is bought, not earned</td>
           </tr>
           <tr>
             <td class="month">M3</td>
-            <td class="conservative">$28K</td>
-            <td class="base">$55K</td>
-            <td class="stretch">$85K</td>
-            <td class="note">Full paid-acquisition stack live · first cohort retention kicks in · affiliate program traction</td>
+            <td class="low">$43K</td>
+            <td class="conservative">$47K</td>
+            <td class="base">$50K</td>
+            <td class="note">Pilot month 2 — ~1,250 new FTDs + the first retained cohort from M2 · the first real retention read arrives (the number that decides the gate)</td>
           </tr>
           <tr>
-            <td class="month">M4</td>
-            <td class="conservative">$50K</td>
-            <td class="base">$90K</td>
-            <td class="stretch">$135K</td>
-            <td class="note">LTV compounding from M1–M3 cohorts · clipping tail effects · BH Ads optimised · affiliate scaling</td>
+            <td class="month">M4 <span style="font-size:9px;color:var(--amber);">GATE</span></td>
+            <td class="low">$49K</td>
+            <td class="conservative">$57K</td>
+            <td class="base">$61K</td>
+            <td class="note">Pilot month 3 — last spend month · headline GGR peaks in every scenario · the gate ignores it and asks what survives the spend stopping</td>
           </tr>
           <tr>
             <td class="month">M5</td>
-            <td class="conservative">$75K</td>
-            <td class="base">$130K</td>
-            <td class="stretch">$195K</td>
-            <td class="note">Above M7+ fixed-burn break-even ($33K/mo) even on conservative case · reinvest signal</td>
+            <td class="low">$17K</td>
+            <td class="conservative">$28.5K</td>
+            <td class="base">$35K</td>
+            <td class="note">Post-pilot truth — marketing off, skeleton $11.3K/mo · GGR = retained base only · the spread is now pure retention</td>
           </tr>
           <tr>
             <td class="month">M6</td>
-            <td class="conservative">$100K</td>
-            <td class="base">$170K</td>
-            <td class="stretch">$260K</td>
-            <td class="note"><strong>Target: cumulative break-even by M6.</strong> Conservative case = ~$81K net contribution after affiliate + variable + bonuses; <strong>+$69K monthly NP</strong> on M6 standalone (see &sect;07).</td>
+            <td class="low">$17K</td>
+            <td class="conservative">$28.5K</td>
+            <td class="base">$35K</td>
+            <td class="note">Run-rate holds (flat assumption — no decay and no reinvestment compounding modelled) · M7+ fixed burn rises to $16.7K/mo</td>
+          </tr>
+          <tr>
+            <td class="month">M4-exit run-rate</td>
+            <td class="low">$17.1K</td>
+            <td class="conservative">$28.5K</td>
+            <td class="base">$35.3K</td>
+            <td class="note">The gate metric: retention &times; ~3,800 pilot FTDs &times; $30 ARPU · floor is ~$35K (~1,170 actives)</td>
+          </tr>
+          <tr>
+            <td class="month">M4 verdict</td>
+            <td class="verdict" style="color:var(--rose);">Kill (&minus;$8.6K/mo)</td>
+            <td class="verdict" style="color:var(--amber);">Kill unless trending up</td>
+            <td class="verdict" style="color:var(--green);">GO — at the line</td>
+            <td class="note">Medium covers the M5–M6 skeleton ($11.3K) but not the $16.7K M7+ burn · GO means survival, not riches — growth comes from reinvesting everything above the floor</td>
           </tr>
           <tr class="total">
             <td class="month">6-mo total</td>
-            <td class="conservative">$278K</td>
-            <td class="base" style="color:var(--green);">$485K</td>
-            <td class="stretch">$745K</td>
-            <td class="note" style="font-style:normal;"><strong>Cumulative GGR · Conservative case targets cumulative break-even by M6</strong> (after spend + 30% affiliate at 40% mix)</td>
+            <td class="low">$167K</td>
+            <td class="conservative">$202K</td>
+            <td class="base">$222K</td>
+            <td class="note" style="font-style:normal;"><strong>Cumulative GGR M1–M6.</strong> All three sit far below the old $278–745K projections — that model assumed marketing ran through M6 and LTV arrived on faith. This one only counts retained players.</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Backing assumption:</strong> CAC ~$40 per FTD (with affiliate ramp lowering blended cost), LTV ~$130 over 6 months (typical crypto casino with mature affiliate program). $151K total paid + affiliate acquisition spend M1–M6 = ~3,800 FTDs × $130 LTV = ~$494K acquired-cohort revenue, mostly realised M3–M9. Existing-cohort revenue plus this is what produces the Conservative-case $485K cumulative target.</div>
+      <div><strong>Backing arithmetic (market benchmarks, not GoLuna data):</strong> Path A growth spend $127.8K &divide; ~3,800 FTDs &asymp; <strong>$34 blended CAC</strong> (Anzil quotes $12–25 for Path C; the old model assumed $40). ARPU <strong>$30/mo</strong> = Brazil regulated-market average. Month GGR = (new FTDs + retention &times; prior cohort) &times; $30; post-pilot run-rate = retention &times; 3,800 &times; $30. At 15% retention the effective cost per <em>retained</em> active is ~$224 — the real price of bonus-hunter volume. Same PIX caveat as Path C: if the ~5% on-ramp fee confirms, net contribution drops 47.5% &rarr; ~42.5% and the floor rises to <strong>~$39K</strong>. Verify all of it at M4.</div>
     </div>
   </section>
 
@@ -494,7 +519,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
     </div>
     <div class="note-box warn" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div>This waterfall is the <strong>variable</strong> stack only. The 47.5¢ at the right is <strong>gross margin per $1 of GGR — NOT net profit</strong>. Affiliate cost is modelled as 40% of traffic at 30% commission on NGR (validation-realistic by M6; mature programs can hit 60%+ mix). Fixed monthly opex ($10.3K M1–M6, $15.7K M7+) AND marketing spend (BH Ads, Paid Social, Streamers, etc.) come out of that 47.5¢ before anything reaches Net Profit / EBITDA. See §07 for the full P&amp;L.</div>
+      <div>This waterfall is the <strong>variable</strong> stack only. The 47.5¢ at the right is <strong>gross margin per $1 of GGR — NOT net profit</strong>. Affiliate cost is modelled as 40% of traffic at 30% commission on NGR (mature programs can hit 60%+ mix). Fixed monthly burn ($11.3K M5–M6, $16.7K M7+) AND the M2–M4 pilot marketing come out of that 47.5¢ before anything reaches Net Profit / EBITDA — which is why the kill line sits at ~$35K GGR/mo. Path C runs the same stack without the 9¢ affiliate (56.5¢ net). See §07 for the full P&amp;L.</div>
     </div>
   </section>
 
@@ -592,8 +617,8 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         <tr>
           <td><strong>Operating buffer</strong></td>
           <td class="cat">Unforeseen ops costs &mdash; what&#39;s left at M6 after planned spend</td>
-          <td class="cat">M6 cumulative budget remaining (post Promotional pool: ~$7K)</td>
-          <td class="num">~$7K M6</td>
+          <td class="cat">Working budget remaining at M6 on the Path A plan, zero-revenue case (revenue adds to it — see &sect;07 &ldquo;cash left&rdquo;)</td>
+          <td class="num">~$28K M6</td>
         </tr>
       </tbody>
     </table>
@@ -632,7 +657,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <thead>
         <tr>
           <th>Month</th>
-          <th style="text-align:right;">GGR target (base)</th>
+          <th style="text-align:right;">GGR (pilot / GO-line)</th>
           <th style="text-align:right;">Basic T&amp;Cs @ 7.5&times;</th>
           <th style="text-align:right;">+ deferred-payout @ 4&times;</th>
           <th style="text-align:right;">Full T&amp;C arsenal @ 3&times; <span class="tag confirmed">recommended</span></th>
@@ -640,13 +665,14 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
         </tr>
       </thead>
       <tbody>
-        <tr><td>M2</td><td class="num">$30K</td><td class="num">$225K</td><td class="num">$120K</td><td class="num" style="color:var(--green);">$90K</td><td class="cat" style="color:var(--amber);">Under by $42K (full arsenal)</td></tr>
-        <tr><td>M3</td><td class="num">$55K</td><td class="num">$413K</td><td class="num">$220K</td><td class="num" style="color:var(--green);">$165K</td><td class="cat" style="color:var(--amber);">Under by $117K &mdash; manageable</td></tr>
-        <tr><td>M4</td><td class="num">$90K</td><td class="num">$675K</td><td class="num">$360K</td><td class="num" style="color:var(--green);">$270K</td><td class="cat" style="color:var(--rose);">Under by $222K</td></tr>
-        <tr><td>M5</td><td class="num">$130K</td><td class="num">$975K</td><td class="num">$520K</td><td class="num" style="color:var(--green);">$390K</td><td class="cat" style="color:var(--rose);">Under by $342K</td></tr>
-        <tr><td>M6</td><td class="num">$170K</td><td class="num">$1.27M</td><td class="num">$680K</td><td class="num" style="color:var(--green);">$510K</td><td class="cat" style="color:var(--rose);">Under by $462K</td></tr>
+        <tr><td>M2</td><td class="num">$39K</td><td class="num">$293K</td><td class="num">$156K</td><td class="num" style="color:var(--green);">$117K</td><td class="cat" style="color:var(--amber);">Under by $69K (full arsenal)</td></tr>
+        <tr><td>M3</td><td class="num">$50K</td><td class="num">$375K</td><td class="num">$200K</td><td class="num" style="color:var(--green);">$150K</td><td class="cat" style="color:var(--amber);">Under by $102K</td></tr>
+        <tr><td>M4</td><td class="num">$61K</td><td class="num">$458K</td><td class="num">$244K</td><td class="num" style="color:var(--green);">$183K</td><td class="cat" style="color:var(--rose);">Under by $135K &mdash; the pilot peak</td></tr>
+        <tr><td>M5</td><td class="num">$35K</td><td class="num">$263K</td><td class="num">$140K</td><td class="num" style="color:var(--green);">$105K</td><td class="cat" style="color:var(--amber);">Under by $57K (GO case)</td></tr>
+        <tr><td>M6</td><td class="num">$35K</td><td class="num">$263K</td><td class="num">$140K</td><td class="num" style="color:var(--green);">$105K</td><td class="cat" style="color:var(--amber);">Under by $57K</td></tr>
       </tbody>
     </table>
+    <p style="font-size:11px;color:var(--text-muted);margin:-14px 0 18px;">Pilot-month GGR (M2&ndash;M4) is bought volume and lands at roughly these levels in <em>every</em> retention scenario &mdash; so the M2&ndash;M4 bankroll exposure applies even in the kill case. M5&ndash;M6 shown at the GO-line run-rate (~$35K); in the low-retention case the need shrinks to ~$51K @ 3&times; (still above the $48K held).</p>
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
@@ -655,11 +681,11 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="note-box warn">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>Bankroll is still the bottleneck even with full T&amp;C protection.</strong>&nbsp; Adopting the full Betplay/Betpanda arsenal cuts the M6 requirement from $680K (at 4&times;) to $510K (at 3&times;) &mdash; a $170K reduction. But the gap from current $48K is still ~$460K. Combined approach:
+      <div><strong>Bankroll is still the bottleneck even with full T&amp;C protection.</strong>&nbsp; Adopting the full Betplay/Betpanda arsenal cuts the M4 pilot-peak requirement from $244K (at 4&times;) to $183K (at 3&times;) &mdash; a $61K reduction. But the gap from the current $48K is still ~$135K at the peak, and even the post-pilot GO run-rate needs ~$105K. Combined approach:
       <br><br>
       &bull; <strong>Step 1 &mdash; adopt full T&amp;C arsenal at launch.</strong> Single biggest lever, zero direct cost. Drop bankroll multiplier from 7.5&times; to 3&times;.
-      <br>&bull; <strong>Step 2 &mdash; reinvest M2&ndash;M3 GGR into bankroll growth.</strong> Per the reinvestment split (40% marketing / 40% bankroll / 10% reserve / 10% distributions), bankroll grows ~$25K/mo from M7.
-      <br>&bull; <strong>Step 3 &mdash; investor capital-call right.</strong> Formalise with trigger: bankroll &lt; 250K SEK &rarr; 500K SEK call within 72h. Closes residual gap.
+      <br>&bull; <strong>Step 2 &mdash; route surplus above the floor into bankroll.</strong> At the GO line (~$35K GGR) Net Profit is ~$0, so there is nothing to route &mdash; this lever only opens above the floor (at $100K GGR, the 40% bankroll share of the reinvestment split &asymp; $12K/mo).
+      <br>&bull; <strong>Step 3 &mdash; investor capital-call right.</strong> Formalise with trigger: bankroll &lt; 250K SEK &rarr; 500K SEK call within 72h. This, not reinvestment, is what actually covers the M2&ndash;M4 pilot exposure.
       <br>&bull; <strong>Step 4 &mdash; max-bet caps as last-resort throttle.</strong> 0.5&ndash;1% of bankroll = $240&ndash;480 max bet on launch, scaling with bankroll. Limits worst-case exposure.
       </div>
     </div>
@@ -775,29 +801,34 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       </thead>
       <tbody>
         <tr>
-          <td><strong>Cover M7+ fixed burn</strong> <span class="tag confirmed">survive</span></td>
+          <td><strong>Cover the M5&ndash;M6 skeleton</strong></td>
+          <td class="num" style="color:var(--text-secondary);">~$24K /mo</td>
+          <td class="cat">$11.3K M5&ndash;M6 fixed burn / 0.475 = $23.8K. Survives the two post-pilot months before the Cubeia minimum lands.</td>
+        </tr>
+        <tr>
+          <td><strong>Path C floor (Anzil)</strong></td>
+          <td class="num" style="color:var(--text-secondary);">~$28K /mo</td>
+          <td class="cat">$14.7K run-rate / 0.515 (56.5% net minus the high-est. PIX hit) = $28.5K. Lower than A/B — no affiliate, leaner team. See <a href="anzil.html" style="color:var(--accent);">Anzil</a>.</td>
+        </tr>
+        <tr>
+          <td><strong>Cover the M7+ run-rate</strong> <span class="tag confirmed">the kill line</span></td>
           <td class="num" style="color:var(--green);">~$35K /mo</td>
-          <td class="cat">$16.7K M7+ fixed burn (incl. affiliate platform) / 0.475 net margin = $35.2K. The absolute minimum to stop bleeding cash.</td>
+          <td class="cat">$16.7K M7+ fixed burn (incl. Cubeia min + affiliate platform) / 0.475 = $35.2K &asymp; ~1,170 actives @ $30 ARPU. Exit M4 below this and flat &rarr; KILL. If the ~5% PIX fee confirms, this rises to ~$39K.</td>
         </tr>
         <tr>
-          <td><strong>+ continue $10K BH Ads</strong></td>
-          <td class="num" style="color:var(--amber);">~$56K /mo</td>
-          <td class="cat">$26.7K total opex / 0.475 = $56.2K. Keeps BH Ads running past M6.</td>
+          <td><strong>Compounding signal</strong></td>
+          <td class="num" style="color:var(--amber);">~$44K+ /mo</td>
+          <td class="cat">The ~39% retention exit (~1,480 actives). Throws off +$4&ndash;6K/mo above the burn — the first money the reinvest-all flywheel can actually spin with.</td>
         </tr>
         <tr>
-          <td><strong>+ all current marketing levels</strong></td>
-          <td class="num" style="color:var(--amber);">~$71K /mo</td>
-          <td class="cat">$33.7K total opex / 0.475 = $70.9K. Includes BH Ads $10K + Paid Social $4K + Streamers $3K continuation.</td>
+          <td><strong>Loyalty envelope activates</strong></td>
+          <td class="num" style="color:var(--amber);">~$88K /mo</td>
+          <td class="cat">NP &ge; $25K (see &sect;09) needs ($25K + $16.7K) / 0.475 = $87.8K GGR — 2.5&times; the kill line. Dormant until well past the gate.</td>
         </tr>
         <tr>
-          <td><strong>Profitable + reinvest growth</strong> <span class="tag confirmed">target</span></td>
-          <td class="num" style="color:var(--green);">$100K–$130K /mo</td>
-          <td class="cat">Generates $30–45K monthly EBITDA for reinvestment in scale, new verticals, or distribution to founders.</td>
-        </tr>
-        <tr>
-          <td><strong>Investor-ready / Series A signal</strong></td>
-          <td class="num" style="color:var(--accent);">$170K+ /mo by M6</td>
-          <td class="cat">Matches the new base-case M6 target (cumulative break-even). Compelling growth chart, positive contribution margin, repeatable acquisition.</td>
+          <td><strong>Self-funding growth</strong> <span class="tag confirmed">target</span></td>
+          <td class="num" style="color:var(--green);">~$100K /mo</td>
+          <td class="cat">Covers the run-rate <em>plus</em> pilot-level media ($30.7K/mo) entirely from revenue: ($16.7K + $30.7K) / 0.475 = $99.7K. The point where growth no longer draws down the envelope.</td>
         </tr>
       </tbody>
     </table>
@@ -809,33 +840,34 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">06.5</span>
       <span class="section-title">Full P&amp;L Cascade — From GGR to Net Profit</span>
     </div>
+    <p class="section-intro" style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px;max-width:920px;">Run at two anchors: the <strong>$35K M4-gate floor</strong> (where the cascade should land at ~$0 — and does) and <strong>$100K</strong> (post-GO scale). M7+ fixed lines throughout.</p>
     <table class="lit">
       <thead>
-        <tr><th>Line</th><th style="text-align:right;">% of GGR</th><th style="text-align:right;">M6 (Base · $170K GGR)</th><th>Note</th></tr>
+        <tr><th>Line</th><th style="text-align:right;">% of GGR</th><th style="text-align:right;">$35K — the M4 floor</th><th style="text-align:right;">$100K — scaled</th><th>Note</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Gross Gaming Revenue (GGR)</strong></td><td class="num">100%</td><td class="num" style="color:var(--green);">$170,000</td><td class="cat">Total wagers − total winnings paid</td></tr>
-        <tr><td>− Bonuses &amp; promo cost</td><td class="num">25%</td><td class="num" style="color:var(--rose);">−$42,500</td><td class="cat">Welcome + reload + cashback + free spins + VIP</td></tr>
-        <tr><td><strong>= Net Gaming Revenue (NGR)</strong></td><td class="num">75%</td><td class="num">$127,500</td><td class="cat">What 'real' revenue actually is</td></tr>
-        <tr><td>− Cubeia platform rev share</td><td class="num">5% of GGR</td><td class="num" style="color:var(--rose);">−$8,500</td><td class="cat">Contract §4ii.a flat</td></tr>
-        <tr><td>− Game-provider rev share (blended)</td><td class="num">~10.5% of GGR</td><td class="num" style="color:var(--rose);">−$17,850</td><td class="cat">Casino 65% × 10% + Sports 25% × 12% + Other 10% × 10%</td></tr>
-        <tr><td>− Crypto payment processing</td><td class="num">~3% of GGR</td><td class="num" style="color:var(--rose);">−$5,100</td><td class="cat">Deposit + withdrawal + on-chain + FX</td></tr>
-        <tr><td>− Affiliate commissions (40% mix &times; 30% on NGR)</td><td class="num">~9% of GGR</td><td class="num" style="color:var(--rose);">−$15,300</td><td class="cat">40% of traffic from affiliates &middot; 30% commission on their NGR</td></tr>
-        <tr class="total"><td><strong>= Gross Margin (Net Contribution)</strong></td><td class="num">~47.5%</td><td class="num" style="color:var(--green);">$80,750</td><td class="cat">What §02 waterfall calls "net to operator"</td></tr>
-        <tr><td>− Salaries (Toro + Owl + Gibbiana)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="cat">M7+ unchanged from forecast page</td></tr>
-        <tr><td>− X VIP Transfer Method</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,143</td><td class="cat">Staff $952 + tool $191</td></tr>
-        <tr><td>− Cubeia AWS hosting</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,836</td><td class="cat">€1,700/mo Appendix B</td></tr>
-        <tr><td>− Cubeia platform minimum (M7+)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,400</td><td class="cat">€5,000/mo from M7</td></tr>
-        <tr><td>− Subs (Customer.io + Freshchat + security + Claude + Other)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,235</td><td class="cat">$324 + $54 + $281 + $200 + $476</td></tr>
-        <tr><td>− Affiliate program platform</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Income Access / Smartico / similar · ongoing</td></tr>
-        <tr><td>− AI Call outreach</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Continues M7+</td></tr>
-        <tr><td>− Marketing acquisition (M1–M6 only)</td><td class="num">—</td><td class="num" style="color:var(--text-muted);">M7+: $0</td><td class="cat">BH Ads $13K + Paid Social $4K + Streamers $3K + Clipping $31K M1 — M1–M6 only</td></tr>
-        <tr class="total"><td><strong>= Net Profit / EBITDA</strong></td><td class="num">—</td><td class="num" style="color:var(--green);font-size:16px;">+$63,136</td><td class="cat"><strong>M7+ run-rate at $170K base · with 40% affiliate mix + $1K affiliate platform · Owl bump applied</strong></td></tr>
+        <tr><td><strong>Gross Gaming Revenue (GGR)</strong></td><td class="num">100%</td><td class="num" style="color:var(--green);">$35,000</td><td class="num" style="color:var(--green);">$100,000</td><td class="cat">Total wagers − total winnings paid</td></tr>
+        <tr><td>− Bonuses &amp; promo cost</td><td class="num">25%</td><td class="num" style="color:var(--rose);">−$8,750</td><td class="num" style="color:var(--rose);">−$25,000</td><td class="cat">Welcome + reload + cashback + free spins + VIP</td></tr>
+        <tr><td><strong>= Net Gaming Revenue (NGR)</strong></td><td class="num">75%</td><td class="num">$26,250</td><td class="num">$75,000</td><td class="cat">What 'real' revenue actually is</td></tr>
+        <tr><td>− Cubeia platform rev share</td><td class="num">5% of GGR</td><td class="num" style="color:var(--rose);">−$1,750</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="cat">Contract §4ii.a flat</td></tr>
+        <tr><td>− Game-provider rev share (blended)</td><td class="num">~10.5% of GGR</td><td class="num" style="color:var(--rose);">−$3,675</td><td class="num" style="color:var(--rose);">−$10,500</td><td class="cat">Casino 65% × 10% + Sports 25% × 12% + Other 10% × 10%</td></tr>
+        <tr><td>− Crypto payment processing</td><td class="num">~3% of GGR</td><td class="num" style="color:var(--rose);">−$1,050</td><td class="num" style="color:var(--rose);">−$3,000</td><td class="cat">Deposit + withdrawal + on-chain + FX</td></tr>
+        <tr><td>− Affiliate commissions (40% mix &times; 30% on NGR)</td><td class="num">~9% of GGR</td><td class="num" style="color:var(--rose);">−$3,150</td><td class="num" style="color:var(--rose);">−$9,000</td><td class="cat">40% of traffic from affiliates &middot; 30% commission on their NGR</td></tr>
+        <tr class="total"><td><strong>= Gross Margin (Net Contribution)</strong></td><td class="num">~47.5%</td><td class="num" style="color:var(--green);">$16,625</td><td class="num" style="color:var(--green);">$47,500</td><td class="cat">What §02 waterfall calls "net to operator"</td></tr>
+        <tr><td>− Salaries (Toro + Owl + Gibbiana)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="num" style="color:var(--rose);">−$5,000</td><td class="cat">M7+ unchanged from forecast page</td></tr>
+        <tr><td>− X VIP Transfer Method</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,143</td><td class="num" style="color:var(--rose);">−$1,143</td><td class="cat">Staff $952 + tool $191</td></tr>
+        <tr><td>− Cubeia AWS hosting</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,836</td><td class="num" style="color:var(--rose);">−$1,836</td><td class="cat">€1,700/mo Appendix B</td></tr>
+        <tr><td>− Cubeia platform minimum (M7+)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$5,400</td><td class="num" style="color:var(--rose);">−$5,400</td><td class="cat">€5,000/mo from M7 &middot; modelled additive to the 5% (see &sect;08 open question)</td></tr>
+        <tr><td>− Subs (Customer.io + Freshchat + security + Claude + Other)</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,335</td><td class="num" style="color:var(--rose);">−$1,335</td><td class="cat">$324 + $54 + $281 + $200 + $476</td></tr>
+        <tr><td>− Affiliate program platform</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Income Access / Smartico / similar · ongoing</td></tr>
+        <tr><td>− AI Call outreach</td><td class="num">—</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="num" style="color:var(--rose);">−$1,000</td><td class="cat">Continues M7+</td></tr>
+        <tr><td>− Growth marketing</td><td class="num">—</td><td class="num" style="color:var(--text-muted);">$0 baseline</td><td class="num" style="color:var(--text-muted);">from NP</td><td class="cat">M5+ baseline is zero — reinvest-all means any media is funded out of the NP line below, never from the envelope</td></tr>
+        <tr class="total"><td><strong>= Net Profit / EBITDA</strong></td><td class="num">—</td><td class="num" style="color:var(--amber);font-size:16px;">−$89 ≈ $0</td><td class="num" style="color:var(--green);font-size:16px;">+$30,786</td><td class="cat"><strong>The $35K column landing at ~$0 is the kill line proven line-by-line (fixed burn $16,714 = floor &times; 47.5%)</strong></td></tr>
       </tbody>
     </table>
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Read this top to bottom.</strong> Each row subtracts a real cost from real GGR. The "Net to operator 47.5%" from §02 is the <em>Gross Margin</em> row here — still seven lines short of the actual Net Profit number. At $170K M6 GGR base case the M7+ run-rate is roughly <strong>+$63K/mo Net Profit</strong>. During M1–M6 the heavy marketing spend (BH $13K + Paid Social $4K + Streamers $3K + clipping prepay) eats most of that — see §07 month-by-month for the actual M1–M6 P&amp;L (cumulative break-even by M6 in the base case). <strong>Affiliate sensitivity at $170K M6 GGR:</strong> at 0% mix NP = ~$78K; at 40% mix NP = $63K; at 60% mix NP = ~$55K (all figures include $1K/mo affiliate platform opex).</div>
+      <div><strong>Read this top to bottom.</strong> Each row subtracts a real cost from real GGR. The "Net to operator 47.5%" from §02 is the <em>Gross Margin</em> row here — still eight fixed lines short of Net Profit. At the <strong>$35K floor the cascade nets ~$0</strong>: that is what "covering the run-rate" means at the M4 gate. At <strong>$100K</strong> the same stack yields <strong>~$30.8K/mo NP</strong> — the operating leverage that makes a GO worth taking. <strong>Affiliate sensitivity at $100K GGR:</strong> at 0% mix NP ≈ $39.8K; at 40% mix (modelled) $30.8K; at 60% mix ≈ $26.3K (all include the $1K/mo affiliate platform). Path C runs the same cascade without the affiliate line at 56.5% — its floor is ~$28K.</div>
     </div>
   </section>
 
@@ -858,70 +890,73 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
       <span class="section-num">07</span>
       <span class="section-title">Monthly P&amp;L — Bet Volume &rarr; GGR &rarr; Net Profit (3 scenarios)</span>
     </div>
-    <p class="section-intro" style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px;max-width:920px;">The full monthly picture for each scenario: how much players wager (bet volume), what that yields as GGR, what's left after bonuses and fees (NGR &rarr; net contribution), and what remains after <strong>all</strong> operating cost &mdash; the Net Profit. The <strong>Cumulative</strong> row is the break-even tracker (green cell = the month you turn cumulatively profitable).</p>
+    <p class="section-intro" style="font-size:14px;color:var(--text-secondary);line-height:1.65;margin-bottom:16px;max-width:920px;">The full monthly picture per <strong>retention scenario</strong> (same Path A spend plan in all three): bet volume &rarr; GGR &rarr; what survives bonuses and fees (NGR &rarr; net contribution) &rarr; minus that month&rsquo;s spend &rarr; <strong>Net Profit</strong>. No scenario turns cumulatively profitable by M6 &mdash; the pilot is an investment. The number the gate reads is the <strong>M4-exit run-rate vs the ~$35K floor</strong>, not the cumulative.</p>
 
     <div class="note-box warn" style="margin-bottom:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <div><strong>The window:</strong> M1 is onboarding. You then have <strong>3 months (M2&ndash;M4)</strong> to ramp acquisition; <strong>M4 is the GO/KILL gate</strong>. The target is <strong>cumulative break-even by M6</strong>. &mdash; <span style="color:var(--accent);font-weight:600;">Conservative</span> hits it (+$20K at M6) &middot; <span style="color:var(--green);font-weight:600;">High</span> hits it a month early (M5) &middot; <span style="color:var(--rose);font-weight:600;">Minimum</span> reaches <em>monthly</em> break-even at M6 but needs ~M8 to recover the M1&ndash;M6 investment.</div>
+      <div><strong>The window:</strong> M1 is onboarding, <strong>M2&ndash;M4 is the pilot</strong>, <strong>M4 is the GO/KILL gate</strong>. All three scenarios exit M6 cumulative-negative (<span style="color:var(--rose);font-weight:600;">Low &minus;$131K</span> &middot; <span style="color:var(--accent);font-weight:600;">Medium &minus;$115K</span> &middot; <span style="color:var(--green);font-weight:600;">GO line &minus;$105K</span> &mdash; against the $238K working envelope). That is by design: the gate doesn&rsquo;t ask &ldquo;are we cumulative-positive&rdquo; (you won&rsquo;t be) &mdash; it asks &ldquo;<strong>does the retained run-rate cover the $16.7K/mo burn</strong>.&rdquo; Recovery of the pilot investment only happens via the reinvest-all flywheel after a GO.</div>
     </div>
 
     <p class="subtitle" style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:0 0 10px;">Scenario summary</p>
     <table class="lit" style="margin-bottom:18px;">
-<thead><tr><th>Scenario</th><th style="text-align:right;">6-mo GGR</th><th style="text-align:right;">6-mo bet volume</th><th style="text-align:right;">Monthly break-even</th><th style="text-align:right;">Cumulative break-even</th><th style="text-align:right;">M6 net profit</th><th style="text-align:right;">M6 cumulative</th></tr></thead>
+<thead><tr><th>Scenario</th><th style="text-align:right;">M4-exit run-rate</th><th style="text-align:right;">vs ~$35K floor (net/mo)</th><th>M4 verdict</th><th style="text-align:right;">6-mo GGR</th><th style="text-align:right;">6-mo NP</th><th style="text-align:right;">Cash left at M6</th></tr></thead>
 <tbody>
-<tr><td><span style="color:var(--rose);font-weight:700;">Minimum</span></td><td class="num">$278K</td><td class="num">$7.0M</td><td class="num">M6</td><td class="num" style="color:var(--rose);">~M8</td><td class="num" style="color:var(--green);">+$36K</td><td class="num" style="color:var(--rose);">-$78K</td></tr>
-<tr><td><span style="color:var(--accent);font-weight:700;">Conservative</span></td><td class="num">$485K</td><td class="num">$12.1M</td><td class="num">M4</td><td class="num" style="color:var(--green);">M6</td><td class="num" style="color:var(--green);">+$69K</td><td class="num" style="color:var(--green);">+$20K</td></tr>
-<tr><td><span style="color:var(--green);font-weight:700;">High</span></td><td class="num">$745K</td><td class="num">$18.6M</td><td class="num">M3</td><td class="num" style="color:var(--green);">M5</td><td class="num" style="color:var(--green);">+$112K</td><td class="num" style="color:var(--green);">+$143K</td></tr>
+<tr><td><span style="color:var(--rose);font-weight:700;">Low ~15%</span> <span style="font-size:10px;color:var(--text-muted);">base case</span></td><td class="num">$17.1K</td><td class="num" style="color:var(--rose);">&minus;$8.6K/mo</td><td><span style="color:var(--rose);font-weight:700;font-size:11px;text-transform:uppercase;">Kill</span></td><td class="num">$167K</td><td class="num" style="color:var(--rose);">&minus;$131K</td><td class="num">~$107K</td></tr>
+<tr><td><span style="color:var(--accent);font-weight:700;">Medium ~25%</span></td><td class="num">$28.5K</td><td class="num" style="color:var(--amber);">&minus;$3.2K/mo</td><td><span style="color:var(--amber);font-weight:700;font-size:11px;text-transform:uppercase;">Kill unless trending up</span></td><td class="num">$202K</td><td class="num" style="color:var(--rose);">&minus;$115K</td><td class="num">~$123K</td></tr>
+<tr><td><span style="color:var(--green);font-weight:700;">GO line ~31%</span></td><td class="num">$35.3K</td><td class="num" style="color:var(--green);">&asymp;$0</td><td><span style="color:var(--green);font-weight:700;font-size:11px;text-transform:uppercase;">GO &mdash; at the line</span></td><td class="num">$222K</td><td class="num" style="color:var(--rose);">&minus;$105K</td><td class="num">~$133K</td></tr>
 </tbody></table>
 
-    <p class="subtitle" style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:18px 0 10px;">Month-by-month detail &mdash; pick a scenario</p>
+    <p class="subtitle" style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:18px 0 10px;">Month-by-month detail &mdash; pick a retention scenario</p>
     <div class="scn-switch" role="group" aria-label="Choose scenario">
-      <button class="scn-btn" type="button" data-scn="min" onclick="scnShow('min')">Minimum</button>
-      <button class="scn-btn active" type="button" data-scn="con" onclick="scnShow('con')">Conservative</button>
-      <button class="scn-btn" type="button" data-scn="high" onclick="scnShow('high')">High</button>
+      <button class="scn-btn" type="button" data-scn="min" onclick="scnShow('min')">Low &mdash; base case</button>
+      <button class="scn-btn active" type="button" data-scn="con" onclick="scnShow('con')">Medium</button>
+      <button class="scn-btn" type="button" data-scn="high" onclick="scnShow('high')">GO line (~31%)</button>
     </div>
 <div class="scn-table" data-scn="min">
-<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
-<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$175K</td><td class="num">$450K</td><td class="num">$700K</td><td class="num">$1.25M</td><td class="num">$1.88M</td><td class="num">$2.50M</td><td class="num">$7.0M</td>
-<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$7K</td><td class="num ">$18K</td><td class="num ">$28K</td><td class="num ">$50K</td><td class="num ">$75K</td><td class="num ">$100K</td><td class="num ">$278K</td></tr>
-<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$1.8K</td><td class="num ">-$4.5K</td><td class="num ">-$7K</td><td class="num ">-$12.5K</td><td class="num ">-$18.8K</td><td class="num ">-$25K</td><td class="num ">-$69.5K</td></tr>
-<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$5.2K</td><td class="num ">$13.5K</td><td class="num ">$21K</td><td class="num ">$37.5K</td><td class="num ">$56.2K</td><td class="num ">$75K</td><td class="num ">$208K</td></tr>
-<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$1.9K</td><td class="num ">-$5K</td><td class="num ">-$7.7K</td><td class="num ">-$13.8K</td><td class="num ">-$20.6K</td><td class="num ">-$27.5K</td><td class="num ">-$76.5K</td></tr>
-<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$3.3K</td><td class="num ">$8.5K</td><td class="num ">$13.3K</td><td class="num ">$23.8K</td><td class="num ">$35.6K</td><td class="num ">$47.5K</td><td class="num ">$132K</td></tr>
-<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
-<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$38.8K</td><td class="num " style="color:var(--rose);">-$36.6K</td><td class="num " style="color:var(--rose);">-$24K</td><td class="num " style="color:var(--rose);">-$13.6K</td><td class="num " style="color:var(--rose);">-$1.7K</td><td class="num  be" style="color:var(--green);">+$36.2K</td><td class="num " style="color:var(--rose);">-$78.5K</td></tr>
-<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$38.8K</td><td class="num " style="color:var(--rose);">-$75.4K</td><td class="num " style="color:var(--rose);">-$99.4K</td><td class="num " style="color:var(--rose);">-$113K</td><td class="num " style="color:var(--rose);">-$115K</td><td class="num " style="color:var(--rose);">-$78.5K</td><td class="num">—</td></tr>
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4 &middot; gate</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$50K</td><td class="num">$975K</td><td class="num">$1.09M</td><td class="num">$1.23M</td><td class="num">$428K</td><td class="num">$428K</td><td class="num">$4.19M</td></tr>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$2K</td><td class="num ">$39K</td><td class="num ">$43.4K</td><td class="num ">$49K</td><td class="num ">$17.1K</td><td class="num ">$17.1K</td><td class="num ">$167.6K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$0.5K</td><td class="num ">-$9.8K</td><td class="num ">-$10.9K</td><td class="num ">-$12.3K</td><td class="num ">-$4.3K</td><td class="num ">-$4.3K</td><td class="num ">-$41.9K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$1.5K</td><td class="num ">$29.3K</td><td class="num ">$32.6K</td><td class="num ">$36.8K</td><td class="num ">$12.8K</td><td class="num ">$12.8K</td><td class="num ">$125.7K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$0.6K</td><td class="num ">-$10.7K</td><td class="num ">-$11.9K</td><td class="num ">-$13.5K</td><td class="num ">-$4.7K</td><td class="num ">-$4.7K</td><td class="num ">-$46.1K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$0.9K</td><td class="num ">$18.5K</td><td class="num ">$20.6K</td><td class="num ">$23.3K</td><td class="num ">$8.1K</td><td class="num ">$8.1K</td><td class="num ">$79.6K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(Path A, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$53.8K</td><td class="num ">-$46K</td><td class="num ">-$46K</td><td class="num ">-$11.3K</td><td class="num ">-$11.3K</td><td class="num ">-$210.5K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$35.3K</td><td class="num " style="color:var(--rose);">-$25.4K</td><td class="num " style="color:var(--rose);">-$22.7K</td><td class="num " style="color:var(--rose);">-$3.2K</td><td class="num " style="color:var(--rose);">-$3.2K</td><td class="num " style="color:var(--rose);">-$131K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$76.5K</td><td class="num " style="color:var(--rose);">-$101.9K</td><td class="num " style="color:var(--rose);">-$124.6K</td><td class="num " style="color:var(--rose);">-$127.8K</td><td class="num " style="color:var(--rose);">-$131K</td><td class="num">—</td></tr>
+<tr><td><strong>M4 verdict</strong></td><td colspan="7" style="text-align:left;font-size:11px;color:var(--rose);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Kill — $17.1K exit run-rate vs the ~$35K floor (&minus;$8.6K/mo net) · still bleeding even at the $11.3K skeleton</td></tr>
 </tbody></table></div>
 </div>
 <div class="scn-table active" data-scn="con">
-<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
-<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$250K</td><td class="num">$750K</td><td class="num">$1.38M</td><td class="num">$2.25M</td><td class="num">$3.25M</td><td class="num">$4.25M</td><td class="num">$12.1M</td>
-<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$10K</td><td class="num ">$30K</td><td class="num ">$55K</td><td class="num ">$90K</td><td class="num ">$130K</td><td class="num ">$170K</td><td class="num ">$485K</td></tr>
-<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$2.5K</td><td class="num ">-$7.5K</td><td class="num ">-$13.8K</td><td class="num ">-$22.5K</td><td class="num ">-$32.5K</td><td class="num ">-$42.5K</td><td class="num ">-$121K</td></tr>
-<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$7.5K</td><td class="num ">$22.5K</td><td class="num ">$41.2K</td><td class="num ">$67.5K</td><td class="num ">$97.5K</td><td class="num ">$128K</td><td class="num ">$364K</td></tr>
-<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$2.8K</td><td class="num ">-$8.2K</td><td class="num ">-$15.1K</td><td class="num ">-$24.8K</td><td class="num ">-$35.8K</td><td class="num ">-$46.8K</td><td class="num ">-$133K</td></tr>
-<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$4.8K</td><td class="num ">$14.2K</td><td class="num ">$26.1K</td><td class="num ">$42.8K</td><td class="num ">$61.8K</td><td class="num ">$80.8K</td><td class="num ">$230K</td></tr>
-<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
-<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$37.4K</td><td class="num " style="color:var(--rose);">-$30.9K</td><td class="num " style="color:var(--rose);">-$11.2K</td><td class="num  be" style="color:var(--green);">+$5.4K</td><td class="num " style="color:var(--green);">+$24.4K</td><td class="num " style="color:var(--green);">+$69.4K</td><td class="num " style="color:var(--green);">+$19.8K</td></tr>
-<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$37.4K</td><td class="num " style="color:var(--rose);">-$68.3K</td><td class="num " style="color:var(--rose);">-$79.5K</td><td class="num " style="color:var(--rose);">-$74K</td><td class="num " style="color:var(--rose);">-$49.6K</td><td class="num  be" style="color:var(--green);">+$19.8K</td><td class="num">—</td></tr>
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4 &middot; gate</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$50K</td><td class="num">$975K</td><td class="num">$1.18M</td><td class="num">$1.42M</td><td class="num">$713K</td><td class="num">$713K</td><td class="num">$5.05M</td></tr>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$2K</td><td class="num ">$39K</td><td class="num ">$47.3K</td><td class="num ">$56.6K</td><td class="num ">$28.5K</td><td class="num ">$28.5K</td><td class="num ">$201.9K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$0.5K</td><td class="num ">-$9.8K</td><td class="num ">-$11.8K</td><td class="num ">-$14.2K</td><td class="num ">-$7.1K</td><td class="num ">-$7.1K</td><td class="num ">-$50.5K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$1.5K</td><td class="num ">$29.3K</td><td class="num ">$35.5K</td><td class="num ">$42.5K</td><td class="num ">$21.4K</td><td class="num ">$21.4K</td><td class="num ">$151.4K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$0.6K</td><td class="num ">-$10.7K</td><td class="num ">-$13K</td><td class="num ">-$15.6K</td><td class="num ">-$7.8K</td><td class="num ">-$7.8K</td><td class="num ">-$55.5K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$0.9K</td><td class="num ">$18.5K</td><td class="num ">$22.5K</td><td class="num ">$26.9K</td><td class="num ">$13.5K</td><td class="num ">$13.5K</td><td class="num ">$95.9K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(Path A, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$53.8K</td><td class="num ">-$46K</td><td class="num ">-$46K</td><td class="num ">-$11.3K</td><td class="num ">-$11.3K</td><td class="num ">-$210.5K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$35.3K</td><td class="num " style="color:var(--rose);">-$23.5K</td><td class="num " style="color:var(--rose);">-$19.1K</td><td class="num  be" style="color:var(--green);">+$2.2K</td><td class="num " style="color:var(--green);">+$2.2K</td><td class="num " style="color:var(--rose);">-$114.7K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$76.5K</td><td class="num " style="color:var(--rose);">-$100K</td><td class="num " style="color:var(--rose);">-$119.1K</td><td class="num " style="color:var(--rose);">-$116.9K</td><td class="num " style="color:var(--rose);">-$114.7K</td><td class="num">—</td></tr>
+<tr><td><strong>M4 verdict</strong></td><td colspan="7" style="text-align:left;font-size:11px;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">Kill unless trending up — $28.5K exit run-rate covers the M5–M6 skeleton (+$2.2K/mo) but not the $16.7K M7+ burn (&minus;$3.2K/mo)</td></tr>
 </tbody></table></div>
 </div>
 <div class="scn-table" data-scn="high">
-<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
-<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$500K</td><td class="num">$1.25M</td><td class="num">$2.12M</td><td class="num">$3.38M</td><td class="num">$4.88M</td><td class="num">$6.50M</td><td class="num">$18.6M</td>
-<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$20K</td><td class="num ">$50K</td><td class="num ">$85K</td><td class="num ">$135K</td><td class="num ">$195K</td><td class="num ">$260K</td><td class="num ">$745K</td></tr>
-<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$5K</td><td class="num ">-$12.5K</td><td class="num ">-$21.2K</td><td class="num ">-$33.8K</td><td class="num ">-$48.8K</td><td class="num ">-$65K</td><td class="num ">-$186K</td></tr>
-<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$15K</td><td class="num ">$37.5K</td><td class="num ">$63.8K</td><td class="num ">$101K</td><td class="num ">$146K</td><td class="num ">$195K</td><td class="num ">$559K</td></tr>
-<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$5.5K</td><td class="num ">-$13.8K</td><td class="num ">-$23.4K</td><td class="num ">-$37.1K</td><td class="num ">-$53.6K</td><td class="num ">-$71.5K</td><td class="num ">-$205K</td></tr>
-<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$9.5K</td><td class="num ">$23.8K</td><td class="num ">$40.4K</td><td class="num ">$64.1K</td><td class="num ">$92.6K</td><td class="num ">$124K</td><td class="num ">$354K</td></tr>
-<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(all-in, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$45.1K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$37.3K</td><td class="num ">-$11.3K</td><td class="num ">-$211K</td></tr>
-<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$32.7K</td><td class="num " style="color:var(--rose);">-$21.4K</td><td class="num  be" style="color:var(--green);">+$3.1K</td><td class="num " style="color:var(--green);">+$26.8K</td><td class="num " style="color:var(--green);">+$55.3K</td><td class="num " style="color:var(--green);">+$112K</td><td class="num " style="color:var(--green);">+$143K</td></tr>
-<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$32.7K</td><td class="num " style="color:var(--rose);">-$54K</td><td class="num " style="color:var(--rose);">-$51K</td><td class="num " style="color:var(--rose);">-$24.1K</td><td class="num  be" style="color:var(--green);">+$31.2K</td><td class="num " style="color:var(--green);">+$143K</td><td class="num">—</td></tr>
+<div class="table-scroll"><table class="lit pl-table"><thead><tr><th>Line</th><th>M1</th><th>M2</th><th>M3</th><th>M4 &middot; gate</th><th>M5</th><th>M6</th><th>6-mo</th></tr></thead><tbody>
+<tr><td>Bet volume <span style="font-size:10px;color:var(--text-muted);">(handle)</span></td><td class="num">$50K</td><td class="num">$975K</td><td class="num">$1.24M</td><td class="num">$1.53M</td><td class="num">$883K</td><td class="num">$883K</td><td class="num">$5.56M</td></tr>
+<tr><td>GGR <span style="font-size:10px;color:var(--text-muted);">gross gaming revenue</span></td><td class="num ">$2K</td><td class="num ">$39K</td><td class="num ">$49.6K</td><td class="num ">$61.2K</td><td class="num ">$35.3K</td><td class="num ">$35.3K</td><td class="num ">$222.4K</td></tr>
+<tr><td>&minus; Bonuses (25%)</td><td class="num ">-$0.5K</td><td class="num ">-$9.8K</td><td class="num ">-$12.4K</td><td class="num ">-$15.3K</td><td class="num ">-$8.8K</td><td class="num ">-$8.8K</td><td class="num ">-$55.6K</td></tr>
+<tr class="sub"><td>= NGR <span style="font-size:10px;color:var(--text-muted);">net gaming revenue (75%)</span></td><td class="num ">$1.5K</td><td class="num ">$29.3K</td><td class="num ">$37.2K</td><td class="num ">$45.9K</td><td class="num ">$26.5K</td><td class="num ">$26.5K</td><td class="num ">$166.8K</td></tr>
+<tr><td>&minus; Platform/provider/crypto/affiliate (27.5%)</td><td class="num ">-$0.6K</td><td class="num ">-$10.7K</td><td class="num ">-$13.6K</td><td class="num ">-$16.8K</td><td class="num ">-$9.7K</td><td class="num ">-$9.7K</td><td class="num ">-$61.2K</td></tr>
+<tr class="sub"><td>= Net contribution (47.5%)</td><td class="num ">$0.9K</td><td class="num ">$18.5K</td><td class="num ">$23.6K</td><td class="num ">$29.1K</td><td class="num ">$16.8K</td><td class="num ">$16.8K</td><td class="num ">$105.7K</td></tr>
+<tr><td>&minus; Operating cost <span style="font-size:10px;color:var(--text-muted);">(Path A, from Forecast)</span></td><td class="num ">-$42.2K</td><td class="num ">-$53.8K</td><td class="num ">-$46K</td><td class="num ">-$46K</td><td class="num ">-$11.3K</td><td class="num ">-$11.3K</td><td class="num ">-$210.5K</td></tr>
+<tr class="np"><td>= <strong>Net Profit</strong> <span style="font-size:10px;color:var(--text-muted);">what’s left each month</span></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$35.3K</td><td class="num " style="color:var(--rose);">-$22.4K</td><td class="num " style="color:var(--rose);">-$16.9K</td><td class="num  be" style="color:var(--green);">+$5.5K</td><td class="num " style="color:var(--green);">+$5.5K</td><td class="num " style="color:var(--rose);">-$104.8K</td></tr>
+<tr><td><strong>Cumulative Net Profit</strong></td><td class="num " style="color:var(--rose);">-$41.2K</td><td class="num " style="color:var(--rose);">-$76.5K</td><td class="num " style="color:var(--rose);">-$98.9K</td><td class="num " style="color:var(--rose);">-$115.8K</td><td class="num " style="color:var(--rose);">-$110.3K</td><td class="num " style="color:var(--rose);">-$104.8K</td><td class="num">—</td></tr>
+<tr><td><strong>M4 verdict</strong></td><td colspan="7" style="text-align:left;font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">GO — $35.3K exit run-rate sits at the floor · M7+ NP ≈ $0 · growth from here = reinvesting every dollar above the line (M5–M6 throw off +$5.5K/mo before the Cubeia min lands)</td></tr>
 </tbody></table></div>
 </div>
     <div class="note-box info" style="margin-top:18px;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>How to read it.</strong> <strong>Bet volume</strong> = GGR &divide; ~4% blended hold (casino-led; sports runs higher). <strong>Net contribution 47.5%</strong> is after bonuses, Cubeia, game providers, crypto fees and affiliate (see &sect;02). <strong>Operating cost</strong> is the all-in monthly spend from the <a href="forecast.html" style="color:var(--accent);">Forecast</a> (salaries, platform, marketing, etc.). So <strong>Net Profit = 47.5% of GGR &minus; that month's spend.</strong> What to strive for each month is the GGR row of the scenario you're targeting.</div>
+      <div><strong>How to read it.</strong> <strong>Bet volume</strong> = GGR &divide; ~4% blended hold (casino-led; sports runs higher). <strong>Net contribution 47.5%</strong> is after bonuses, Cubeia, game providers, crypto fees and affiliate (see &sect;02). <strong>Operating cost</strong> is Path A&rsquo;s monthly spend from the <a href="forecast.html" style="color:var(--accent);">Forecast</a> ($210.5K over 6 months; Path B runs ~$3.5K lighter with the same shape). So <strong>Net Profit = 47.5% of GGR &minus; that month&rsquo;s spend.</strong> The pilot months (M2&ndash;M4) look similar in every tab because that GGR is bought — the scenarios separate at M5, and the <strong>M4 verdict row is the whole game</strong>. GGR per month = (new FTDs + retention &times; prior cohort) &times; $30 ARPU; market benchmarks, not GoLuna data — verify at M4.</div>
     </div>
   </section>
 
@@ -962,8 +997,16 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
           <td>BTC has highest network fees; USDT-TRC20 nearly free. Mix changes the 3% crypto-drag number meaningfully.</td>
         </tr>
         <tr>
-          <td><strong>CAC / LTV calibration after M1</strong></td>
-          <td>Base case assumes $50 CAC / $100 LTV. Real numbers from first cohort should re-anchor M3–M6 targets up or down.</td>
+          <td><strong>CAC / LTV calibration at M2–M3</strong></td>
+          <td>Model assumes ~$34 blended CAC (Path A; Anzil quotes $12–25 for C) and LTV $31–62 depending on the retention window. First-cohort numbers land mid-pilot — re-anchor the M4 gate read with them, not the benchmarks.</td>
+        </tr>
+        <tr>
+          <td><strong>PIX on-ramp fee — is the ~5% high estimate real?</strong></td>
+          <td>Applies to A/B as much as C (players on-ramp via PIX either way). If confirmed, net contribution drops 47.5% → ~42.5% and the kill line rises ~$35K → ~$39K. The flywheel on <a href="anzil.html" style="color:var(--accent);">Anzil</a> already prices it; §05 there and this page's headline stack don't yet.</td>
+        </tr>
+        <tr>
+          <td><strong>Cubeia €5K/mo from M7 — additive fee or minimum?</strong></td>
+          <td>This page and every run-rate number ($16.7K burn, $35K floor) model it as <em>additive</em> to the 5% rev share (per §03). Anzil §05 words it as a <em>minimum credited against the 5%</em>. If it's a minimum, the M7+ floor drops from ~$35K to ~$32K. Check the contract wording and align the pages.</td>
         </tr>
         <tr>
           <td><strong>Sports book hold target with Betby</strong></td>
@@ -1079,7 +1122,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
 
     <div class="note-box info">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-      <div><strong>Implementation note:</strong> the envelope comes out of operating Net Profit before founder distribution. At <strong>$44K M7+ base-case NP</strong> (per §06.5, with 40% affiliate mix), envelope = 10% × $44K = $4.4K. Paid out: Owl $880, Toro and Gibbiana $660 each ($2.2K total). Reserve accrual: +$2.2K to the Reserve Pool balance. Note: at $44K NP the Owl base bump ($50K NP threshold) has not yet triggered, so Owl base stays at $1K and total comp is Owl $1,880 / T/G $2,660 each. Owl's paid cap binds at <strong>$1.25M monthly NP</strong>, Toro and Gibbiana's at <strong>$1.67M monthly NP</strong>. Reserve accrual continues until the $500K soft cap.</div>
+      <div><strong>Implementation note:</strong> the envelope comes out of operating Net Profit before founder distribution. Under the M4-gate model it is <strong>dormant for the whole pilot</strong>: at the GO line (~$35K GGR) NP &asymp; $0, and the $25K trigger needs <strong>~$88K GGR/mo</strong> (2.5&times; the kill line — see &sect;06). Worked example at <strong>$100K GGR</strong> (NP &asymp; $30.8K per &sect;06.5): envelope = 10% &times; $30.8K = $3.08K. Paid out: Owl $616, Toro and Gibbiana $462 each ($1.54K total); Reserve accrual +$1.54K. The Owl base bump ($50K NP threshold &asymp; <strong>~$140K GGR</strong>) has not yet triggered there, so Owl base stays at $1K. Owl's paid cap binds at <strong>$1.25M monthly NP</strong>, Toro and Gibbiana's at <strong>$1.67M monthly NP</strong>. Reserve accrual continues until the $500K soft cap.</div>
     </div>
 
     <h3 style="font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em;margin:24px 0 12px;">Operating Rules</h3>
@@ -1134,7 +1177,7 @@ body.fx-eur th.col-usd, body.fx-eur td.col-usd, body.fx-eur th.col-sek, body.fx-
   </section>
 
   <footer class="footer">
-    GoLuna &mdash; Revenue Forecast &mdash; v0.1 &middot; May 2026 &mdash; Confidential &mdash; <a href="forecast.html">Spend Forecast &rarr;</a>
+    GoLuna &mdash; Revenue Forecast &mdash; v0.2 &middot; June 2026 &mdash; Confidential &mdash; <a href="forecast.html">Spend Forecast &rarr;</a> &middot; <a href="anzil.html">Path C &rarr;</a>
   </footer>
 
 </div>

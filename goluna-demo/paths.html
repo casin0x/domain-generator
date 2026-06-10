@@ -46,6 +46,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
 .logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
 .header-right { display: flex; align-items: center; gap: 6px; }
+/* 14-link header: tighten + scroll below 1280px instead of overflowing the row */
+@media (min-width: 641px) {
+  .header-inner .logo { flex-shrink: 0; }
+  .header-right { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .header-right::-webkit-scrollbar { display: none; }
+  .header-right .header-link { white-space: nowrap; flex-shrink: 0; }
+}
+@media (min-width: 641px) and (max-width: 1280px) {
+  .header-right .header-link { padding: 6px 8px; font-size: 12.5px; }
+}
 .header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
 .header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 .header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
@@ -280,7 +290,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       <li><strong>The channel mix leans bonus-hunter.</strong> BH Ads = 47% of M1&ndash;M6 marketing — structurally the bonus-hunter channel.</li>
       <li><strong>The LTV assumption is load-bearing.</strong> The Revenue P&amp;L assumes ~$130 LTV per FTD (6 mo) — which needs a 2nd-deposit rate of 35&ndash;40%.</li>
       <li><strong>The realistic default is lower.</strong> Poorly-engineered onboarding runs 22&ndash;25%.</li>
-      <li><strong>The gap is ~$80&ndash;120K.</strong> If LTV is off by that margin, M1&ndash;M6 cumulative NP lands $80&ndash;120K below the +$7K base case.</li>
+      <li><strong>The gap decides the gate.</strong> If retention lands at the default instead of the engineered level, the M4-exit run-rate sits $10&ndash;18K below the ~$35K floor &mdash; that&rsquo;s a kill, not a smaller profit.</li>
       <li><strong>Path B earns the LTV</strong> instead of hoping for it.</li>
     </ul>
 
@@ -312,7 +322,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
             <div class="m-val amber">47% ($60K)</div>
           </div>
           <div>
-            <div class="m-key">Target FTDs M1–M6</div>
+            <div class="m-key">Pilot FTDs M2–M4</div>
             <div class="m-val">~3,800</div>
           </div>
           <div>
@@ -321,14 +331,14 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
           </div>
           <div>
             <div class="m-key">M6 cumulative NP</div>
-            <div class="m-val green">+$7K</div>
+            <div class="m-val" style="color:var(--rose);">−$123K to −$131K</div>
           </div>
           <div>
-            <div class="m-key">M7+ run-rate NP</div>
-            <div class="m-val green">~$63K/mo</div>
+            <div class="m-key">M4-exit run-rate</div>
+            <div class="m-val" style="color:var(--rose);">~$17–23K GGR</div>
           </div>
         </div>
-        <div class="footer-tag">Risk: if 2nd-dep rate undershoots, the +$7K cumulative goes silently negative.</div>
+        <div class="footer-tag">Risk: at realistic 15–20% retention the M4 exit sits below the ~$35K floor — bought volume that doesn&rsquo;t stick is a kill, however good M2–M3 looks.</div>
       </div>
 
       <div class="path-card b">
@@ -345,7 +355,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
             <div class="m-val cyan">23% ($30K)</div>
           </div>
           <div>
-            <div class="m-key">Target FTDs M1–M6</div>
+            <div class="m-key">Pilot FTDs M2–M4</div>
             <div class="m-val">~3,000–3,400</div>
           </div>
           <div>
@@ -354,11 +364,11 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
           </div>
           <div>
             <div class="m-key">M6 cumulative NP</div>
-            <div class="m-val amber">~$0 to +$5K</div>
+            <div class="m-val" style="color:var(--rose);">−$105K to −$119K</div>
           </div>
           <div>
-            <div class="m-key">M7+ run-rate NP</div>
-            <div class="m-val green">~$80K+/mo</div>
+            <div class="m-key">M4-exit run-rate</div>
+            <div class="m-val cyan">~$29–38K GGR</div>
           </div>
         </div>
         <div class="footer-tag">Risk: depends on actually executing the 48h flow + community work in M1. If they slip, you get Path A&rsquo;s costs without Path A&rsquo;s volume.</div>
@@ -583,7 +593,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
       </thead>
       <tbody>
         <tr>
-          <td><strong>M1&ndash;M6 FTDs (target)</strong></td>
+          <td><strong>Pilot FTDs M2&ndash;M4 (target)</strong></td>
           <td class="num">~3,800</td>
           <td class="num">~3,000&ndash;3,400</td>
           <td class="cat">Path A wins on volume by ~10&ndash;20%. Mostly from BH-driven signups.</td>
@@ -607,28 +617,28 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
           <td class="cat">Path A&rsquo;s realistic LTV is below the $130 the dashboard currently assumes; Path B earns the assumption.</td>
         </tr>
         <tr>
-          <td><strong>M1&ndash;M6 cumulative GGR</strong></td>
-          <td class="num">~$485K</td>
-          <td class="num">~$450&ndash;500K</td>
-          <td class="cat">Similar range &mdash; lower volume offset by better LTV. Wide overlap depending on execution.</td>
+          <td><strong>6-mo GGR (M1&ndash;M6, retention-derived)</strong></td>
+          <td class="num">~$168&ndash;185K</td>
+          <td class="num">~$185&ndash;215K</td>
+          <td class="cat">At each path&rsquo;s realistic retention (A 15&ndash;20%, B 30&ndash;40%). B&rsquo;s retained tail outearns A&rsquo;s volume &mdash; <em>if</em> the execution lands. Full month-by-month on <a href="revenue.html" style="color:var(--accent);">Revenue</a>.</td>
         </tr>
         <tr>
-          <td><strong>M6 cumulative NP (base case)</strong></td>
-          <td class="num" style="color:var(--green);">+$7K</td>
-          <td class="num" style="color:var(--amber);">~$0 to +$5K</td>
-          <td class="cat">Path B is slightly lower on M1&ndash;M6 cumulative because Path A&rsquo;s LTV assumption is generous. If LTV is realistic, Path A may actually be negative cumulative.</td>
+          <td><strong>M6 cumulative NP</strong></td>
+          <td class="num" style="color:var(--rose);">&minus;$123K to &minus;$131K</td>
+          <td class="num" style="color:var(--rose);">&minus;$105K to &minus;$119K</td>
+          <td class="cat">Nobody is cumulative-positive at M6 under the M4-gate model &mdash; the pilot is an investment. The gate reads the run-rate below, not this line.</td>
         </tr>
         <tr>
-          <td><strong>M7+ run-rate NP at base case</strong></td>
-          <td class="num" style="color:var(--green);">~$63K/mo</td>
-          <td class="num" style="color:var(--green);">~$80K+/mo</td>
-          <td class="cat"><strong>The headline difference.</strong> Path B&rsquo;s M7+ cohort base is healthier, producing higher monthly NP from the same M6 acquisition base.</td>
+          <td><strong>M4-exit run-rate NP (M7+ burn basis)</strong></td>
+          <td class="num" style="color:var(--rose);">&minus;$6K to &minus;$9K/mo</td>
+          <td class="num" style="color:var(--amber);">&minus;$3K to +$1.5K/mo</td>
+          <td class="cat"><strong>The headline difference &mdash; and the gate verdict.</strong> A sits below the ~$35K floor at realistic retention (kill); B straddles it, clearing only at the top of its retention window.</td>
         </tr>
         <tr>
-          <td><strong>12-month forward NP (M7&ndash;M18)</strong></td>
-          <td class="num" style="color:var(--green);">~$760K</td>
-          <td class="num" style="color:var(--green);">~$960K+</td>
-          <td class="cat">The compounding shows up over the next year, not in M1&ndash;M6.</td>
+          <td><strong>Post-gate outlook (M7+)</strong></td>
+          <td class="num" style="color:var(--rose);">killed at gate (base case)</td>
+          <td class="num" style="color:var(--amber);">survives at the line</td>
+          <td class="cat">Growth after a GO comes from the reinvest-all flywheel, not from these run-rates &mdash; at the line there is nothing spare to reinvest until retention or scale improves.</td>
         </tr>
       </tbody>
     </table>
@@ -675,7 +685,7 @@ body.fx-usd .cur-usd, body.fx-sek .cur-sek, body.fx-eur .cur-eur { display: reve
         <tr><td><strong>Is there a viable community manager candidate available?</strong></td><td class="cat">$1.5K/mo for offshore CM is realistic, but the candidate needs crypto-casino fluency. A bad hire wastes the spend.</td></tr>
         <tr><td><strong>Are 1 mid-tier + 2&ndash;3 micro streamer partnerships available at $5K/mo?</strong></td><td class="cat">If the pipeline isn&rsquo;t there, the +$18K streamer bump can&rsquo;t deploy &mdash; Path B&rsquo;s biggest single channel bet under-delivers.</td></tr>
         <tr><td><strong>Are existing affiliates willing to accept tiered commission structure?</strong></td><td class="cat">Tiered 20% + 5&ndash;10% retention bonus is harder to sell than flat 30%. Some volume affiliates will decline. Worth asking 2&ndash;3 prospective partners first.</td></tr>
-        <tr><td><strong>What&rsquo;s the M6 minimum viable 2nd-deposit rate the model needs to hold?</strong></td><td class="cat">Path A implicitly needs ~35% to hit its NP numbers. If retention comes in at default 22&ndash;25%, the +$7K cumulative becomes &minus;$60&ndash;100K. Worth knowing the threshold.</td></tr>
+        <tr><td><strong>What&rsquo;s the minimum viable retention at the M4 gate?</strong></td><td class="cat">Path A needs ~31% of its ~3,800 pilot FTDs retained to clear the ~$35K floor; at the realistic 15&ndash;20% it exits at $17&ndash;23K &mdash; a kill. Know the threshold before M3, not at the gate.</td></tr>
         <tr><td><strong>Is there a hybrid worth exploring?</strong></td><td class="cat">e.g. keep Path A&rsquo;s marketing mix but deploy Path B&rsquo;s structural changes (lower welcome, 48h CRM, tiered affiliate). Gets some of the retention uplift without the marketing-mix risk.</td></tr>
       </tbody>
     </table>
