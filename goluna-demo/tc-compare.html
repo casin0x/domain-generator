@@ -177,6 +177,29 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
 .src-list a:hover { text-decoration: underline; }
 .src-list .mono { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
 
+/* Operator filter (click-to-toggle per casino) */
+.opfilter { position: sticky; top: 96px; z-index: 98; background: rgba(11,13,20,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.opfilter-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 8px; height: 46px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.opfilter-inner::-webkit-scrollbar { display: none; }
+.opfilter-label { font-family: var(--mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); flex-shrink: 0; }
+.opchip { flex-shrink: 0; padding: 6px 14px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); font-family: var(--font); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.opchip:hover { color: var(--text); border-color: var(--border-hover); }
+.opchip.all.active { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent); }
+.opchip.betplay.active { background: var(--green-dim); border-color: var(--green-border); color: var(--green); }
+.opchip.betpanda.active { background: var(--purple-dim); border-color: var(--purple-border); color: var(--purple); }
+.opchip.c21.active { background: var(--rose-dim); border-color: var(--rose-border); color: var(--rose); }
+.opchip.kings.active { background: var(--amber-dim); border-color: var(--amber-border); color: var(--amber); }
+.opchip.coins.active { background: var(--cyan-dim); border-color: var(--cyan-border); color: var(--cyan); }
+.op-card { cursor: pointer; transition: opacity 0.15s, border-color 0.15s, background 0.15s; }
+.op-card:hover { border-color: var(--border-hover); }
+.op-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.op-card.active { border-color: var(--border-hover); background: var(--surface-2); }
+.op-card.dim { opacity: 0.35; }
+.opx-hide { display: none !important; }
+body.op-filtered .cmp { min-width: 0; }
+body.op-filtered .pc-grid { grid-template-columns: 1fr; }
+@media (max-width: 640px) { .opfilter { top: 92px; padding: 0 16px; } .opfilter-inner { height: 42px; } }
+
 .footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); margin-top: 40px; }
 .footer a { color: var(--text-secondary); text-decoration: none; }
 .footer a:hover { color: var(--text); }
@@ -240,6 +263,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   </div>
 </div>
 
+<div class="opfilter" role="toolbar" aria-label="Filter by casino">
+  <div class="opfilter-inner">
+    <span class="opfilter-label">View:</span>
+    <button class="opchip all active" data-op="all" aria-pressed="true">All five</button>
+    <button class="opchip betplay" data-op="betplay" aria-pressed="false">Betplay</button>
+    <button class="opchip betpanda" data-op="betpanda" aria-pressed="false">Betpanda</button>
+    <button class="opchip c21" data-op="c21" aria-pressed="false">21.com</button>
+    <button class="opchip kings" data-op="kings" aria-pressed="false">Kings.game</button>
+    <button class="opchip coins" data-op="coins" aria-pressed="false">Coins.game</button>
+  </div>
+</div>
+
 <div class="page">
 
   <section class="hero">
@@ -262,28 +297,29 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
       <span class="section-num">01</span>
       <span class="section-title">The Lineup</span>
     </div>
+    <p class="section-intro">Click a casino — card below or chip in the bar above — to filter the tables and pros &amp; cons to that operator only. Click it again (or <strong>All five</strong>) to restore the full comparison.</p>
     <div class="op-grid">
-      <div class="op-card betplay">
+      <div class="op-card betplay" data-op="betplay" role="button" tabindex="0" aria-pressed="false">
         <div class="op-name">Betplay.io</div>
         <div class="op-co">LAMA TECH, LIMITADA<br>Costa Rica &middot; no license</div>
         <div class="op-tags"><span class="op-tag">Cubeia</span><span class="op-tag ok">Cashback model</span><span class="op-tag">Poker</span></div>
       </div>
-      <div class="op-card betpanda">
+      <div class="op-card betpanda" data-op="betpanda" role="button" tabindex="0" aria-pressed="false">
         <div class="op-name">Betpanda.io</div>
         <div class="op-co">Star Bright Media S.R.L.<br>Costa Rica &middot; no license</div>
         <div class="op-tags"><span class="op-tag">Cubeia</span><span class="op-tag ok">Cashback model</span><span class="op-tag">No-KYC signup</span></div>
       </div>
-      <div class="op-card c21">
+      <div class="op-card c21" data-op="c21" role="button" tabindex="0" aria-pressed="false">
         <div class="op-name">21.com</div>
         <div class="op-co">Operator not named on bonus page<br>General ToS not captured</div>
         <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag ok">Non-sticky</span></div>
       </div>
-      <div class="op-card kings">
+      <div class="op-card kings" data-op="kings" role="button" tabindex="0" aria-pressed="false">
         <div class="op-name">Kings.game</div>
         <div class="op-co">Royal Way Limited (reg. 15820)<br>Anjouan license ALSI-202410033-FI2</div>
         <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag">Licensed</span></div>
       </div>
-      <div class="op-card coins">
+      <div class="op-card coins" data-op="coins" role="button" tabindex="0" aria-pressed="false">
         <div class="op-name">Coins.game</div>
         <div class="op-co">Royal Way Limited (reg. 15820)<br>Same operator as Kings.game</div>
         <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag">Sister brand</span><span class="op-tag">Sportsbook</span></div>
@@ -715,6 +751,51 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
   if(!sn || !wrap) return;
   function check(){ wrap.classList.toggle('has-scroll', sn.scrollWidth > sn.clientWidth + 4); }
   check(); window.addEventListener('resize', check);
+})();
+
+/* Per-casino click-to-toggle filter */
+(function(){
+  var OPS = ['betplay','betpanda','c21','kings','coins'];
+  // tag comparison-table cells with their operator (columns are in fixed order)
+  document.querySelectorAll('table.cmp tr').forEach(function(tr){
+    for (var i = 1; i < tr.children.length && i <= 5; i++) tr.children[i].setAttribute('data-op', OPS[i-1]);
+  });
+  // tag pros/cons cards from their class
+  document.querySelectorAll('.pc-card').forEach(function(c){
+    OPS.forEach(function(o){ if (c.classList.contains(o)) c.setAttribute('data-op', o); });
+  });
+  var current = 'all';
+  function setOp(op){
+    current = op;
+    document.body.classList.toggle('op-filtered', op !== 'all');
+    document.querySelectorAll('.cmp [data-op], .pc-card[data-op]').forEach(function(el){
+      el.classList.toggle('opx-hide', op !== 'all' && el.getAttribute('data-op') !== op);
+    });
+    document.querySelectorAll('.opchip').forEach(function(ch){
+      var on = ch.getAttribute('data-op') === op;
+      ch.classList.toggle('active', on);
+      ch.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    document.querySelectorAll('.op-card[data-op]').forEach(function(c){
+      var mine = c.getAttribute('data-op') === op;
+      c.classList.toggle('active', mine);
+      c.classList.toggle('dim', op !== 'all' && !mine);
+      c.setAttribute('aria-pressed', mine ? 'true' : 'false');
+    });
+  }
+  function toggleOp(op){ setOp(op === current ? 'all' : op); }
+  document.querySelectorAll('.opchip').forEach(function(ch){
+    ch.addEventListener('click', function(){
+      var o = ch.getAttribute('data-op');
+      if (o === 'all') setOp('all'); else toggleOp(o);
+    });
+  });
+  document.querySelectorAll('.op-card[data-op]').forEach(function(c){
+    c.addEventListener('click', function(){ toggleOp(c.getAttribute('data-op')); });
+    c.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOp(c.getAttribute('data-op')); }
+    });
+  });
 })();
 </script>
 
