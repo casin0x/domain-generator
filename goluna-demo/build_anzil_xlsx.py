@@ -2,6 +2,7 @@
 """Build Anzil_Brazil_Pilot_Forecast.xlsx — Sheet 1: Path C cost forecast, Sheet 2: revenue targets."""
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.formatting.rule import CellIsRule
 from openpyxl.utils import get_column_letter
 
 ARIAL = "Arial"
@@ -17,8 +18,16 @@ ANZIL_FILL = PatternFill("solid", start_color="EDE9FE")
 YELLOW = PatternFill("solid", start_color="FFFF00")
 TOT_FILL = PatternFill("solid", start_color="EFEFEF")
 CUR = '$#,##0;[Red]($#,##0);"-"'
+PROFIT = '+$#,##0;($#,##0);"-"'
 PCT = "0.0%"
 NUM = '#,##0;[Red](#,##0);"-"'
+GOOD_RULE = lambda: CellIsRule(operator="greaterThan", formula=["0"],
+    fill=PatternFill("solid", start_color="C6EFCE"), font=Font(name=ARIAL, size=10, bold=True, color="006100"))
+BAD_RULE = lambda: CellIsRule(operator="lessThan", formula=["0"],
+    fill=PatternFill("solid", start_color="FFC7CE"), font=Font(name=ARIAL, size=10, bold=True, color="9C0006"))
+def profit_color(ws, rng):
+    ws.conditional_formatting.add(rng, GOOD_RULE())
+    ws.conditional_formatting.add(rng, BAD_RULE())
 thin = Side(style="thin", color="CCCCCC")
 BORDER = Border(top=thin, bottom=thin, left=thin, right=thin)
 
@@ -187,7 +196,7 @@ for i, (label, val, font, fmt, yellow) in enumerate(rows_b, start=5):
     c = w2.cell(row=i, column=2, value=val); c.font = font; c.number_format = fmt
     if yellow: c.fill = YELLOW
 
-T = 13
+T = 20  # monthly-detail header row; rows 13-18 hold the PROFIT AT A GLANCE block (filled in after the detail blocks exist)
 heads = ["Metric", "M1 (onboard)", "M2 (pilot 1)", "M3 (pilot 2)", "M4 (pilot 3 · gate)", "M5", "M6", "M7+ /mo"]
 for j, h in enumerate(heads):
     c = w2.cell(row=T, column=1 + j, value=h); c.fill = HDR_FILL; c.font = HDR_FONT
@@ -243,22 +252,45 @@ def block(start, ret_cell, tag):
     for j, src in enumerate(["B", "C", "D", "E", "F", "G", "H"]):
         c = w2.cell(row=r_cost, column=2 + j, value=f"='Cost Forecast'!{src}{TOT}")
         c.font = GREEN; c.number_format = CUR
-    w2.cell(row=r_res, column=1, value="Operating result (net contribution − cost)").font = BOLD
+    w2.cell(row=r_res, column=1, value="MONTHLY PROFIT / LOSS  (net contribution − cost)").font = BOLD
     for j in range(7):
         col = get_column_letter(2 + j)
         c = w2.cell(row=r_res, column=2 + j, value=f"={col}{r_net}-{col}{r_cost}")
-        c.font = BOLD; c.number_format = CUR
-    w2.cell(row=r_cum2, column=1, value="Cumulative result (M1–M6)").font = BLACK
-    w2.cell(row=r_cum2, column=2, value=f"=B{r_res}").number_format = CUR
+        c.font = BOLD; c.number_format = PROFIT
+    w2.cell(row=r_cum2, column=1, value="CUMULATIVE PROFIT / LOSS  (M1–M6)").font = BOLD
+    w2.cell(row=r_cum2, column=2, value=f"=B{r_res}").number_format = PROFIT
     for j in range(1, 6):
         col, prev = get_column_letter(2 + j), get_column_letter(1 + j)
         c = w2.cell(row=r_cum2, column=2 + j, value=f"={prev}{r_cum2}+{col}{r_res}")
-        c.font = BLACK; c.number_format = CUR
+        c.font = BOLD; c.number_format = PROFIT
     w2.cell(row=r_cum2, column=8, value="n/a").font = SUB
-    return r_cum2
+    profit_color(w2, f"B{r_res}:H{r_res}")
+    profit_color(w2, f"B{r_cum2}:G{r_cum2}")
+    return r_res, r_cum2
 
-end_need = block(T + 6, "$B$9", "NEED — break-even line (~28% retention)")
-end_opt = block(end_need + 3, "$B$10", "OPTIMIZE — compounding (~39% retention)")
+need_res, need_cum = block(T + 6, "$B$9", "NEED — break-even line (~28% retention)")
+opt_res, opt_cum = block(need_cum + 3, "$B$10", "OPTIMIZE — compounding (~39% retention)")
+end_opt = opt_cum
+
+# ---- PROFIT AT A GLANCE (rows 13-18, references the detail blocks below) ----
+G = 13
+w2.cell(row=G, column=1, value="PROFIT — AT A GLANCE").font = BOLD
+w2.cell(row=G, column=1).fill = TOT_FILL
+for j in range(1, 5): w2.cell(row=G, column=1 + j).fill = TOT_FILL
+gheads = ["Scenario", "Pilot M1–M4 (the investment)", "M5–M6 / mo", "M7+ / mo", "Cumulative at M6"]
+for j, h in enumerate(gheads):
+    c = w2.cell(row=G + 1, column=1 + j, value=h); c.fill = HDR_FILL; c.font = HDR_FONT
+    c.alignment = Alignment(horizontal="right" if j else "left")
+for i, (nm, r_res_x, r_cum_x) in enumerate([("NEED — break-even (~28% ret.)", need_res, need_cum),
+                                            ("OPTIMIZE — compounding (~39% ret.)", opt_res, opt_cum)]):
+    r = G + 2 + i
+    w2.cell(row=r, column=1, value=nm).font = BOLD
+    for col_i, f in [(2, f"=SUM(B{r_res_x}:E{r_res_x})"), (3, f"=F{r_res_x}"), (4, f"=H{r_res_x}"), (5, f"=G{r_cum_x}")]:
+        c = w2.cell(row=r, column=col_i, value=f); c.font = BOLD; c.number_format = PROFIT
+profit_color(w2, f"B{G+2}:E{G+3}")
+w2.cell(row=G + 5, column=1, value=("Read: the pilot is an investment (red) in both scenarios. At the NEED line the machine reaches break-even from M7 "
+    "(profit ≈ $0/mo — that is the definition of the line). At the OPTIMIZE line the same spend returns ~+$6K/mo from M7 to reinvest. Green = profit, red = loss.")).font = SUB
+w2.merge_cells(start_row=G + 5, start_column=1, end_row=G + 5, end_column=8)
 
 # after-M4 states
 A = end_opt + 3
@@ -273,9 +305,10 @@ for i, (ret, verdict) in enumerate(states):
     w2.cell(row=r, column=2, value=f"=A{r}*$E${r_cum}").number_format = NUM
     w2.cell(row=r, column=3, value=f"=B{r}*$B$5").number_format = CUR
     w2.cell(row=r, column=4, value=f"=C{r}*$B$8").number_format = CUR
-    w2.cell(row=r, column=5, value=f"=D{r}-$B$11").number_format = CUR
+    w2.cell(row=r, column=5, value=f"=D{r}-$B$11").number_format = PROFIT
     w2.cell(row=r, column=6, value=verdict).font = BLACK
     for col in range(2, 6): w2.cell(row=r, column=col).font = BLACK
+profit_color(w2, f"E{A+2}:E{A+5}")
 
 F = A + 8
 w2.cell(row=F, column=1, value="M4 gate floor (GGR/mo) = M7+ run-rate ÷ net contribution").font = BOLD
@@ -284,7 +317,7 @@ c = w2.cell(row=F, column=2, value="=B11/B8"); c.font = BLACK; c.number_format =
 w2.column_dimensions["A"].width = 44
 for col in range(2, 9):
     w2.column_dimensions[get_column_letter(col)].width = 15
-w2.freeze_panes = "B14"
+w2.freeze_panes = "B21"
 
 wb.save("Anzil_Brazil_Pilot_Forecast.xlsx")
 print("saved", TOT, CUM, REM)
