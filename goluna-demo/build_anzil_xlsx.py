@@ -41,8 +41,8 @@ ws["A1"] = "GoLuna — Path C (Anzil) Month-by-Month Cost Forecast (USD)"
 ws["A1"].font = H1
 ws.merge_cells("A1:N1")
 ws["A2"] = ("Anzil engagement hard-capped at $100K over the 3-month pilot (M2–M4) · 1M SEK dedicated to Brazil/Anzil · "
-            "clipping + influencer activation removed · M2 kill checkpoint (decision 2026-06-11). "
-            "Benchmarks, not GoLuna-measured data — verify at M4.")
+            "influencer activation removed from Anzil scope · Clipping $25K (M2 prepay) runs via a separate vendor outside the cap · "
+            "M2 kill checkpoint. Benchmarks, not GoLuna-measured data — verify at M4.")
 ws["A2"].font = SUB
 ws.merge_cells("A2:N2")
 
@@ -84,13 +84,15 @@ lines = [
     ("Designer (casino design)", [4800]+[0]*11, False),
     ("Betby setup (sportsbook)", [3000]+[0]*11, False),
     ("Other subscriptions", [476]*12, False),
+    ("Clipping (content/streamer campaign · prepaid M2 · separate vendor, not Anzil)", [0, 25000]+[0]*10, True),
     ("Anzil setup (€3K, one-time, M1)", [3240]+[0]*11, True),
     ("Anzil retainer (€1.5K/mo, M2–M4)", [0]+[1620]*3+[0]*8, True),
     ("Anzil media — Meta+WhatsApp (M2–M4)", [0, 15000, 25000, 29000]+[0]*8, True),
     ("Anzil management (15% of media)", None, True),  # formula row
 ]
 FIRST = HDR + 1
-MEDIA_ROW = FIRST + 15
+CLIP_ROW = FIRST + 13
+MEDIA_ROW = FIRST + 16
 for i, (label, vals, is_anzil) in enumerate(lines):
     r = FIRST + i
     lc = ws.cell(row=r, column=1, value=label); lc.font = BOLD if is_anzil else BLACK
@@ -106,16 +108,16 @@ for i, (label, vals, is_anzil) in enumerate(lines):
     t = ws.cell(row=r, column=14, value=f"=SUM(B{r}:M{r})"); t.font = BLACK; t.number_format = CUR
     if is_anzil: t.fill = ANZIL_FILL
 LAST = FIRST + len(lines) - 1
-ANZIL_FIRST, ANZIL_LAST = FIRST + 13, FIRST + 16  # setup..management
-FIX_LAST = FIRST + 12                              # GoLuna fixed block
+ANZIL_FIRST, ANZIL_LAST = FIRST + 14, FIRST + 17  # setup..management
+FIX_LAST = FIRST + 12                              # GoLuna fixed block (clipping excluded)
 
-# subtotal rows: marketing (Anzil) and GoLuna fixed, per month
+# subtotal rows: marketing (Anzil + clipping) and GoLuna fixed, per month
 MKT = LAST + 1
-ws.cell(row=MKT, column=1, value="MARKETING / ANZIL — monthly total (setup + retainer + media + mgmt)").font = BOLD
+ws.cell(row=MKT, column=1, value="MARKETING — monthly total (Anzil + clipping)").font = BOLD
 for m in range(13):
     col = get_column_letter(2 + m)
     rng = f"{col}{ANZIL_FIRST}:{col}{ANZIL_LAST}"
-    c = ws.cell(row=MKT, column=2 + m, value=f"=SUM({rng})")
+    c = ws.cell(row=MKT, column=2 + m, value=f"=SUM({rng})+{col}{CLIP_ROW}")
     c.font = BOLD; c.number_format = CUR; c.fill = ANZIL_FILL
 FIX = MKT + 1
 ws.cell(row=FIX, column=1, value="GoLuna fixed — monthly total (salaries, platform, security, one-times)").font = BOLD
@@ -151,18 +153,33 @@ for m in range(12):
 S = REM + 3
 ws.cell(row=S, column=1, value="Anzil engagement summary").font = BOLD
 items = [
-    ("Anzil committed total (setup + retainer + media + mgmt)", f"=N{FIRST+13}+N{FIRST+14}+N{FIRST+15}+N{FIRST+16}", CUR, BLACK),
+    ("Anzil committed total (setup + retainer + media + mgmt)", f"=N{ANZIL_FIRST}+N{ANZIL_FIRST+1}+N{ANZIL_FIRST+2}+N{ANZIL_FIRST+3}", CUR, BLACK),
     ("Brazil/Anzil envelope (1M SEK)", "=B7", CUR, BLACK),
     ("Headroom vs envelope (WhatsApp/PIX fees, TBD)", f"=B7-B{S+1}", CUR, BLACK),
     ("Contract hard cap", "=B9", CUR, BLACK),
     ("Headroom vs hard cap", f"=B9-B{S+1}", CUR, BLACK),
-    ("Sunk if cut at M2 checkpoint (setup + M2 retainer/media/mgmt)", f"=B{FIRST+13}+C{FIRST+14}+C{FIRST+15}+C{FIRST+16}", CUR, BLACK),
+    ("Sunk if cut at M2 checkpoint (setup + M2 retainer/media/mgmt)", f"=B{ANZIL_FIRST}+C{ANZIL_FIRST+1}+C{ANZIL_FIRST+2}+C{ANZIL_FIRST+3}", CUR, BLACK),
     ("Never deployed if cut at M2", f"=B{S+1}-B{S+6}", CUR, BLACK),
-    ("Paid if cut after 2 live months (end of M3)", f"=B{S+6}+D{FIRST+14}+D{FIRST+15}+D{FIRST+16}", CUR, BLACK),
+    ("Paid if cut after 2 live months (end of M3)", f"=B{S+6}+D{ANZIL_FIRST+1}+D{ANZIL_FIRST+2}+D{ANZIL_FIRST+3}", CUR, BLACK),
+    ("Clipping campaign (separate vendor — outside the Anzil cap and 1M SEK envelope; funded from the experiments pot)", f"=N{CLIP_ROW}", CUR, BLACK),
 ]
 for i, (label, formula, fmt, font) in enumerate(items, start=S + 1):
     ws.cell(row=i, column=1, value=label).font = BLACK
     c = ws.cell(row=i, column=2, value=formula); c.font = font; c.number_format = fmt
+
+# what is deliberately NOT in this sheet
+NB = S + len(items) + 2
+ws.cell(row=NB, column=1, value="Not in this sheet (and why)").font = BOLD
+notes = [
+    "Player bonuses & incentives (welcome / reload / cashback ≈ 25% of GGR) — variable cost, scales with revenue: deducted on the Revenue Targets sheet (GGR → NGR → net contribution).",
+    "Game-provider / Cubeia 5% / crypto / PIX fees — also % of GGR, inside the 51.5% net-contribution margin on the Revenue Targets sheet.",
+    "Promotional pool (community giveaways — $4K/mo M2–M4 in Paths A/B) — NOT budgeted for Path C; add ~$12K if the Anzil pilot should run community incentives too.",
+    "WhatsApp per-message + Anzil payments fees — volume-tiered, TBD at integration; covered by the cap headroom.",
+    "Bankroll 500K SEK (~$48K) — held separately for player withdrawals, not an operating cost.",
+]
+for i, t in enumerate(notes, start=NB + 1):
+    ws.cell(row=i, column=1, value="• " + t).font = SUB
+    ws.merge_cells(start_row=i, start_column=1, end_row=i, end_column=14)
 
 ws.column_dimensions["A"].width = 44
 for col in range(2, 15):
@@ -222,7 +239,7 @@ for j in range(1, 7):
 w2.cell(row=r_cum, column=2).font = BLACK
 
 def block(start, ret_cell, tag):
-    r_act, r_ggr, r_ngr, r_net, r_cost, r_res, r_cum2 = range(start, start + 7)
+    r_act, r_ggr, r_bon, r_ngr, r_net, r_cost, r_res, r_cum2 = range(start, start + 8)
     w2.cell(row=start - 1, column=1, value=tag).font = BOLD
     w2.cell(row=start - 1, column=1).fill = TOT_FILL
     for j in range(7):
@@ -240,8 +257,9 @@ def block(start, ret_cell, tag):
         c = w2.cell(row=r_act, column=2 + j, value=f); c.font = BLACK; c.number_format = NUM
     for r, label, mult in [
         (r_ggr, "Target GGR (actives × ARPU)", f"{r_act}*$B$5"),
-        (r_ngr, "≈ NGR (GGR − 25% bonuses)", f"{r_ggr}*$B$7"),
-        (r_net, "Net contribution (51.5% of GGR)", f"{r_ggr}*$B$8"),
+        (r_bon, "− Player bonuses & incentives (25% of GGR)", f"{r_ggr}*($B$7-1)"),
+        (r_ngr, "NGR  (= GGR − bonuses)", f"{r_ggr}*$B$7"),
+        (r_net, "Net contribution (51.5% of GGR, after all variable fees)", f"{r_ggr}*$B$8"),
     ]:
         w2.cell(row=r, column=1, value=label).font = BLACK
         for j in range(7):
