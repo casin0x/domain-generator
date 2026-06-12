@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Competitor T&amp;C Comparison (5 Operators)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0b0d14;
+  --surface: #13161f;
+  --surface-2: #1a1e2a;
+  --surface-3: #222736;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --accent: #818cf8;
+  --accent-dim: rgba(129,140,248,0.10);
+  --accent-border: rgba(129,140,248,0.20);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.10);
+  --green-border: rgba(52,211,153,0.20);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251,191,36,0.10);
+  --amber-border: rgba(251,191,36,0.20);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.10);
+  --rose-border: rgba(251,113,133,0.20);
+  --cyan: #22d3ee;
+  --cyan-dim: rgba(34,211,238,0.10);
+  --cyan-border: rgba(34,211,238,0.20);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --purple-border: rgba(167,139,250,0.20);
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --font: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.page { max-width: 1400px; margin: 0 auto; padding: 0 32px 80px; }
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba(11,13,20,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 32px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.header-right { display: flex; align-items: center; gap: 6px; }
+@media (min-width: 641px) {
+  .header-inner .logo { flex-shrink: 0; }
+  .header-right { min-width: 0; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .header-right::-webkit-scrollbar { display: none; }
+  .header-right .header-link { white-space: nowrap; flex-shrink: 0; }
+}
+@media (min-width: 641px) and (max-width: 1280px) {
+  .header-right .header-link { padding: 6px 8px; font-size: 12.5px; }
+}
+.header-link { padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+.header-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.header-link.active { color: var(--text); font-weight: 600; background: rgba(255,255,255,0.06); }
+.header-link-hub { color: var(--accent); font-weight: 600; }
+.header-link-hub:hover { color: var(--accent); background: rgba(129,140,248,0.10); }
+.hamburger { display: none; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 22px; padding: 4px; }
+.subnav { position: sticky; top: 56px; z-index: 99; background: rgba(11,13,20,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 32px; position: sticky; }
+.subnav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 2px; height: 40px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.subnav-inner::-webkit-scrollbar { height: 0; }
+.subnav-link { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-decoration: none; white-space: nowrap; transition: all 0.15s; }
+.subnav-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.hero { padding: 56px 0 32px; }
+.hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; background: var(--cyan-dim); border: 1px solid var(--cyan-border); font-size: 11px; font-weight: 600; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.06em; }
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--text-secondary); line-height: 1.65; max-width: 920px; }
+.hero-date { font-size: 11px; color: var(--text-muted); font-family: var(--mono); letter-spacing: 0.04em; }
+.section { margin-bottom: 48px; }
+.section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.section-num { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; background: var(--cyan-dim); color: var(--cyan); }
+.section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+.section-intro { font-size: 13px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px; max-width: 920px; }
+.section-intro strong { color: var(--text); }
+
+.note-box { display: flex; align-items: flex-start; gap: 10px; padding: 14px 18px; border-radius: 10px; font-size: 13px; line-height: 1.55; margin-bottom: 24px; }
+.note-box svg { flex-shrink: 0; margin-top: 2px; }
+.note-box.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+.note-box.warn { background: var(--amber-dim); border: 1px solid var(--amber-border); color: var(--amber); }
+.note-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: var(--green); }
+.note-box.rose { background: var(--rose-dim); border: 1px solid var(--rose-border); color: var(--rose); }
+.note-box strong { color: var(--text); font-weight: 600; }
+.note-box .nb-body { color: var(--text-secondary); }
+
+/* Operator lineup cards */
+.op-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.op-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; position: relative; overflow: hidden; }
+.op-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.op-card.betplay::before { background: var(--green); }
+.op-card.betpanda::before { background: var(--purple); }
+.op-card.c21::before { background: var(--rose); }
+.op-card.kings::before { background: var(--amber); }
+.op-card.coins::before { background: var(--cyan); }
+.op-name { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.op-card.betplay .op-name { color: var(--green); }
+.op-card.betpanda .op-name { color: var(--purple); }
+.op-card.c21 .op-name { color: var(--rose); }
+.op-card.kings .op-name { color: var(--amber); }
+.op-card.coins .op-name { color: var(--cyan); }
+.op-co { font-size: 11px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px; }
+.op-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.op-tag { font-family: var(--mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em; padding: 3px 7px; border-radius: 4px; background: var(--surface-2); color: var(--text-muted); text-transform: uppercase; white-space: nowrap; }
+.op-tag.hot { background: var(--rose-dim); color: var(--rose); }
+.op-tag.ok { background: var(--green-dim); color: var(--green); }
+
+/* Comparison tables */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 16px; background: var(--surface); }
+.table-scroll::-webkit-scrollbar { height: 6px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+.table-scroll::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 3px; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 1080px; }
+.cmp th, .cmp td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.cmp th { background: var(--surface-2); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); font-weight: 700; white-space: nowrap; position: sticky; top: 0; }
+.cmp th.betplay { color: var(--green); }
+.cmp th.betpanda { color: var(--purple); }
+.cmp th.c21 { color: var(--rose); }
+.cmp th.kings { color: var(--amber); }
+.cmp th.coins { color: var(--cyan); }
+.cmp td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; font-size: 12px; background: rgba(255,255,255,0.015); }
+.cmp td { color: var(--text-secondary); }
+.cmp tr:last-child td { border-bottom: none; }
+.cmp .hl { color: var(--text); font-weight: 600; }
+.cmp .bad { color: var(--rose); font-weight: 600; }
+.cmp .good { color: var(--green); font-weight: 600; }
+.cmp .warn { color: var(--amber); font-weight: 600; }
+.cmp .na { color: var(--text-muted); font-style: italic; }
+.cmp .mono { font-family: var(--mono); font-size: 11.5px; }
+
+/* Pros & cons */
+.pc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.pc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; position: relative; overflow: hidden; }
+.pc-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; }
+.pc-card.betplay::before { background: var(--green); }
+.pc-card.betpanda::before { background: var(--purple); }
+.pc-card.c21::before { background: var(--rose); }
+.pc-card.kings::before { background: var(--amber); }
+.pc-card.coins::before { background: var(--cyan); }
+.pc-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.pc-name { font-size: 16px; font-weight: 700; }
+.pc-card.betplay .pc-name { color: var(--green); }
+.pc-card.betpanda .pc-name { color: var(--purple); }
+.pc-card.c21 .pc-name { color: var(--rose); }
+.pc-card.kings .pc-name { color: var(--amber); }
+.pc-card.coins .pc-name { color: var(--cyan); }
+.pc-sub { font-size: 11px; color: var(--text-muted); font-family: var(--mono); }
+.pc-verdict { font-size: 12px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 14px; }
+.pc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pc-list-title { font-family: var(--mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.pc-list-title.pros { color: var(--green); }
+.pc-list-title.cons { color: var(--rose); }
+.pc-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.pc-list li { font-size: 12px; color: var(--text-secondary); line-height: 1.5; padding-left: 16px; position: relative; }
+.pc-list li strong { color: var(--text); font-weight: 600; }
+.pc-list.pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.pc-list.cons li::before { content: '−'; position: absolute; left: 0; color: var(--rose); font-weight: 700; }
+
+/* Takeaways */
+.tk-list { display: flex; flex-direction: column; gap: 12px; }
+.tk { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+.tk-num { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+.tk.adopt .tk-num { color: var(--green); background: var(--green-dim); border-color: var(--green-border); }
+.tk.avoid .tk-num { color: var(--rose); background: var(--rose-dim); border-color: var(--rose-border); }
+.tk-body { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.tk-body strong { color: var(--text); font-weight: 600; }
+.tk-body a { color: var(--accent); text-decoration: none; }
+.tk-body a:hover { text-decoration: underline; }
+
+/* Sources */
+.src-list { display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+.src-list a { color: var(--accent); text-decoration: none; }
+.src-list a:hover { text-decoration: underline; }
+.src-list .mono { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+
+.footer { text-align: center; padding: 40px 0 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); margin-top: 40px; }
+.footer a { color: var(--text-secondary); text-decoration: none; }
+.footer a:hover { color: var(--text); }
+
+@media (max-width: 1100px) {
+  .op-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .pc-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .subnav { padding: 0 16px; } .subnav-inner { height: 36px; }
+  .page { padding: 0 16px 60px; }
+  .site-header { padding: 0 16px; }
+  .hero { padding: 36px 0 24px; }
+  .hero h1 { font-size: 26px; }
+  .hamburger { display: block; }
+  .header-right { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(11,13,20,0.98); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 12px 16px; }
+  .header-right.open { display: flex; }
+  .header-link { width: 100%; }
+  .op-grid { grid-template-columns: 1fr; }
+  .pc-cols { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link">Revenue</a>
+      <a href="paths.html" class="header-link">Paths A/B</a>
+      <a href="anzil.html" class="header-link">Anzil Collab</a>
+      <a href="retention.html" class="header-link">Assumptions</a>
+      <a href="partnership.html" class="header-link">Partnership</a>
+      <a href="capital.html" class="header-link">Capital</a>
+      <a href="tc.html" class="header-link active">T&amp;Cs</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <a href="#lineup" class="subnav-link">Lineup</a>
+    <a href="#findings" class="subnav-link">Key Findings</a>
+    <a href="#legal" class="subnav-link">Legal Posture</a>
+    <a href="#bonus" class="subnav-link">Bonus Mechanics</a>
+    <a href="#proscons" class="subnav-link">Pros &amp; Cons</a>
+    <a href="#takeaways" class="subnav-link">GoLuna Takeaways</a>
+    <a href="#sources" class="subnav-link">Sources</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge">Competitor Intelligence</div>
+      <span class="hero-date">v0.1 &middot; 12 June 2026</span>
+    </div>
+    <h1>Competitor T&amp;C Comparison — Five Operators</h1>
+    <p>Side-by-side comparison of the live terms &amp; conditions of <strong style="color:var(--green);">Betplay.io</strong>, <strong style="color:var(--purple);">Betpanda.io</strong>, <strong style="color:var(--rose);">21.com</strong>, <strong style="color:var(--amber);">Kings.game</strong> and <strong style="color:var(--cyan);">Coins.game</strong> — corporate posture, bonus machinery, and what each design choice means for GoLuna. Companion to the <a href="tc.html" style="color:var(--accent);text-decoration:none;">T&amp;C Clause Library</a>, which turns the useful clauses into GoLuna drafts.</p>
+  </section>
+
+  <div class="note-box warn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div class="nb-body"><strong>Scope.</strong>&nbsp; Betplay/Betpanda = full general ToS, captured May 2026. Kings.game = general ToU + dedicated bonus T&amp;C; Coins.game = Terms of Use + Terms of Service — captured 12 June 2026. <strong>21.com = bonus-rules page only</strong> (its general ToS was not captured), so its corporate rows are marked accordingly. All statements below describe what the captured documents say — this is working competitor analysis, not legal advice.</div>
+  </div>
+
+  <!-- §01 OPERATOR LINEUP -->
+  <section class="section" id="lineup">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-title">The Lineup</span>
+    </div>
+    <div class="op-grid">
+      <div class="op-card betplay">
+        <div class="op-name">Betplay.io</div>
+        <div class="op-co">LAMA TECH, LIMITADA<br>Costa Rica &middot; no license</div>
+        <div class="op-tags"><span class="op-tag">Cubeia</span><span class="op-tag ok">Cashback model</span><span class="op-tag">Poker room</span></div>
+      </div>
+      <div class="op-card betpanda">
+        <div class="op-name">Betpanda.io</div>
+        <div class="op-co">Star Bright Media S.R.L.<br>Costa Rica &middot; no license</div>
+        <div class="op-tags"><span class="op-tag">Cubeia</span><span class="op-tag ok">Cashback model</span><span class="op-tag">No-KYC signup</span></div>
+      </div>
+      <div class="op-card c21">
+        <div class="op-name">21.com</div>
+        <div class="op-co">Operator not named on bonus page<br>General ToS not captured</div>
+        <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag ok">Non-sticky</span></div>
+      </div>
+      <div class="op-card kings">
+        <div class="op-name">Kings.game</div>
+        <div class="op-co">Royal Way Limited (reg. 15820)<br>Anjouan license ALSI-202410033-FI2</div>
+        <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag">Licensed</span></div>
+      </div>
+      <div class="op-card coins">
+        <div class="op-name">Coins.game</div>
+        <div class="op-co">Royal Way Limited (reg. 15820)<br>Same operator as Kings.game</div>
+        <div class="op-tags"><span class="op-tag hot">Bonus machine</span><span class="op-tag">Sister brand</span><span class="op-tag">Sportsbook</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 KEY FINDINGS -->
+  <section class="section" id="findings">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-title">Key Findings</span>
+    </div>
+
+    <div class="note-box rose">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="nb-body"><strong>The Royal Way tell — one company, three wagering numbers.</strong>&nbsp; Kings.game and Coins.game are the <em>same operator</em> (Royal Way Limited, Anjouan commercial register no. 15820). Yet their documents quote three different standard wagering requirements: Kings&rsquo; bonus-page summary table says <strong>x35</strong>, Kings&rsquo; own clauses (&sect;11, &sect;14) say <strong>x20</strong>, and Coins&rsquo; general terms say <strong>30x casino / 15x sportsbook</strong>. Kings&rsquo; free-spin counts also contradict themselves (table 25/50/75/100 vs clauses 50/100/150/200). The legal docs are assembled per-brand from templates with nobody reconciling the numbers — and in a dispute, the operator picks which one applies.</div>
+    </div>
+
+    <div class="note-box green">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div class="nb-body"><strong>Two business models, visible in the paperwork.</strong>&nbsp; The Costa Rica pair (Betplay/Betpanda — the same Cubeia chassis as GoLuna) run a <strong>no-bonus model</strong>: 1x deposit wagering, weekly cashback caps, and affiliates explicitly banned from advertising &ldquo;welcome bonuses.&rdquo; The trio with bonus engines (21.com, Kings, Coins) carry the full deposit-match rulebook: 20&ndash;35x wagering, contribution tables, max-bet caps, forfeiture and advantage-play machinery. The T&amp;C architecture follows the acquisition model — adopting match bonuses means adopting this entire extra rulebook.</div>
+    </div>
+  </section>
+
+  <!-- §03 CORPORATE & LEGAL TABLE -->
+  <section class="section" id="legal">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-title">Corporate &amp; Legal Posture</span>
+    </div>
+    <p class="section-intro">Who stands behind each brand, under what law, and how much they disclose. <strong>21.com cells marked &ldquo;not captured&rdquo;</strong> mean the fact lives in their general ToS, which is outside the captured bonus document.</p>
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th class="betplay">Betplay.io</th>
+            <th class="betpanda">Betpanda.io</th>
+            <th class="c21">21.com</th>
+            <th class="kings">Kings.game</th>
+            <th class="coins">Coins.game</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operating company</td>
+            <td>LAMA TECH, LIMITADA (Costa Rica)</td>
+            <td>Star Bright Media S.R.L. (Costa Rica, ID 3-102-880000)</td>
+            <td class="na">Not named — &ldquo;the Operator&rdquo;</td>
+            <td>Royal Way Limited (Anjouan reg. 15820)</td>
+            <td><span class="warn">Royal Way Limited — same company as Kings</span></td>
+          </tr>
+          <tr>
+            <td>License</td>
+            <td><span class="bad">None</span> — CR registration only</td>
+            <td><span class="bad">None</span> — states it outright: &ldquo;not under any domestic licensing regime&rdquo;</td>
+            <td class="na">Not captured</td>
+            <td>Anjouan (Comoros) <span class="mono">ALSI-202410033-FI2</span>; payment agent Altrimax Ltd</td>
+            <td>Anjouan — same Royal Way entity</td>
+          </tr>
+          <tr>
+            <td>Governing law</td>
+            <td>Costa Rica, exclusive jurisdiction</td>
+            <td>Costa Rica, exclusive jurisdiction</td>
+            <td class="na">Not stated in bonus doc</td>
+            <td>Anjouan, Union of Comoros</td>
+            <td>Anjouan, Union of Comoros</td>
+          </tr>
+          <tr>
+            <td>Restricted countries</td>
+            <td>~22 — EU dependencies, US, UK, Japan, Turkey, Poland</td>
+            <td><span class="warn">~70</span> — big Africa/Asia block, sanctions lists, US, Australia&hellip; and Costa Rica itself</td>
+            <td class="na">Not stated in bonus doc</td>
+            <td><span class="bad">No list at all</span> — generic &ldquo;where prohibited&rdquo; clause</td>
+            <td>~15 named: US+deps, UK, France, Spain, Netherlands, Australia, Iran, Iraq&hellip; + NetEnt territory lists</td>
+          </tr>
+          <tr>
+            <td>KYC model</td>
+            <td>Soft — triggered by high-value withdrawal or abuse</td>
+            <td>No-KYC signup; triggered on suspicion; FIU/AML language</td>
+            <td>Phone/email verification gate for bonuses</td>
+            <td>Discretionary, any stage incl. pre-withdrawal; source-of-funds + EDD</td>
+            <td>On deposit/withdrawal (ToS &sect;6); account closed if docs not sent</td>
+          </tr>
+          <tr>
+            <td>Dispute resolution</td>
+            <td>Operator only, decision final</td>
+            <td>Operator only, decision final</td>
+            <td>&ldquo;Operator&rsquo;s decision shall be final and binding&rdquo;</td>
+            <td>Anjouan courts; operator discretion throughout</td>
+            <td>Decisions &ldquo;final and binding in all respects&rdquo;</td>
+          </tr>
+          <tr>
+            <td>Products</td>
+            <td>Casino + sportsbook + racebook + <span class="hl">poker room</span> + Originals (&sect;17)</td>
+            <td>Casino + live + sports; Originals in footer only</td>
+            <td>Casino — slots, live, crash, originals</td>
+            <td>Casino + Originals + live + sports (separate sports T&amp;C)</td>
+            <td>Casino + <span class="hl">full sportsbook rules (&sect;17)</span> + esports + NetEnt restrictions (&sect;18)</td>
+          </tr>
+          <tr>
+            <td>Doc quality</td>
+            <td>Full ToS, mid-detail</td>
+            <td><span class="good">Most explicit numbers</span> of the unlicensed pair</td>
+            <td><span class="good">Cleanest bonus disclosure</span> in the set</td>
+            <td><span class="bad">Thinnest general ToU</span> — 16 short sections, no caps, no list</td>
+            <td><span class="good">Largest legal stack</span> — ToU + ToS + sports + provider restrictions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §04 BONUS & MONEY MECHANICS TABLE -->
+  <section class="section" id="bonus">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-title">Bonus &amp; Money Mechanics</span>
+    </div>
+    <p class="section-intro">The dials that decide bonus economics: wagering multiples, windows, contribution tables, caps and forfeiture rules. <strong>n/a</strong> = the operator doesn&rsquo;t run that mechanic (the cashback pair has no match bonuses to regulate).</p>
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th class="betplay">Betplay.io</th>
+            <th class="betpanda">Betpanda.io</th>
+            <th class="c21">21.com</th>
+            <th class="kings">Kings.game</th>
+            <th class="coins">Coins.game</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bonus model</td>
+            <td>Weekly cashback &le; <span class="mono">$20,000</span>; no welcome match</td>
+            <td>Weekly cashback &le; <span class="mono">&euro;20,000</span> (not sports/esports/virtuals)</td>
+            <td>Deposit match, dedicated bonus T&amp;C page</td>
+            <td>4-stage welcome match + promo codes</td>
+            <td>Match + free spins + cashback + free bets (ToU &sect;16)</td>
+          </tr>
+          <tr>
+            <td>Welcome offer</td>
+            <td class="na">None — cashback/rakeback instead</td>
+            <td class="na">None — cashback + VIP free spins</td>
+            <td>Generic frame; specifics per promo</td>
+            <td>100% / 125% / 125% / 150%, min dep $20, max <span class="mono">$1,000</span>/stage; <span class="bad">FS counts contradict (25/50/75/100 vs 50/100/150/200)</span></td>
+            <td>Advertised &ldquo;up to $2,250 + 125 FS&rdquo;; specifics per promo</td>
+          </tr>
+          <tr>
+            <td>Wagering requirement</td>
+            <td><span class="good">1x</span> rollover on free-contest winnings only</td>
+            <td class="na">n/a — no match bonuses</td>
+            <td><span class="mono">25x</span> bonus, standard</td>
+            <td><span class="bad">x20 in clauses vs x35 in own table</span></td>
+            <td><span class="mono">30x</span> casino / <span class="mono">15x</span> sport (ToU &sect;16.10.2.10)</td>
+          </tr>
+          <tr>
+            <td>Architecture</td>
+            <td class="na">n/a</td>
+            <td>Cancelled bonus is never reinstated (&sect;2.3)</td>
+            <td><span class="good">Non-sticky</span>: cash plays first, withdrawable anytime — at cost of forfeiting bonus</td>
+            <td>Forfeit-first: withdrawing real funds requires forfeiting active bonus</td>
+            <td>Withdraw before wagering done = lose bonus (via support); bonus can be abandoned</td>
+          </tr>
+          <tr>
+            <td>Max bet in bonus</td>
+            <td class="na">n/a (Originals cap &euro;5,000 generally)</td>
+            <td class="na">n/a</td>
+            <td><span class="mono">$5</span> per spin/hand/round</td>
+            <td class="na">Not stated in bonus doc</td>
+            <td class="na">Per-promo (bonus cabinet shows e.g. 3 USD)</td>
+          </tr>
+          <tr>
+            <td>Window / expiry</td>
+            <td>Contest winnings expire in 30 days</td>
+            <td>VIP free spins: 24h to report geo-block or forfeited</td>
+            <td>30 days to claim &amp; clear</td>
+            <td><span class="bad">7 days to activate + 7 days to wager</span> — tightest in set</td>
+            <td>30 days standard</td>
+          </tr>
+          <tr>
+            <td>Game contribution</td>
+            <td class="na">n/a</td>
+            <td class="na">n/a</td>
+            <td>Slots 100% (Amusnet/EGT 50%) &middot; live/BJ/VP 25% &middot; crash/originals 50%</td>
+            <td>Slots/lotteries 100% &middot; Originals 20% &middot; <span class="warn">live &amp; crash 0%</span></td>
+            <td>Slots 100% &middot; table 10% &middot; BJ/roulette/VP/baccarat 5% &middot; some 0%; <span class="bad">&ldquo;can change — ask support&rdquo;</span></td>
+          </tr>
+          <tr>
+            <td>Win / conversion caps</td>
+            <td>Originals round win cap <span class="mono">&euro;100,000</span></td>
+            <td>Max win <span class="mono">3M uBTC</span>/24h, <span class="mono">10M uBTC</span>/round</td>
+            <td class="na">None beyond the wagering gate</td>
+            <td><span class="warn">Cashout capped at bonus amount</span> (or FS win amount) — excess cancelled</td>
+            <td class="na">Per-promo (&ldquo;bonus win limit&rdquo; field)</td>
+          </tr>
+          <tr>
+            <td>Deposit wagering</td>
+            <td><span class="mono">1x</span> before withdrawal</td>
+            <td><span class="mono">1x</span> before withdrawal</td>
+            <td class="na">Not in bonus doc</td>
+            <td class="na">Not stated</td>
+            <td class="na">Not stated as blanket rule</td>
+          </tr>
+          <tr>
+            <td>Withdrawal caps</td>
+            <td><span class="mono">$8,000</span>/24h (VIP higher)</td>
+            <td><span class="mono">&euro;5,000</span>/24h &middot; <span class="mono">&euro;15,000</span>/wk &middot; <span class="mono">&euro;45,000</span>/mo</td>
+            <td class="na">Not in bonus doc</td>
+            <td class="na">&ldquo;Depends on region and risk profile&rdquo;</td>
+            <td class="na">Not stated in captured docs</td>
+          </tr>
+          <tr>
+            <td>Anti-abuse machinery</td>
+            <td>Bonus/bug abuse, bots, multi-account &rarr; termination + confiscation; <span class="warn">inactive-account deduction after 6 mo</span></td>
+            <td>Zero-tolerance advantage play; anti-fraud &sect;5; closure forfeits balance + cashback</td>
+            <td>Multi-account, arbitrage, loopholes &rarr; revoke/void/close; <span class="warn">restricted-games list mutable without notice, retroactive voiding</span></td>
+            <td>One bonus per person/household/IP/device/payment method; round-postponing ban (&sect;27); payout refusal on suspicion (&sect;24)</td>
+            <td><span class="hl">Most explicit</span>: roulette 64%-coverage rule, feature-banking ban, low-margin/hedge bets = irregular play; ADVANTAGE PLAY clause (ToS &sect;14)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §05 PROS & CONS -->
+  <section class="section" id="proscons">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-title">Pros &amp; Cons — Per Operator</span>
+    </div>
+    <p class="section-intro">Judged as <strong>T&amp;C / business designs</strong> from GoLuna&rsquo;s operator seat: what each document does well (player proposition, bankroll protection, clarity) and where it leaks (trust, dispute risk, acquisition friction).</p>
+
+    <div class="pc-grid">
+
+      <div class="pc-card betplay">
+        <div class="pc-head"><span class="pc-name">Betplay.io</span><span class="pc-sub">Costa Rica &middot; cashback model &middot; Cubeia</span></div>
+        <div class="pc-verdict">The simplest player proposition in the set — no bonus traps at all — but with a couple of quietly player-hostile clauses and zero regulatory cover.</div>
+        <div class="pc-cols">
+          <div>
+            <div class="pc-list-title pros">Pros</div>
+            <ul class="pc-list pros">
+              <li><strong>1x deposit, no bonus machinery</strong> — nothing to clear, nothing to dispute</li>
+              <li><strong>$8,000/day withdrawal cap</strong> — most generous documented limit here</li>
+              <li>Documents its Originals exposure: &euro;5,000 max bet, &euro;100,000 round win cap</li>
+              <li>Light KYC = near-zero signup friction</li>
+              <li>Only operator in the set with a documented poker product</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pc-list-title cons">Cons</div>
+            <ul class="pc-list cons">
+              <li><strong>No license</strong> — players have zero recourse beyond support chat</li>
+              <li><strong>Inactive-account balance deduction</strong> after 6 months — reputational liability</li>
+              <li>Discretionary confiscation with operator as sole judge</li>
+              <li>No weekly/monthly withdrawal tiers documented — only the daily figure</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-card betpanda">
+        <div class="pc-head"><span class="pc-name">Betpanda.io</span><span class="pc-sub">Costa Rica &middot; cashback model &middot; Cubeia</span></div>
+        <div class="pc-verdict">The best bankroll-protection paperwork of the unlicensed pair — explicit caps everywhere — wrapped in the most aggressive liability language in the set.</div>
+        <div class="pc-cols">
+          <div>
+            <div class="pc-list-title pros">Pros</div>
+            <ul class="pc-list pros">
+              <li><strong>Tiered velocity caps</strong>: &euro;5K/day &middot; &euro;15K/wk &middot; &euro;45K/mo — the model GoLuna&rsquo;s clause library adopts</li>
+              <li><strong>Explicit win caps</strong>: 3M uBTC/24h, 10M uBTC/round — worst-case exposure is bounded</li>
+              <li>No-KYC signup = strongest acquisition funnel of the five</li>
+              <li>Cashback capped (&euro;20K/wk) and excluded from sports — leak control</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pc-list-title cons">Cons</div>
+            <ul class="pc-list cons">
+              <li><strong>No license and says so</strong> — plus players &ldquo;waive any right to claim reimbursements&rdquo;</li>
+              <li>~70-country restricted list it cannot realistically enforce — includes its own home country</li>
+              <li>&ldquo;Zero tolerance advantage play&rdquo; clause is broad enough to void almost any winner</li>
+              <li>Elaborate confiscation machinery (&sect;5) — a dispute magnet</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-card c21">
+        <div class="pc-head"><span class="pc-name">21.com</span><span class="pc-sub">bonus rules only &middot; operator not named on page</span></div>
+        <div class="pc-verdict">The cleanest bonus T&amp;C in the set — every dial stated on one page, genuinely non-sticky — undermined by a mutable restricted-games clause and an unnamed operator.</div>
+        <div class="pc-cols">
+          <div>
+            <div class="pc-list-title pros">Pros</div>
+            <ul class="pc-list pros">
+              <li><strong>Non-sticky architecture</strong> — cash and bonus separated, cash withdrawable anytime; the strongest player-fairness design here</li>
+              <li><strong>Full disclosure on one page</strong>: 25x, $5 max bet, 30 days, complete contribution table</li>
+              <li>No conversion cap — cleared winnings are actually yours</li>
+              <li>One-bonus-per-household/IP/device rule is standard and clearly stated</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pc-list-title cons">Cons</div>
+            <ul class="pc-list cons">
+              <li><strong>Restricted-games list mutable &ldquo;without prior notice&rdquo;</strong> with retroactive voiding — a trust hole that can nullify wins after the fact</li>
+              <li>Cancelling a pending withdrawal forfeits bonus + winnings — gotcha clause</li>
+              <li>Operator entity not named on the page; corporate posture unverifiable from this doc</li>
+              <li>25x on bonus <em>and</em> winnings is still heavy math for players</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-card kings">
+        <div class="pc-head"><span class="pc-name">Kings.game</span><span class="pc-sub">Royal Way Ltd &middot; Anjouan &middot; launched with 2025-dated terms</span></div>
+        <div class="pc-verdict">A licensed wrapper and a thorough 27-clause bonus rulebook — but the page contradicts itself on the headline number, and the caps make the big advertised percentages cosmetic.</div>
+        <div class="pc-cols">
+          <div>
+            <div class="pc-list-title pros">Pros</div>
+            <ul class="pc-list pros">
+              <li><strong>Licensed (Anjouan)</strong> with named payment agent — more structure than the CR pair</li>
+              <li><strong>Conversion cap = bonus amount</strong> — bankroll exposure from promos is hard-bounded</li>
+              <li>27 numbered bonus clauses incl. a feature-banking ban — operationally complete</li>
+              <li>Staged welcome (4 activations) spreads exposure and extends engagement</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pc-list-title cons">Cons</div>
+            <ul class="pc-list cons">
+              <li><strong>x35 vs x20 contradiction live on the page</strong> — dispute and affiliate-audit risk</li>
+              <li><strong>7-day wagering window</strong> — tightest in the set, near-unclearable for casual players</li>
+              <li>Win cap = bonus amount makes &ldquo;150% up to $1,000&rdquo; mostly marketing</li>
+              <li>General ToU is the thinnest here: 16 short sections, no restricted list, no money caps</li>
+              <li>Live casino &amp; crash contribute 0% — buried cost for those audiences</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pc-card coins">
+        <div class="pc-head"><span class="pc-name">Coins.game</span><span class="pc-sub">Royal Way Ltd &middot; Anjouan &middot; same operator as Kings</span></div>
+        <div class="pc-verdict">The most complete legal stack of the five — and the most explicit about what counts as abuse — but its standard numbers contradict its own sister brand, and its disclosure style pushes work onto the player.</div>
+        <div class="pc-cols">
+          <div>
+            <div class="pc-list-title pros">Pros</div>
+            <ul class="pc-list pros">
+              <li><strong>Fullest legal stack</strong>: ToU (19&sect;) + separate ToS (14&sect;) + sports rules + NetEnt territory lists</li>
+              <li><strong>Enforceable abuse definitions</strong> — roulette 64%-coverage rule, feature-banking ban — specific, not vague</li>
+              <li>Documented bonus-abandon path and pre-wagering withdrawal route (lose bonus, keep cash)</li>
+              <li>15x sportsbook wagering is comparatively fair</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pc-list-title cons">Cons</div>
+            <ul class="pc-list cons">
+              <li><strong>30x casino standard vs sister brand&rsquo;s x20/x35</strong> — same company, three numbers</li>
+              <li><strong>&ldquo;Contribution percentages can change — contact support each time&rdquo;</strong> — hostile disclosure by design</li>
+              <li>Table games at 5&ndash;10%, several at 0% — live/table players effectively can&rsquo;t clear bonuses</li>
+              <li>KYC-on-demand with account closure if documents aren&rsquo;t sent</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- §06 GOLUNA TAKEAWAYS -->
+  <section class="section" id="takeaways">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-title">What This Means for GoLuna</span>
+    </div>
+    <p class="section-intro">GoLuna runs the same Cubeia chassis as Betplay/Betpanda and the same bankroll constraint (500K SEK held for withdrawals). These are the design decisions the five documents argue for:</p>
+
+    <div class="tk-list">
+      <div class="tk adopt">
+        <div class="tk-num">1</div>
+        <div class="tk-body"><strong>Stay on the cashback chassis for launch.</strong> The Betplay/Betpanda model (1x deposit, capped cashback, no match bonuses) is what the <a href="tc.html">clause library</a> already encodes — and the bonus-machine trio shows the price of the alternative: an entire extra rulebook of wagering multiples, contribution tables, forfeiture clauses and the disputes they generate. With a $48K bankroll, the simpler promise is also the safer one.</div>
+      </div>
+      <div class="tk adopt">
+        <div class="tk-num">2</div>
+        <div class="tk-body"><strong>Keep Betpanda&rsquo;s velocity caps + win caps</strong> (already bankroll-critical clauses in the library: $5K/day tiered withdrawals, per-round and per-day win caps). They are the single biggest reducer of worst-case bankroll exposure, and Betpanda proves they survive contact with a live crypto audience.</div>
+      </div>
+      <div class="tk adopt">
+        <div class="tk-num">3</div>
+        <div class="tk-body"><strong>If GoLuna ever runs match bonuses, copy 21.com&rsquo;s disclosure, not Royal Way&rsquo;s.</strong> Every dial on one page (multiple, max bet, window, contribution table), non-sticky balances as the player-facing differentiator — and add Kings&rsquo; conversion cap <em>only if</em> bankroll pressure demands it, priced as the acquisition cost it is.</div>
+      </div>
+      <div class="tk avoid">
+        <div class="tk-num">4</div>
+        <div class="tk-body"><strong>One canonical number, everywhere.</strong> The Royal Way lesson: their three contradicting wagering figures (x20 / x35 / 30x) across two sister brands are a standing dispute liability. GoLuna&rsquo;s T&amp;Cs, promo pages and affiliate material must quote a single source of truth — same discipline this dashboard applies to the $35K kill line.</div>
+      </div>
+      <div class="tk avoid">
+        <div class="tk-num">5</div>
+        <div class="tk-body"><strong>Avoid trust-hole clauses.</strong> Retroactive game-restriction voiding (21.com &sect;7.2), &ldquo;percentages can change — ask support&rdquo; (Coins &sect;16.10.2.11), and inactive-balance deduction (Betplay &sect;15) all save the operator pennies and cost real reputation in Trustpilot/AskGamblers threads. GoLuna&rsquo;s honesty posture (conservative numbers, verify-at-M4) should extend to its player-facing terms.</div>
+      </div>
+      <div class="tk avoid">
+        <div class="tk-num">6</div>
+        <div class="tk-body"><strong>Don&rsquo;t publish a restricted-country list you won&rsquo;t enforce.</strong> Betpanda&rsquo;s ~70-country list (including its own home jurisdiction) is compliance theatre; Kings publishes none at all. The defensible middle is Coins&rsquo; shape: a short, real list aligned with payment/geo-blocking that is actually switched on.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §07 SOURCES -->
+  <section class="section" id="sources">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-title">Sources &amp; Capture Notes</span>
+    </div>
+    <div class="src-list">
+      <div><span class="mono">May 2026</span> &mdash; <a href="https://betplay.io/en/info/terms" target="_blank" rel="noopener">Betplay.io Terms</a> &middot; <a href="https://betpanda.io/en/info/terms" target="_blank" rel="noopener">Betpanda.io Terms</a> (full general ToS)</div>
+      <div><span class="mono">12 Jun 2026</span> &mdash; <a href="https://21.com/bonus-rules" target="_blank" rel="noopener">21.com Bonus Rules</a> (bonus T&amp;C only)</div>
+      <div><span class="mono">12 Jun 2026</span> &mdash; <a href="https://kings.game/help-center/terms-of-use" target="_blank" rel="noopener">Kings.game Terms of Use</a> &middot; <a href="https://kings.game/help-center/terms-of-bonus" target="_blank" rel="noopener">Kings.game Bonus T&amp;C</a></div>
+      <div><span class="mono">12 Jun 2026</span> &mdash; <a href="https://coins.game/?&amp;rules" target="_blank" rel="noopener">Coins.game rules modal</a> (Terms of Use + Terms of Service tabs)</div>
+      <div style="margin-top:6px;color:var(--text-muted);">Full captured texts and the 5-way comparison .docx live in the research repo (<span class="mono">alhambra-research/tc-docs/</span>). Live pages may have changed since capture — recheck before relying on a specific figure.</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    GoLuna &mdash; Competitor T&amp;C Comparison &mdash; v0.1 &middot; 12 June 2026 &mdash; Confidential &mdash; <a href="tc.html">T&amp;C Clause Library &rarr;</a> &middot; <a href="revenue.html">Revenue</a> &middot; <a href="index.html">Hub</a>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var sn = document.querySelector('.subnav-inner');
+  var wrap = document.querySelector('.subnav');
+  if(!sn || !wrap) return;
+  function check(){ wrap.classList.toggle('has-scroll', sn.scrollWidth > sn.clientWidth + 4); }
+  check(); window.addEventListener('resize', check);
+})();
+</script>
+
+</body>
+</html>
