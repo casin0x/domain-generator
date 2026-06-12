@@ -337,5 +337,206 @@ for col in range(2, 9):
     w2.column_dimensions[get_column_letter(col)].width = 15
 w2.freeze_panes = "B21"
 
+# ---------------- Sheet 3: P&L Cascade ----------------
+MOVING_FILL = PatternFill("solid", start_color="FDE9C8")
+FIXED_FILL = PatternFill("solid", start_color="D6F0F7")
+w3 = wb.create_sheet("P&L Cascade")
+w3["A1"] = "Full P&L Cascade — From GGR to Net Profit (Path C stack)"
+w3["A1"].font = H1
+w3.merge_cells("A1:F1")
+w3["A2"] = ("Read top to bottom: every row takes a real cost out of real GGR. MOVING fees scale with revenue (% of GGR); "
+            "FIXED fees are $/month regardless of revenue. Includes the ~5% high-estimate PIX on-ramp fee and treats the Cubeia €5K/mo (M7+) "
+            "as additive — deliberately more conservative than the dashboard's at-scale page. "
+            "Paths A/B variant: add 9% affiliate → 47.5% net, floor ~$35K.")
+w3["A2"].font = SUB
+w3.merge_cells("A2:F2")
+
+h3 = ["Line", "Type", "Rate / $ per month", "At the floor (~$28.5K GGR)", "At $100K GGR", "Who gets it / note"]
+for j, h in enumerate(h3):
+    c = w3.cell(row=4, column=1 + j, value=h); c.fill = HDR_FILL; c.font = HDR_FONT
+    c.alignment = Alignment(horizontal="right" if j in (2, 3, 4) else "left")
+
+GG = 5
+w3.cell(row=GG, column=1, value="Gross Gaming Revenue (GGR)").font = BOLD
+w3.cell(row=GG, column=2, value="the input").font = SUB
+for col, v in [(4, 28500), (5, 100000)]:
+    c = w3.cell(row=GG, column=col, value=v); c.font = BLUE; c.number_format = CUR; c.fill = YELLOW
+w3.cell(row=GG, column=6, value="stakes − player wins · change the blue cells to test any level").font = SUB
+
+moving = [
+    ("− Player bonuses & incentives", 0.25, "welcome / reload / cashback — to players"),
+    None,  # NGR subtotal slot
+    ("− Game-provider rev share (blended)", 0.105, "slot / live studios"),
+    ("− Crypto processing", 0.03, "processors + on-chain fees"),
+    ("− PIX on-ramp (HIGH estimate, unconfirmed)", 0.05, "fiat→crypto on-ramp — verify the real fee"),
+    ("− Cubeia platform rev share", 0.05, "white-label platform (contract §4)"),
+]
+r = GG
+rate_rows = []
+for item in moving:
+    r += 1
+    if item is None:
+        w3.cell(row=r, column=1, value="NGR  (GGR − bonuses)").font = BOLD
+        for col in (4, 5):
+            gl = get_column_letter(col)
+            w3.cell(row=r, column=col, value=f"={gl}{GG}+{gl}{r-1}").number_format = CUR
+        w3.cell(row=r, column=6, value="what 'real' revenue actually is").font = SUB
+        continue
+    label, rate, who = item
+    w3.cell(row=r, column=1, value=label).font = BLACK
+    tc = w3.cell(row=r, column=2, value="MOVING — % of GGR"); tc.fill = MOVING_FILL; tc.font = Font(name=ARIAL, size=9, bold=True, color="7A4D00")
+    rc = w3.cell(row=r, column=3, value=rate); rc.font = BLUE; rc.number_format = PCT
+    rate_rows.append(r)
+    for col in (4, 5):
+        gl = get_column_letter(col)
+        w3.cell(row=r, column=col, value=f"=-{gl}${GG}*$C{r}").number_format = CUR
+    w3.cell(row=r, column=6, value=who).font = SUB
+NC = r + 1
+w3.cell(row=NC, column=1, value="NET CONTRIBUTION  (after all moving fees)").font = BOLD
+nc_rate = "-".join([f"C{x}" for x in rate_rows])
+c = w3.cell(row=NC, column=3, value=f"=1-{nc_rate}"); c.font = BLACK; c.number_format = PCT
+for col in (4, 5):
+    gl = get_column_letter(col)
+    w3.cell(row=NC, column=col, value=f"={gl}{GG}*$C{NC}").number_format = CUR
+    w3.cell(row=NC, column=col).font = BOLD
+w3.cell(row=NC, column=6, value="51.5% of every GGR dollar survives the moving fees").font = SUB
+for col in range(1, 7): w3.cell(row=NC, column=col).fill = TOT_FILL
+
+fixed = [
+    ("− Salaries (T + O + G)", 5000, "the team"),
+    ("− X VIP Transfer Method", 1143, "staff $952 + tool $191"),
+    ("− Cubeia AWS hosting", 1836, "€1,700/mo, Appendix B"),
+    ("− Cubeia platform minimum (M7+)", 5400, "€5K/mo from M7 — additive in this model (open question vs 'minimum')"),
+    ("− Subscriptions", 1335, "Customer.io 324 + Freshchat 54 + security 281 + Claude 200 + other 476"),
+]
+fr0 = NC + 1
+for i, (label, amt, who) in enumerate(fixed):
+    r = fr0 + i
+    w3.cell(row=r, column=1, value=label).font = BLACK
+    tc = w3.cell(row=r, column=2, value="FIXED — $ / month"); tc.fill = FIXED_FILL; tc.font = Font(name=ARIAL, size=9, bold=True, color="0B5563")
+    ac = w3.cell(row=r, column=3, value=amt); ac.font = BLUE; ac.number_format = CUR
+    for col in (4, 5):
+        w3.cell(row=r, column=col, value=f"=-$C{r}").number_format = CUR
+    w3.cell(row=r, column=6, value=who).font = SUB
+FX_TOT = fr0 + len(fixed)
+w3.cell(row=FX_TOT, column=1, value="Total fixed burn  (M7+ run-rate)").font = BOLD
+c = w3.cell(row=FX_TOT, column=3, value=f"=SUM(C{fr0}:C{FX_TOT-1})"); c.font = BLACK; c.number_format = CUR
+for col in (4, 5):
+    gl = get_column_letter(col)
+    w3.cell(row=FX_TOT, column=col, value=f"=SUM({gl}{fr0}:{gl}{FX_TOT-1})").number_format = CUR
+NP3 = FX_TOT + 1
+w3.cell(row=NP3, column=1, value="NET PROFIT / month").font = BOLD
+for col in (4, 5):
+    gl = get_column_letter(col)
+    c = w3.cell(row=NP3, column=col, value=f"={gl}{NC}+{gl}{FX_TOT}"); c.font = BOLD; c.number_format = PROFIT
+w3.cell(row=NP3, column=6, value="the floor column landing at ≈ $0 is the kill line proven line-by-line").font = SUB
+for col in range(1, 7): w3.cell(row=NP3, column=col).fill = TOT_FILL
+profit_color(w3, f"D{NP3}:E{NP3}")
+w3.cell(row=NP3 + 2, column=1, value="Growth marketing: $0 baseline after the pilot — reinvest-all means media is funded out of the Net Profit line, never the envelope.").font = SUB
+w3.merge_cells(start_row=NP3 + 2, start_column=1, end_row=NP3 + 2, end_column=6)
+w3.cell(row=NP3 + 3, column=1, value="The floor, derived: fixed burn ÷ net-contribution % =").font = BOLD
+c = w3.cell(row=NP3 + 3, column=3, value=f"=C{FX_TOT}/C{NC}"); c.font = BLACK; c.number_format = CUR
+w3.cell(row=NP3 + 3, column=6, value="exit M4 below this run-rate and flat → KILL").font = SUB
+w3.column_dimensions["A"].width = 40
+w3.column_dimensions["B"].width = 19
+w3.column_dimensions["C"].width = 17
+w3.column_dimensions["D"].width = 22
+w3.column_dimensions["E"].width = 15
+w3.column_dimensions["F"].width = 52
+
+# ---------------- Sheet 4: Fees at Scale ----------------
+w4 = wb.create_sheet("Fees at Scale")
+w4["A1"] = "Every Fee at Scale — monthly GGR of $100K / $1M / $10M / $100M"
+w4["A1"].font = H1
+w4.merge_cells("A1:F1")
+w4["A2"] = ("MOVING fees scale 1:1 with GGR; FIXED/stepped costs dilute — that is the operating leverage. "
+            "Rates link to the P&L Cascade sheet (single source of truth). GoLuna fixed opex is a staffed-for-scale estimate; "
+            "$100M column extrapolated (~3% of GGR) — tune to a real hiring plan. Growth marketing 20% of GGR is a steady-state "
+            "assumption (media ~17.4% + Anzil 15% mgmt ~2.6%); at $5M+/mo renegotiate or in-house the 15%.")
+w4["A2"].font = SUB
+w4.merge_cells("A2:F2")
+w4["A4"] = "Growth marketing (steady-state, % of GGR)"; w4["A4"].font = BLACK
+mk = w4["B4"]; mk.value = 0.20; mk.font = BLUE; mk.number_format = PCT; mk.fill = YELLOW
+
+h4 = ["Line", "Type / rate", "$100K / mo", "$1M / mo", "$10M / mo", "$100M / mo"]
+for j, h in enumerate(h4):
+    c = w4.cell(row=6, column=1 + j, value=h); c.fill = HDR_FILL; c.font = HDR_FONT
+    c.alignment = Alignment(horizontal="right" if j >= 2 else "left")
+G4 = 7
+w4.cell(row=G4, column=1, value="Gross Gaming Revenue (GGR)").font = BOLD
+for j, v in enumerate([100000, 1000000, 10000000, 100000000]):
+    c = w4.cell(row=G4, column=3 + j, value=v); c.font = BLUE; c.number_format = CUR
+mv_labels = [
+    ("− Player bonuses & incentives (→ players)", rate_rows[0]),
+    ("− Game providers, blended (→ studios)", rate_rows[1]),
+    ("− Crypto processing (→ processors)", rate_rows[2]),
+    ("− PIX on-ramp, high est. (→ on-ramp partner)", rate_rows[3]),
+    ("− Cubeia platform 5% (→ Cubeia)", rate_rows[4]),
+]
+for i, (label, rr) in enumerate(mv_labels):
+    r = G4 + 1 + i
+    w4.cell(row=r, column=1, value=label).font = BLACK
+    tc = w4.cell(row=r, column=2, value=f"MOVING — ='P&L Cascade'!C{rr}"); tc.value = f"='P&L Cascade'!C{rr}"; tc.font = GREEN; tc.number_format = PCT
+    for j in range(4):
+        gl = get_column_letter(3 + j)
+        w4.cell(row=r, column=3 + j, value=f"=-{gl}${G4}*$B{r}").number_format = CUR
+MVT = G4 + 6
+w4.cell(row=MVT, column=1, value="Total moving fees").font = BOLD
+c = w4.cell(row=MVT, column=2, value=f"=SUM(B{G4+1}:B{MVT-1})"); c.font = BLACK; c.number_format = PCT
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    w4.cell(row=MVT, column=3 + j, value=f"=SUM({gl}{G4+1}:{gl}{MVT-1})").number_format = CUR
+NC4 = MVT + 1
+w4.cell(row=NC4, column=1, value="NET CONTRIBUTION").font = BOLD
+c = w4.cell(row=NC4, column=2, value=f"=1-B{MVT}"); c.font = BLACK; c.number_format = PCT
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    cc = w4.cell(row=NC4, column=3 + j, value=f"={gl}{G4}+{gl}{MVT}"); cc.font = BOLD; cc.number_format = CUR
+for col in range(1, 7): w4.cell(row=NC4, column=col).fill = TOT_FILL
+CMIN = NC4 + 1
+w4.cell(row=CMIN, column=1, value="− Cubeia platform minimum, M7+ (FIXED)").font = BLACK
+w4.cell(row=CMIN, column=2, value="='P&L Cascade'!C" + str(fr0 + 3)).font = GREEN
+w4.cell(row=CMIN, column=2).number_format = CUR
+for j in range(4):
+    w4.cell(row=CMIN, column=3 + j, value=f"=-$B{CMIN}").number_format = CUR
+OPX = CMIN + 1
+w4.cell(row=OPX, column=1, value="− GoLuna fixed opex (stepped estimate — staffed for scale)").font = BLACK
+w4.cell(row=OPX, column=2, value="FIXED / stepped").font = SUB
+for j, v in enumerate([9314, 45000, 330000, 3000000]):
+    c = w4.cell(row=OPX, column=3 + j, value=-v); c.font = BLUE; c.number_format = CUR
+OP = OPX + 1
+w4.cell(row=OP, column=1, value="OPERATING PROFIT  (EBITDA, pre-marketing)").font = BOLD
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    c = w4.cell(row=OP, column=3 + j, value=f"={gl}{NC4}+{gl}{CMIN}+{gl}{OPX}"); c.font = BOLD; c.number_format = PROFIT
+profit_color(w4, f"C{OP}:F{OP}")
+MK = OP + 1
+w4.cell(row=MK, column=1, value="− Growth marketing (media + Anzil 15% mgmt)").font = BLACK
+tc = w4.cell(row=MK, column=2, value="=B4"); tc.font = BLACK; tc.number_format = PCT
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    w4.cell(row=MK, column=3 + j, value=f"=-{gl}${G4}*$B$4").number_format = CUR
+NP4 = MK + 1
+w4.cell(row=NP4, column=1, value="NET PROFIT / month").font = BOLD
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    c = w4.cell(row=NP4, column=3 + j, value=f"={gl}{OP}+{gl}{MK}"); c.font = BOLD; c.number_format = PROFIT
+for col in range(1, 7): w4.cell(row=NP4, column=col).fill = TOT_FILL
+profit_color(w4, f"C{NP4}:F{NP4}")
+MG = NP4 + 1
+w4.cell(row=MG, column=1, value="Net margin (% of GGR)").font = BLACK
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    c = w4.cell(row=MG, column=3 + j, value=f"={gl}{NP4}/{gl}{G4}"); c.font = BLACK; c.number_format = PCT
+AN = MG + 1
+w4.cell(row=AN, column=1, value="Annualised GGR (×12)").font = SUB
+for j in range(4):
+    gl = get_column_letter(3 + j)
+    c = w4.cell(row=AN, column=3 + j, value=f"={gl}{G4}*12"); c.font = SUB; c.number_format = CUR
+w4.column_dimensions["A"].width = 46
+w4.column_dimensions["B"].width = 16
+for col in range(3, 7):
+    w4.column_dimensions[get_column_letter(col)].width = 15
+
 wb.save("Anzil_Brazil_Pilot_Forecast.xlsx")
 print("saved", TOT, CUM, REM)
