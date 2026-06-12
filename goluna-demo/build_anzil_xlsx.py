@@ -97,14 +97,30 @@ for i, (label, vals, is_anzil) in enumerate(lines):
     t = ws.cell(row=r, column=14, value=f"=SUM(B{r}:M{r})"); t.font = BLACK; t.number_format = CUR
     if is_anzil: t.fill = ANZIL_FILL
 LAST = FIRST + len(lines) - 1
+ANZIL_FIRST, ANZIL_LAST = FIRST + 13, FIRST + 16  # setup..management
+FIX_LAST = FIRST + 12                              # GoLuna fixed block
 
-TOT = LAST + 1
-ws.cell(row=TOT, column=1, value="Monthly total").font = BOLD
-for m in range(12):
+# subtotal rows: marketing (Anzil) and GoLuna fixed, per month
+MKT = LAST + 1
+ws.cell(row=MKT, column=1, value="MARKETING / ANZIL — monthly total (setup + retainer + media + mgmt)").font = BOLD
+for m in range(13):
     col = get_column_letter(2 + m)
-    c = ws.cell(row=TOT, column=2 + m, value=f"=SUM({col}{FIRST}:{col}{LAST})")
+    rng = f"{col}{ANZIL_FIRST}:{col}{ANZIL_LAST}"
+    c = ws.cell(row=MKT, column=2 + m, value=f"=SUM({rng})")
+    c.font = BOLD; c.number_format = CUR; c.fill = ANZIL_FILL
+FIX = MKT + 1
+ws.cell(row=FIX, column=1, value="GoLuna fixed — monthly total (salaries, platform, security, one-times)").font = BOLD
+for m in range(13):
+    col = get_column_letter(2 + m)
+    c = ws.cell(row=FIX, column=2 + m, value=f"=SUM({col}{FIRST}:{col}{FIX_LAST})")
     c.font = BOLD; c.number_format = CUR; c.fill = TOT_FILL
-c = ws.cell(row=TOT, column=14, value=f"=SUM(N{FIRST}:N{LAST})"); c.font = BOLD; c.number_format = CUR; c.fill = TOT_FILL
+
+TOT = FIX + 1
+ws.cell(row=TOT, column=1, value="Monthly total (fixed + marketing)").font = BOLD
+for m in range(13):
+    col = get_column_letter(2 + m)
+    c = ws.cell(row=TOT, column=2 + m, value=f"={col}{MKT}+{col}{FIX}")
+    c.font = BOLD; c.number_format = CUR; c.fill = TOT_FILL
 
 CUM = TOT + 1
 ws.cell(row=CUM, column=1, value="Cumulative").font = BOLD
