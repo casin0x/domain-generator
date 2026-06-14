@@ -73,6 +73,17 @@ details.section>.section-body{padding:18px 22px 22px}
 .part-label{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin:14px 0 6px;padding:6px 10px;background:var(--surface-2);border-radius:6px}
 .part-label.reserved{color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border)}
 .tldr-wrap{margin-top:8px}
+.diff-head{font-size:13px;font-weight:700;color:var(--text);margin:4px 0 12px;letter-spacing:0.01em}
+.tldr-diff{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.diff-col{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--b,var(--accent));border-radius:12px;padding:16px 18px}
+.diff-col.fair{--b:var(--green)}.diff-col.match{--b:var(--amber)}
+.diff-col h4{font-size:11.5px;font-weight:700;margin-bottom:11px;text-transform:uppercase;letter-spacing:0.05em}
+.diff-col.fair h4{color:var(--green)}.diff-col.match h4{color:var(--amber)}
+.diff-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.diff-col li{font-size:12.5px;color:var(--text-secondary);line-height:1.5;padding-left:18px;position:relative;overflow-wrap:anywhere}
+.diff-col.fair li::before{content:'+';position:absolute;left:2px;color:var(--green);font-weight:700}
+.diff-col.match li::before{content:'=';position:absolute;left:3px;color:var(--amber);font-weight:700}
+@media(max-width:760px){.tldr-diff{grid-template-columns:1fr}}
 .tldr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .tldr-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--b,var(--accent));border-radius:12px;padding:16px 18px;--b:var(--cyan)}
 .tldr-card.bankroll{--b:var(--rose)}.tldr-card.fraud{--b:var(--purple)}.tldr-card.bonus{--b:var(--amber)}.tldr-card.standard{--b:var(--cyan)}.tldr-card.green{--b:var(--green)}
@@ -579,6 +590,11 @@ details.section>.section-body{padding:18px 22px 22px}
   <section class="section tldr-wrap" id="tldr">
     <div class="section-label"><span class="section-num">&#9733;</span><span class="section-title">TL;DR — Key Points at a Glance</span></div>
     <p class="section-intro">Plain-language summary of the points that matter most. For convenience only and <strong>not binding</strong> — the full Terms above govern.</p>
+    <div class="diff-head">How ours differs from the other operators</div>
+    <div class="tldr-diff">
+      <div class="diff-col fair"><h4>Friendlier than several rivals</h4><ul><li>Voluntary closure returns your clean cash balance — Betplay and Betpanda forfeit the whole balance when an account is closed.</li><li>A non-fraud bonus void refunds your deposit (only the winnings are voided) rather than confiscating everything.</li><li>No retroactive rule changes — 21.com reserves the right to restrict games and void winnings without notice; Coins says contribution rates “can change, contact support.”</li><li>Soft dormancy: 12 months then free reactivation — Betplay deducts your balance after just 6 months.</li><li>One consistent wagering figure throughout — Kings and Coins (same owner) quote three different numbers (x20 / x35 / 30x).</li><li>A short, real restricted-country list — not Betpanda's ~70-country list (which even bans its own home country) or Kings' none at all.</li></ul></div>
+      <div class="diff-col match"><h4>On par with the industry — not softer</h4><ul><li>Sole / absolute discretion on fraud, abuse, bonus eligibility and account closure — same as all five.</li><li>We can close an account without stating a reason (subject to law) — like Betpanda and Coins.</li><li>No-KYC signup with KYC on trigger — like Betplay and Betpanda.</li><li>No external gambling regulator; our decision is final — the standard unlicensed Costa Rica posture.</li><li>Velocity caps, win caps and 1x deposit wagering — standard across the set.</li><li>If deposit-match bonuses launch, the 35x wagering sits at the higher (tougher) end of the pack.</li></ul></div>
+    </div>
     <div class="tldr-grid">
       <div class="tldr-card standard"><h4>Who can play</h4><ul><li>You must be 18+ (or older if your country requires) and legally allowed to gamble.</li><li>One account per person, household, IP address, device and payment method.</li><li>Blocked from: USA, UK, Costa Rica, France, Netherlands &amp; Dutch Caribbean, Spain, Australia, and sanctioned countries.</li><li>Give accurate details and keep them current.</li></ul></div>
       <div class="tldr-card bankroll"><h4>Deposits &amp; withdrawals</h4><ul><li>Crypto only — you withdraw in the same coin you deposited; no currency exchange.</li><li>Send to the correct address and network: wrong sends cannot be recovered.</li><li>Deposits must be wagered once (1x) before you can withdraw.</li><li>Withdrawal limits: $5,000 / 24h, $15,000 / week, $45,000 / month (higher for VIPs).</li><li>No interest is paid — GoLuna is not a bank.</li></ul></div>
