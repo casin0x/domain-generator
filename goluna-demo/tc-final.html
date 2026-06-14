@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoLuna — Terms &amp; Conditions (Draft)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0d14;--surface:#13161f;--surface-2:#1a1e2a;--surface-3:#222736;--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--accent:#818cf8;--accent-dim:rgba(129,140,248,0.10);--accent-border:rgba(129,140,248,0.20);--green:#34d399;--green-dim:rgba(52,211,153,0.10);--green-border:rgba(52,211,153,0.20);--amber:#fbbf24;--amber-dim:rgba(251,191,36,0.10);--amber-border:rgba(251,191,36,0.20);--rose:#fb7185;--rose-dim:rgba(251,113,133,0.10);--rose-border:rgba(251,113,133,0.20);--cyan:#22d3ee;--cyan-dim:rgba(34,211,238,0.10);--cyan-border:rgba(34,211,238,0.20);--purple:#a78bfa;--purple-dim:rgba(167,139,250,0.10);--purple-border:rgba(167,139,250,0.20);--text:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--font:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.page{max-width:1100px;margin:0 auto;padding:0 32px 80px}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(11,13,20,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 32px}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-size:18px;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
+.header-right{display:flex;align-items:center;gap:6px}
+@media(min-width:641px){.header-inner .logo{flex-shrink:0}.header-right{min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.header-right::-webkit-scrollbar{display:none}.header-right .header-link{white-space:nowrap;flex-shrink:0}}
+@media(min-width:641px) and (max-width:1280px){.header-right .header-link{padding:6px 8px;font-size:12.5px}}
+.header-link{padding:6px 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--text-secondary);text-decoration:none;transition:all .15s}
+.header-link:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+.header-link.active{color:var(--text);font-weight:600;background:rgba(255,255,255,0.06)}
+.header-link-hub{color:var(--accent);font-weight:600}
+.hamburger{display:none;background:none;border:none;color:var(--text-secondary);cursor:pointer;font-size:22px;padding:4px}
+.subnav{position:sticky;top:56px;z-index:99;background:rgba(11,13,20,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px}
+.subnav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:2px;height:40px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.subnav-inner::-webkit-scrollbar{height:0}
+.subnav-link{padding:5px 10px;border-radius:4px;font-size:12px;font-weight:500;color:var(--text-muted);text-decoration:none;white-space:nowrap;transition:all .15s}
+.subnav-link:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.hero{padding:56px 0 28px}
+.hero-top{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;background:var(--amber-dim);border:1px solid var(--amber-border);font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:0.06em}
+.hero h1{font-size:38px;font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:12px}
+.hero p{font-size:16px;color:var(--text-secondary);line-height:1.65;max-width:860px}
+.hero-date{font-size:11px;color:var(--text-muted);font-family:var(--mono);letter-spacing:0.04em}
+.note-box{display:flex;align-items:flex-start;gap:10px;padding:14px 18px;border-radius:10px;font-size:13px;line-height:1.55;margin-bottom:24px}
+.note-box svg{flex-shrink:0;margin-top:2px}
+.note-box.info{background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent)}
+.note-box.warn{background:var(--amber-dim);border:1px solid var(--amber-border);color:var(--amber)}
+.note-box .nb-body{color:var(--text-secondary)}
+.note-box strong{color:var(--text);font-weight:600}
+.note-box ul{margin:6px 0 0 0;padding-left:18px;color:var(--text-secondary)}
+.note-box li{margin:2px 0;font-size:12.5px}
+.toolbar{display:flex;gap:8px;margin:0 0 22px;flex-wrap:wrap}
+.tbtn{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-secondary);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .15s;text-decoration:none}
+.tbtn:hover{background:var(--surface-3);color:var(--text)}
+.tbtn.dl{background:var(--accent-dim);border-color:var(--accent-border);color:var(--accent)}
+details.section{margin-bottom:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s}
+details.section[open]{border-color:var(--border-hover)}
+details.section>summary{list-style:none;cursor:pointer;padding:18px 22px;display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;user-select:none;border-bottom:1px solid transparent;transition:background .15s}
+details.section>summary::-webkit-details-marker{display:none}
+details.section>summary:hover{background:var(--surface-2)}
+details.section[open]>summary{border-bottom-color:var(--border)}
+details.section .summary-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-muted);font-family:var(--mono)}
+details.section .clause-count{background:var(--surface-3);color:var(--text-secondary);padding:3px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:0.04em}
+details.section .chev{width:14px;height:14px;opacity:.5;transition:transform .2s;flex-shrink:0}
+details.section[open] .chev{transform:rotate(180deg)}
+details.section>summary>.section-num{font-family:var(--mono);font-size:10px;font-weight:700;padding:4px 10px;border-radius:4px;letter-spacing:0.1em;background:var(--cyan-dim);color:var(--cyan)}
+details.section>summary>.section-num.bankroll{background:var(--rose-dim);color:var(--rose)}
+details.section>summary>.section-num.fraud{background:var(--purple-dim);color:var(--purple)}
+details.section>summary>.section-num.bonus{background:var(--amber-dim);color:var(--amber)}
+details.section>summary>.section-title{font-size:14px;font-weight:700;letter-spacing:0.01em;color:var(--text)}
+details.section>.section-body{padding:18px 22px 22px}
+.section-intro{font-size:13px;color:var(--text-secondary);line-height:1.6;margin:0 0 16px;max-width:820px;font-style:italic}
+.clause{display:grid;grid-template-columns:46px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--border)}
+.clause:first-of-type{border-top:none}
+.cnum{font-family:var(--mono);font-size:11px;color:var(--text-muted);font-weight:600;padding-top:2px}
+.clause-body{font-size:13.5px;color:var(--text-secondary);line-height:1.6;overflow-wrap:anywhere}
+.clause-body strong{color:var(--text);font-weight:600}
+.note-clause{background:var(--green-dim);border:1px solid var(--green-border);border-radius:8px;padding:11px 14px;margin:6px 0;grid-template-columns:46px 1fr}
+.note-clause .clause-body{color:var(--text)}
+.part-label{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin:14px 0 6px;padding:6px 10px;background:var(--surface-2);border-radius:6px}
+.part-label.reserved{color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border)}
+.footer{text-align:center;padding:40px 0 24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);margin-top:40px}
+.footer a{color:var(--text-secondary);text-decoration:none}
+.footer a:hover{color:var(--text)}
+@media(max-width:640px){.subnav{padding:0 16px}.subnav-inner{height:36px}.page{padding:0 16px 60px}.site-header{padding:0 16px}.hero{padding:36px 0 22px}.hero h1{font-size:26px}.hamburger{display:block}.header-right{display:none;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:rgba(11,13,20,0.98);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 16px}.header-right.open{display:flex}.header-link{width:100%}details.section>summary{padding:14px 16px;grid-template-columns:auto 1fr auto}details.section .summary-meta{display:none}.clause{grid-template-columns:40px 1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">GoLuna</a>
+    <button class="hamburger" aria-expanded="false" aria-label="Toggle menu" onclick="var n=this.nextElementSibling;n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))">&#9776;</button>
+    <nav class="header-right">
+      <a href="marketresearch.html" class="header-link">Markets</a>
+      <a href="strategy.html" class="header-link">Marketing</a>
+      <a href="channels.html" class="header-link">Channels</a>
+      <a href="vendors.html" class="header-link">Vendors</a>
+      <a href="budget.html" class="header-link">Budget</a>
+      <a href="forecast.html" class="header-link">Forecast</a>
+      <a href="revenue.html" class="header-link">Revenue</a>
+      <a href="paths.html" class="header-link">Paths A/B</a>
+      <a href="anzil.html" class="header-link">Anzil Collab</a>
+      <a href="retention.html" class="header-link">Assumptions</a>
+      <a href="partnership.html" class="header-link">Partnership</a>
+      <a href="capital.html" class="header-link">Capital</a>
+      <a href="tc.html" class="header-link active">T&amp;Cs</a>
+      <a href="index.html" class="header-link header-link-hub">Hub</a>
+    </nav>
+  </div>
+</header>
+<div class="subnav"><div class="subnav-inner">
+    <a href="#intro" class="subnav-link">Introduction</a>
+    <a href="#eligibility" class="subnav-link">Eligibility</a>
+    <a href="#account" class="subnav-link">Your Account</a>
+    <a href="#kyc" class="subnav-link">Identity Verification</a>
+    <a href="#deposits" class="subnav-link">Deposits</a>
+    <a href="#wagering" class="subnav-link">Wagering Requirement on Deposits</a>
+    <a href="#withdrawals" class="subnav-link">Withdrawals</a>
+    <a href="#caps" class="subnav-link">Maximum Bet</a>
+    <a href="#bonuses" class="subnav-link">Bonuses</a>
+    <a href="#games" class="subnav-link">Games, Fairness</a>
+    <a href="#originals" class="subnav-link">GoLuna Originals</a>
+    <a href="#prohibited" class="subnav-link">Prohibited Conduct</a>
+    <a href="#antifraud" class="subnav-link">Anti-Fraud, Investigation</a>
+    <a href="#closure" class="subnav-link">Suspension, Closure</a>
+    <a href="#dormant" class="subnav-link">Dormant Accounts</a>
+    <a href="#responsible" class="subnav-link">Responsible Gambling</a>
+    <a href="#funds" class="subnav-link">Player Funds</a>
+    <a href="#ip" class="subnav-link">Intellectual Property</a>
+    <a href="#liability" class="subnav-link">Limitation of Liability</a>
+    <a href="#privacy" class="subnav-link">Privacy</a>
+    <a href="#complaints" class="subnav-link">Complaints</a>
+    <a href="#changes" class="subnav-link">Changes to the Terms</a>
+    <a href="#general" class="subnav-link">General</a>
+    <a href="#law" class="subnav-link">Governing Law</a>
+    <a href="#company" class="subnav-link">Company Details</a>
+</div></div>
+<div class="page">
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-badge">Draft — Goluna Terms &amp; Conditions</div>
+      <span class="hero-date">v0.1 — Draft for legal review · 14 June 2026</span>
+    </div>
+    <h1>GoLuna — Terms &amp; Conditions</h1>
+    <p>GoLuna's own player terms, drafted from the five-operator comparison: it keeps the protective machinery (velocity &amp; win caps, KYC-on-trigger, anti-fraud forfeiture) and deliberately drops the reputational-trap clauses. Posture: <strong>Costa Rica, no license · Cubeia · cashback-active, deposit-match reserved · no-KYC signup</strong>. Companion to the <a href="tc.html" style="color:var(--accent);text-decoration:none;">Clause Library</a> and <a href="tc-compare.html" style="color:var(--accent);text-decoration:none;">Competitor Comparison</a>.</p>
+  </section>
+  <div class="note-box warn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <div class="nb-body"><strong>Draft for legal review — not yet effective.</strong> A lawyer must review this and complete the bracketed fill-ins before it is published:
+      <ul><li><strong>Operating entity</strong> — Registered legal name of the Costa Rica company operating GoLuna</li><li><strong>Corporate ID</strong> — Costa Rica company registration / cédula jurídica number</li><li><strong>Registered address</strong> — Full registered office address in Costa Rica</li><li><strong>Website domain(s)</strong> — The live GoLuna domain(s) these terms cover</li><li><strong>Support email</strong> — Official support / complaints contact address</li><li><strong>Effective date</strong> — Date these terms take effect once finalised</li><li><strong>Restricted-territories list</strong> — Confirm with counsel before publishing (see §2.3)</li><li><strong>Numeric dials</strong> — Cashback cap (§9.2), liability look-back (§19.3), dormancy fee (§15.3) — confirm</li></ul>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button class="tbtn" data-action="expand">Expand all</button>
+    <button class="tbtn" data-action="collapse">Collapse all</button>
+    <button class="tbtn" data-action="print">Print / Save PDF</button>
+    <a class="tbtn dl" href="GoLuna-Terms-and-Conditions.docx" download>Download .docx</a>
+  </div>
+
+  <details class="section" id="intro" open>
+  <summary>
+    <span class="section-num standard">01</span>
+    <span class="section-title">Introduction &amp; Acceptance</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">These Terms govern your access to and use of GoLuna. Read them with the Privacy Policy before you play.</p>
+      <div class="clause"><div class="cnum">1.1</div><div class="clause-body">These Terms and Conditions (the “Terms”) form a binding agreement between you and [OPERATING ENTITY — to confirm], a company organised under the laws of Costa Rica (the “Company”, “GoLuna”, “we”, “us”), which operates the website [goluna domain — to confirm] and the games and services offered on it (the “Service”).</div></div>
+      <div class="clause"><div class="cnum">1.2</div><div class="clause-body">By accessing or using the Service, whether as a guest or a registered user, you confirm that you have read, understood and agree to be bound by these Terms and the Privacy Policy, without reservation. If you do not agree, you must not access or use the Service.</div></div>
+      <div class="clause"><div class="cnum">1.3</div><div class="clause-body">These Terms take effect the moment you access the Website and remain in force while you use the Service. We may amend them in accordance with Section 22.</div></div>
+      <div class="clause"><div class="cnum">1.4</div><div class="clause-body"><strong>Limited licence.</strong> We grant you a personal, non-exclusive, non-transferable, revocable right to use the Service for your own recreational entertainment only, on a device you control.</div></div>
+      <div class="clause"><div class="cnum">1.5</div><div class="clause-body"><strong>What GoLuna is.</strong> GoLuna offers crypto-based gambling and related chat services only. We are not a bank, exchange, broker, custodian or investment service, and we do not provide currency-exchange services. You may withdraw only in the same cryptocurrency you deposited.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="eligibility" open>
+  <summary>
+    <span class="section-num standard">02</span>
+    <span class="section-title">Eligibility &amp; Restricted Territories</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Who may use GoLuna, and from where.</p>
+      <div class="clause"><div class="cnum">2.1</div><div class="clause-body">You must be at least 18 years old, or the age of majority in your jurisdiction if higher, and have full legal capacity to enter into this agreement. Accounts identified as belonging to a minor will be closed immediately and winnings voided.</div></div>
+      <div class="clause"><div class="cnum">2.2</div><div class="clause-body">You must not be prohibited from gambling for legal, regulatory, health, moral, religious or psychological reasons. By registering you confirm you are in a fit state to make rational gambling decisions and to understand their consequences.</div></div>
+      <div class="clause"><div class="cnum">2.3</div><div class="clause-body"><strong>Restricted Territories.</strong> Persons resident in, or accessing the Service from, the following territories may not open an account or use the Service: the United States of America and its territories; the United Kingdom; Costa Rica; France and the French overseas territories; the Netherlands and the Dutch Caribbean (Aruba, Bonáire, Curaçao, Saba, St Eustatius, St Maarten); Spain; Australia; and any country or person subject to United Nations, United States or European Union sanctions. [counsel to confirm final list]</div></div>
+      <div class="clause"><div class="cnum">2.4</div><div class="clause-body">You are solely responsible for ensuring that online gambling is lawful where you are located. You access and use the Service at your own risk and are responsible for any consequences under your local law.</div></div>
+      <div class="clause"><div class="cnum">2.5</div><div class="clause-body">We may use geolocation, device and other checks to enforce these restrictions, and may block access to or close any account that breaches them. We may add territories to the restricted list where required for legal, regulatory or commercial reasons; changes apply prospectively.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="account" open>
+  <summary>
+    <span class="section-num standard">03</span>
+    <span class="section-title">Your Account</span>
+    <span class="summary-meta"><span class="clause-count">6 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">One genuine personal account, accurate details, your responsibility to secure it.</p>
+      <div class="clause"><div class="cnum">3.1</div><div class="clause-body"><strong>One account.</strong> You may hold only one account. Only one account is permitted per person, household, IP address, device and payment method. Duplicate or linked accounts may be closed and any benefits, bonuses or winnings derived from them voided; where one account is retained it will be the first you opened.</div></div>
+      <div class="clause"><div class="cnum">3.2</div><div class="clause-body">You must provide accurate, complete and current information on registration and keep it up to date. Providing false, misleading or outdated information is a material breach of these Terms.</div></div>
+      <div class="clause"><div class="cnum">3.3</div><div class="clause-body">You are responsible for keeping your credentials confidential and for all activity under your account. Notify us immediately of any unauthorised use or security breach.</div></div>
+      <div class="clause"><div class="cnum">3.4</div><div class="clause-body">You may not sell, transfer, assign, pledge or share your account, your balance or your access with any other person.</div></div>
+      <div class="clause"><div class="cnum">3.5</div><div class="clause-body">Usernames must not impersonate another person, infringe third-party rights, or be offensive, vulgar or unlawful.</div></div>
+      <div class="clause"><div class="cnum">3.6</div><div class="clause-body">Your account is for genuine personal, recreational play only — not for professional, financial, commercial or any non-entertainment purpose.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="kyc" open>
+  <summary>
+    <span class="section-num fraud">04</span>
+    <span class="section-title">Identity Verification (KYC &amp; AML)</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Registration is friction-free; verification is risk-based and triggered when it matters.</p>
+      <div class="clause"><div class="cnum">4.1</div><div class="clause-body"><strong>No verification at sign-up.</strong> You may register and begin playing without first completing identity verification.</div></div>
+      <div class="clause"><div class="cnum">4.2</div><div class="clause-body"><strong>Risk-based verification.</strong> We operate a risk-based Know-Your-Customer and Anti-Money-Laundering programme. We may require you to verify your identity, age, address, source of funds and ownership of your payment method, including: before processing a withdrawal; at or above applicable regulatory or internal thresholds; on reasonable suspicion of fraud, abuse, collusion or money laundering; or where required by law.</div></div>
+      <div class="clause"><div class="cnum">4.3</div><div class="clause-body">Pending verification, we may suspend withdrawals and restrict the account. If verification is not completed within a reasonable period, or is not passed, we may close the account; and where there are reasonable grounds to suspect fraud or an AML breach, we may withhold funds to the extent and for the period required by law.</div></div>
+      <div class="clause"><div class="cnum">4.4</div><div class="clause-body">We comply with applicable anti-money-laundering and counter-terrorist-financing laws. Suspicious transactions may be reported to the competent authority, and we may be legally prohibited from informing you that a report has been or may be made.</div></div>
+      <div class="clause"><div class="cnum">4.5</div><div class="clause-body">You warrant that funds you deposit are lawfully yours and are not derived from any criminal or illegal activity.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="deposits" open>
+  <summary>
+    <span class="section-num standard">05</span>
+    <span class="section-title">Deposits</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Crypto in, same crypto out. Sending to the wrong place is not recoverable.</p>
+      <div class="clause"><div class="cnum">5.1</div><div class="clause-body">You may deposit by sending an accepted cryptocurrency to the deposit address shown in your profile. You must send the correct asset on the correct network to the correct address.</div></div>
+      <div class="clause"><div class="cnum">5.2</div><div class="clause-body"><strong>Wrong-address risk.</strong> We are not responsible for, and cannot recover, funds sent to an incorrect address, on an incorrect or unsupported network, or in an unsupported asset.</div></div>
+      <div class="clause"><div class="cnum">5.3</div><div class="clause-body">Cryptocurrency values fluctuate. We are not liable for changes in exchange rate or asset value before, during or after play.</div></div>
+      <div class="clause"><div class="cnum">5.4</div><div class="clause-body"><strong>No currency exchange.</strong> You may withdraw only in the same cryptocurrency you used to deposit. We do not convert between currencies.</div></div>
+      <div class="clause"><div class="cnum">5.5</div><div class="clause-body">Minimum and maximum deposit amounts, supported assets and network fees may apply and may change. Deposits must originate from a wallet or source that you own and control.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="wagering" open>
+  <summary>
+    <span class="section-num bankroll">06</span>
+    <span class="section-title">Wagering Requirement on Deposits</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Deposited funds must be played before they can leave — standard anti-pass-through protection.</p>
+      <div class="clause"><div class="cnum">6.1</div><div class="clause-body">All deposited funds must be wagered at least one (1) time before any withdrawal request can be processed. Funds that have not been wagered are not eligible for withdrawal.</div></div>
+      <div class="clause"><div class="cnum">6.2</div><div class="clause-body">Depositing and then seeking to withdraw without genuine play may be treated as suspected money laundering and will trigger the verification and investigation provisions of Sections 4 and 13.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="withdrawals" open>
+  <summary>
+    <span class="section-num bankroll">07</span>
+    <span class="section-title">Withdrawals &amp; Velocity Limits</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Per-period caps protect both the player-fund pool and you, in the event your account is compromised.</p>
+      <div class="clause"><div class="cnum">7.1</div><div class="clause-body"><strong>Velocity caps.</strong> To protect account security and the integrity of the player-fund pool, withdrawals are limited to the equivalent of USD 5,000 per 24 hours, USD 15,000 per 7 days and USD 45,000 per 30 days. Higher limits may apply to verified VIP players. You may withdraw a same-day deposit before the cap takes effect.</div></div>
+      <div class="clause"><div class="cnum">7.2</div><div class="clause-body">Withdrawals are paid only to a wallet you own and may require verification under Section 4 first.</div></div>
+      <div class="clause"><div class="cnum">7.3</div><div class="clause-body">We may hold or suspend a withdrawal while we investigate a suspected breach of Sections 12 or 13, for the period reasonably required.</div></div>
+      <div class="clause"><div class="cnum">7.4</div><div class="clause-body">If you cancel a pending withdrawal, any bonus then active and its associated winnings may be forfeited in accordance with Section 9.</div></div>
+      <div class="clause"><div class="cnum">7.5</div><div class="clause-body">We pay no interest on balances. Your account is not a bank, savings or investment account. Minimum withdrawal amounts and network fees may apply.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="caps" open>
+  <summary>
+    <span class="section-num bankroll">08</span>
+    <span class="section-title">Maximum Bet &amp; Maximum Win</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Hard ceilings that bound the Company's worst-case exposure and keep the bankroll solvent.</p>
+      <div class="clause"><div class="cnum">8.1</div><div class="clause-body">The maximum bet per single wager or game round is the equivalent of EUR 1,000, unless a lower limit applies while a bonus is active (Section 9).</div></div>
+      <div class="clause"><div class="cnum">8.2</div><div class="clause-body"><strong>Single-round win cap.</strong> The maximum win from a single game round is the equivalent of EUR 50,000. Any outcome that would exceed this is capped at that amount.</div></div>
+      <div class="clause"><div class="cnum">8.3</div><div class="clause-body"><strong>24-hour win cap.</strong> The maximum aggregate win in any rolling 24-hour period is the equivalent of 3 BTC.</div></div>
+      <div class="clause"><div class="cnum">8.4</div><div class="clause-body">These caps bound the Company's maximum liability and protect the funds available to pay all players. Amounts above an applicable cap are not credited and are not payable.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="bonuses" open>
+  <summary>
+    <span class="section-num bonus">09</span>
+    <span class="section-title">Bonuses &amp; Promotions</span>
+    <span class="summary-meta"><span class="clause-count">15 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">GoLuna's live model is cashback. The deposit-match rules in Part B are written but RESERVED — they apply only if and when we switch match offers on.</p>
+      <div class="part-label">Part A — Cashback (the active model)</div>
+      <div class="clause"><div class="cnum">9.1</div><div class="clause-body">GoLuna's standard promotional model is cashback / rakeback rather than deposit-match bonuses. Cashback is credited according to the rules published for the relevant programme or VIP tier.</div></div>
+      <div class="clause"><div class="cnum">9.2</div><div class="clause-body"><strong>Cashback cap.</strong> Weekly cashback is capped at the equivalent of USD 5,000 [cap to confirm] and does not apply to sports betting, esports betting or virtual sports.</div></div>
+      <div class="clause"><div class="cnum">9.3</div><div class="clause-body">Cashback and any winnings generated from it are subject to a one-times (1x) wagering requirement before withdrawal, unless the relevant programme states otherwise.</div></div>
+      <div class="clause"><div class="cnum">9.4</div><div class="clause-body">If you decline or cancel a bonus, we are under no obligation to reinstate or return it.</div></div>
+      <div class="clause"><div class="cnum">9.5</div><div class="clause-body">Free spins awarded through VIP level-ups originate from third-party game providers. If you cannot use them due to a geographic restriction, contact support within 24 hours to have them reassigned, otherwise they are forfeited.</div></div>
+      <div class="part-label reserved">Part B — Deposit-Match Bonuses (RESERVED — not currently active)</div>
+      <div class="clause"><div class="cnum">9.6</div><div class="clause-body"><strong>Status.</strong> The following terms apply only if and when GoLuna activates deposit-match bonus offers. Until then they are inactive and no deposit-match bonus is offered.</div></div>
+      <div class="clause"><div class="cnum">9.7</div><div class="clause-body">Bonus funds and any winnings from them are subject to a 35x wagering requirement of the bonus amount, unless a specific offer states otherwise.</div></div>
+      <div class="clause"><div class="cnum">9.8</div><div class="clause-body"><strong>Forfeit-on-withdraw.</strong> The bonus balance is held separately from your cash balance and is played only after your cash balance is spent. Withdrawing cash while a bonus is active forfeits the active bonus, the bonus balance and any winnings derived from it.</div></div>
+      <div class="clause"><div class="cnum">9.9</div><div class="clause-body">While a bonus is active, the maximum bet per spin, hand or round is the equivalent of USD 5.</div></div>
+      <div class="clause"><div class="cnum">9.10</div><div class="clause-body"><strong>Game contribution (published, not retroactive).</strong> Contribution toward wagering is: slots 100%; table games, live casino and video poker 10%; crash games and Originals as published for the offer. We publish the contribution table for each offer and we do not change it, to your detriment, for a bonus already in progress.</div></div>
+      <div class="clause"><div class="cnum">9.11</div><div class="clause-body"><strong>Conversion cap.</strong> The maximum that may convert from a bonus to your withdrawable balance is the amount of the bonus credited; any excess is voided.</div></div>
+      <div class="clause"><div class="cnum">9.12</div><div class="clause-body">Bonus funds and unused free spins must be wagered within 30 days of being credited, after which they and any associated winnings expire.</div></div>
+      <div class="clause"><div class="cnum">9.13</div><div class="clause-body">One bonus per person, household, IP address, device and payment method.</div></div>
+      <div class="clause"><div class="cnum">9.14</div><div class="clause-body"><strong>No feature-banking.</strong> You may not postpone or “bank” a game feature (including free-spin or bonus features) to trigger it later once you have no wagering requirement, nor deposit anew while such features remain available, in order to capture the benefit. Doing so voids the bonus, the triggering deposit and any related winnings.</div></div>
+      <div class="clause"><div class="cnum">9.15</div><div class="clause-body">Each promotion may carry its own specific terms, which prevail over this Section for that promotion. We may amend, suspend or withdraw any promotion prospectively. In a bonus dispute, our determination, made reasonably and in good faith, is final.</div></div>
+
+  </div>
+  </details>
+
+  <details class="section" id="games" open>
+  <summary>
+    <span class="section-num standard">10</span>
+    <span class="section-title">Games, Fairness &amp; Malfunctions</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Outcomes are final; genuine malfunctions and obvious errors are not.</p>
+      <div class="clause"><div class="cnum">10.1</div><div class="clause-body">Game outcomes are determined by a random number generator and/or provably-fair mechanisms. Results, once confirmed, are final.</div></div>
+      <div class="clause"><div class="cnum">10.2</div><div class="clause-body"><strong>Malfunction voids play.</strong> A malfunction voids all affected plays and pays. Where a game malfunctions, affected bets are voided and stakes returned, and we may reverse any credit caused by the malfunction.</div></div>
+      <div class="clause"><div class="cnum">10.3</div><div class="clause-body"><strong>Obvious error.</strong> Manifestly incorrect odds, paytables, prices or configurations are not binding. We may void affected bets and correct the error.</div></div>
+      <div class="clause"><div class="cnum">10.4</div><div class="clause-body">We may modify, suspend or remove any game or feature at our discretion. Interrupted rounds are resumed or settled in accordance with the relevant game provider's rules.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="originals" open>
+  <summary>
+    <span class="section-num standard">11</span>
+    <span class="section-title">GoLuna Originals (In-House Games)</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">In-house games, with the same bet and win ceilings as the rest of the casino.</p>
+      <div class="clause"><div class="cnum">11.1</div><div class="clause-body">In-house “Originals” games are governed by these Terms together with any rules shown in the game.</div></div>
+      <div class="clause"><div class="cnum">11.2</div><div class="clause-body">The maximum bet on Originals is the equivalent of EUR 1,000 (Section 8.1) and the maximum win per round is the equivalent of EUR 50,000 (Section 8.2).</div></div>
+      <div class="clause"><div class="cnum">11.3</div><div class="clause-body"><strong>Auto-bet / Auto-play.</strong> Where auto-bet or auto-play is offered, you accept full responsibility for every wager placed automatically. We are not liable for losses incurred during automated sessions.</div></div>
+      <div class="clause"><div class="cnum">11.4</div><div class="clause-body">All bets are final once placed and cannot be cancelled or refunded.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="prohibited" open>
+  <summary>
+    <span class="section-num fraud">12</span>
+    <span class="section-title">Prohibited Conduct &amp; Bonus Abuse</span>
+    <span class="summary-meta"><span class="clause-count">7 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">The conduct that gets an account investigated and, if confirmed, closed.</p>
+      <div class="clause"><div class="cnum">12.1</div><div class="clause-body">You may not use bots, automation, scripts, AI agents or any third-party software that automates, exploits or interferes with gameplay.</div></div>
+      <div class="clause"><div class="cnum">12.2</div><div class="clause-body">You may not exploit a bug, error or vulnerability. You must report any you discover, and any benefit derived from one must be returned.</div></div>
+      <div class="clause"><div class="cnum">12.3</div><div class="clause-body">You may not engage in multi-accounting, collusion, chip-dumping or coordinated play.</div></div>
+      <div class="clause"><div class="cnum">12.4</div><div class="clause-body">You may not abuse bonuses or promotions, including through arbitrage or systematic equal, zero-margin, low-margin or hedge betting undertaken solely to satisfy a wagering requirement (“irregular play”).</div></div>
+      <div class="clause"><div class="cnum">12.5</div><div class="clause-body">You may not initiate chargebacks or engage in fraudulent payment activity.</div></div>
+      <div class="clause"><div class="cnum">12.6</div><div class="clause-body">You may not use the Service for money laundering, terrorist financing or any unlawful purpose.</div></div>
+      <div class="clause"><div class="cnum">12.7</div><div class="clause-body">You may not behave abusively toward, or harass, other users or our staff, in chat or otherwise.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="antifraud" open>
+  <summary>
+    <span class="section-num fraud">13</span>
+    <span class="section-title">Anti-Fraud, Investigation &amp; Consequences</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Broad protection where there is genuine wrongdoing — and an express fairness limit where there is not.</p>
+      <div class="clause"><div class="cnum">13.1</div><div class="clause-body">We monitor accounts, gameplay, transactions, devices, IP addresses and payment methods to detect and prevent fraud and abuse.</div></div>
+      <div class="clause"><div class="cnum">13.2</div><div class="clause-body"><strong>Our remedies.</strong> On detection of, or reasonable grounds to suspect, a breach of Sections 3, 4 or 12, we may, acting reasonably and proportionately: suspend or close the affected account(s); withhold, suspend or reverse withdrawals; void bets, bonuses and winnings derived from the breaching conduct; and reclaim amounts paid in error.</div></div>
+      <div class="clause"><div class="cnum">13.3</div><div class="clause-body">Where a breach is established, winnings and bonus funds connected to that breach are forfeited. Where the breach involves fraud, money laundering or prohibited conduct under Section 12, the entire balance of the affected account(s) may be withheld pending investigation and to the extent required by law.</div></div>
+      <div class="clause note-clause"><div class="cnum">13.4</div><div class="clause-body"><strong>Fairness limit.</strong> In the absence of fraud, money laundering or prohibited conduct, where a bonus or promotion is voided we will still refund a player's verified, lawfully-deposited and unwagered funds. We void winnings derived from a breach — we do not confiscate a player's own clean deposit as a matter of course.</div></div>
+      <div class="clause"><div class="cnum">13.5</div><div class="clause-body">Returns, winnings or bonuses connected to a duplicate or linked account may be reclaimed. Our determinations under this Section are made in good faith and are subject to the complaints process in Section 21.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="closure" open>
+  <summary>
+    <span class="section-num standard">14</span>
+    <span class="section-title">Suspension, Closure &amp; Termination</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">How accounts end — and what happens to the balance when they do.</p>
+      <div class="clause"><div class="cnum">14.1</div><div class="clause-body">You may close your account at any time by contacting support. Ensure any pending transactions or bonus conditions are completed first; closure may take up to 24 hours to process and your account remains open until we confirm closure in writing.</div></div>
+      <div class="clause"><div class="cnum">14.2</div><div class="clause-body">We may suspend or terminate access, acting reasonably, including for breach of these Terms, legal or regulatory reasons, or unacceptable risk.</div></div>
+      <div class="clause"><div class="cnum">14.3</div><div class="clause-body"><strong>Closure for cause.</strong> On closure for cause under Section 13, balances may be withheld or forfeited as set out in that Section. Otherwise, your verified withdrawable balance is returned, subject to Sections 4 and 7.</div></div>
+      <div class="clause note-clause"><div class="cnum">14.4</div><div class="clause-body"><strong>Voluntary closure.</strong> If you close your account voluntarily, you forfeit only unredeemed cashback, rakeback or bonus that has not met its conditions. Your genuine, withdrawable cash balance is paid out to you — we do not confiscate it on closure.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="dormant" open>
+  <summary>
+    <span class="section-num standard">15</span>
+    <span class="section-title">Dormant Accounts</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">A soft dormancy policy: notice first, free reactivation, no aggressive deductions.</p>
+      <div class="clause"><div class="cnum">15.1</div><div class="clause-body">An account with no log-in or activity for 12 consecutive months is treated as dormant. We will make reasonable efforts to notify you before applying any dormancy measure.</div></div>
+      <div class="clause"><div class="cnum">15.2</div><div class="clause-body">You can reactivate a dormant account at any time, free of charge, simply by logging in.</div></div>
+      <div class="clause"><div class="cnum">15.3</div><div class="clause-body"><strong>Administrative fee.</strong> Only after the account has been dormant for 12 months and we have given notice, a modest monthly administrative fee — the lesser of USD 5 or the account balance [amount to confirm] — may be applied to accounts holding a balance. The fee stops on reactivation and never creates a negative balance.</div></div>
+      <div class="clause"><div class="cnum">15.4</div><div class="clause-body">We handle unclaimed funds in accordance with applicable law.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="responsible" open>
+  <summary>
+    <span class="section-num standard">16</span>
+    <span class="section-title">Responsible Gambling &amp; Self-Exclusion</span>
+    <span class="summary-meta"><span class="clause-count">4 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Tools and limits, because gambling is entertainment, not income.</p>
+      <div class="clause"><div class="cnum">16.1</div><div class="clause-body">Gambling should be entertaining and affordable. Play only with money you can afford to lose, and never as a source of income.</div></div>
+      <div class="clause"><div class="cnum">16.2</div><div class="clause-body">On request we provide responsible-gambling tools, including deposit limits, loss and session limits, cool-off periods and self-exclusion.</div></div>
+      <div class="clause"><div class="cnum">16.3</div><div class="clause-body"><strong>Self-exclusion.</strong> If you self-exclude, we will close or lock your account for the period chosen and use reasonable efforts to prevent you opening a new one. You must not attempt to circumvent a self-exclusion.</div></div>
+      <div class="clause"><div class="cnum">16.4</div><div class="clause-body">We may impose limits on, or exclude, any account where we have reasonable concern about problem gambling. We signpost recognised problem-gambling support organisations on the Website.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="funds" open>
+  <summary>
+    <span class="section-num bankroll">17</span>
+    <span class="section-title">Player Funds</span>
+    <span class="summary-meta"><span class="clause-count">3 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">What your balance is — and what it is not.</p>
+      <div class="clause"><div class="cnum">17.1</div><div class="clause-body">Balances are held to enable play and withdrawal. We are not a bank and pay no interest on any balance.</div></div>
+      <div class="clause"><div class="cnum">17.2</div><div class="clause-body">Your balance is a contractual claim against the Company for the purpose of play and withdrawal under these Terms; it is not a regulated deposit and carries no deposit-guarantee protection. [state fund-segregation arrangement if any]</div></div>
+      <div class="clause"><div class="cnum">17.3</div><div class="clause-body">We are not liable for losses arising from cryptocurrency volatility, blockchain or network issues, or the acts or failures of third-party payment processors.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="ip" open>
+  <summary>
+    <span class="section-num standard">18</span>
+    <span class="section-title">Intellectual Property</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">The brand, software and games are ours or our licensors'.</p>
+      <div class="clause"><div class="cnum">18.1</div><div class="clause-body">All content, software, game designs, graphics, trademarks and the GoLuna brand are owned by or licensed to the Company. You receive only the limited personal licence in Section 1.4.</div></div>
+      <div class="clause"><div class="cnum">18.2</div><div class="clause-body">You may not copy, reproduce, transmit, store, scrape, reverse-engineer or commercially exploit any part of the Service without our prior written consent.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="liability" open>
+  <summary>
+    <span class="section-num standard">19</span>
+    <span class="section-title">Limitation of Liability &amp; Indemnity</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Standard caps and carve-outs, to the extent the law allows.</p>
+      <div class="clause"><div class="cnum">19.1</div><div class="clause-body">The Service is provided “as is” and “as available”, without warranties of any kind to the maximum extent permitted by law.</div></div>
+      <div class="clause"><div class="cnum">19.2</div><div class="clause-body">We are not liable for any indirect, incidental, special or consequential loss, or for lost profits, data or goodwill, nor for losses caused by outages, third-party providers, internet or blockchain failures, or your own error.</div></div>
+      <div class="clause"><div class="cnum">19.3</div><div class="clause-body"><strong>Liability cap.</strong> Our total aggregate liability to you is limited to the lesser of the balance in your account or the net amount you deposited in the preceding  six months.</div></div>
+      <div class="clause"><div class="cnum">19.4</div><div class="clause-body">You agree to indemnify and hold the Company, its directors, employees, partners and service providers harmless against any loss, cost, claim or liability arising from your breach of these Terms or your unlawful use of the Service.</div></div>
+      <div class="clause"><div class="cnum">19.5</div><div class="clause-body">Nothing in these Terms excludes or limits any liability that cannot lawfully be excluded or limited.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="privacy" open>
+  <summary>
+    <span class="section-num standard">20</span>
+    <span class="section-title">Privacy &amp; Data</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Brief here; the detail is in the Privacy Policy.</p>
+      <div class="clause"><div class="cnum">20.1</div><div class="clause-body">We process personal data in accordance with our Privacy Policy, which forms part of these Terms and which you accept by using the Service.</div></div>
+      <div class="clause"><div class="cnum">20.2</div><div class="clause-body">We process data as necessary to operate your account, secure the Service, meet AML obligations and improve the Service, on the lawful bases set out in the Privacy Policy.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="complaints" open>
+  <summary>
+    <span class="section-num standard">21</span>
+    <span class="section-title">Complaints &amp; Disputes</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">How to raise an issue — stated honestly for an unlicensed operator.</p>
+      <div class="clause"><div class="cnum">21.1</div><div class="clause-body">If you have a complaint, contact support first. We aim to acknowledge and work to resolve complaints within a reasonable period.</div></div>
+      <div class="clause"><div class="cnum">21.2</div><div class="clause-body">Complaints are escalated internally where needed. As GoLuna operates without a gambling regulator, there is no external gaming regulator to whom a dispute may be referred; our determination, made reasonably and in good faith, is final, without prejudice to your statutory rights and Section 24.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="changes" open>
+  <summary>
+    <span class="section-num standard">22</span>
+    <span class="section-title">Changes to the Terms</span>
+    <span class="summary-meta"><span class="clause-count">3 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">We can update these Terms — prospectively, with notice of material changes.</p>
+      <div class="clause"><div class="cnum">22.1</div><div class="clause-body">We may amend these Terms from time to time. We will give notice of material changes via the Website or by email. Continued use after a change takes effect constitutes acceptance.</div></div>
+      <div class="clause"><div class="cnum">22.2</div><div class="clause-body">The version of the Terms in force is the version published when you access the Service.</div></div>
+      <div class="clause"><div class="cnum">22.3</div><div class="clause-body"><strong>Prospective only.</strong> Changes apply prospectively. We will not retroactively change game rules, contribution rates or bonus conditions to your detriment for play or a bonus already in progress.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="general" open>
+  <summary>
+    <span class="section-num standard">23</span>
+    <span class="section-title">General</span>
+    <span class="summary-meta"><span class="clause-count">5 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">The usual boilerplate that keeps the agreement intact.</p>
+      <div class="clause"><div class="cnum">23.1</div><div class="clause-body">If any provision is held invalid or unenforceable, the remaining provisions continue in full force.</div></div>
+      <div class="clause"><div class="cnum">23.2</div><div class="clause-body">Our failure to enforce a provision is not a waiver of it.</div></div>
+      <div class="clause"><div class="cnum">23.3</div><div class="clause-body">We may assign or transfer our rights and obligations under these Terms; you may not assign yours without our consent.</div></div>
+      <div class="clause"><div class="cnum">23.4</div><div class="clause-body">These Terms, with the Privacy Policy and any applicable promotional terms, are the entire agreement between you and us.</div></div>
+      <div class="clause"><div class="cnum">23.5</div><div class="clause-body">We are not liable for failure or delay caused by events beyond our reasonable control (force majeure). The English-language version of these Terms prevails over any translation. Headings are for convenience only.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="law" open>
+  <summary>
+    <span class="section-num standard">24</span>
+    <span class="section-title">Governing Law &amp; Jurisdiction</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Costa Rica.</p>
+      <div class="clause"><div class="cnum">24.1</div><div class="clause-body">These Terms and any dispute arising out of or in connection with them are governed by the laws of Costa Rica.</div></div>
+      <div class="clause"><div class="cnum">24.2</div><div class="clause-body">You and the Company submit to the exclusive jurisdiction of the competent courts of Costa Rica.</div></div>
+  </div>
+  </details>
+
+  <details class="section" id="company" open>
+  <summary>
+    <span class="section-num standard">25</span>
+    <span class="section-title">Company Details &amp; Contact</span>
+    <span class="summary-meta"><span class="clause-count">2 clauses</span></span>
+    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </summary>
+  <div class="section-body">
+    <p class="section-intro">Who you are contracting with.</p>
+      <div class="clause"><div class="cnum">25.1</div><div class="clause-body">Operator: [OPERATING ENTITY — to confirm], a company organised under the laws of Costa Rica (corporate ID [CORP ID — to confirm]), registered office [REGISTERED ADDRESS — to confirm].</div></div>
+      <div class="clause"><div class="cnum">25.2</div><div class="clause-body">Website: [goluna domain — to confirm]. Support and complaints: [support@ — to confirm]. Effective date: [effective date — to confirm].</div></div>
+  </div>
+  </details>
+
+  <footer class="footer">
+    GoLuna — Terms &amp; Conditions — v0.1 — Draft for legal review · 14 June 2026 — Confidential — <a href="tc.html">Clause Library</a> · <a href="tc-compare.html">Competitor Comparison</a> · <a href="index.html">Hub</a>
+  </footer>
+</div>
+<script>
+document.querySelectorAll('.tbtn[data-action]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var a=b.getAttribute('data-action');
+    if(a==='print'){window.print();return;}
+    document.querySelectorAll('details.section').forEach(function(d){d.open=(a==='expand');});
+  });
+});
+(function(){var sn=document.querySelector('.subnav-inner');if(!sn)return;})();
+</script>
+</body>
+</html>
