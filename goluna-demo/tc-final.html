@@ -72,6 +72,15 @@ details.section>.section-body{padding:18px 22px 22px}
 .note-clause .clause-body{color:var(--text)}
 .part-label{font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin:14px 0 6px;padding:6px 10px;background:var(--surface-2);border-radius:6px}
 .part-label.reserved{color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber-border)}
+.tldr-wrap{margin-top:8px}
+.tldr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.tldr-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--b,var(--accent));border-radius:12px;padding:16px 18px;--b:var(--cyan)}
+.tldr-card.bankroll{--b:var(--rose)}.tldr-card.fraud{--b:var(--purple)}.tldr-card.bonus{--b:var(--amber)}.tldr-card.standard{--b:var(--cyan)}.tldr-card.green{--b:var(--green)}
+.tldr-card h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:11px;letter-spacing:0.01em}
+.tldr-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tldr-card li{font-size:12.5px;color:var(--text-secondary);line-height:1.5;padding-left:16px;position:relative;overflow-wrap:anywhere}
+.tldr-card li::before{content:'';position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--b,var(--accent))}
+@media(max-width:760px){.tldr-grid{grid-template-columns:1fr}}
 .footer{text-align:center;padding:40px 0 24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted);margin-top:40px}
 .footer a{color:var(--text-secondary);text-decoration:none}
 .footer a:hover{color:var(--text)}
@@ -128,6 +137,7 @@ details.section>.section-body{padding:18px 22px 22px}
     <a href="#general" class="subnav-link">General</a>
     <a href="#law" class="subnav-link">Governing Law</a>
     <a href="#company" class="subnav-link">Company Details</a>
+    <a href="#tldr" class="subnav-link" style="color:var(--accent);font-weight:600">TL;DR</a>
 </div></div>
 <div class="page">
   <section class="hero">
@@ -565,6 +575,21 @@ details.section>.section-body{padding:18px 22px 22px}
       <div class="clause"><div class="cnum">25.2</div><div class="clause-body">Website: [goluna domain — to confirm]. Support and complaints: [support@ — to confirm]. Effective date: [effective date — to confirm].</div></div>
   </div>
   </details>
+
+  <section class="section tldr-wrap" id="tldr">
+    <div class="section-label"><span class="section-num">&#9733;</span><span class="section-title">TL;DR — Key Points at a Glance</span></div>
+    <p class="section-intro">Plain-language summary of the points that matter most. For convenience only and <strong>not binding</strong> — the full Terms above govern.</p>
+    <div class="tldr-grid">
+      <div class="tldr-card standard"><h4>Who can play</h4><ul><li>You must be 18+ (or older if your country requires) and legally allowed to gamble.</li><li>One account per person, household, IP address, device and payment method.</li><li>Blocked from: USA, UK, Costa Rica, France, Netherlands &amp; Dutch Caribbean, Spain, Australia, and sanctioned countries.</li><li>Give accurate details and keep them current.</li></ul></div>
+      <div class="tldr-card bankroll"><h4>Deposits &amp; withdrawals</h4><ul><li>Crypto only — you withdraw in the same coin you deposited; no currency exchange.</li><li>Send to the correct address and network: wrong sends cannot be recovered.</li><li>Deposits must be wagered once (1x) before you can withdraw.</li><li>Withdrawal limits: $5,000 / 24h, $15,000 / week, $45,000 / month (higher for VIPs).</li><li>No interest is paid — GoLuna is not a bank.</li></ul></div>
+      <div class="tldr-card bankroll"><h4>Bet &amp; win limits</h4><ul><li>Maximum bet: EUR 1,000 per round.</li><li>Maximum win: EUR 50,000 per round and 3 BTC per 24 hours.</li><li>Anything above a cap is not paid out.</li></ul></div>
+      <div class="tldr-card bonus"><h4>Bonuses</h4><ul><li>Standard model is cashback: 1x wagering, weekly cap, not on sports.</li><li>Deposit-match bonuses are reserved — not active yet.</li><li>If match bonuses launch: 35x wagering, $5 max bet while active, 30-day limit, winnings capped at the bonus amount.</li><li>Withdrawing cash while a bonus is active forfeits that bonus. One bonus per person/household/IP/device.</li></ul></div>
+      <div class="tldr-card fraud"><h4>Verification (KYC / AML)</h4><ul><li>No ID needed to sign up.</li><li>We can request ID, address and source of funds — especially before a withdrawal, over certain amounts, or on suspicion.</li><li>We can pause withdrawals and the account until you verify.</li></ul></div>
+      <div class="tldr-card fraud"><h4>Fair play &amp; our rights</h4><ul><li>Banned: bots, multiple accounts, collusion, bonus abuse and exploiting bugs.</li><li>For fraud or abuse we can suspend or close accounts, void winnings and forfeit balances — at our sole discretion.</li><li>For non-fraud bonus issues we void the winnings but may refund your clean deposit.</li><li>We can close an account without giving a reason (subject to law) and deduct what you owe us from your balance.</li></ul></div>
+      <div class="tldr-card green"><h4>Responsible gambling</h4><ul><li>Deposit, loss and session limits, cool-off and self-exclusion are available on request.</li><li>Play for entertainment and within your means; help-organisation links are provided.</li></ul></div>
+      <div class="tldr-card standard"><h4>Legal &amp; changes</h4><ul><li>Governed by the laws of Costa Rica; there is no external gambling regulator, so our decision is final.</li><li>We can update these terms; changes apply going forward, not to play already completed.</li><li>Dormant after 12 months — reactivate free anytime; a small fee applies only after notice.</li></ul></div>
+    </div>
+  </section>
 
   <footer class="footer">
     GoLuna — Terms &amp; Conditions — v0.1 — Draft for legal review · 14 June 2026 — Confidential — <a href="tc.html">Clause Library</a> · <a href="tc-compare.html">Competitor Comparison</a> · <a href="index.html">Hub</a>
